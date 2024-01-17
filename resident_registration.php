@@ -258,6 +258,17 @@
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label> Upload birth certificate or any valid ID: </label>
+                                            <input type="file" class="form-control" name="id_picture" placeholder="" readonly>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+
+                                    
                                 </div>
 
 
