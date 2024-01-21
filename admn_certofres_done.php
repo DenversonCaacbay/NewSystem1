@@ -5,10 +5,11 @@
     require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
-    $bmis->delete_bspermit();
-    $view = $bmis->view_bspermit();
-    $id_resident = $_GET['id_resident'];
-    $resident = $residentbmis->get_single_bspermit($id_resident);
+    $bmis->delete_certofres();
+    $view = $bmis->view_certofres();
+    // $id_resident = $_GET['id_resident'];
+    // $resident = $residentbmis->get_single_certofres($id_resident);
+    // $resident = view_certofres();
    
 ?>
 
@@ -43,34 +44,34 @@
     <!-- Page Heading -->
 
     <div class="row"> 
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="text-center mb-0">Pending Business Recommendation Requests</h1>
-                <a href="admn_bspermit_done.php" class="btn btn-primary">View Done</a>
-            </div>
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="text-center mb-0">List of Done Residency Requests</h1>
+            <a href="admn_certofres.php" class="btn btn-primary">Back</a>
         </div>
     </div>
+    </div>
 
-    <hr class="w-100">
+    <hr>
 
-    <div class="row"> 
+    <div class="row">
         <div class="col">
             <form method="POST" action="">
-                    <div class="input-icons d-flex">
-                        <i class="fa fa-search icon"></i>
-                        <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
-                        <button class="btn btn-success" name="search_bspermit" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
-                        <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
-                    </div>
-                </form>
-            <br>
+                <div class="input-icons d-flex">
+                    <i class="fa fa-search icon"></i>
+                    <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
+                    <button class="btn btn-success" name="search_resident" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
+                    <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                </div>
+			</form>
         </div>
     </div>
+
 
     <div class="row"> 
         <div class="col-md-12"> 
             <?php 
-                include('tables/bspermit_pending.php');
+                include('tables/residency_pending.php');
             ?>
         </div>
     </div>
@@ -93,5 +94,5 @@
 <script src="../BarangaySystem/bootstrap/js/bootstrap.bundle.js" type="text/javascript"> </script>
 
 <?php 
-    include('dashboard_sidebar_end.php');
+    // include('dashboard_sidebar_end.php');
 ?>

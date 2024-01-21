@@ -45,8 +45,8 @@
     <div class="row"> 
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="text-center mb-0">Pending Business Recommendation Requests</h1>
-                <a href="admn_bspermit_done.php" class="btn btn-primary">View Done</a>
+                <h1 class="text-center mb-0">List of Done Business Recommendation Requests</h1>
+                <a href="admn_bspermit.php" class="btn btn-primary">Back</a>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
 
     <div class="row"> 
         <div class="col">
-            <form method="POST" action="">
+        <form method="POST" action="">
                     <div class="input-icons d-flex">
                         <i class="fa fa-search icon"></i>
                         <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
@@ -63,14 +63,13 @@
                         <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
                     </div>
                 </form>
-            <br>
         </div>
     </div>
 
     <div class="row"> 
         <div class="col-md-12"> 
             <?php 
-                include('tables/bspermit_pending.php');
+                include('tables/bspermit_done.php');
             ?>
         </div>
     </div>

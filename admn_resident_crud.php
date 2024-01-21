@@ -48,7 +48,7 @@
 
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="text-center mb-0">Barangay Residents Data</h1>
+            <h1 class="text-center mb-0">Viewing Pending Accounts</h1>
 
             
             
@@ -58,12 +58,9 @@
             </button>
             <?php $registered_users = $residentbmis->count_registered_resident(); ?>
                             
-                <a href="admn_registered_resident.php" style="position: relative;">
-                    <i class="fas fa-users text-primary fa-2x "></i>
-                    <?php if($registered_users > 0) : ?>
-                    <span class="badge badge-danger" style="font-size:10px; position: absolute; top: -5; left: -5;"><?php echo $registered_users; ?></span>
-                </a>&nbsp;
-            <?php endif; ?>
+            <a href="admn_registered_resident.php"><i class="fas fa-thumbs-up text-primary fa-2x me-4"></i></a>
+            <a href="admn_disapproved_resident.php"><i class="fas fa-thumbs-down text-primary fa-2x"></i></a>
+            
         </div>
     </div>
 
@@ -77,7 +74,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Number of Residents</div>
+                                Number of Approved Residents</div>
                                     <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescount ?></div>
                             </div>
                             <div class="col-auto">
@@ -139,17 +136,16 @@
 
 
         <div class="col-md-12 mt-4">
-			<form method="POST" action="">
-				<div class="input-icons" >
+        <form method="POST" action="">
+                <div class="input-icons d-flex">
                     <i class="fa fa-search icon"></i>
-					<input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
+                    <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
+                    <button class="btn btn-success" name="search_resident" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
+                    <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
                 </div>
-                    <button class="btn btn-success" name="search_resident" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:41.5%;">Search</button>
-					<a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px;">Reload</a>
-				
 			</form>
 		<?php 
-            include('search_resident.php');
+            include('resident_register/resident_pending.php');
         ?>
 	</div>
 <!-- Modal for Registering Residents -->

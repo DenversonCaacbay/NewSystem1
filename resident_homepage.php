@@ -38,182 +38,24 @@
     .bg-primary{
         background: #309464 !important;
     }
+    .text-primary{
+        color: #309464 !important;
+    }
     .btn-primary{
         background: #309464 !important;
     }
     body::-webkit-scrollbar {
-            display: none;
-        }
-        .top-link {
-    transition: all 0.25s ease-in-out;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    display: inline-flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    margin: 0 3em 3em 0;
-    border-radius: 50%;
-    padding: 0.25em;
-    width: 80px;
-    height: 80px;
-    background-color: #3661D5;
+        display: none;
     }
-    .top-link.show {
-    visibility: visible;
-    opacity: 1;
-    }
-    .top-link.hide {
-    visibility: hidden;
-    opacity: 0;
-    }
-    .top-link svg {
-    fill: white;
-    width: 24px;
-    height: 12px;
-    }
-    .top-link:hover {
-    background-color: #3498DB;
-    }
-    .top-link:hover svg {
-    fill: #000000;
+    .card{
+        border-radius: 50px;
+        width: 94%;
+        padding: 5px;
     }
 
-    .screen-reader-text {
-    position: absolute;
-    clip-path: inset(50%);
-    margin: -1px;
-    border: 0;
-    padding: 0;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    word-wrap: normal !important;
-    clip: rect(1px, 1px, 1px, 1px);
+    .footer{
+        width: 75%;
     }
-    .screen-reader-text:focus {
-    display: block;
-    top: 5px;
-    left: 5px;
-    z-index: 100000;
-    clip-path: none;
-    background-color: #eee;
-    padding: 15px 23px 14px;
-    width: auto;
-    height: auto;
-    text-decoration: none;
-    line-height: normal;
-    color: #444;
-    font-size: 1em;
-    clip: auto !important;
-    }
-
-    /* E-Services Zoom */
-
-    /* .zoom1 {
-    transition: transform .3s;
-    }
-
-    .zoom1:hover {
-    -ms-transform: scale(1.1); 
-    -webkit-transform: scale(1.1); 
-    transform: scale(1.1); 
-    } */
-
-    /* Footer Style */
-    
-    .footerlinks{
-        color:white;
-        }
-    .shfooter .collapse {
-        display: inherit;
-    }
-        @media (max-width:767px) {
-    .shfooter ul {
-            margin-bottom: 0;
-    }
-
-    .shfooter .collapse {
-            display: none;
-    }
-
-    .shfooter .collapse.show {
-            display: block;
-    }
-
-    .shfooter .title .fa-angle-up,
-    .shfooter .title[aria-expanded=true] .fa-angle-down {
-            display: none;
-    }
-
-    .shfooter .title[aria-expanded=true] .fa-angle-up {
-            display: block;
-    }
-
-    .shfooter .navbar-toggler {
-            display: inline-block;
-            padding: 0;
-    }
-
-    }
-
-    .resize {
-        text-align: center;
-    }
-    .resize {
-        margin-top: 3rem;
-        font-size: 1.25rem;
-    }
-    /*RESIZESCREEN ANIMATION*/
-    .fa-angle-double-right {
-        animation: rightanime 1s linear infinite;
-    }
-
-    .fa-angle-double-left {
-        animation: leftanime 1s linear infinite;
-    }
-    @keyframes rightanime {
-        50% {
-            transform: translateX(10px);
-            opacity: 0.5;
-    }
-        100% {
-            transform: translateX(10px);
-            opacity: 0;
-    }
-    }
-    @keyframes leftanime {
-        50% {
-            transform: translateX(-10px);
-            opacity: 0.5;
-    }
-        100% {
-            transform: translateX(-10px);
-            opacity: 0;
-    }
-    }
-
-    /* Contact Chip */
-
-    .chip {
-    display: inline-block;
-    padding: 0 25px;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 25px;
-    background-color: #2C54C1;
-    margin-top: 5px;
-    }
-
-    .chip img {
-    float: left;
-    margin: 0 10px 0 -25px;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    }
-
 
 
 
@@ -231,6 +73,13 @@
             .desk {
                 display: none;
             }
+            .footer{
+                width: 100%;
+            }
+        }
+
+        h4, h6{
+            color: #ffffff;
         }
 
     </style>
@@ -290,21 +139,23 @@
             </table>
 
             <div class="container">
-                <div class="alert alert-primary bg-primary alert-dismissible fade show" role="alert"
-                 style="margin-top: 4%; 
-                        margin-bottom: 1.5%;
-                        border-radius:20px; 
-                        width:100%;
-                        color: white;">
-                <strong><h5 class="text-center">ANNOUNCEMENT!<h3></strong> 
-                <hr class="w-100"> 
-                <p style="font-size: 18px;"> 
-                    <?= $view['event'];?> 
-                </p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <div class="alert alert-primary bg-primary" role="alert"
+                    style="margin-top: 4%; 
+                            margin-bottom: 1.5%;
+                            border-radius:20px; 
+                            width:100%;
+                            color: white;">
+                    <strong><h5 class="text-center">ANNOUNCEMENT!<h3></strong> 
+                    <hr class="w-100"> 
+                    <div class="text-center"><img class="text-center" src="assets/default-thumbnail.jpg"></div>
+                    
+                    <p class="mt-3" style="font-size: 18px;text-align:center"> 
+                        <?= $view['event'];?> 
+                    </p>
+                    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> -->
+                </div>
             </div>
             
 
@@ -345,7 +196,7 @@
                                 <div class="card"> 
                                     <div class="card-body text-center"> 
                                         <img src="icons/ResidentHomepage/busper.png">
-                                        <h4> Business Recommendation </h4> 
+                                        <h4 class="text-primary"> Business Recommendation </h4> 
                                     </div>
                                 </div>
                             </div>
@@ -357,7 +208,7 @@
                                 <div class="card"> 
                                     <div class="card-body text-center"> 
                                         <img style="height: 139px;" src="icons/ResidentHomepage/brgyid.png">
-                                        <h4> Barangay ID </h4>
+                                        <h4 class="text-primary"> Barangay ID </h4>
                                     </div>
                                 </div>
                             </div>
@@ -369,7 +220,7 @@
                                 <div class="card"> 
                                     <div class="card-body text-center"> 
                                         <img src="icons/ResidentHomepage/indigency.png">
-                                        <h4> Certificate of Indigency </h4>
+                                        <h4 class="text-primary"> Certificate of Indigency </h4>
                                     </div>
                                 </div>
                             </div>
@@ -382,7 +233,7 @@
                             <div class="card"> 
                                 <div class="card-body text-center"> 
                                 <img src="icons/ResidentHomepage/residency.png">
-                                    <h4> Certificate of Residency </h4>
+                                    <h4 class="text-primary"> Certificate of Residency </h4>
                                 </div>
                             </div>
                         </div>
@@ -395,7 +246,7 @@
                             <div class="card"> 
                                 <div class="card-body text-center">
                                 <img src="icons/ResidentHomepage/clearance.png"> 
-                                    <h4> Barangay Clearance </h4>
+                                    <h4 class="text-primary"> Barangay Clearance </h4>
                                 </div>
                             </div>
                         </div>
@@ -406,8 +257,59 @@
             </div>
 
         <br>
-        <br>
-        <br>
+        <div class="row bg-primary p-3">
+            <div class="container footer">
+                <div class="row">
+                <div class="col-md-4">
+                <h4>Documentation</h4>
+                <h6>Barangay Clearance</h6>
+                <h6>Barangay ID</h6>
+                <h6>Business Recommendation</h6>
+                <h6>Residency</h6>
+                <h6>Indigency</h6>
+            </div>
+            <div class="col-md-4">
+                <h4>Other Services</h4>
+                <h6>Peace and Order</h6>
+            </div>
+            <div class="col-md-4">
+                <div class="card mt-3">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="icons/Contact/charlene.png" style="width:50px;border-radius:30px;">
+                        </div>
+                        <div class="col-10">
+                            <h6 class="mt-2 text-primary">Charlene Turqueza | 09762866176</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="icons/Contact/dan.png" style="width:50px;border-radius:30px;">
+                        </div>
+                        <div class="col-10">
+                        <h6 class="mt-2 text-primary">Dan Emmanuel Duarte | 09989120644</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="icons/Contact/jerika.png" style="width:50px;border-radius:30px;">
+                        </div>
+                        <div class="col-10">
+                        <h6 class="mt-2 text-primary">Jerika Soriano | 09661385889</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                </div>
+            </div>
+        </div>
 
         <!-- Footer -->
         

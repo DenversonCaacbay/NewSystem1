@@ -71,7 +71,7 @@
 	}else{
 ?>
 <table class="table table-hover table-bordered text-center table-responsive">
-		<thead class="alert-info">
+<thead class="alert-info">
 			<tr>
                 <th> Actions</th>
                 <th> Email </th>
@@ -86,8 +86,7 @@
                 <th hidden> Nationality </th>
                 <th hidden> Family Head </th>
                 <th hidden> Registered Voter </th>
-                <th hidden> Verified </th>
-                <th> View </th>
+                <th> Verified </th>
 			</tr>
 		</thead>
 
@@ -99,12 +98,12 @@
                             <form action="" method="post">
                                 <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
                                 <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
-                                <button class="btn btn-primary" type="submit" name="delete_resident" onclick="return confirm('Are you sure you want to archive this data?')"> Approve </button>
-                                <button class="btn btn-danger" type="submit" name="delete_resident" onclick="return confirm('Are you sure you want to archive this data?')"> Dissapprove </button>
+                                <button class="btn btn-danger" type="submit" name="delete_resident" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
+                                <a class="btn btn-primary" href="admn_view_approve_details.php" name=""> View </a>
                             </form>
                         </td>
                         <td> <?= $view['email'];?> </td>
-                        <td> <?= $view['lname'];?> <?= $view['fname'];?><?= $view['mi'];?> </td>
+                        <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                         <td> <?= $view['age'];?> </td>
                         <td> <?= $view['sex'];?> </td>
                         <td> <?= $view['status'];?> </td>
@@ -115,9 +114,7 @@
                         <td hidden> <?= $view['nationality'];?> </td>
                         <td hidden> <?= $view['family_role'];?> </td>
                         <td hidden> <?= $view['voter'];?> </td>
-                        <td hidden> <?= $view['verified'];?> </td>
-                        <td><button class="btn btn-primary" type="submit" name=""> View </button></td>
-                        
+                        <td> <?= $view['verified'];?> </td>
                     </tr>
 			
                 <?php

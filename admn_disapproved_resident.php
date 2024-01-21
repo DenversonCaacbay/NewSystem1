@@ -48,7 +48,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8"> <h1 class="mb-0">Viewing Approved Accounts</h1></div>
+            <div class="col-md-8"> <h1 class="mb-0">Viewing Disapproved Accounts</h1></div>
             <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_resident_crud.php"> Back </a></div>
            
         </div>
@@ -58,7 +58,7 @@
 
 
         <div class="col-md-12 mt-4">
-			<form method="POST" action="">
+        <form method="POST" action="">
                 <div class="input-icons d-flex">
                     <i class="fa fa-search icon"></i>
                     <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
@@ -67,7 +67,7 @@
                 </div>
 			</form>
 		<?php 
-            include('resident_register/resident_approved.php');
+            include('resident_register/resident_disapproved.php');
         ?>
 	</div>
 

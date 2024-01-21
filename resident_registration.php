@@ -24,6 +24,12 @@
     </head>
 
     <style>
+            .bg-primary{
+                    background: #309464 !important;
+                }
+                .btn-primary{
+                    background: #309464 !important;
+                }
         
         .field-icon {
             margin-left: 78%;
@@ -259,10 +265,35 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label> Upload birth certificate or any valid ID: </label>
-                                            <input type="file" class="form-control" name="id_picture" placeholder="" readonly>
+                                            <input type="file" class="form-control" name="id_picture" placeholder="">
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="mtop">Are you a registered voter? </label>
+                                            <select class="form-control" name="voter" id="regvote" required>
+                                                <option value="" <?php echo empty($_POST['voter']) ? 'selected' : ''; ?>>...</option>
+                                                <option value="Yes" >Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="mtop">Are you head of the family? </label>
+                                            <select class="form-control" name="family_role" id="famhead" required>
+                                                <option value="" <?php echo empty($_POST['family_role']) ? 'selected' : ''; ?>>...</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>

@@ -22,7 +22,7 @@
 
 <!-- Begin Page Content -->
 
-<div class="container">
+<div class="container-fluid">
 
     <!-- Page Heading -->
 
@@ -32,12 +32,11 @@
         </div>
     </div>
 
-    <hr>
 
     <br>
       
     <div class="row"> 
-        <div class="col-sm-6"> 
+        <div class="col-sm-4"> 
             <div class="card">
                 <div class="card-header bg-primary text-white" style="font-size: 20px;"> Event Announcement Form </div>
                 <div class="card-body">
@@ -49,84 +48,66 @@
                                     Announcement Message
                                 </h6>
                                 <br>
-                                <textarea name="event" class="form-control" rows="6" placeholder="Enter Message Here"></textarea>
+                                <input type="file" class="form-control" name="picture" required>
+                                <textarea name="event" class="form-control mt-3" rows="6" placeholder="Enter Message Here"></textarea>
                             </div>
                         </div>
 
                         <br>
-                        <hr>
+                        <hr class="w-100">
 
                         <div class="row"> 
                             <div class="col"> 
                                 <input type="hidden" name="start_date" value="<?= $cdate?>">
                                 <input name="addedby" type="hidden" value="<?= $userdetails['surname']?>, <?= $userdetails['firstname']?>">
-                                <button type="submit" name="create_announce" class="btn btn-primary" style="margin-left: 34%; border-radius: 15px; width: 150px; font-size: 18px;"> Submit Entry </button>
+                                <button type="submit" name="create_announce" class="btn btn-primary w-100"> Submit Entry </button>
                             </div>
                         </div>       
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6"> 
+        <div class="col-sm-8"> 
             <div class="card">
-                <div class="card-header bg-info text-white" style="font-size: 20px;"> Current Announcement Posted </div>
+                <div class="card-header bg-primary text-white" style="font-size: 20px;"> Current Announcement Posted </div>
                 <div class="card-body">
-                    <table class="table table-hover table-bordered table-responsive text-center">
-                        <form action="" method="post">
-                            <thead class="alert-info"> 
-                                <tr>
-                                    <th> Actions </th>
-                                    <th> Announcement </th>
-                                    <th> Date Posted </th>
-                                    <th> Added By </th>        
-                                </tr>
-                            </thead>
-                            <tbody> 
-                                <?php if(is_array($view)) {?>
-                                    <?php foreach($view as $view) {?>
-                                        <tr>
-                                            <td>    
-                                                <form action="" method="post">
-                                                    <input type="hidden" name="id_announcement" value="<?= $view['id_announcement'];?>">
-                                                    <button class="btn btn-danger" type="submit" name="delete_announcement"> Remove </button>
-                                                </form>
-                                            </td>
-                                            <td> <?= $view['event'];?> </td>
-                                            <td> <?= $view['start_date'];?> </td>
-                                            <td> <?= $view['addedby'];?> </td>              
-                                        </tr>
-                                    <?php }?>
-                                <?php } ?>
-                            </tbody>
-                        </form>
-                    </table>
+                    <div class="card p-2">
+                        <?php if(is_array($view)) {?>
+                            <?php foreach($view as $view) {?>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <?php if (is_null($view['picture'])): ?>
+                                            <img id="blah" src="assets/default-thumbnail.jpg" class="img-fluid" width="250" height="200" alt="Poster Picture">
+                                        <?php else: ?>
+                
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['picture'] ?>', '<?= $view['category'] ?>')">
+                                                <img src="<?= $view['picture'] ?>" class="img-fluid" alt="Modal Image" width="50">
+                                        </a>
+
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="col-md-8">
+                                    <h4><b>Description:</b><br> <?= $view['event'];?> </h4>
+                                    <h4><b>Created At:</b> <?= $view['start_date'];?> </h4>
+                                    <h4><b>Created by:</b> <?= $view['addedby'];?> </h4>   
+                                    <form action="" method="post">
+                                            <input type="hidden" name="id_announcement" value="<?= $view['id_announcement'];?>">
+                                            <button class="btn btn-danger" type="submit" name="delete_announcement"> Remove </button>
+                                        </form>    
+                                    </div>
+                                </div>
+                                           
+                               
+                            <?php }?>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <br><br>
 
-    <div class="row"> 
-        <div class="col">             
-            <div class="card">
-                <div class="card-header bg-success text-white" style="font-size: 20px;"> Current Announcement Output </div>
-                <div class="card-body">
 
-                    <div class="alert alert-info alert-dismissible fade show" 
-                        style="border-radius:30px;
-                        margin-left:13%; 
-                        width:75%;
-                        color: white;
-                        background-color:#3498DB;" role="alert">
-                        <strong><h4>ANNOUNCEMENT!<h4><hr></strong> <br> <p> <?= $view['event'];?> </p>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- /.container-fluid -->
 

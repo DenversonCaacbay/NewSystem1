@@ -90,10 +90,13 @@
 
                         // proceed to create
                         $connection = $this->openConn();
-                        $stmt = $connection->prepare("INSERT INTO tbl_resident ( `email`,`password`,`lname`,`fname`,
-                            `mi`, `age`, `sex`, `status`, `houseno`, `purok`,`street`, `brgy`, `municipal`, `address`,`contact`, `bdate`, 
-                            `bplace`, `nationality`,`voter` ,`family_role`,
-                            `role`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?,?,?)");
+                        $stmt = $connection->prepare("INSERT INTO tbl_resident (
+                            `email`,`password`,`lname`,`fname`, `mi`, `age`, `sex`, `status`, `houseno`, 
+                            `purok`,`street`, `brgy`, `municipal`, `address`,`contact`, `bdate`, 
+                            `bplace`, `nationality`,`voter` ,`family_role`, `role`, verified
+                        ) VALUES (
+                            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'No'
+                        )");
     
                         $stmt->Execute([ $email, $hashed_password, $lname, $fname, $mi, $age, $sex, $status, 
                         $houseno, $purok,$street, $brgy, $municipal, $address,$contact, $bdate, $bplace, $nationality, $voter, $familyrole, $role]);

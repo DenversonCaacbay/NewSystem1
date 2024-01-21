@@ -42,24 +42,26 @@
     <!-- Page Heading -->
 
     <div class="row"> 
-        <div class="col text-center"> 
-            <h1> Barangay Clearance Requests</h1>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="text-center mb-0">Pending Barangay Clearance Requests</h1>
+                <a href="admn_brgyclearance_done.php" class="btn btn-primary">View Done</a>
+            </div>
         </div>
     </div>
 
-    <hr>
+    <hr class="w-100">
 
     <div class="row"> 
         <div class="col">
-            <form method="POST">
-            <div class="input-icons" >
-                <i class="fa fa-search icon"></i>
-                <input type="search" class="form-control" style="border-radius: 30px;" name="keyword" value="" required=""/>
-            </div>
-                <button class="btn btn-success" name="search_clearance" style="width: 90px; font-size: 18px; border-radius:30px; margin-left:41.5%;">Search</button>
-                <a href="admn_brgyclearance.php" class="btn btn-info" style="width: 90px; font-size: 18px; border-radius:30px;">Reload</a>
-            
-            </form>
+        <form method="POST" action="">
+                    <div class="input-icons d-flex">
+                        <i class="fa fa-search icon"></i>
+                        <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
+                        <button class="btn btn-success" name="search_clearance" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
+                        <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                    </div>
+                </form>
             <br>
         </div>
     </div>
@@ -67,7 +69,7 @@
     <div class="row"> 
         <div class="col"> 
             <?php 
-                include('admn_brgyclearance_search.php');
+                include('tables/brgyclearance_pending.php');
             ?>
         </div>
     </div>

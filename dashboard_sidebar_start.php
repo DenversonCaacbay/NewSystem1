@@ -95,7 +95,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="admn_resident_crud.php">
                     <i class="fas fa-users"></i>
-                    <span>Barangay Residents</span></a>
+                    <span>Barangay Residents</span>
+                    <?php $registered_users = $residentbmis->count_registered_resident(); ?>    
+                    <?php if($registered_users > 0) : ?>
+                        <span class="badge badge-danger ms-2"><?php echo $registered_users; ?></span>
+                    <?php endif; ?>
+                </a>
+                    
             </li>
 
             <!-- Divider -->
@@ -158,7 +164,12 @@
             
 
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+            <hr class="sidebar-divider d-none">
+            <li class="nav-item">
+                <a class="nav-link" href="archives.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Archives</span></a>
+            </li>
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

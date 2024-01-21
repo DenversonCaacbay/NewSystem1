@@ -116,7 +116,7 @@
                         <td hidden> <?= $view['family_role'];?> </td>
                         <td hidden> <?= $view['voter'];?> </td>
                         <td hidden> <?= $view['verified'];?> </td>
-                        <td><button class="btn btn-primary" type="submit" name=""> View </button></td>
+                        <td><a class="btn btn-primary" href="admn_view_pending_details.php" name=""> View </a></td>
                     </tr>
                 <?php
                     }

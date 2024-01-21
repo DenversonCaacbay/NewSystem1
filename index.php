@@ -49,11 +49,28 @@
         <script src="https://kit.fontawesome.com/67a9b7069e.js" crossorigin="anonymous"></script>
         <!-- fontawesome icons --> 
         <script src="..//customjs/main.js" type="text/javascript"></script>
+        <link rel="manifest" href="manifest.json">
+        <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+            .then(function(registration) {
+                console.log('Service Worker registered with scope:', registration.scope);
+            }).catch(function(error) {
+                console.log('Service Worker registration failed:', error);
+            });
+        }
+        </script>
 
         <style> 
             body {
-                background: #00405B !important;
+                background: #309464 !important;
             }
+            .bg-primary{
+                    background: #309464 !important;
+                }
+                .btn-primary{
+                    background: #309464 !important;
+                }
             .input-container {
             display: -ms-flexbox; /* IE10 */
             display: flex;
@@ -63,7 +80,7 @@
 
             .icon {
             padding: 15px;
-            background: dodgerblue;
+            background: #309464 !important;
             color: white;
             min-width: 50px;
             text-align: center;
@@ -76,7 +93,7 @@
             }
 
             .input-field:focus {
-            border: 2px solid dodgerblue;
+            border: 2px solid #309464;
             }
 
             /* Set a style for the submit button */
@@ -107,6 +124,7 @@
                 <div class="row">
                     <div class="col-sm"></div>
                         <div class="col-sm main-heading text-center text-white" > 
+                        <img src="icon.png" width="150">
                             <h3> Barangay Santa Rita Management System </h3>
 
                         </div>

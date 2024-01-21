@@ -43,17 +43,17 @@
     <div class="row"> 
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="text-center mb-0">Pending Indigency Requests</h1>
-            <a href="admn_certofindigency_done.php" class="btn btn-primary">View Done</a>
+            <h1 class="text-center mb-0">List of Done Indigency Requests</h1>
+            <a href="admn_certofindigency.php" class="btn btn-primary">Back</a>
         </div>
     </div>
     </div>
 
-    <hr class="w-100">
+    <hr>
 
     <div class="row"> 
         <div class="col">
-        <form method="POST" action="">
+            <form method="POST" action="">
                 <div class="input-icons d-flex">
                     <i class="fa fa-search icon"></i>
                     <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
@@ -68,7 +68,7 @@
     <div class="row"> 
         <div class="col"> 
             <?php 
-                include('tables/certofindigency_pending.php');
+                include('tables/certofindigency_done.php');
             ?>
         </div>
     </div>

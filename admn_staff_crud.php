@@ -2,6 +2,7 @@
     ini_set('display_errors',0);
     error_reporting(E_ALL ^ E_WARNING);
     require('classes/staff.class.php');
+    require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
     $view = $staffbmis->view_staff();
@@ -21,89 +22,12 @@
 
     <!-- Page Heading -->
 
-    <h1 class="mb-4 text-center">Barangay Staff Data</h1>
-
-    <hr>
-    <br>
-    <br>
-
-    <div class="row">
-        <div class="col-md-9">
-            <div class="card"> 
-                <div class="card-header bg-primary text-white"> Add new Barangay Staff </div>
-                <div class="card-body"> 
-                    <form method="post" class="was-validated"> 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label> Last Name: </label>
-                                    <input type="text" class="form-control" name="lname" value="<?php echo isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : ''; ?>" placeholder="Enter Last Name" required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                </div>
-                            </div>
-                            
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="mtop" >First Name: </label>
-                                    <input type="text" class="form-control" name="fname" value="<?php echo isset($_POST['fname']) ? htmlspecialchars($_POST['fname']) : ''; ?>" placeholder="Enter First Name" required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                </div>
-                            </div>
-
-                            <div class="col"> 
-                                <div class="form-group">
-                                    <label class="mtop"> Middle Initial: </label>
-                                    <input type="text" class="form-control" name="mi" maxlength="1" value="<?php echo isset($_POST['mi']) ? htmlspecialchars($_POST['mi']) : ''; ?>" placeholder="Enter Middle Initial" required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row"> 
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Email: </label>
-                                    <input type="email" class="form-control" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" placeholder="Enter Email" required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                </div>
-                            </div>
-                            
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Password:</label>
-                                    <input type="password" class="form-control" id="password-field" name="password" placeholder="Enter Password" required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Confirm Password:</label>
-                                    <input type="password" class="form-control" id="password-field" name="confirm_password" placeholder="Enter Confirm Password" required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <input type="hidden" class="form-control" name="role" value="administrator">
-
-                        <br>
-                        <hr>
-
-                        <button class="btn btn-primary" type="submit" name="add_staff" style="width: 150px; font-size: 18px; border-radius:30px; margin-left:40%;"> Submit </button>  
-                    </form>      
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="text-center mb-0">Barangay Staff Data</h1>
+            <button type="button" class="btn btn-primary ml-auto me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add Staff
+            </button>
             <div class="card border-left-primary shadow">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -120,20 +44,90 @@
             </div>
         </div>
     </div>
-                    
-    <br>
-    <hr>
-    <br>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Stafft</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" class="was-validated"> 
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label> Last Name: </label>
+                                            <input type="text" class="form-control" name="lname" value="<?php echo isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : ''; ?>" placeholder="Enter Last Name" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="mtop" >First Name: </label>
+                                            <input type="text" class="form-control" name="fname" value="<?php echo isset($_POST['fname']) ? htmlspecialchars($_POST['fname']) : ''; ?>" placeholder="Enter First Name" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
 
-    <h1 class="mb-4 text-center">Barangay Staff Tables</h1>
+                                    <div class="col"> 
+                                        <div class="form-group">
+                                            <label class="mtop"> Middle Initial: </label>
+                                            <input type="text" class="form-control" name="mi" maxlength="1" value="<?php echo isset($_POST['mi']) ? htmlspecialchars($_POST['mi']) : ''; ?>" placeholder="Enter Middle Initial" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="row"> 
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Email: </label>
+                                            <input type="email" class="form-control" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" placeholder="Enter Email" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Password:</label>
+                                            <input type="password" class="form-control" id="password-field" name="password" placeholder="Enter Password" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Confirm Password:</label>
+                                            <input type="password" class="form-control" id="password-field" name="confirm_password" placeholder="Enter Confirm Password" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <input type="hidden" class="form-control" name="role" value="administrator">
+
+                                <br>
+                                <hr>
+
+                                <button class="btn btn-primary w-100" type="submit" name="add_staff" style="border-radius:10px;"> Submit </button>  
+                            </form>    
+                        </div>
+                    </div>
+                </div>
+            </div>
     <hr>
-    <br>
-    <br>
 
     <div class="row"> 
         <div class="col-md-12">
-           <table class="table table-hover text-center table-bordered table-responsive" id="dataTable" width="100%" cellspacing="0">
+           <table class="table table-hover text-center table-bordered " id="dataTable" width="100%" cellspacing="0">
                 <form action="" method="post">
                     <thead class="alert-info"> 
                         <tr>
@@ -152,9 +146,9 @@
                                 <tr>
                                     <td>    
                                         <form action="" method="post">
-                                            <a href="update_staff_form.php?id_user=<?= $view['id_admin'];?>" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" class="btn btn-success"> Update </a>
+                                            <a href="update_staff_form.php?id_user=<?= $view['id_admin'];?>" class="btn btn-success"> Update </a>
                                             <input type="hidden" name="id_user" value="<?= $view['id_admin'];?>">
-                                            <button class="btn btn-danger" style="width: 90px; font-size: 17px; border-radius:30px;" type="submit" name="delete_staff" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
+                                            <button class="btn btn-danger" type="submit" name="delete_staff" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
                                         </form>
                                     </td>
                                     <td> <?= $view['email'];?> </td>
