@@ -147,14 +147,18 @@
                             color: white;">
                     <strong><h5 class="text-center">ANNOUNCEMENT!<h3></strong> 
                     <hr class="w-100"> 
-                    <div class="text-center"><img class="text-center" src="assets/default-thumbnail.jpg"></div>
-                    
-                    <p class="mt-3" style="font-size: 18px;text-align:center"> 
-                        <?= $view['event'];?> 
-                    </p>
-                    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> -->
+                    <div class="text-center">
+                        <?php if (is_null($view['announcement_image'])): ?>
+                            <img id="blah" src="assets/default-thumbnail.jpg" class="text-center">
+                        <?php else: ?>
+                            <img class="text-center" src="<?= $view['announcement_image'] ?>"  width="250"></div>
+                        <?php endif; ?>
+                        <p class="mt-3" style="font-size: 18px;text-align:center"> 
+                            <?= $view['event'];?> 
+                        </p>
+                        <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
                 </div>
             </div>
             

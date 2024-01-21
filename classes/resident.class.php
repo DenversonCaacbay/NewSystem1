@@ -37,9 +37,7 @@
                 $confirm_password = ($_POST['confirm_password']);
                 $lname = ucfirst(strtolower($_POST['lname'])); // Convert to uppercase
                 $fname = ucfirst(strtolower($_POST['fname'])); // Convert to uppercase
-                // $mi = strtoupper(substr($_POST['mi'], 0, 1)) . '.'; // Get first letter in uppercase and add '.'
                 $mi = ucfirst(strtolower($_POST['mi']));
-                // $age = $_POST['age'];
                 $sex = $_POST['sex'];
                 $status = $_POST['status'];
                 $houseno = $_POST['houseno'];
@@ -49,70 +47,78 @@
                 $municipal = $_POST['municipal'];
                 $address = isset($_POST['address']) ? $_POST['address'] : NULL;
                 $contact = $_POST['contact'];
-
+        
                 $bdate = $_POST['bdate'];
-                // Calculate age based on the provided birthdate
                 $current_year = date("Y");
                 $birth_year = date("Y", strtotime($bdate));
                 $age = $current_year - $birth_year;
-
+        
                 $bplace = $_POST['bplace'];
                 $nationality = $_POST['nationality'];
                 $voter = $_POST['voter'];
                 $familyrole = $_POST['family_role'];
                 $role = $_POST['role'];
-
-                if ($this->check_resident($email) == 0 ) {
-
-                    // check if user is 18
-                    if ($age < 18) {
-                        $message = "Sorry, you are still underaged to register an account";
-                        echo "<script type='text/javascript'>alert('$message');</script>";
-                        return false;
+        
+                // Check if user is 18
+                if ($age < 18) {
+                    $message = "Sorry, you are still underaged to register an account";
+                    echo "<script type='text/javascript'>alert('$message');</script>";
+                    return false;
+                }
+        
+                // Check if the password and confirm password match
+                if ($password !== $confirm_password) {
+                    $message = "Password and Confirm Password do not match";
+                    echo "<script type='text/javascript'>alert('$message');</script>";
+                    return false;
+                }
+        
+                // Check if the password is at least 8 characters long
+                if (strlen($password) < 8) {
+                    $message = "Password must be at least 8 characters long";
+                    echo "<script type='text/javascript'>alert('$message');</script>";
+                    return false;
+                }
+        
+                // Hash the password
+                $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+        
+                $new_image = $_FILES['id_picture'];
+        
+                if (!empty($new_image['name'])) {
+                    $target_dir = "uploads/residents_id/";
+                    $file_extension = pathinfo($new_image['name'], PATHINFO_EXTENSION);
+        
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0755, true);
                     }
-                    else {
-                        // Check if the password and confirm password match
-                        if ($password !== $confirm_password) {
-                            $message = "Password and Confirm Password do not match";
-                            echo "<script type='text/javascript'>alert('$message');</script>";
-                            return false;
-                        }
-
-                        // Check if the password is at least 8 characters long
-                        if (strlen($password) < 8) {
-                            $message = "Password must be at least 8 characters long";
-                            echo "<script type='text/javascript'>alert('$message');</script>";
-                            return false;
-                        }
-
-                        // Hash the password
-                        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-                        // proceed to create
+        
+                    $target_file = $target_dir . time() . '.' . $file_extension;
+        
+                    if (move_uploaded_file($new_image["tmp_name"], $target_file)) {
+                        // proceed to create resident with image
                         $connection = $this->openConn();
                         $stmt = $connection->prepare("INSERT INTO tbl_resident (
-                            `email`,`password`,`lname`,`fname`, `mi`, `age`, `sex`, `status`, `houseno`, 
-                            `purok`,`street`, `brgy`, `municipal`, `address`,`contact`, `bdate`, 
-                            `bplace`, `nationality`,`voter` ,`family_role`, `role`, verified
-                        ) VALUES (
-                            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'No'
-                        )");
-    
-                        $stmt->Execute([ $email, $hashed_password, $lname, $fname, $mi, $age, $sex, $status, 
-                        $houseno, $purok,$street, $brgy, $municipal, $address,$contact, $bdate, $bplace, $nationality, $voter, $familyrole, $role]);
-
+                            `email`, `password`, `lname`, `fname`, `mi`, `age`, `sex`, `status`, `houseno`, 
+                            `purok`, `street`, `brgy`, `municipal`, `address`, `contact`, `bdate`, 
+                            `bplace`, `nationality`, `voter`, `family_role`, `role`, `valid_id_photo`
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            
+                        $stmt->Execute([$email, $hashed_password, $lname, $fname, $mi, $age, $sex, $status, 
+                        $houseno, $purok, $street, $brgy, $municipal, $address, $contact, $bdate, 
+                        $bplace, $nationality, $voter, $familyrole, $role, $target_file]);
+        
                         $message2 = "Account added, you can now continue logging in";
                         echo "<script type='text/javascript'>alert('$message2');</script>";
-
-                        echo '<script>window.location.replace("index.php")</script>;';
+        
+                        echo '<script>window.location.replace("index.php")</script>';
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
                     }
-                }
-
-                else {
-                    echo "<script type='text/javascript'>alert('Email Account already exists');</script>";
                 }
             }
         }
+        
 
         public function view_resident(){
             $connection = $this->openConn();
@@ -121,6 +127,19 @@
             $view = $stmt->fetchAll();
             return $view;
         }
+
+
+        public function view_single_resident() {
+            $resident = $_GET['id_resident'];
+        
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("SELECT * FROM tbl_resident WHERE id_resident = ?");
+            $stmt->execute([$resident]);
+            $view = $stmt->fetch();
+        
+            return $view;
+        }        
+
         public function view_pending_account(){
             $connection = $this->openConn();
             $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified IS NULL");
@@ -152,19 +171,81 @@
                 $familyrole = $_POST['family_role'];
                 $role = $_POST['role'];
                 $addedby = $_POST['addedby'];
-
-                $connection = $this->openConn();
-                $stmt = $connection->prepare("UPDATE tbl_resident SET `password` =?, `lname` =?, 
-                `fname` = ?, `mi` =?, `age` =?, `sex` =?, `status` =?, `email` =?, `houseno` =?, `street` =?,
-                `brgy` =?, `municipal` =?, `contact` =?,
-                `bdate` =?, `bplace` =?, `nationality` =?, `voter` =?, `family_role` =?, `role` =?, `addedby` =? WHERE `id_resident` = ?");
-                $stmt->execute([$password, $lname, $fname, $mi, $age, $sex, $status,$email, $houseno, 
-                $street, $brgy, $municipal,
-                $contact, $bdate, $bplace, $nationality, $voter, $familyrole, $role, $addedby, $id_resident]);
-                    
+        
+                // Check if a new picture is uploaded
+                $new_picture = $_FILES['resident_picture'];
+                $target_dir = "uploads/resident_picture/";
+        
+                // Function to handle image upload
+                function uploadImage($new_picture, $target_dir) {
+                    // ... code for handling image upload (same as in the previous example)
+                }
+        
+                // Check if a new picture is uploaded
+                if (!empty($new_picture['name'])) {
+                    $uploaded_file = uploadImage($new_picture, $target_dir);
+        
+                    if ($uploaded_file !== false) {
+                        $connection = $this->openConn();
+        
+                        // Update the resident information including the new picture
+                        $stmt = $connection->prepare("UPDATE tbl_resident SET `password` =?, `lname` =?, 
+                        `fname` = ?, `mi` =?, `age` =?, `sex` =?, `status` =?, `email` =?, `houseno` =?, `street` =?,
+                        `brgy` =?, `municipal` =?, `contact` =?,
+                        `bdate` =?, `bplace` =?, `nationality` =?, `voter` =?, `family_role` =?, `role` =?, `addedby` =?, `res_photo` = ? WHERE `id_resident` = ?");
+                        $stmt->execute([$password, $lname, $fname, $mi, $age, $sex, $status, $email, $houseno,
+                        $street, $brgy, $municipal,
+                        $contact, $bdate, $bplace, $nationality, $voter, $familyrole, $role, $addedby, $uploaded_file, $id_resident]);
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                        return;
+                    }
+                } else {
+                    // Update resident information without changing the picture
+                    $connection = $this->openConn();
+                    $stmt = $connection->prepare("UPDATE tbl_resident SET `password` =?, `lname` =?, 
+                    `fname` = ?, `mi` =?, `age` =?, `sex` =?, `status` =?, `email` =?, `houseno` =?, `street` =?,
+                    `brgy` =?, `municipal` =?, `contact` =?,
+                    `bdate` =?, `bplace` =?, `nationality` =?, `voter` =?, `family_role` =?, `role` =?, `addedby` =? WHERE `id_resident` = ?");
+                    $stmt->execute([$password, $lname, $fname, $mi, $age, $sex, $status, $email, $houseno,
+                    $street, $brgy, $municipal,
+                    $contact, $bdate, $bplace, $nationality, $voter, $familyrole, $role, $addedby, $id_resident]);
+                }
+        
                 $message2 = "Resident Data Updated";
                 echo "<script type='text/javascript'>alert('$message2');</script>";
                 header("refresh: 0");
+            }
+        }
+        
+
+        public function approve_resident(){
+            $id_resident = $_POST['id_resident'];
+
+            if(isset($_POST['approve_resident'])){
+                $connection = $this->openConn();
+                $stmt = $connection->prepare("UPDATE tbl_resident SET verified = 'Yes' WHERE id_resident = ?");
+                $stmt->execute([$id_resident]);
+    
+                $message2 = "Resident approved";
+                
+                echo "<script type='text/javascript'>alert('$message2');</script>";
+                header("Refresh:0");
+            }
+        }
+
+        public function decline_resident(){
+            $id_resident = $_POST['id_resident'];
+
+            if(isset($_POST['decline_resident'])){
+                $connection = $this->openConn();
+                $stmt = $connection->prepare("UPDATE tbl_resident SET verified = 'No' WHERE id_resident = ?");
+                $stmt->execute([$id_resident]);
+    
+                $message2 = "Resident declined";
+                
+                echo "<script type='text/javascript'>alert('$message2');</script>";
+                header("Refresh:0");
             }
         }
 
@@ -274,7 +355,9 @@
     public function count_head_resident() {
         $connection = $this->openConn();
 
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident where family_role = 'Yes'");
+        $stmt = $connection->prepare("SELECT COUNT(houseno) FROM tbl_resident GROUP BY houseno");
+        // $stmt = $connection->prepare("SELECT COUNT(*) as count, lname FROM tbl_resident GROUP BY houseno, lname");
+        // $stmt = $connection->prepare("SELECT SUM(count) as total_count FROM (SELECT COUNT(*) as count FROM tbl_resident GROUP BY houseno, lname) AS subquery");
         $stmt->execute();
         $rescount = $stmt->fetchColumn();
 
@@ -282,12 +365,13 @@
     }
 
     public function count_member_resident() {
-        $connection = $this->openConn();
+        // $connection = $this->openConn();
 
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident where family_role = 'Family Member'");
-        $stmt->execute();
-        $rescount = $stmt->fetchColumn();
+        // $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident where family_role = 'Family Member'");
+        // $stmt->execute();
+        // $rescount = $stmt->fetchColumn();
 
+        $rescount = 0;
         return $rescount;
     }
 

@@ -60,10 +60,18 @@ class BMISClass {
                     $stmt->execute([$email]);
                     $user = $stmt->fetch();
 
+
                     if ($user AND password_verify($password, $user['password'])) {
                         // 
-                        $this->set_userdata($user);
-                        header('Location: resident_homepage.php');
+                        if($user['verified'] == 'Pending'){
+                            echo "<script type='text/javascript'>alert('Account not yet verified');</script>";
+                            return;
+                        }
+
+                        else{
+                            $this->set_userdata($user);
+                            header('Location: resident_homepage.php');
+                        }
                     }
                 }
 
@@ -256,26 +264,54 @@ class BMISClass {
  //  ----------------------------------------------- ANNOUNCEMENT CRUD ---------------------------------------------------------
 
 
-    public function create_announcement() {
-        if(isset($_POST['create_announce'])) {
-            $id_announcement = $_POST['id_announcement'];
-            $event = $_POST['event'];
-            $start_date = $_POST['start_date'];
-            $addedby = $_POST['addedby'];
+ public function create_announcement() {
+    if(isset($_POST['create_announce'])) {
+        $id_announcement = $_POST['id_announcement'];
+        $event = $_POST['event'];
+        $start_date = $_POST['start_date'];
+        $addedby = $_POST['addedby'];
 
-            $connection = $this->openConn();
-            $stmt = $connection->prepare("INSERT INTO tbl_announcement (`id_announcement`, 
-            `event`, `start_date`, `addedby`) VALUES ( ?, ?, ?, ?)");
-            $stmt->execute([$id_announcement, $event, $start_date, $addedby]);
+        $new_image = $_FILES['announcement_image'];
 
-            $message2 = "Announcement Added";
-            echo "<script type='text/javascript'>alert('$message2');</script>";
-            header('refresh:0');
-        }
+        if (!empty($new_image['name'])) {
+            $target_dir = "uploads/announcements/";
+            $file_extension = pathinfo($new_image['name'], PATHINFO_EXTENSION);
 
-        else {
-        }
+            if (!is_dir($target_dir)) {
+                mkdir($target_dir, 0755, true);
+            }
+
+            $target_file = $target_dir . time() . '.' . $file_extension;
+
+            if (move_uploaded_file($new_image["tmp_name"], $target_file)) {
+                // proceed to create announcement with image
+                $connection = $this->openConn();
+                $stmt = $connection->prepare("INSERT INTO tbl_announcement 
+                    (`id_announcement`, `event`, `start_date`, `addedby`, `announcement_image`) 
+                    VALUES (?, ?, ?, ?, ?)");
+                $stmt->execute([$id_announcement, $event, $start_date, $addedby, $target_file]);
+
+                $message2 = "Announcement Added";
+                echo "<script type='text/javascript'>alert('$message2');</script>";
+                header('refresh:0');
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        } 
+        // else {
+        //     // proceed to create announcement without image
+        //     $connection = $this->openConn();
+        //     $stmt = $connection->prepare("INSERT INTO tbl_announcement 
+        //         (`id_announcement`, `event`, `start_date`, `addedby`) VALUES (?, ?, ?, ?)");
+        //     $stmt->execute([$id_announcement, $event, $start_date, $addedby]);
+
+        //     $message2 = "Announcement Added";
+        //     echo "<script type='text/javascript'>alert('$message2');</script>";
+        //     header('refresh:0');
+        // }
     }
+}
+
 
     public function view_announcement(){
         $connection = $this->openConn();

@@ -99,8 +99,8 @@
                             <form action="" method="post">
                                 <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
                                 <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
-                                <button class="btn btn-primary" type="submit" name="delete_resident" onclick="return confirm('Are you sure you want to archive this data?')"> Approve </button>
-                                <button class="btn btn-danger" type="submit" name="delete_resident" onclick="return confirm('Are you sure you want to archive this data?')"> Dissapprove </button>
+                                <button class="btn btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> Approve </button>
+                                <button class="btn btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline </button>
                             </form>
                         </td>
                         <td> <?= $view['email'];?> </td>
@@ -116,7 +116,7 @@
                         <td hidden> <?= $view['family_role'];?> </td>
                         <td hidden> <?= $view['voter'];?> </td>
                         <td hidden> <?= $view['verified'];?> </td>
-                        <td><a class="btn btn-primary" href="admn_view_pending_details.php" name=""> View </a></td>
+                        <td><a class="btn btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a></td>
                     </tr>
                 <?php
                     }

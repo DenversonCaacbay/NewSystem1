@@ -40,7 +40,7 @@
             <div class="card">
                 <div class="card-header bg-primary text-white" style="font-size: 20px;"> Event Announcement Form </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <div class="row"> 
                             <div class="col">
                                 <h6>
@@ -48,7 +48,7 @@
                                     Announcement Message
                                 </h6>
                                 <br>
-                                <input type="file" class="form-control" name="picture" required>
+                                <input type="file" class="form-control" name="announcement_image" required>
                                 <textarea name="event" class="form-control mt-3" rows="6" placeholder="Enter Message Here"></textarea>
                             </div>
                         </div>
@@ -76,12 +76,12 @@
                             <?php foreach($view as $view) {?>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <?php if (is_null($view['picture'])): ?>
+                                        <?php if (is_null($view['announcement_image'])): ?>
                                             <img id="blah" src="assets/default-thumbnail.jpg" class="img-fluid" width="250" height="200" alt="Poster Picture">
                                         <?php else: ?>
                 
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['picture'] ?>', '<?= $view['category'] ?>')">
-                                                <img src="<?= $view['picture'] ?>" class="img-fluid" alt="Modal Image" width="50">
+                                                <img src="<?= $view['announcement_image'] ?>" class="img-fluid" alt="Modal Image" width="250">
                                         </a>
 
                                         <?php endif; ?>

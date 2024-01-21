@@ -10,6 +10,9 @@
    $residentbmis->update_resident();
    $residentbmis->delete_resident();
    
+   //    
+   $residentbmis->approve_resident();
+   $residentbmis->decline_resident();
 
    $rescount = $residentbmis->count_resident();
    $rescountm = $residentbmis->count_male_resident();
