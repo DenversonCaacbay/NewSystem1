@@ -46,7 +46,7 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1 class="text-center mb-0">Pending Business Recommendation Requests</h1>
-                <a href="admn_bspermit_done.php" class="btn btn-primary">View Done</a>
+                <!-- <a href="admn_bspermit_done.php" class="btn btn-primary">View Done</a> -->
             </div>
         </div>
     </div>
@@ -63,7 +63,6 @@
                         <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
                     </div>
                 </form>
-            <br>
         </div>
     </div>
 

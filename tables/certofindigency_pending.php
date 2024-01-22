@@ -95,10 +95,8 @@
 <table class="table table-hover text-center table-bordered table-responsive">
     <thead class="alert-info">
         <tr>
-            <th> Resident ID </th>
             <th> Tracking ID </th>
             <th> Full Name </th>
-            <th> Nationality </th>
             <th> Address </th>
             <th> Purpose </th>
             <th> Date </th>
@@ -111,18 +109,18 @@
         <?php if(is_array($view)) {?>
             <?php foreach($view as $view) {?>
                 <tr>
-                    <td> <?= $view['id_indigency'];?> </td> 
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
-                    <td> <?= $view['nationality'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?> </td>
                     <td> <?= $view['purpose'];?> </td>
-                    <td> <?= $view['date'];?> </td>
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td>
                         <?php if (is_null($view['certofindigency_photo'])): ?>
                             <span>No Image Available</span>
                         <?php else: ?>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#imageModal<?= $view['id_indigency'] ?>">View</button>
+                            <a href="#" data-toggle="modal" data-target="#imageModal<?= $view['id_indigency'] ?>">
+                                <img src="<?= $view['certofindigency_photo'] ?>" class="img-fluid" alt="Modal Image" width="50">
+                            </a>
                     
                             <div class="modal fade" id="imageModal<?= $view['id_indigency'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -147,9 +145,10 @@
                     <td width="20%">    
                         <form action="" method="post">
                             <!--<a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="indigency_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> -->
-                            <a href="generatePdf/generate_indigency.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-success" target='_blank'>Generate</a>
+                            <a href="generatePdf/generate_indigency.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
                             <input type="hidden" name="id_indigency" value="<?= $view['id_indigency'];?>">
-                            <button class="btn btn-danger" type="submit" name="delete_certofindigency" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
+                            <button class="btn btn-primary" type="submit" name="approved_certofindigency" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
+                            <button class="btn btn-danger" type="submit" name="delete_certofindigency" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
                         </form>
                     </td>
                 </tr>

@@ -44,7 +44,7 @@
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="text-center mb-0">Pending Indigency Requests</h1>
-            <a href="admn_certofindigency_done.php" class="btn btn-primary">View Done</a>
+            <!-- <a href="admn_certofindigency_done.php" class="btn btn-primary">View Done</a> -->
         </div>
     </div>
     </div>

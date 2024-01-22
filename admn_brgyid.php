@@ -43,31 +43,32 @@
     <!-- Page Heading -->
 
     <div class="row"> 
-        <div class="col text-center"> 
-            <h1> Barangay ID Card Requests</h1>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="text-center mb-0">Pending Barangay ID Requests</h1>
+                <!-- <a href="admn_bspermit_done.php" class="btn btn-primary">View Done</a> -->
+            </div>
         </div>
     </div>
 
     <hr>
-
     <div class="row"> 
         <div class="col">
-            <form method="POST">
-            <div class="input-icons" >
-                <i class="fa fa-search icon"></i>
-                <input type="search" class="form-control" name="keyword" value=""style="border-radius: 30px;" required=""/>
-            </div>
-                <button class="btn btn-success" name="search_brgyid" style="width: 90px; font-size: 18px; border-radius:30px; margin-left:41.7%;">Search</button>
-                <a href="admn_brgyid.php" class="btn btn-info" style="width: 90px; font-size: 18px; border-radius:30px;">Reload</a>
-            </form>
-            <br>
+            <form method="POST" action="">
+                    <div class="input-icons d-flex">
+                        <i class="fa fa-search icon"></i>
+                        <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
+                        <button class="btn btn-success" name="search_brgyid" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
+                        <a href="admn_brgyid.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                    </div>
+                </form>
         </div>
     </div>
 
     <div class="row"> 
         <div class="col-md-12"> 
             <?php 
-                include('admn_brgyid_search.php');
+                include('tables/brgyid_pending.php');
             ?>
         </div>
     </div>

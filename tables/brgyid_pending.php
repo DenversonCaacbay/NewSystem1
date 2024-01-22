@@ -130,7 +130,9 @@
                         <?php if (is_null($view['res_photo'])): ?>
                             <span>No Image Available</span>
                         <?php else: ?>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#imageModal<?= $view['id_brgyid'] ?>">View</button>
+                            <a href="#" data-toggle="modal" data-target="#imageModal<?= $view['id_brgyid'] ?>">
+                                <img src="<?= $view['res_photo'] ?>" class="img-fluid" alt="Modal Image" width="80">
+                            </a>
                     
                             <div class="modal fade" id="imageModal<?= $view['id_brgyid'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -154,9 +156,10 @@
                     </td>
                     <td width="20%">      
                         <form action="" method="post">
-                            <a class="btn btn-success" target="blank"  href="barangayid_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> 
+                            <a class="btn btn-primary" target="blank"  href="barangayid_form.php?id_resident=<?= $view['id_resident'];?>"><i class="fas fa-print p-1"></i></a> 
                             <input type="hidden" name="id_brgyid" value="<?= $view['id_brgyid'];?>">
-                            <button class="btn btn-danger" type="submit" name="delete_brgyid" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
+                            <button class="btn btn-primary" type="submit" name="approved_brgy" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
+                            <button class="btn btn-danger" type="submit" name="delete_brgyid" onclick="return confirm('Are you sure you want to decline this data?')"> Decline </button>
                         </form>
                     </td>
                 </tr>

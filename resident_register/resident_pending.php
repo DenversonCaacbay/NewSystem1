@@ -8,22 +8,14 @@
 
 		<thead class="alert-info">
 			<tr>
-                <th> Actions</th>
-                <th> Email </th>
-                <th> Surname </th>
-                <th> First name </th>
-                <th> Middle name </th>
-                <th> Age </th>
-                <th> Sex </th>
-                <th> Status </th>
-                <th> House No.</th>
-                <th> Street </th>
-                <th> Barangay </th>
-                <th> Contact # </th>
-                <th> Birth date </th>
-                <th> Birth place </th>
-                <th> Nationality </th>
-                <th> Family Head </th>
+                <th width="20%"> Actions</th>
+                <th width="20%"> Email </th>
+                <th width="20%"> Full Name </th>
+                <th width="5%"> Age </th>
+                <th width="20%"> Address </th>
+                <th width="10%"> Contact # </th>
+                <th width="5%">Verification ID</th>
+                <th width="5%"> View </th>
 			</tr>
 		</thead>
 
@@ -38,28 +30,25 @@
 				while($view = $stmnt->fetch()){
 			?>
                 <tr>
-                    <td>    
-                        <form action="" method="post">
-                            <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;">  Update </a>
-                            <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
-                            <button class="btn btn-danger" type="submit" name="delete_resident" style="width: 90px; font-size: 17px; border-radius:30px;"> Archive </button>
-                        </form>
-                    </td>
-                    <td> <?= $view['email'];?> </td>
-                    <td> <?= $view['lname'];?> </td>
-                    <td> <?= $view['fname'];?> </td>
-                    <td> <?= $view['mi'];?> </td>
-                    <td> <?= $view['age'];?> </td>
-                    <td> <?= $view['sex'];?> </td>
-                    <td> <?= $view['status'];?> </td>
-                    <td> <?= $view['houseno'];?> </td>
-                    <td> <?= $view['street'];?> </td>
-                    <td> <?= $view['brgy'];?> </td>
-                    <td> <?= $view['contact'];?> </td>
-                    <td> <?= $view['bdate'];?> </td>
-                    <td> <?= $view['bplace'];?> </td>
-                    <td> <?= $view['nationality'];?> </td>
-                    <td> <?= $view['family_role'];?> </td>
+                <td width="20%">    
+                            <form action="" method="post">
+                                <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
+                                <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
+                                <input type="hidden" name="email" value="<?= $view['email'];?>">
+                                <button class="btn btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> Approve </button>
+                                <button class="btn btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline </button>
+                            </form>
+                        </td>
+                        <td> <?= $view['email'];?> </td>
+                        <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
+                        <td> <?= $view['age'];?> </td>
+                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?> </td>
+                        <td> <?= $view['contact'];?> </td>
+                        <td>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['valid_id_photo'] ?>', '<?= $view['lname'];?>', '<?= $view['fname'];?> <?= $view['mi'];?>')">
+                                <img src="<?= $view['valid_id_photo'] ?>" class="img-fluid" alt="Modal Image" width="50">
+                            </a></td>
+                        <td><a class="btn btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a></td>
                 </tr>
 			<?php
 			}
@@ -73,21 +62,16 @@
 <table class="table table-hover table-bordered text-center table-responsive">
 <thead class="alert-info">
 			<tr>
-                <th> Actions</th>
-                <th> Email </th>
-                <th> Full Name </th>
-                <th> Age </th>
-                <th> Sex </th>
-                <th> Civil Status </th>
-                <th> Address </th>
-                <th> Contact # </th>
-                <th hidden> Birth date </th>
-                <th hidden> Birth place </th>
-                <th hidden> Nationality </th>
-                <th hidden> Family Head </th>
-                <th hidden> Registered Voter </th>
-                <th hidden> Verified </th>
-                <th> View </th>
+                
+                
+                <th width="15%"> Full Name </th>
+                <th width="20%"> Email </th>
+                <th width="5%"> Age </th>
+                <th width="20%"> Address </th>
+                <th width="10%"> Contact # </th>
+                <th width="5%">Verification ID</th>
+                <th width="5%"> View </th>
+                <th width="15%"> Actions</th>
 			</tr>
 		</thead>
 
@@ -95,28 +79,27 @@
 		    <?php if(is_array($view)) {?>
                 <?php foreach($view as $view) {?>
                     <tr>                    
+                        
+                        
+                        <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
+                        <td> <?= $view['email'];?> </td>
+                        <td> <?= $view['age'];?> </td>
+                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?> </td>
+                        <td> <?= $view['contact'];?> </td>
+                        <td>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['valid_id_photo'] ?>', '<?= $view['lname'];?>', '<?= $view['fname'];?> <?= $view['mi'];?>')">
+                                <img src="<?= $view['valid_id_photo'] ?>" class="img-fluid" alt="Modal Image" width="80">
+                            </a></td>
+                        <td><a class="btn btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a></td>
                         <td width="20%">    
                             <form action="" method="post">
                                 <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
                                 <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
+                                <input type="hidden" name="email" value="<?= $view['email'];?>">
                                 <button class="btn btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> Approve </button>
                                 <button class="btn btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline </button>
                             </form>
                         </td>
-                        <td> <?= $view['email'];?> </td>
-                        <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
-                        <td> <?= $view['age'];?> </td>
-                        <td> <?= $view['sex'];?> </td>
-                        <td> <?= $view['status'];?> </td>
-                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?> </td>
-                        <td> <?= $view['contact'];?> </td>
-                        <td hidden> <?= $view['bdate'];?> </td>
-                        <td hidden> <?= $view['bplace'];?> </td>
-                        <td hidden> <?= $view['nationality'];?> </td>
-                        <td hidden> <?= $view['family_role'];?> </td>
-                        <td hidden> <?= $view['voter'];?> </td>
-                        <td hidden> <?= $view['verified'];?> </td>
-                        <td><a class="btn btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a></td>
                     </tr>
                 <?php
                     }
@@ -132,3 +115,35 @@ $con = null;
 ?>
 
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"> Picture</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Modal image -->
+                <img id="modalImage" class="img-fluid" alt="Modal Image" width="100%">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript function to open the modal, set the image source, and update the modal title
+    function openModal(imageSrc, lname, fname) {
+        console.log("Opening modal with image source and fullname:", imageSrc, lname, fname);
+
+        // Assuming modalImage is the ID of your image element in the modal
+        document.getElementById('modalImage').src = imageSrc;
+
+        // Assuming modalTitle is the class of your modal title element
+        document.querySelector('.modal-title').textContent = lname + ', ' + fname + '- Verification ID';
+    }
+</script>

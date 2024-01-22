@@ -97,14 +97,11 @@
 
     <thead class="alert-info">
         <tr>
-            <th hidden> Resident ID </th>
-            <th> Tracking ID </th>
-            <th> Full Name </th>
-            <th> Purpose </th>
-            <th> Address </th>
-            <th> Status </th>
-            <th> Image </th>
-            <th> Actions</th>
+            <th width="20%"> Tracking ID </th>
+            <th width="20%"> Full Name </th>
+            <th width="20%"> Purpose </th>
+            <th width="20%"> Address </th>
+            <th width="20%"> Actions</th>
         </tr>
     </thead>
 
@@ -117,41 +114,14 @@
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['purpose'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>,<?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
-
-                    <td> <?= $view['status'];?> </td>
-                    <td>
-                        <?php if (is_null($view['brgyclearance_photo'])): ?>
-                            <span>No Image Available</span>
-                        <?php else: ?>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#imageModal<?= $view['id_clearance'] ?>">View</button>
-                    
-                            <div class="modal fade" id="imageModal<?= $view['id_clearance'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="imageModalTitle"><?= $view['fname'];?> <?= $view['lname'];?></h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a href="<?= $view['brgyclearance_photo'] ?>" target="_blank"><img src="<?= $view['brgyclearance_photo'] ?>" class="img-fluid" alt="Modal Image"></a>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    </td>
                     <td width="20%">    
                         <form action="" method="post">
                             <!-- <a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a>  -->
-                            <a href="generatePdf/generate_clearance.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-success" target='_blank'>Generate</a>
+                            <a href="generatePdf/generate_clearance.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
 
                             <input type="hidden" name="id_clearance" value="<?= $view['id_clearance'];?>">
-                            <button class="btn btn-danger" type="submit" name="delete_clearance" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
+                            <button class="btn btn-primary" type="submit" name="approved_clearance" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
+                            <button class="btn btn-danger" type="submit" name="delete_clearance" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
                         </form>
                     </td>
 

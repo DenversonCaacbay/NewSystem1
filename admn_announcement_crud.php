@@ -74,6 +74,8 @@
                     <div class="card p-2">
                         <?php if(is_array($view)) {?>
                             <?php foreach($view as $view) {?>
+                                <div class="card mt-3">
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <?php if (is_null($view['announcement_image'])): ?>
@@ -88,13 +90,15 @@
                                     </div>
                                     <div class="col-md-8">
                                     <h4><b>Description:</b><br> <?= $view['event'];?> </h4>
-                                    <h4><b>Created At:</b> <?= $view['start_date'];?> </h4>
+                                    <h4><b>Created at:</b> <?= date("F d, Y", strtotime($view['start_date'])); ?></h4>
                                     <h4><b>Created by:</b> <?= $view['addedby'];?> </h4>   
                                     <form action="" method="post">
                                             <input type="hidden" name="id_announcement" value="<?= $view['id_announcement'];?>">
                                             <button class="btn btn-danger" type="submit" name="delete_announcement"> Remove </button>
                                         </form>    
                                     </div>
+                                </div>
+
                                 </div>
                                            
                                

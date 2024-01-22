@@ -14,7 +14,8 @@
     <script src="https://kit.fontawesome.com/67a9b7069e.js" crossorigin="anonymous"></script>
 </head>
 <?php 
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
     require_once('main.class.php');
     
     // // check if user is logged
@@ -122,7 +123,7 @@
 
         public function view_resident(){
             $connection = $this->openConn();
-            $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified IS NOT NULL");
+            $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified ='Pending'");
             $stmt->execute();
             $view = $stmt->fetchAll();
             return $view;
@@ -140,9 +141,16 @@
             return $view;
         }        
 
-        public function view_pending_account(){
+        public function view_approved_account(){
             $connection = $this->openConn();
-            $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified IS NULL");
+            $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified ='Yes'");
+            $stmt->execute();
+            $view = $stmt->fetchAll();
+            return $view;
+        }
+        public function view_rejected_account(){
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified ='No'");
             $stmt->execute();
             $view = $stmt->fetchAll();
             return $view;
@@ -219,31 +227,88 @@
         }
         
 
-        public function approve_resident(){
+        public function approve_resident() {
             $id_resident = $_POST['id_resident'];
-
-            if(isset($_POST['approve_resident'])){
+            $email = $_POST['email'];
+        
+            if (isset($_POST['approve_resident'])) {
                 $connection = $this->openConn();
                 $stmt = $connection->prepare("UPDATE tbl_resident SET verified = 'Yes' WHERE id_resident = ?");
                 $stmt->execute([$id_resident]);
-    
-                $message2 = "Resident approved";
-                
+        
+                // Send email using PHPMailer
+                $mail = new PHPMailer(true);
+        
+                try {
+                    // Server settings
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';  // Replace with your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com';  // Replace with your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj';  // Replace with your SMTP password
+                    $mail->SMTPSecure = 'tls';  // Choose SSL or TLS
+                    $mail->Port = 587;  // Adjust the port if necessary
+        
+                    // Recipients
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita');  // Replace with your email and name
+                    $mail->addAddress($email);  // Email address of the resident
+        
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Account Verification';
+                    $mail->Body = 'Your account has been verified. You can now login.';
+        
+                    $mail->send();
+                    
+                    $message2 = "Resident approved and email sent";
+                } catch (Exception $e) {
+                    $message2 = "Resident approved, but email could not be sent. Error: {$mail->ErrorInfo}";
+                }
+        
                 echo "<script type='text/javascript'>alert('$message2');</script>";
                 header("Refresh:0");
             }
         }
+        
 
-        public function decline_resident(){
+        public function decline_resident() {
             $id_resident = $_POST['id_resident'];
-
-            if(isset($_POST['decline_resident'])){
+            $email = $_POST['email'];
+        
+            if (isset($_POST['decline_resident'])) {
                 $connection = $this->openConn();
                 $stmt = $connection->prepare("UPDATE tbl_resident SET verified = 'No' WHERE id_resident = ?");
                 $stmt->execute([$id_resident]);
-    
-                $message2 = "Resident declined";
-                
+        
+                // Send email using PHPMailer
+                $mail = new PHPMailer(true);
+        
+                try {
+                    // Server settings
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';  // Replace with your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com';  // Replace with your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj';  // Replace with your SMTP password
+                    $mail->SMTPSecure = 'tls';  // Choose SSL or TLS
+                    $mail->Port = 587;  // Adjust the port if necessary
+        
+                    // Recipients
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita');  // Replace with your email and name
+                    $mail->addAddress($email);  // Email address of the resident
+        
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Account Verification';
+                    $mail->Body = 'Your account verification was not successful. Please enter the right information or you may contact olongapobarangaysantarita@gmail.com for further assistance.';
+        
+                    $mail->send();
+                    
+                    $message2 = "Resident Declined and email sent";
+                } catch (Exception $e) {
+                    $message2 = "Resident Declined, but email could not be sent. Error: {$mail->ErrorInfo}";
+                }
+        
                 echo "<script type='text/javascript'>alert('$message2');</script>";
                 header("Refresh:0");
             }
@@ -306,7 +371,48 @@
     }
     public function count_registered_resident() {
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) as count FROM tbl_resident WHERE verified IS NULL ");
+        $stmt = $connection->prepare("SELECT COUNT(*) as count FROM tbl_resident WHERE verified ='Pending' ");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
+    }
+    public function count_residency() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) as count FROM tbl_rescert WHERE form_status ='Pending' ");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
+    }
+
+    public function count_id() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) as count FROM tbl_brgyid WHERE form_status ='Pending' ");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
+    }
+    public function count_bussiness() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) as count FROM tbl_bspermit WHERE form_status ='Pending' ");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
+    }
+    public function count_clearance() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) as count FROM tbl_clearance WHERE form_status ='Pending' ");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
+    }
+    public function count_indigency() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) as count FROM tbl_indigency WHERE form_status ='Pending' ");
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 

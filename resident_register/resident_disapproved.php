@@ -8,22 +8,13 @@
 
 		<thead class="alert-info">
 			<tr>
-                <th> Actions</th>
-                <th> Email </th>
-                <th> Surname </th>
-                <th> First name </th>
-                <th> Middle name </th>
-                <th> Age </th>
-                <th> Sex </th>
-                <th> Status </th>
-                <th> House No.</th>
-                <th> Street </th>
-                <th> Barangay </th>
-                <th> Contact # </th>
-                <th> Birth date </th>
-                <th> Birth place </th>
-                <th> Nationality </th>
-                <th> Family Head </th>
+                <th width="20%"> Full Name </th>
+                <th width="20%"> Email </th>
+                <th width="5%"> Age </th>
+                <th width="20%"> Address </th>
+                <th width="20%"> Contact # </th>
+                <th width="10%"> Verified </th>
+                <th width="5%"> Actions</th>
 			</tr>
 		</thead>
 
@@ -37,29 +28,20 @@
 				
 				while($view = $stmnt->fetch()){
 			?>
-                <tr>
-                    <td>    
+                <tr> 
+                    <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
+                    <td> <?= $view['email'];?> </td>
+                    <td> <?= $view['age'];?> </td>
+                    <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?> </td>
+                    <td> <?= $view['contact'];?> </td>
+                    <td> <?= $view['verified'];?> </td>
+                    <td width="20%">    
                         <form action="" method="post">
-                            <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;">  Update </a>
+                            <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
                             <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
-                            <button class="btn btn-danger" type="submit" name="delete_resident" style="width: 90px; font-size: 17px; border-radius:30px;"> Archive </button>
+                            <a class="btn btn-primary" href="admn_view_disapprove_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a>
                         </form>
                     </td>
-                    <td> <?= $view['email'];?> </td>
-                    <td> <?= $view['lname'];?> </td>
-                    <td> <?= $view['fname'];?> </td>
-                    <td> <?= $view['mi'];?> </td>
-                    <td> <?= $view['age'];?> </td>
-                    <td> <?= $view['sex'];?> </td>
-                    <td> <?= $view['status'];?> </td>
-                    <td> <?= $view['houseno'];?> </td>
-                    <td> <?= $view['street'];?> </td>
-                    <td> <?= $view['brgy'];?> </td>
-                    <td> <?= $view['contact'];?> </td>
-                    <td> <?= $view['bdate'];?> </td>
-                    <td> <?= $view['bplace'];?> </td>
-                    <td> <?= $view['nationality'];?> </td>
-                    <td> <?= $view['family_role'];?> </td>
                 </tr>
 			<?php
 			}
@@ -73,47 +55,33 @@
 <table class="table table-hover table-bordered text-center table-responsive">
 <thead class="alert-info">
 			<tr>
-                <th> Actions</th>
-                <th> Email </th>
-                <th> Full Name </th>
-                <th> Age </th>
-                <th> Sex </th>
-                <th> Civil Status </th>
-                <th> Address </th>
-                <th> Contact # </th>
-                <th hidden> Birth date </th>
-                <th hidden> Birth place </th>
-                <th hidden> Nationality </th>
-                <th hidden> Family Head </th>
-                <th hidden> Registered Voter </th>
-                <th> Verified </th>
+                <th width="20%"> Full Name </th>
+                <th width="20%"> Email </th>
+                <th width="5%"> Age </th>
+                <th width="20%"> Address </th>
+                <th width="20%"> Contact # </th>
+                <th width="10%"> Verified </th>
+                <th width="5%"> Actions</th>
 			</tr>
 		</thead>
 
 		<tbody>
 		    <?php if(is_array($view)) {?>
                 <?php foreach($view as $view) {?>
-                    <tr>                    
+                    <tr>
+                        <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
+                        <td> <?= $view['email'];?> </td>
+                        <td> <?= $view['age'];?> </td>
+                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?> </td>
+                        <td> <?= $view['contact'];?> </td>
+                        <td> <?= $view['verified'];?> </td>
                         <td width="20%">    
                             <form action="" method="post">
                                 <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
                                 <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
-                                <a class="btn btn-primary" href="admn_view_disapprove_details.php" name=""> View </a>
+                                <a class="btn btn-primary" href="admn_view_disapprove_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a>
                             </form>
                         </td>
-                        <td> <?= $view['email'];?> </td>
-                        <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
-                        <td> <?= $view['age'];?> </td>
-                        <td> <?= $view['sex'];?> </td>
-                        <td> <?= $view['status'];?> </td>
-                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?> </td>
-                        <td> <?= $view['contact'];?> </td>
-                        <td hidden> <?= $view['bdate'];?> </td>
-                        <td hidden> <?= $view['bplace'];?> </td>
-                        <td hidden> <?= $view['nationality'];?> </td>
-                        <td hidden> <?= $view['family_role'];?> </td>
-                        <td hidden> <?= $view['voter'];?> </td>
-                        <td> <?= $view['verified'];?> </td>
                     </tr>
 			
                 <?php

@@ -5,7 +5,7 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
-   $view = $residentbmis->view_resident();
+   $view = $residentbmis->view_single_resident();
    
 ?>
 
@@ -39,7 +39,7 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1 class="text-center mb-0">Viewing Details</h1>
-                <a class="btn btn-primary" href="admn_resident_crud.php">Back</a>
+                <a class="btn btn-primary" href="admn_registered_resident.php">Back</a>
             </div>
         </div>
 
@@ -47,80 +47,82 @@
 
 
         <div class="col-md-12 mt-3">
-            <div class="row">
+        <div class="row">
                 <div class="col-md-12" style="font-size: 18px; font-weight:bold;">Personal Details</div>
                 <div class="col-md-4">
                     <label>Last Name</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['lname'];?>">
                 </div>
                 <div class="col-md-4">
                 <label>First Name</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['fname'];?>">
                 </div>
                 <div class="col-md-4">
                 <label>Middle Name</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['mi'];?>">
                 </div>
                 <div class="col-md-2 mt-3">
                 <label>Birthdate</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['bdate'];?>">
                 </div>
                 <div class="col-md-2 mt-3">
                 <label>Birth Place</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['bplace'];?>">
                 </div>
                 <div class="col-md-3 mt-3">
                 <label>Nationality</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['nationality'];?>">
                 </div>
                 <div class="col-md-3 mt-3">
                 <label>Civil Status</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['status'];?>">
                 </div>
                 <div class="col-md-2 mt-3">
                 <label>Sex</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['sex'];?>">
                 </div>
                 <div class="col-md-12 mt-3" style="font-size: 18px; font-weight:bold;">Address Details</div>
                 <div class="col-md-2 mt-3">
                 <label>House No</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['houseno'];?>">
                 </div>
                 <div class="col-md-2 mt-3">
                 <label>Purok</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['purok'];?>">
                 </div>
                 <div class="col-md-2 mt-3">
                 <label>Street</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['street'];?>">
                 </div>
                 <div class="col-md-3 mt-3">
                 <label>Barangay</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['brgy'];?>">
                 </div>
                 <div class="col-md-3 mt-3">
                 <label>Municipality</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['municipal'];?>">
                 </div>
                 <div class="col-md-6 mt-3">
                 <label>Voter?</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['voter'];?>">
                 </div>
                 <div class="col-md-6 mt-3">
                 <label>Family Head?</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['family_role'];?>">
                 </div>
                 <div class="col-md-12 mt-3" style="font-size: 18px; font-weight:bold;">Contact Details</div>
                 <div class="col-md-6 mt-3">
                 <label>Contact Number</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['contact'];?>">
                 </div>
                 <div class="col-md-6 mt-3">
                 <label>Email Address</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="<?= $view['email'];?>">
                 </div>
             </div>
 	    </div>
+        </div>
+            
 <!-- Modal for Registering Residents -->
     </div>
 

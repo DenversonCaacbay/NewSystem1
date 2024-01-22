@@ -41,7 +41,7 @@
             display: none;
         }
         .form-control{
-            padding:20px;
+            
         }
         .was-validated .form-control:valid, 
         .was-validated .form-control:invalid {
@@ -239,7 +239,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label> Street: </label>
-                                            <select id="streetsDropdown" class="form-control" name="street" disabled required>
+                                            <select id="streetsDropdown" class="form-select" name="street" disabled required>
                                                 <option value="" disabled selected>Select Street</option>
                                             </select>
                                             <div class="valid-feedback">Valid.</div>
@@ -267,8 +267,10 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label> Upload birth certificate or any valid ID: </label>
-                                            <input type="file" class="form-control" name="id_picture" placeholder="">
+                                            <!-- <label class="mtop" style="font-size:15px;"> Please upload an ID with an address or any proof of billing. </label>
+                                            <input type="file" class="form-control" name="id_picture" placeholder=""> -->
+                                            <label for="formFile" class="form-label mt-2"  style="font-size:15px;">Please upload an ID with an address or any proof of billing. </label>
+                                            <input class="form-control" type="file" id="formFile" name="id_picture">
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -276,8 +278,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="mtop">Are you a registered voter? </label>
-                                            <select class="form-control" name="voter" id="regvote" required>
-                                                <option value="" <?php echo empty($_POST['voter']) ? 'selected' : ''; ?>>...</option>
+                                            <select class="form-select" name="voter" id="regvote" required>
+                                                <option value="" <?php echo empty($_POST['voter']) ? 'selected' : ''; ?>>See Option</option>
                                                 <option value="Yes" >Yes</option>
                                                 <option value="No">No</option>
                                             </select>
@@ -289,8 +291,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="mtop">Are you head of the family? </label>
-                                            <select class="form-control" name="family_role" id="famhead" required>
-                                                <option value="" <?php echo empty($_POST['family_role']) ? 'selected' : ''; ?>>...</option>
+                                            <select class="form-select" name="family_role" id="famhead" required>
+                                                <option value="" <?php echo empty($_POST['family_role']) ? 'selected' : ''; ?>>See Option</option>
                                                 <option value="Yes">Yes</option>
                                                 <option value="No">No</option>
                                             </select>
@@ -372,8 +374,10 @@
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
         <!---->
-        <script src="js/purok-street.js" type="text/javascript"></script>
+        <script src="js/purok-street.js"></script>
         
         <script>
             $(".toggle-password").click(function() {

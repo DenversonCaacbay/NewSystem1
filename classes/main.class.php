@@ -1,6 +1,15 @@
+
 <?php 
 
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    require 'PHPMailer/src/Exception.php';
+    require 'PHPMailer/src/PHPMailer.php';
+    require 'PHPMailer/src/SMTP.php';
+
 class BMISClass {
+
 
 //------------------------------------------ DATABASE CONNECTION ----------------------------------------------------
     
@@ -64,7 +73,7 @@ class BMISClass {
                     if ($user AND password_verify($password, $user['password'])) {
                         // 
                         if($user['verified'] == 'Pending'){
-                            echo "<script type='text/javascript'>alert('Account not yet verified');</script>";
+                            echo "<script type='text/javascript'>alert('Account not yet verified, Check Email for Confirmation. Thank you!');</script>";
                             return;
                         }
 
@@ -1215,25 +1224,44 @@ class BMISClass {
 
     public function view_certofres(){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * from tbl_rescert WHERE deleted_at IS NULL");
+        $stmt = $connection->prepare("SELECT * from tbl_rescert WHERE form_status ='Pending'");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_certofres_done(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * from tbl_rescert WHERE form_status ='Done'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
     }
 
 
-    public function delete_certofres(){
+    public function delete_certofres() {
         $id_rescert = $_POST['id_rescert'];
-
-        if(isset($_POST['delete_certofres'])) {
+    
+        if (isset($_POST['delete_certofres'])) {
             $connection = $this->openConn();
-            // $stmt = $connection->prepare("DELETE FROM tbl_rescert where id_rescert = ?");
-            $stmt = $connection->prepare("UPDATE tbl_rescert SET deleted_at = NOW() WHERE id_rescert = ?");
+            $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Declined' WHERE id_rescert = ?");
             $stmt->execute([$id_rescert]);
-
+    
             header("Refresh:0");
         }
     }
+
+    public function approved_certofres() {
+        $id_rescert = $_POST['id_rescert'];
+    
+        if (isset($_POST['approved_certofres'])) {
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Approved' WHERE id_rescert = ?");
+            $stmt->execute([$id_rescert]);
+    
+            header("Refresh:0");
+        }
+    }
+    
 
      //------------------------------------------ CERT OF INIDIGENCY CRUD -----------------------------------------------
 

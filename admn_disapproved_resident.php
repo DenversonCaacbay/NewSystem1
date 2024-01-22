@@ -5,7 +5,7 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
-   $view = $residentbmis->view_pending_account();
+   $view = $residentbmis->view_rejected_account();
    $residentbmis->create_resident();
    $residentbmis->update_resident();
    $residentbmis->delete_resident();
@@ -48,7 +48,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8"> <h1 class="mb-0">Viewing Disapproved Accounts</h1></div>
+            <div class="col-md-8"> <h1 class="mb-0">Viewing Declined Accounts</h1></div>
             <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_resident_crud.php"> Back </a></div>
            
         </div>
@@ -63,7 +63,7 @@
                     <i class="fa fa-search icon"></i>
                     <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
                     <button class="btn btn-success" name="search_resident" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
-                    <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                    <a href="admn_disapproved_resident.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
                 </div>
 			</form>
 		<?php 

@@ -116,7 +116,9 @@
             <th> Address </th>
             <th> Business Industry </th>
             <th> Area of Establishment </th>
+            <th> Date</th>
             <th> Image</th>
+            
                         <th> Actions</th>
         </tr>
     </thead>
@@ -132,12 +134,15 @@
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
                     <td> <?= $view['bsindustry'];?> </td>
                     <td> <?= $view['aoe'];?> </td>
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td>
                         <?php if (is_null($view['bspermit_photo'])): ?>
                             <span>No Image Available</span>
                         <?php else: ?>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#imageModal<?= $view['id_bspermit'] ?>">View</button>
-                    
+                            <!-- <a class="btn btn-primary" data-toggle="modal" data-target="#imageModal<?= $view['id_bspermit'] ?>">View</a> -->
+                            <a href="#" data-toggle="modal" data-target="#imageModal<?= $view['id_bspermit'] ?>">
+                                <img src="<?= $view['bspermit_photo'] ?>" class="img-fluid" alt="Modal Image" width="80">
+                            </a>
                             <div class="modal fade" id="imageModal<?= $view['id_bspermit'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -160,9 +165,10 @@
                     </td>
                     <td width="20%">    
                         <form action="" method="post">
-                           <a href="generatePdf/generate_businesspermit.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-success" target='_blank'>Generate</a>
+                           <a href="generatePdf/generate_businesspermit.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
                             <input type="hidden" name="id_bspermit" value="<?= $view['id_bspermit'];?>">
-                            <button class="btn btn-danger" type="submit" name="delete_bspermit" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
+                            <button class="btn btn-primary" type="submit" name="approved_bspermit" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
+                            <button class="btn btn-danger" type="submit" name="delete_bspermit" onclick="return confirm('Are you sure you want to deline this request?')"> Decline </button>
                         </form>
                     </td>
                 </tr>

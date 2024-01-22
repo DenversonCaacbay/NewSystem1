@@ -45,7 +45,6 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1 class="text-center mb-0">Pending Barangay Clearance Requests</h1>
-                <a href="admn_brgyclearance_done.php" class="btn btn-primary">View Done</a>
             </div>
         </div>
     </div>
@@ -59,10 +58,9 @@
                         <i class="fa fa-search icon"></i>
                         <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
                         <button class="btn btn-success" name="search_clearance" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
-                        <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                        <a href="admn_brgyclearance.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
                     </div>
                 </form>
-            <br>
         </div>
     </div>
 

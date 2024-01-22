@@ -98,7 +98,7 @@
                     <span>Barangay Residents</span>
                     <?php $registered_users = $residentbmis->count_registered_resident(); ?>    
                     <?php if($registered_users > 0) : ?>
-                        <span class="badge badge-danger ms-2"><?php echo $registered_users; ?></span>
+                        <span class="badge badge-danger" style="margin-left:20px;font-size:10px;"><?php echo $registered_users; ?></span>
                     <?php endif; ?>
                 </a>
                     
@@ -123,19 +123,32 @@
             <li class="nav-item">
                 <a class="nav-link" href="admn_certofres.php">
                     <i class="fas fa-file-word"></i>
-                    <span>Certificate of Residency</span></a>
+                    <span>Certificate of Residency</span>
+                    <?php $registered_users = $residentbmis->count_residency(); ?>    
+                    <?php if($registered_users > 0) : ?>
+                        <span class="badge badge-danger" style="margin-left:6px;font-size:10px;"><?php echo $registered_users; ?></span>
+                    <?php endif; ?>
+                </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="admn_brgyid.php">
                     <i class="fas fa-id-card"></i>
-                    <span>Barangay ID </span></a>
+                    <span>Barangay ID </span>
+                    <?php $registered_users = $residentbmis->count_id(); ?>    
+                    <?php if($registered_users > 0) : ?>
+                        <span class="badge badge-danger" style="margin-left:70px;font-size:10px;"><?php echo $registered_users; ?></span>
+                    <?php endif; ?></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="admn_bspermit.php">
                     <i class="fas fa-file-contract"></i>
-                    <span>Business Recommendation</span></a>
+                    <span>Business Recommend..</span>
+                    <?php $registered_users = $residentbmis->count_bussiness(); ?>    
+                    <?php if($registered_users > 0) : ?>
+                        <span class="badge badge-danger" style="margin-left:9px;font-size:10px;"><?php echo $registered_users; ?></span>
+                    <?php endif; ?></a>
             </li>
 
 
@@ -144,14 +157,22 @@
             <li class="nav-item">
                 <a class="nav-link" href="admn_brgyclearance.php">
                     <i class="fas fa-file"></i>
-                    <span>Barangay Clearance</span></a>
+                    <span>Barangay Clearance</span>
+                    <?php $registered_users = $residentbmis->count_clearance(); ?>    
+                    <?php if($registered_users > 0) : ?>
+                        <span class="badge badge-danger" style="margin-left:27px;font-size:10px;"><?php echo $registered_users; ?></span>
+                    <?php endif; ?></a>
             </li>
 
             <!-- Certificate of Indigency -->
             <li class="nav-item">
                 <a class="nav-link" href="admn_certofindigency.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Certificate of Indigency</span></a>
+                    <span>Certificate of Indigency</span>
+                    <?php $registered_users = $residentbmis->count_indigency(); ?>    
+                    <?php if($registered_users > 0) : ?>
+                        <span class="badge badge-danger" style="margin-left:2px;font-size:10px;"><?php echo $registered_users; ?></span>
+                    <?php endif; ?></a>
             </li>
 
             <!-- Complain Blotter Report -->
