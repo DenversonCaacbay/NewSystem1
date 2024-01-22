@@ -1238,10 +1238,10 @@ class BMISClass {
     }
 
 
-    public function delete_certofres() {
+    public function reject_rescert() {
         $id_rescert = $_POST['id_rescert'];
     
-        if (isset($_POST['delete_certofres'])) {
+        if (isset($_POST['reject_rescert'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Declined' WHERE id_rescert = ?");
             $stmt->execute([$id_rescert]);
@@ -1250,10 +1250,10 @@ class BMISClass {
         }
     }
 
-    public function approved_certofres() {
+    public function approved_rescert() {
         $id_rescert = $_POST['id_rescert'];
     
-        if (isset($_POST['approved_certofres'])) {
+        if (isset($_POST['approved_rescert'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Approved' WHERE id_rescert = ?");
             $stmt->execute([$id_rescert]);
@@ -1363,6 +1363,30 @@ class BMISClass {
         }
     }
 
+    public function reject_indigency() {
+        $id_indigency = $_POST['id_indigency'];
+    
+        if (isset($_POST['reject_indigency'])) {
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Declined' WHERE id_indigency = ?");
+            $stmt->execute([$id_indigency]);
+    
+            header("Refresh:0");
+        }
+    }
+
+    public function approved_indigency() {
+        $id_indigency = $_POST['id_indigency'];
+    
+        if (isset($_POST['approved_indigency'])) {
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Approved' WHERE id_indigency = ?");
+            $stmt->execute([$id_indigency]);
+    
+            header("Refresh:0");
+        }
+    }
+
 
      //------------------------------------------ BRGY CLEARANCE CRUD -----------------------------------------------
 
@@ -1459,6 +1483,30 @@ class BMISClass {
             $stmt = $connection->prepare("UPDATE tbl_clearance SET deleted_at = NOW() where id_clearance = ?");
             $stmt->execute([$id_clearance]);
 
+            header("Refresh:0");
+        }
+    }
+
+    public function reject_clearance() {
+        $id_clearance = $_POST['id_clearance'];
+    
+        if (isset($_POST['reject_clearance'])) {
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Declined' WHERE id_clearance = ?");
+            $stmt->execute([$id_clearance]);
+    
+            header("Refresh:0");
+        }
+    }
+
+    public function approved_clearance(){
+        $id_clearance = $_POST['id_clearance'];
+    
+        if (isset($_POST['approved_clearance'])) {
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Approved' WHERE id_clearance = ?");
+            $stmt->execute([$id_clearance]);
+    
             header("Refresh:0");
         }
     }
@@ -1654,6 +1702,30 @@ class BMISClass {
         }
     }
 
+    public function reject_bspermit() {
+        $id_bspermit = $_POST['id_bspermit'];
+    
+        if (isset($_POST['reject_bspermit'])) {
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined' WHERE id_bspermit = ?");
+            $stmt->execute([$id_bspermit]);
+    
+            header("Refresh:0");
+        }
+    }
+
+    public function approved_bspermit(){
+        $id_bspermit = $_POST['id_bspermit'];
+    
+        if (isset($_POST['approved_bspermit'])) {
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Approved' WHERE id_bspermit = ?");
+            $stmt->execute([$id_bspermit]);
+    
+            header("Refresh:0");
+        }
+    }
+
 
 
 
@@ -1734,19 +1806,41 @@ class BMISClass {
 
 
     public function delete_brgyid(){
-        $id_bspermit = $_POST['id_brgyid'];
+        $id_brgyid = $_POST['id_brgyid'];
 
         if(isset($_POST['delete_brgyid'])) {
             $connection = $this->openConn();
             // $stmt = $connection->prepare("DELETE FROM tbl_brgyid where id_brgyid = ?");
             $stmt = $connection->prepare("UPDATE tbl_brgyid SET deleted_at = NOW() WHERE id_brgyid = ?");
-            $stmt->execute([$id_bspermit]);
+            $stmt->execute([$id_brgyid]);
 
             header("Refresh:0");
         }
     }
 
+    public function reject_brgyid() {
+        $id_brgyid = $_POST['id_brgyid'];
+    
+        if (isset($_POST['reject_brgyid'])) {
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Declined' WHERE id_brgyid = ?");
+            $stmt->execute([$id_brgyid]);
+    
+            header("Refresh:0");
+        }
+    }
 
+    public function approved_brgyid(){
+        $id_brgyid = $_POST['id_brgyid'];
+    
+        if (isset($_POST['approved_brgyid'])) {
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Approved' WHERE id_brgyid = ?");
+            $stmt->execute([$id_brgyid]);
+    
+            header("Refresh:0");
+        }
+    }
 
 
 
