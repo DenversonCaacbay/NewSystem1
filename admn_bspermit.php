@@ -5,7 +5,8 @@
     require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
-    $bmis->delete_bspermit();
+    $bmis->reject_bspermit();
+    $bmis->approved_bspermit();
     $view = $bmis->view_bspermit();
     $id_resident = $_GET['id_resident'];
     $resident = $residentbmis->get_single_bspermit($id_resident);
@@ -60,7 +61,7 @@
                         <i class="fa fa-search icon"></i>
                         <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
                         <button class="btn btn-success" name="search_bspermit" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
-                        <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                        <a href="admn_bspermit.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
                     </div>
                 </form>
         </div>

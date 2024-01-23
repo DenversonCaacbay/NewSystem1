@@ -5,7 +5,8 @@
     require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
-    $bmis->delete_certofindigency();
+    $bmis->reject_indigency();
+    $bmis->approved_indigency();
     $view = $bmis->view_certofindigency();
     $id_resident = $_GET['id_resident'];
     $resident = $residentbmis->get_single_certofindigency($id_resident);
@@ -58,7 +59,7 @@
                     <i class="fa fa-search icon"></i>
                     <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
                     <button class="btn btn-success" name="search_certofindigency" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
-                    <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                    <a href="admn_certofindigency.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
                 </div>
 			</form>
             <br>

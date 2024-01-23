@@ -5,83 +5,43 @@
 		$keyword = $_POST['keyword'];
 ?>
 
-<table class="table table-hover text-center table-bordered table-responsive" >
-    <thead class="alert-info">
+<table class="table table-hover text-center table-bordered" >
+    <thead class="alert-info sticky">
         
         <tr>
-            <th> Resident ID </th>
+            <th hidden> Resident ID </th>
             <th> Tracking ID </th>
-            <th> Surname </th>
-            <th> First Name </th>
-            <th> Middle Name </th>
+            <th> Full Name </th>
             <th> Purpose </th>
-            <th> House No. </th>
-            <th> Street </th>
-            <th> Barangay </th>
-            <th> Municipality </th>
+            <th> Address </th>
+            <th> Civil Status </th>
             <th> Status </th>
-            <th> Image </th>
-            <th> Actions</th>
+           
         </tr>
     </thead>
 
     <tbody>
         <?php
-            
+            $formStatus = $_POST['form_status'];
             $stmnt = $conn->prepare("SELECT * FROM `tbl_clearance` WHERE (`lname` LIKE '%$keyword%' or  `mi` LIKE '%$keyword%' or  `fname` LIKE '%$keyword%' 
             or  `id_resident` LIKE '%$keyword%' or  `houseno` LIKE '%$keyword%' or  `street` LIKE '%$keyword%'
-            or `brgy` LIKE '%$keyword%' or `municipal` LIKE '%$keyword%' or `status` LIKE '%$keyword%' or `track_id` LIKE '%$keyword%')AND deleted_at IS NULL ");
+            or `brgy` LIKE '%$keyword%' or `municipal` LIKE '%$keyword%' or `status` LIKE '%$keyword%' or `track_id` LIKE '%$keyword%')AND `form_status` = '$formStatus' ");
             $stmnt->execute();
             
             while($view = $stmnt->fetch()){
         ?>
             <tr>
-                <td> <?= $view['id_clearance'];?> </td> 
-                <td> <?= $view['track_id'];?> </td> 
-                <td> <?= $view['lname'];?> </td>
-                <td> <?= $view['fname'];?> </td>
-                <td> <?= $view['mi'];?> </td>
-                <td> <?= $view['purpose'];?> </td>
-                <td> <?= $view['houseno'];?> </td>
-                <td> <?= $view['street'];?> </td>
-                <td> <?= $view['brgy'];?> </td>
-                <td> <?= $view['municipal'];?> </td>
-                <td> <?= $view['status'];?> </td>
-                <td>
-                    <?php if (is_null($view['brgyclearance_photo'])): ?>
-                        <span>No Image Available</span>
-                    <?php else: ?>
-                        <button class="btn btn-success" data-toggle="modal" data-target="#imageModal<?= $view['id_clearance'] ?>">View</button>
-                
-                        <div class="modal fade" id="imageModal<?= $view['id_clearance'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="imageModalTitle"><?= $view['fname'];?> <?= $view['lname'];?></h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <a href="<?= $view['brgyclearance_photo'] ?>" target="_blank"><img src="<?= $view['brgyclearance_photo'] ?>" class="img-fluid" alt="Modal Image"></a>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                </td>
-                <td>    
-                    <form action="" method="post">
-                        <!--<a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> -->
-                        <a href="generatePdf/generate_clearance.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-success" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" target='_blank'>Generate</a>
-                        <input type="hidden" name="id_rescert" value="<?= $view['id_rescert'];?>">
-                        <button class="btn btn-danger" style="width: 90px; font-size: 17px; border-radius:30px;" type="submit" name="delete_clearance" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
-                    </form>
-                </td>
-            </tr>
+                    <td hidden> <?= $view['id_clearance'];?> </td> 
+                    <td> <?= $view['track_id'];?> </td> 
+                    <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
+                    <td> <?= $view['purpose'];?> </td>
+                    <td> <?= $view['houseno'];?>, <?= $view['street'];?>,<?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
+
+                    <td> <?= $view['status'];?> </td>
+                    <td> <?= $view['form_status'];?> </td>
+                    
+
+                </tr>
         <?php
         }
         ?>
@@ -93,7 +53,7 @@
 	}else{
 ?>
 
-<table class="table table-hover text-center table-bordered table-responsive">
+<table class="table table-hover text-center table-bordered">
 
     <thead class="alert-info">
         <tr>
@@ -102,9 +62,9 @@
             <th> Full Name </th>
             <th> Purpose </th>
             <th> Address </th>
+            <th> Civil Status </th>
             <th> Status </th>
-            <th> Image </th>
-            <th> Actions</th>
+           
         </tr>
     </thead>
 
@@ -119,41 +79,8 @@
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>,<?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
 
                     <td> <?= $view['status'];?> </td>
-                    <td>
-                        <?php if (is_null($view['brgyclearance_photo'])): ?>
-                            <span>No Image Available</span>
-                        <?php else: ?>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#imageModal<?= $view['id_clearance'] ?>">View</button>
+                    <td> <?= $view['form_status'];?> </td>
                     
-                            <div class="modal fade" id="imageModal<?= $view['id_clearance'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="imageModalTitle"><?= $view['fname'];?> <?= $view['lname'];?></h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a href="<?= $view['brgyclearance_photo'] ?>" target="_blank"><img src="<?= $view['brgyclearance_photo'] ?>" class="img-fluid" alt="Modal Image"></a>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    </td>
-                    <td width="20%">    
-                        <form action="" method="post">
-                            <!-- <a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a>  -->
-                            <a href="generatePdf/generate_clearance.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-success" target='_blank'>Generate</a>
-
-                            <input type="hidden" name="id_clearance" value="<?= $view['id_clearance'];?>">
-                            <button class="btn btn-danger" type="submit" name="delete_clearance" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
-                        </form>
-                    </td>
 
                 </tr>
             <?php

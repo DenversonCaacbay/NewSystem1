@@ -4,98 +4,46 @@
 	if(isset($_POST['search_certofres'])){
 		$keyword = $_POST['keyword'];
 ?>
-<table class="table table-hover text-center table-bordered table-responsive" >
+<table class="table table-hover text-center table-bordered" >
     <thead class="alert-info">
         
     <tr>
-        <th hidden> Resident ID </th>
-        <th> Tracking ID </th>
-        <th> Surname </th>
-        <th> First Name </th>
-        <th> Middle Name </th>
-        <th> Age </th>
-        <th> Nationality </th>
-        <th> House Number </th>
-        <th> Street </th>
-        <th> Barangay </th>
-        <th> Municipality </th>
-        <th>Image</th>
-        <th> Date </th>
-        <th> Purpose </th>
-        <th> Actions</th>
+    <th> Tracking ID </th>
+                <th> Full Name </th>
+                <th> Age </th>
+                <th> Nationality </th>
+                <th> Address </th>
+                <th> Date </th>
+                <th> Purpose </th>
+                <th>Status</th>
     </tr>
     </thead>
 
     <tbody>    
         <?php
-            $stmnt = $conn->prepare("SELECT * FROM `tbl_rescert` WHERE 
-                (`lname` LIKE '%$keyword%' or  `mi` LIKE '%$keyword%' or  `fname` LIKE '%$keyword%' 
-                or `age` LIKE '%$keyword%' or  `id_resident` LIKE '%$keyword%' or  `nationality` LIKE '%$keyword%' 
-                or  `houseno` LIKE '%$keyword%' or `street` LIKE '%$keyword%' or `brgy` LIKE '%$keyword%' 
-                or `municipal` LIKE '%$keyword%' or `date` LIKE '%$keyword%' or `purpose` LIKE '%$keyword%' 
-                or `track_id` LIKE '%$keyword%') AND deleted_at IS NULL");
-            $stmnt->execute();
+           $formStatus = $_POST['form_status'];
+        //    echo "Selected form status: $formStatus";
+           // Modify your SQL query to include the form_status condition
+           $stmnt = $conn->prepare("SELECT * FROM `tbl_rescert` WHERE 
+               (`lname` LIKE '%$keyword%' OR  `mi` LIKE '%$keyword%' OR  `fname` LIKE '%$keyword%' 
+               OR `age` LIKE '%$keyword%' OR  `id_resident` LIKE '%$keyword%' OR  `nationality` LIKE '%$keyword%' 
+               OR  `houseno` LIKE '%$keyword%' OR `street` LIKE '%$keyword%' OR `brgy` LIKE '%$keyword%' 
+               OR `municipal` LIKE '%$keyword%' OR `date` LIKE '%$keyword%' OR `purpose` LIKE '%$keyword%' 
+               OR `track_id` LIKE '%$keyword%') AND `form_status` = '$formStatus' ");
+           $stmnt->execute();
             
             while($view = $stmnt->fetch()){
         ?>
             <tr>
-                <td hidden> <?= $view['id_resident'];?> </td> 
-                <td> <?= $view['track_id'];?> </td> 
-                <td> <?= $view['lname'];?> </td>
-                <td> <?= $view['fname'];?> </td>
-                <td> <?= $view['mi'];?> </td>
-                <td> <?= $view['age'];?> </td>
-                <td> <?= $view['nationality'];?> </td>
-                <td> <?= $view['houseno'];?> </td>
-                <td> <?= $view['street'];?> </td>
-                <td> <?= $view['brgy'];?> </td>
-                <td> <?= $view['municipal'];?> </td>
-                <td>
-                    <!-- checks photo exist -->
-                    <?php if (is_null($view['certofres_photo'])): ?>
-                        <span>No Image Available</span>
-                    <?php else: ?>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#imageModal<?= $view['id_rescert']; ?>">View</button>
-                
-                        <!-- The Modal -->
-                        <div class="modal fade" id="imageModal<?= $view['id_rescert']; ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="imageModalTitle"><?= $view['fname'];?> <?= $view['lname'];?></h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                
-                                    <!-- Modal Body -->
-                                    <div class="modal-body">
-                                         <a href="<?= $view['certofres_photo'] ?>" target="_blank"><img src="<?php echo $view['certofres_photo']; ?>" class="img-fluid" alt="Modal Image"></a>
-                                    </div>
-                
-                                    <!-- Modal Footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-                
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                </td>
-                <td> <?= $view['date'];?> </td>
-                <td> <?= $view['purpose'];?> </td>
-                <td>    
-                    <form action="" method="post">
-                        <!--<a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> -->
-                        <a href="generatePdf/generate_residency.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-success" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" target='_blank'>Generate</a>
-                        <input type="hidden" name="id_rescert" value="<?= $view['id_rescert'];?>">
-                        <button class="btn btn-danger" style="width: 90px; font-size: 17px; border-radius:30px;" type="submit" name="delete_certofres" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
-                    </form>
-                </td>
-            </tr>
+                        <td> <?= $view['track_id'];?> </td> 
+                        <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?>  </td>
+                        <td> <?= $view['age'];?> </td>
+                        <td> <?= $view['nationality'];?> </td>
+                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>                        
+                        <td> <?= $view['date'];?> </td>
+                        <td> <?= $view['purpose'];?> </td>
+                        <td> <?= $view['form_status'];?> </td>
+                    </tr>
         <?php
         }
         ?>
@@ -107,19 +55,17 @@
 	}else{
 ?>
 
-<table class="table table-hover text-center table-bordered table-responsive">
+<table class="table table-hover text-center table-bordered">
 		<thead class="alert-info">
 			<tr>
-                <th hidden> Resident ID </th>
                 <th> Tracking ID </th>
                 <th> Full Name </th>
                 <th> Age </th>
                 <th> Nationality </th>
                 <th> Address </th>
-                <th>Image</th>
                 <th> Date </th>
                 <th> Purpose </th>
-                <th> Actions</th>
+                <th>Status</th>
 			</tr>
 		</thead>
 
@@ -127,57 +73,14 @@
 		    <?php if(is_array($view)) {?>
                 <?php foreach($view as $view) {?>
                     <tr>
-                        <td hidden> <?= $view['id_resident'];?> </td> 
                         <td> <?= $view['track_id'];?> </td> 
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?>  </td>
                         <td> <?= $view['age'];?> </td>
                         <td> <?= $view['nationality'];?> </td>
-                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
-                        <td>
-                            <!-- checks photo exist -->
-                            <?php if (is_null($view['certofres_photo'])): ?>
-                                <span>No Image Available</span>
-                            <?php else: ?>
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#imageModal<?= $view['id_rescert']; ?>">View</button>
-                        
-                                <!-- The Modal -->
-                                <div class="modal fade" id="imageModal<?= $view['id_rescert']; ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                        
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="imageModalTitle"><?= $view['fname'];?> <?= $view['lname'];?></h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                        
-                                            <!-- Modal Body -->
-                                            <div class="modal-body">
-                                                <a href="<?= $view['certofres_photo'] ?>" target="_blank"><img src="<?php echo $view['certofres_photo']; ?>" class="img-fluid" alt="Modal Image"></a>
-                                            </div>
-                        
-                                            <!-- Modal Footer -->
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            </div>
-                        
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-                        </td>
+                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>                        
                         <td> <?= $view['date'];?> </td>
                         <td> <?= $view['purpose'];?> </td>
-                        <td width="20%">    
-                            <form action="" method="post">
-                                <!--<a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> -->
-                                <a href="generatePdf/generate_residency.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-success" target='_blank'>Generate</a>
-                                <input type="hidden" name="id_rescert" value="<?= $view['id_rescert'];?>">
-                                <button class="btn btn-danger" type="submit" name="delete_certofres" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
-                            </form>
-                        </td>
+                        <td> <?= $view['form_status'];?> </td>
                     </tr>
                 <?php
                     }

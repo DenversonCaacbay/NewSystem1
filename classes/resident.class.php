@@ -507,6 +507,79 @@ use PHPMailer\PHPMailer\Exception;
         }
 
     }
+    // ------------------------------------ ARCHIVES COOUNT PER REQUEST ------------------------------------
+    // Done
+    public function count_clearance_approved() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_clearance WHERE form_status='Approved'");
+        $stmt->execute();
+        $rescount = $stmt->fetchColumn();
+        return $rescount;
+    }
+    public function count_bspermit_approved() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_bspermit WHERE form_status='Approved'");
+        $stmt->execute();
+        $rescount = $stmt->fetchColumn();
+        return $rescount;
+    }
+    public function count_indigency_approved() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_indigency WHERE form_status='Approved'");
+        $stmt->execute();
+        $rescount = $stmt->fetchColumn();
+        return $rescount;
+    }
+    public function count_residency_approved() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_rescert WHERE form_status='Approved'");
+        $stmt->execute();
+        $rescount = $stmt->fetchColumn();
+        return $rescount;
+    }
+    public function count_brgyid_approved() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_brgyid WHERE form_status='Approved'");
+        $stmt->execute();
+        $rescount = $stmt->fetchColumn();
+        return $rescount;
+    }
+    // Decline
+    public function count_clearance_decline() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_clearance WHERE form_status='Declined'");
+        $stmt->execute();
+        $rescount = $stmt->fetchColumn();
+        return $rescount;
+    }
+    public function count_bspermit_decline() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_bspermit WHERE form_status='Declined'");
+        $stmt->execute();
+        $rescount = $stmt->fetchColumn();
+        return $rescount;
+    }
+    public function count_indigency_decline() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_indigency WHERE form_status='Declined'");
+        $stmt->execute();
+        $rescount = $stmt->fetchColumn();
+        return $rescount;
+    }
+    public function count_residency_decline() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_rescert WHERE form_status='Declined'");
+        $stmt->execute();
+        $rescount = $stmt->fetchColumn();
+        return $rescount;
+    }
+    public function count_brgyid_decline() {
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_brgyid WHERE form_status='Declined'");
+        $stmt->execute();
+        $rescount = $stmt->fetchColumn();
+        return $rescount;
+    }
     
 
     //------------------------------------- RESIDENT FILTERING QUERIES --------------------------------------

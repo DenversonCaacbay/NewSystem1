@@ -187,7 +187,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none">
             <li class="nav-item">
-                <a class="nav-link" href="archives.php">
+                <a class="nav-link" href="admn_request_archives.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Archives</span></a>
             </li>

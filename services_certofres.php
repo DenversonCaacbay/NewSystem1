@@ -633,7 +633,7 @@
             <!-- Modal -->
 
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalCenterTitle">Certificate of Residency Form</h5>
@@ -652,7 +652,7 @@
                                         <div class="form-group">
                                             <label for="lname">Last Name:</label>
                                             <input name="lname" type="text" class="form-control" 
-                                            placeholder="Enter Last Name" value="<?= $userdetails['surname']?>" required>
+                                            placeholder="Enter Last Name" value="<?= $userdetails['surname']?>" readonly>
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -662,28 +662,29 @@
                                         <div class="form-group">
                                             <label for="fname">First Name:</label>
                                             <input name="fname" type="text" class="form-control" 
-                                            placeholder="Enter First Name" value="<?= $userdetails['firstname']?>" required>
+                                            placeholder="Enter First Name" value="<?= $userdetails['firstname']?>" readonly>
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="mi">Middle Name: </label>
+                                            <input name="mi" type="text" class="form-control" 
+                                            placeholder="Enter Middle Name" value="<?= $userdetails['mname']?>" readonly>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="mi" class="mtop">Middle Name: </label>
-                                            <input name="mi" type="text" class="form-control" 
-                                            placeholder="Enter Middle Name" value="<?= $userdetails['mname']?>" required>
-                                            <div class="valid-feedback">Valid.</div>
-                                            <div class="invalid-feedback">Please fill out this field.</div>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="Age" class="mtop">Age: </label>
                                             <input type="number" name="age" class="form-control" 
-                                            placeholder="Enter your Age" value="<?= $userdetails['age']?>" required>
+                                            placeholder="Enter your Age" value="<?= $userdetails['age']?>" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -693,7 +694,7 @@
                                         <div class="form-group">
                                             <label for="Age" class="mtop">Nationality: </label>
                                             <input type="text" name="nationality" class="form-control" 
-                                            placeholder="Enter your Nationality" value="<?= $userdetails['nationality']?>" required>
+                                            placeholder="Enter your Nationality" value="<?= $userdetails['nationality']?>" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -706,7 +707,7 @@
                                         <div class="form-group">
                                             <label> House No: </label>
                                             <input type="text" class="form-control" name="houseno"  
-                                            placeholder="Enter House No." value="<?= $userdetails['houseno']?>" required>
+                                            placeholder="Enter House No." value="<?= $userdetails['houseno']?>" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -716,7 +717,7 @@
                                         <div class="form-group">
                                             <label> Street: </label>
                                             <input type="text" class="form-control" name="street"  
-                                            placeholder="Enter Street" value="<?= $userdetails['street']?>" required>
+                                            placeholder="Enter Street" value="<?= $userdetails['street']?>" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -726,7 +727,7 @@
                                         <div class="form-group">
                                             <label> Barangay: </label>
                                             <input type="text" class="form-control" name="brgy" 
-                                             placeholder="Enter Barangay" value="<?= $userdetails['brgy']?>" required>
+                                             placeholder="Enter Barangay" value="<?= $userdetails['brgy']?>" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -736,7 +737,7 @@
                                         <div class="form-group">
                                             <label> Municipality: </label>
                                             <input type="text" class="form-control" name="municipal" 
-                                            placeholder="Enter Municipality" value="<?= $userdetails['municipal']?>" required>
+                                            placeholder="Enter Municipality" value="<?= $userdetails['municipal']?>" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>

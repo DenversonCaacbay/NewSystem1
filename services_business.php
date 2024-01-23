@@ -24,15 +24,7 @@
         
         <style>
             /* Back-to-Top */
-            .bg-primary{
-        background: #309464 !important;
-                }
-                .btn-primary{
-                    background: #309464 !important;
-                }
-                body::-webkit-scrollbar {
-                        display: none;
-                    }
+
             .top-link {
             transition: all 0.25s ease-in-out;
             position: fixed;
@@ -296,26 +288,6 @@
             transform: scale(1.4); 
             }
 
-            @media (min-width: 768px) {
-            /* Display "desk" class on medium and larger screens (desktop) */
-            
-        }
-
-        @media (max-width: 767.98px) {
-            /* Display "mob" class on smaller screens (mobile) */
-            .text1 {
-                font-size: 20px;
-                font-weight: bold;
-            }
-            h5{
-                font-size: 17px;
-            }
-            .picture{
-                width: 100px;
-                height: 100px;
-            }
-        }
-
         </style>
   </head>
 
@@ -323,245 +295,730 @@
 
         <!-- Back-to-Top and Back Button -->
 
+        <a data-toggle="tooltip" title="Back-To-Top" class="top-link hide" href="" id="js-top">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>
+            <span class="screen-reader-text">Back to top</span>
+        </a>
 
         <!-- Eto yung navbar -->
 
-        <nav class="navbar navbar-dark navbar-expand-lg bg-primary sticky-top">
-            <div class="container-fluid w-100">
-                <!-- Desktop view -->
-                <a class="navbar-brand desk ms-3 d-none d-lg-block" style="color: white;">Barangay Santa Rita Information & E-Services</a>
-
-                <!-- Mobile view -->
-                <a class="navbar-brand mob mx-auto d-lg-none" style="color: white;">BSRI & E-Services</a>
-
-                <div class="dropdown ml-auto me-3">
-                    <a title="Your Account" class="nav-link text-white dropdown-toggle" style="margin-right: 2px;" type="button" data-toggle="dropdown">
-                        <?= $userdetails['surname'];?>, <?= $userdetails['firstname'];?>
-                        <span class="caret" style="margin-left: 2px;"></span>
-                    </a>
-                    <ul class="dropdown-menu" style="width: 175px; right: 0;" >
-                        <a class="btn" href="resident_profile.php?id_resident=<?= $userdetails['id_resident'];?>"> <i class="fas fa-user"> &nbsp; </i>Personal Profile  </a>
-                        <a class="btn" href="resident_changepass.php?id_resident=<?= $userdetails['id_resident'];?>"> <i class="fas fa-lock" >&nbsp;</i> Change Password  </a>
-                        <a class="btn" href="logout.php"> <i class="fas fa-sign-out-alt">&nbsp;</i> Logout  </a>
-                    </ul>
-                </div>
-            </div>            
+        <nav class="navbar navbar-dark bg-primary sticky-top">
+            <a class="navbar-brand" href="resident_homepage.php">Barangay Santa Rita Information & E-Servicesㅤㅤㅤㅤㅤㅤㅤㅤㅤ</a>
+            <a href="resident_homepage.php" data-toggle="tooltip" title="Home" class="btn5 bg-primary"><i class="fa fa-home fa-lg"></i></a>
+            <a href="#down3" data-toggle="tooltip" title="Procedure" class="btn5 bg-primary"><i class="fa fa-question fa-lg"></i></a>
+            <a href="#down2" data-toggle="tooltip" title="Information" class="btn4 bg-primary"><i class="fa fa-info fa-lg"></i></a>
+            <a href="#down1" data-toggle="tooltip" title="Registration" class="btn3 bg-primary"><i class="fa fa-edit fa-lg"></i></a>
+            <a href="#down" data-toggle="tooltip" title="Contact" class="btn2 bg-primary"><i class="fa fa-phone fa-lg"></i></a>
+           
+            <div class="dropdown ml-auto">
+                <button title="Your Account" class="btn btn-primary dropdown-toggle" style="margin-right: 2px;" type="button" data-toggle="dropdown"><?= $userdetails['surname'];?>, <?= $userdetails['firstname'];?>
+                    <span class="caret" style="margin-left: 2px;"></span>
+                </button>
+                <ul class="dropdown-menu" style="width: 175px;" >
+                    <a class="btn" href="resident_profile.php?id_resident=<?= $userdetails['id_resident'];?>"> <i class="fas fa-user"> &nbsp; </i>Personal Profile  </a>
+                    <a class="btn" href="resident_changepass.php?id_resident=<?= $userdetails['id_resident'];?>"> <i class="fas fa-lock" >&nbsp;</i> Change Password  </a>
+                    <a class="btn" href="logout.php"> <i class="fas fa-sign-out-alt">&nbsp;</i> Logout  </a>
+                </ul>
+            </div>
         </nav>
 
-        <div class="container-fluid"> 
+        <div class="container-fluid container1"> 
             <div class="row"> 
-                <div class="col-md-6"> 
-                    <div class="text-center">
+                <div class="col"> 
+                    <div class="header">
                         <h1 class="text1">Business Permit (Mayor's Permit) </h1>
                         <h5> Before you can start operating your business in the Philippines, you need to secure 
                         <br> a Mayor’s Permit or Business Permit from the Local Government Unit (LGU) where your 
                         <br> company office is located. </h5>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col text-center"><img class="picture mx-auto d-block" src="icons/Documents/santaritalogo.png"></div>
-                        <div class="col text-center"><img class="picture mx-auto d-block" src="icons/Documents/rnplogo.png"></div>
-                        <div class="col text-center"><img class="picture mx-auto d-block" src="icons/Documents/sklogo.png"></div>
-                    </div>
 
-                   
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="mt-3">Procedure</h3>
-                                <hr style="background-color: black;">
-                            </div>
-                        </div>
+                    <br>
 
-                        <div class="row">
-                            <div class="col">
-                                <i class="fas fa-id-card fa-4x"></i>
-                                <h3>Step 1: Preparation</h3>
-                                <p>The first step is to gather all the necessary information required for acquiring a business permit.</p>
-                            </div>
-
-                            <div class="col">
-                                <i class="fas fa-laptop fa-4x"></i>
-                                <h3>Step 2: Fill-Up</h3>
-                                <p>The second step involves completing the entire form in our system.</p>
-                            </div>
-
-                            <div class="col">
-                                <i class="fas fa-user-check fa-4x"></i>
-                                <h3>Step 3: Assessment</h3>
-                                <p>The third step, verify all the information provided in our system to ensure accuracy in your document.</p>
-                            </div>
-
-                            <div class="col">
-                                <i class="fas fa-file fa-4x"></i>
-                                <h3>Step 4: Release</h3>
-                                <p>The fourth step involves the issuance of your Business/Mayor's Permit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-<!-- Sample -->
-                <form method="post" class="was-validated mt-3 p-3" enctype="multipart/form-data">
-                    <div class="row"> 
-                        <div class="col-md-12"><h4>Request Form</h4></div>
-                        <div class="col-md-4" hidden>
-                            <div class="form-group">
-                                <label for="lname">Last Name:</label>
-                                <input name="lname" type="text" class="form-control" value="<?= $userdetails['surname'];?>" readonly>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                        <div class="col-md-4" hidden>
-                            <div class="form-group">
-                                <label for="fname">First Name:</label>
-                                <input name="fname" type="text" class="form-control" value="<?= $userdetails['firstname'];?>" readonly>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                        <div class="col-md-4" hidden>
-                            <div class="form-group">
-                                <label for="mi">Middle Name </label>
-                                <input name="mi" type="text" class="form-control" value="<?= $userdetails['mname'];?>"  readonly>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">  
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="bsname">Business Name:</label>
-                                <input name="bsname" type="text" class="form-control" placeholder="Enter Business Name" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label> House No: </label>
-                                <input type="text" class="form-control" name="houseno"  placeholder="Enter House No." value="<?= $userdetails['houseno'];?>"  readonly>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label> Street: </label>
-                                <input type="text" class="form-control" name="street"  placeholder="Enter Street" value="<?= $userdetails['street'];?>"  readonly>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label> Barangay: </label>
-                                <input type="text" class="form-control" name="brgy"  placeholder="Enter Barangay" value="<?= $userdetails['brgy'];?>"  readonly>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label> Municipality: </label>
-                                <input type="text" class="form-control" name="municipal" placeholder="Enter Municipality" value="<?= $userdetails['municipal'];?>"  readonly>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="status">Business Industry:</label>
-                                <select class="form-control" name="bsindustry" id="status" placeholder="Enter Status" required>
-                                <option value="">Choose your Business Industry</option>
-                                    <option value="Computer">Computer</option>
-                                    <option value="Telecommunication">Telecommunication</option>
-                                    <option value="Agriculture">Agriculture</option>
-                                    <option value="Construction">Construction</option>
-                                    <option value="Education">Education</option>
-                                    <option value="Pharmaceutical">Pharmaceutical</option>
-                                    <option value="Food">Food</option>
-                                    <option value="HealthCare">HealthCare</option>
-                                    <option value="Hospitality">Hospitality</option>
-                                    <option value="Entertainment">Entertainment</option>
-                                    <option value="News Media">News Media</option>
-                                    <option value="Energy">Energy</option>
-                                    <option value="Manufacturing">Manufacturing</option>
-                                    <option value="Music">Music</option>
-                                    <option value="Mining">Mining</option>
-                                    <option value="WorldWide Web">WorldWide Web</option>
-                                    <option value="Electronics">Electronics</option>
-                                    <option value="Transport">Pharmaceutical</option>
-                                    <option value="Transport">Aerospace</option>
-                                </select>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="aoe">Area of Establishment (SqM): </label>
-                                <input type="number" name="aoe" class="form-control" placeholder="Enter your AOE" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-
-                            <h6>Guidelines for Supporting Evidence Photo:</h6>
-                            <p>
-                                <ul style="font-size: 15px;">
-                                    <li>
-                                        Good quality photo.
-                                    </li>
-                                    <li>
-                                        At least 50KB and no more than 50MB.
-                                    </li>
-                                    <li>
-                                        File Format: JPEG or PNG
-                                    </li>
-                                    <li>
-                                        Clear and in focus.
-                                    </li>
-                                </ul>
-                            </p>
-                            <label>Supporting Evidence Photo:</label>
-                            <div class="custom-file form-group">
-                                <input type="file" onchange="readURL(this);" class="custom-file-input" id="customFile" name="bspermit_photo" required>
-                                <label class="custom-file-label" for="customFile">Choose File Photo</label>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label>Photo Display:</label><br>
-                            <img id="blah" src="http://placehold.it/470x350" width="300" alt="your image" />
-                        </div>
-                        <div class="col-md-12">
-                            <input name="id_resident" type="hidden" class="form-control" value="<?= $userdetails['id_resident']?>">
-                            
-                            <button name ="create_bspermit" type="submit" class="btn btn-primary w-100 mt-3">Submit Request</button>
-                        </div>
-                    </div>
-        
-                </form>
+                    <img class="picture" src="icons/Documents/santaritalogo.png">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img class="picture" src="icons/Documents/rnplogo.png">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img class="picture" src="icons/Documents/sklogo.png">
                 </div>
             </div>
         </div>
 
+        <div id="down3"></div>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <h1>Procedure</h1>
+                    <hr style="background-color: black;">
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col">
+                    <i class="fas fa-id-card fa-7x"></i>
+
+                    <br>
+                    <br>
+
+                    <h3>Step 1: Preparation</h3>
+                    <p>The first step is to gather all the necessary information required for acquiring a business permit.</p>
+                </div>
+
+                <div class="col">
+                    <i class="fas fa-laptop fa-7x"></i>
+
+                    <br>
+                    <br>
+
+                    <h3>Step 2: Fill-Up</h3>
+                    <p>The second step involves completing the entire form in our system.</p>
+                </div>
+
+                <div class="col">
+                    <i class="fas fa-user-check fa-7x"></i>
+
+                    <br>
+                    <br>
+
+                    <h3>Step 3: Assessment</h3>
+                    <p>The third step, verify all the information provided in our system to ensure accuracy in your document.</p>
+                </div>
+
+                <div class="col">
+                    <i class="fas fa-file fa-7x"></i>
+
+                    <br>
+                    <br>
+
+                    <h3>Step 4: Release</h3>
+                    <p>The fourth step involves the issuance of your Business/Mayor's Permit.</p>
+                </div>
+            </div>
+
+            <div id="down2"></div>
+
+            <br>
+            <br>
+            <br>
+
+            <div class="row">
+                <div class="col">
+                    <h1>Other Details</h1>
+                    <hr style="background-color: black;">
+                </div>
+            </div>
+
+            <br> 
+
+            <div class="row text2">
+                <div class="col" data-toggle="modal" data-target="#exampleModalCenter1">
+                    <div class="card bg-primary card1">
+                        <div class="card-header">
+                            <h5> Eligibility <br><br> <i class="fas fa-user-check fa-2x"></i>  </h5>
+                        </div>
+                        <!--<div class="card-body">-->
+                        <!--    <p class="card-text">-->
+                        <!--        A Philippines Resident.-->
+                        <!--    </p>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                                            <div class="card bg-primary card1">
+                        <div class="card-header">
+                            <h5> Eligibility <br><br> <i class="fas fa-user-check fa-2x"></i>  </h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                A Philippines Resident.
+                            </p>
+                        </div>
+                    </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col" data-toggle="modal" data-target="#exampleModalCenter2">
+                    <div class="card bg-primary card2">
+                        <div class="card-header">
+                            <h5> Validity <br><br> <i class="fas fa-clipboard-check fa-2x"></i>  </h5>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                                            <div class="card bg-primary card1">
+                        <div class="card-header">
+                            <h5> Validity <br><br> <i class="fas fa-clipboard-check fa-2x"></i>  </h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Your permit is valid for 1 year.
+                            </p>
+                        </div>
+                    </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col" data-toggle="modal" data-target="#exampleModalCenter3">
+                    <div class="card bg-primary card3">
+                        <div class="card-header">
+                            <h5> Fees <br><br> <i class="fas fa-coins fa-2x"></i>  </h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                                           <div class="card bg-primary card3">
+                        <div class="card-header">
+                            <h5> Fees <br><br> <i class="fas fa-coins fa-2x"></i>  </h5>
+                        </div>
+                        <div class="card-body">
+                            <ul style="text-align: justify;">
+                                <p class="card-text">
+                                    <li> 100% Free </li>
+                                </p>
+                            </ul>
+                        </div>
+                    </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col" data-toggle="modal" data-target="#exampleModalCenter4">
+                    <div class="card bg-primary card4">
+                        <div class="card-header">
+                            <h5 style="font-size: 19.4px;"> Processing Time <br><br> <i class="fas fa-clock fa-2x"></i>  </h5>
+                        </div>
+                    </div>
+                </div>
+                
+                                                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                                           <div class="card bg-primary card3">
+                        <div class="card-header">
+                            <h5 style="font-size: 19.4px;"> Processing Time <br><br> <i class="fas fa-clock fa-2x"></i>  </h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Within Working Hours (8:00am - 5:00pm)
+                            </p>
+                        </div>
+                    </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col"  data-toggle="modal" data-target="#exampleModalCenter5">
+                    <div class="card bg-primary card5">
+                        <div class="card-header">
+                            <h6> What you need <br><br> <i class="fas fa-file fa-2x"></i>  </h6>
+                        </div>
+
+                    </div>
+                </div>
+                
+                                                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                                           <div class="card bg-primary card3">
+                        <div class="card-header">
+                            <h6> What you need <br><br> <i class="fas fa-file fa-2x"></i>  </h6>
+                        </div>
+                                                <div class="card-body">
+                                <p class="card-text">
+                                    <ul style="text-align: left; font-size: 16px;">
+                                        <li> DTI Business Name Certificate or SEC Registration Certificate </li>
+                                        <li> Latest Community Tax Certificate (Cedula) </li>
+                                        <li> Barangay Clearance </li>
+                                        <li> Location Clearance </li>
+                                        <li> Certificate of Occupancy </li>
+                                        <li> Building Permit </li>
+                                        <li> Contract of Lease or Land Title Tax Declaration (whichever is applicable) </li>
+                                        <li> Picture or Sketch of the Site </li>
+                                        <li>Fire Safety or Inspection Permit</li>
+                                        <li> Electrical Inspection Certificate </li>
+                                        <li>Sanitary Permit</li>
+                                        <li>Public Liability Insurance</li>
+                                    </ul>
+                                </p>
+                        </div>
+                    </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <div id="down1"></div>
+
+        <br>
+        <br>
+        <br>
 
         <!-- Button trigger modal -->
 
+        <div class="container">
+
+            <h1 class="text-center">Registration</h1>
+            <hr style="background-color:black;">
+
+            <div class="col">   
+                <button type="button" class="btn btn-primary applybutton" data-toggle="modal" data-target="#exampleModalCenter">
+                    Request Form
+                </button>
+            </div>
+
+
             <!-- Modal -->
 
-                            
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Business Permit Form</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <!-- Modal Body -->
+
+                        <div class="modal-body">
+                            <form method="post" class="was-validated" enctype="multipart/form-data">
+
+                                <div class="row"> 
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="lname" class="mtop">Last Name:</label>
+                                            <input name="lname" type="text" class="form-control" value="<?= $userdetails['surname'];?>" readonly>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="fname" class="mtop">First Name:</label>
+                                            <input name="fname" type="text" class="form-control" value="<?= $userdetails['firstname'];?>" readonly>
+                                                <div class="valid-feedback">Valid.</div>
+                                                <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="mi" class="mtop">Middle Name </label>
+                                            <input name="mi" type="text" class="form-control" value="<?= $userdetails['mname'];?>"  readonly>
+                                                <div class="valid-feedback">Valid.</div>
+                                                <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="bsname">Business Name:</label>
+                                            <input name="bsname" type="text" class="form-control" placeholder="Enter Business Name" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6>Business Address:</h6>
+
+                                <hr class="w-100">
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label> House No: </label>
+                                            <input type="text" class="form-control" name="houseno"  placeholder="Enter House No." value=""  required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label> Street: </label>
+                                            <input type="text" class="form-control" name="street"  placeholder="Enter Street" value=""  required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label> Barangay: </label>
+                                            <input type="text" class="form-control" name="brgy"  placeholder="Enter Barangay" value="<?= $userdetails['brgy'];?>"  readonly>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label> Municipality: </label>
+                                            <input type="text" class="form-control" name="municipal" placeholder="Enter Municipality" value="<?= $userdetails['municipal'];?>"  readonly>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="status" class="mtop">Business Industry:</label>
+                                            <select class="form-control" name="bsindustry" id="status" placeholder="Enter Status" required>
+                                            <option value="">Choose your Business Industry</option>
+                                                <option value="Computer">Computer</option>
+                                                <option value="Telecommunication">Telecommunication</option>
+                                                <option value="Agriculture">Agriculture</option>
+                                                <option value="Construction">Construction</option>
+                                                <option value="Education">Education</option>
+                                                <option value="Pharmaceutical">Pharmaceutical</option>
+                                                <option value="Food">Food</option>
+                                                <option value="HealthCare">HealthCare</option>
+                                                <option value="Hospitality">Hospitality</option>
+                                                <option value="Entertainment">Entertainment</option>
+                                                <option value="News Media">News Media</option>
+                                                <option value="Energy">Energy</option>
+                                                <option value="Manufacturing">Manufacturing</option>
+                                                <option value="Music">Music</option>
+                                                <option value="Mining">Mining</option>
+                                                <option value="WorldWide Web">WorldWide Web</option>
+                                                <option value="Electronics">Electronics</option>
+                                                <option value="Transport">Pharmaceutical</option>
+                                                <option value="Transport">Aerospace</option>
+                                            </select>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="aoe" class="mtop">Area of Establishment (SqM): </label>
+                                            <input type="number" name="aoe" class="form-control" placeholder="Enter your AOE" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="w-100">
+
+                                <h6>Guidelines for Supporting Evidence Photo:</h6>
+
+                                <p>
+                                    <ul style="font-size: 15px;">
+                                        <li>
+                                            Good quality photo.
+                                        </li>
+                                        <li>
+                                            At least 50KB and no more than 50MB.
+                                        </li>
+                                        <li>
+                                            File Format: JPEG or PNG
+                                        </li>
+                                        <li>
+                                            Clear and in focus.
+                                        </li>
+                                    </ul>
+                                </p>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label>Supporting Evidence Photo:</label>
+                                        <div class="custom-file form-group">
+                                            <input type="file" onchange="readURL(this);" class="custom-file-input" id="customFile" name="bspermit_photo" required>
+                                            <label class="custom-file-label" for="customFile">Choose File Photo</label>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label>Photo Display:</label>
+                                        <img id="blah" src="http://placehold.it/470x350" alt="your image" />
+                                    </div>
+                                </div>
+                           
+                        </div>
+
+                        <!-- Modal Footer -->
+            
+                        <div class="modal-footer">
+                            <div class="paa">
+                                <input name="id_resident" type="hidden" class="form-control" value="<?= $userdetails['id_resident']?>">
+                                
+                                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                                <button name ="create_bspermit" type="submit" class="btn btn-primary">Submit Request</button>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+
+        <br>
+        <br>
+        <br>
+
+        <!-- Footer -->
+
+        <footer id="footer" class="bg-primary text-white d-flex-column text-center">
+            <hr class="mt-0">
+
+            <div class="text-center">
+                <h1>Services</h1>
+                <ul class="list-unstyled list-inline">
+
+                &nbsp;
+
+                <li class="list-inline-item">
+                    <a href="#!" class="sbtn btn-large mx-1" title="Documents">
+                    <i class="fas fa-file fa-2x"></i>
+                    </a>
+                </li>
+
+                &nbsp;
+
+                <li class="list-inline-item">
+                    <a href="#!" class="sbtn btn-large mx-1" title="Card">
+                    <i class="fas fa-id-card fa-2x"></i>
+                    </a>
+                </li>
+
+                &nbsp;
+
+                <li class="list-inline-item">
+                    <a href="#!" class="sbtn btn-large mx-1" title="Friend">
+                    <i class="fas fa-user-friends fa-2x"></i>
+                    </a>
+                </li>
+
+                &nbsp;
+
+                <li class="list-inline-item">
+                    <a href="#!" class="sbtn btn-large mx-1" title="Blotter">
+                    <i class="fas fa-user-shield fa-2x"></i>
+                    </a>
+                </li>
+
+                &nbsp;
+
+                <li class="list-inline-item">
+                    <a href="#!" class="sbtn btn-large mx-1" title="Contact">
+                    <i class="fas fa-phone fa-2x"></i>
+                    </a>
+                </li>
+                </ul>
+            </div>
+
+            <hr class="mb-0">
+
+            <!--Footer Links-->
+
+            <div class="container text-left text-md-center">
+                <div class="row">
+
+                    <!--First column-->
+
+                    <div class="col-md-3 mx-auto shfooter">
+                        <h5 class="my-2 font-weight-bold d-none d-md-block">Documentation</h5>
+                        <div class="d-md-none title" data-target="#Documentation" data-toggle="collapse">
+                            <div class="mt-3 font-weight-bold">Documentation
+                                <div class="float-right navbar-toggler">
+                                    <i class="fas fa-angle-down"></i>
+                                    <i class="fas fa-angle-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled collapse" id="Documentation">
+                            <li><a href="services_certofres.php">Certificate of Residency</a></li>
+                            <li><a href="services_brgyclearance.php">Barangay Clearance</a></li>
+                            <li><a href="services_certofindigency.php">Certificate of Indigency</a></li>
+                            <li><a href="services_business.php">Business Permit</a></li>
+                            <li><a href="services_brgyid.php">Barangay ID</a></li>
+                        </ul>
+                    </div>
+
+                    <!--/.First column-->
+
+                    <hr class="clearfix w-100 d-md-none mb-0">
+
+                    <!--Third column-->
+
+                    <!--<div class="col-md-3 mx-auto shfooter">-->
+                    <!--    <h5 class="my-2 font-weight-bold d-none d-md-block">Other Services</h5>-->
+                    <!--    <div class="d-md-none title" data-target="#OtherServices" data-toggle="collapse">-->
+                    <!--        <div class="mt-3 font-weight-bold">Other Services-->
+                    <!--            <div class="float-right navbar-toggler">-->
+                    <!--                <i class="fas fa-angle-down"></i>-->
+                    <!--                <i class="fas fa-angle-up"></i>-->
+                    <!--            </div>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+
+                    <!--    <ul class="list-unstyled collapse" id="OtherServices">-->
+                    <!--        <li><a href="services_blotter.php">Peace and Order</a></li>-->
+                    <!--    </ul>-->
+                    <!--</div>-->
+
+                    <!--/.Third column-->
+
+                    <hr class="clearfix w-100 d-md-none mb-0">
+ 
+                    <!--Fourth column-->
+
+                    <div class="col-md-3 mx-auto shfooter" id="down">
+                        <h5 class="my-2 font-weight-bold d-none d-md-block">Contact Us:</h5>
+                        <div class="d-md-none title" data-target="#Contact-Us" data-toggle="collapse">
+                        <div class="mt-3 font-weight-bold">Contact Us:
+                            <div class="float-right navbar-toggler">
+                            <i class="fas fa-angle-down"></i>
+                            <i class="fas fa-angle-up"></i>
+                            </div>
+                        </div>
+                        </div>
+                        <ul class="list-unstyled collapse" id="Contact-Us">
+                        <li>
+                                <div class="zoom">
+                                    <div class="chip" style="font-size:10px;">
+                                        <img src="icons/Contact/charlene.png" alt="Person" width="96" height="96">
+                                        Charlene Turqueza | 09762866176
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="zoom">
+                                    <div class="chip" style="font-size:10px;">
+                                        <img src="icons/Contact/dan.png" alt="Person" width="96" height="96">
+                                        Dan Emmanuel Duarte | 09989120644
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="zoom">
+                                    <div class="chip" style="font-size:10px;">
+                                        <img src="icons/Contact/jerika.png" alt="Person" width="96" height="96">
+                                        Jerika Soriano | 09661385889
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--/.Fourth column-->
+
+                </div>
+            </div>
+
+            <!--/.Footer Links-->
+
+            <hr class="mb-0">
+
+            <!--Copyright-->
+
+            <div class="py-3 text-center">
+                Copyright
+                <script>
+                document.write(new Date().getFullYear())
+                </script> 
+                BI & ESMS
+            </div>
+
+        </footer>
+
         <script>
             // Set a variable for our button element.
             const scrollToTopButton = document.getElementById('js-top');

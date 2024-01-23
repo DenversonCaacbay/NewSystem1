@@ -27,95 +27,271 @@
 
     <head> 
         <title> Barangay Santa Rita Information & E-Services </title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- css & js for resident is on resident.class.php -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <style>
 
     /* Navbar Buttons */
-    .bg-primary{
-        background: #309464 !important;
-    }
-    .text-primary{
-        color: #309464 !important;
-    }
-    .btn-primary{
-        background: #309464 !important;
-    }
-    body::-webkit-scrollbar {
-        display: none;
-    }
-    .card{
-        border-radius: 50px;
-        width: 94%;
-        padding: 5px;
+
+    .btn1 {
+    border-radius: 20px;
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    margin-left: 16%;
+    padding: 12px 22px;
     }
 
-    .footer{
-        width: 75%;
+    .btn2 {
+    border-radius: 20px;
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    padding: 12px 22px;
+    margin-left: .1%;
     }
 
+    .btn3 {
+    border-radius: 20px;
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    padding: 12px 22px;
+    margin-left: .1%;
+    }
 
+    /* Darker background on mouse-over */
+    .btn1:hover {
+    background-color: RoyalBlue;
+    color: black;
+    }
+
+    .btn2:hover {
+    background-color: RoyalBlue;
+    color: black;
+    }
+
+    .btn3:hover {
+    background-color: RoyalBlue;
+    color: black;
+    }
+
+    /* Back-to-Top */
+
+    .top-link {
+    transition: all 0.25s ease-in-out;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3em 3em 0;
+    border-radius: 50%;
+    padding: 0.25em;
+    width: 80px;
+    height: 80px;
+    background-color: #3661D5;
+    }
+    .top-link.show {
+    visibility: visible;
+    opacity: 1;
+    }
+    .top-link.hide {
+    visibility: hidden;
+    opacity: 0;
+    }
+    .top-link svg {
+    fill: white;
+    width: 24px;
+    height: 12px;
+    }
+    .top-link:hover {
+    background-color: #3498DB;
+    }
+    .top-link:hover svg {
+    fill: #000000;
+    }
+
+    .screen-reader-text {
+    position: absolute;
+    clip-path: inset(50%);
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    word-wrap: normal !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    }
+    .screen-reader-text:focus {
+    display: block;
+    top: 5px;
+    left: 5px;
+    z-index: 100000;
+    clip-path: none;
+    background-color: #eee;
+    padding: 15px 23px 14px;
+    width: auto;
+    height: auto;
+    text-decoration: none;
+    line-height: normal;
+    color: #444;
+    font-size: 1em;
+    clip: auto !important;
+    }
+
+    /* E-Services Zoom */
+
+    .zoom1 {
+    transition: transform .3s;
+    }
+
+    .zoom1:hover {
+    -ms-transform: scale(1.1); /* IE 9 */
+    -webkit-transform: scale(1.1); /* Safari 3-8 */
+    transform: scale(1.1); 
+    }
+
+    /* Footer Style */
+    
+    .footerlinks{
+        color:white;
+        }
+    .shfooter .collapse {
+        display: inherit;
+    }
+        @media (max-width:767px) {
+    .shfooter ul {
+            margin-bottom: 0;
+    }
+
+    .shfooter .collapse {
+            display: none;
+    }
+
+    .shfooter .collapse.show {
+            display: block;
+    }
+
+    .shfooter .title .fa-angle-up,
+    .shfooter .title[aria-expanded=true] .fa-angle-down {
+            display: none;
+    }
+
+    .shfooter .title[aria-expanded=true] .fa-angle-up {
+            display: block;
+    }
+
+    .shfooter .navbar-toggler {
+            display: inline-block;
+            padding: 0;
+    }
+
+    }
+
+    .resize {
+        text-align: center;
+    }
+    .resize {
+        margin-top: 3rem;
+        font-size: 1.25rem;
+    }
+    /*RESIZESCREEN ANIMATION*/
+    .fa-angle-double-right {
+        animation: rightanime 1s linear infinite;
+    }
+
+    .fa-angle-double-left {
+        animation: leftanime 1s linear infinite;
+    }
+    @keyframes rightanime {
+        50% {
+            transform: translateX(10px);
+            opacity: 0.5;
+    }
+        100% {
+            transform: translateX(10px);
+            opacity: 0;
+    }
+    }
+    @keyframes leftanime {
+        50% {
+            transform: translateX(-10px);
+            opacity: 0.5;
+    }
+        100% {
+            transform: translateX(-10px);
+            opacity: 0;
+    }
+    }
 
     /* Contact Chip */
-    @media (min-width: 768px) {
-            /* Display "desk" class on medium and larger screens (desktop) */
-            .mob {
-                display: none;
-            }
-            
-        }
 
-        @media (max-width: 767.98px) {
-            /* Display "mob" class on smaller screens (mobile) */
-            .desk {
-                display: none;
-            }
-            .footer{
-                width: 100%;
-            }
-        }
+    .chip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #2C54C1;
+    margin-top: 5px;
+    }
 
-        h4, h6{
-            color: #ffffff;
-        }
+    .chip img {
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    }
+
+    .zoom {
+    transition: transform .3s;
+    }
+
+    .zoom:hover {
+    -ms-transform: scale(1.4); /* IE 9 */
+    -webkit-transform: scale(1.4); /* Safari 3-8 */
+    transform: scale(1.4); 
+    }
 
     </style>
     <body> 
 
         <!-- Back-to-Top and Back Button -->
 
-        <!-- <a data-toggle="tooltip" title="Back-To-Top" class="top-link hide" href="" id="js-top">
+        <a data-toggle="tooltip" title="Back-To-Top" class="top-link hide" href="" id="js-top">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>
             <span class="screen-reader-text">Back to top</span>
-        </a> -->
+        </a>
 
         <!-- Eto yung navbar -->
 
-        <nav class="navbar navbar-dark navbar-expand-lg bg-primary sticky-top">
-            <div class="container-fluid w-100">
-                <!-- Desktop view -->
-                <a class="navbar-brand desk ms-3 d-none d-lg-block" style="color: white;">Barangay Santa Rita Information & E-Services</a>
-
-                <!-- Mobile view -->
-                <a class="navbar-brand mob mx-auto d-lg-none" style="color: white;">BSRI & E-Services</a>
-
-                <div class="dropdown ml-auto me-3">
-                    <a title="Your Account" class="nav-link text-white dropdown-toggle" style="margin-right: 2px;" type="button" data-toggle="dropdown">
-                        <?= $userdetails['surname'];?>, <?= $userdetails['firstname'];?>
-                        <span class="caret" style="margin-left: 2px;"></span>
-                    </a>
-                    <ul class="dropdown-menu" style="width: 175px; right: 0;" >
-                        <a class="btn" href="resident_profile.php?id_resident=<?= $userdetails['id_resident'];?>"> <i class="fas fa-user"> &nbsp; </i>Personal Profile  </a>
-                        <a class="btn" href="resident_changepass.php?id_resident=<?= $userdetails['id_resident'];?>"> <i class="fas fa-lock" >&nbsp;</i> Change Password  </a>
-                        <a class="btn" href="logout.php"> <i class="fas fa-sign-out-alt">&nbsp;</i> Logout  </a>
-                    </ul>
-                </div>
-            </div>            
+        <nav class="navbar navbar-dark bg-primary sticky-top">
+            <a class="navbar-brand" href="resident_homepage.php">Barangay Santa Rita Information & E-Services</a>
+            <a href="#down2" data-toggle="tooltip" title="Announcement" class="btn1 bg-primary"><i class="fa fa-bullhorn fa-lg"></i></a>
+            <a href="#down1" data-toggle="tooltip" title="E-Services" class="btn2 bg-primary"><i class="fa fa-edit fa-lg"></i></a>
+            <a href="#down" data-toggle="tooltip" title="Contact" class="btn3 bg-primary"><i class="fa fa-phone fa-lg"></i></a>
+            
+           
+            <div class="dropdown ml-auto">
+                <button title="Your Account" class="btn btn-primary dropdown-toggle" style="margin-right: 2px;" type="button" data-toggle="dropdown"><?= $userdetails['surname'];?>, <?= $userdetails['firstname'];?>
+                    <span class="caret" style="margin-left: 2px;"></span>
+                </button>
+                <ul class="dropdown-menu" style="width: 175px;" >
+                    <a class="btn" href="resident_profile.php?id_resident=<?= $userdetails['id_resident'];?>"> <i class="fas fa-user"> &nbsp; </i>Personal Profile  </a>
+                    <a class="btn" href="resident_changepass.php?id_resident=<?= $userdetails['id_resident'];?>"> <i class="fas fa-lock" >&nbsp;</i> Change Password  </a>
+                    <a class="btn" href="logout.php"> <i class="fas fa-sign-out-alt">&nbsp;</i> Logout  </a>
+                </ul>
+            </div>
         </nav>
 
+        <div  id="down2"></div>
 
         <?php 
             $view = $bmis->view_announcement();
@@ -138,16 +314,17 @@
                 </tbody>
             </table>
 
-            <div class="container">
-                <div class="alert alert-primary bg-primary" role="alert"
-                    style="margin-top: 4%; 
-                            margin-bottom: 1.5%;
-                            border-radius:20px; 
-                            width:100%;
-                            color: white;">
-                    <strong><h5 class="text-center">ANNOUNCEMENT!<h3></strong> 
-                    <hr class="w-100"> 
-                    <div class="text-center">
+            <div class="alert alert-info alert-dismissible fade show" role="alert"
+                 style="margin-top: 4%; 
+                        margin-left: 17.5%;
+                        margin-bottom: 1.5%;
+                        border-radius:30px; 
+                        width:65%;
+                        color: white;
+                        background-color:#3498DB;">
+                <strong><h3 class="text-center">ANNOUNCEMENT!<h3></strong> 
+                <hr> 
+                <div class="text-center">
                         <?php if (is_null($view['announcement_image'])): ?>
                             <img id="blah" src="assets/default-thumbnail.jpg" class="text-center">
                         <?php else: ?>
@@ -160,8 +337,11 @@
                             <span aria-hidden="true">&times;</span>
                         </button> -->
                 </div>
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            
 
         <?php 
             }
@@ -172,11 +352,18 @@
 
         ?>
 
+        <div id="down1"></div>
 
+        <br>
 
+        <section class="heading-section"> 
             <div class="container text-center"> 
                 <div class="row"> 
                     <div class="col"> 
+                        
+                        <br>
+                        <br>
+
                         <div class="header"> 
                             <h2> Welcome to Barangay Santa Rita Information & E-Services </h2><bR>
                             <h3> You may select the following e-services offered below </h3>
@@ -185,143 +372,269 @@
                 </div>
             </div>
 
+            <br>
+            <br>
+
             <div class="container"> 
-                <div class="row">
-                    <div class="col-md-12"> 
+                <div class="row title-spacing">
+                    <div class="col"> 
                         <h2 class="text-center"> E-Services</h2>
-                        <hr class="w-100">
+                        <hr>
                     </div> 
                 </div>
                 
                 <div class="row">
-                    <div class="col-md-4 mt-2"> 
-                        <a style="text-decoration:none;" href="services_business.php">
+                    <div class="col"> 
+                        <a href="services_business.php">
                             <div class="zoom1"> 
                                 <div class="card"> 
                                     <div class="card-body text-center"> 
                                         <img src="icons/ResidentHomepage/busper.png">
-                                        <h4 class="text-primary"> Business Recommendation </h4> 
+                                        <h4> Business Recommendation </h4> 
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-4 mt-2"> 
-                        <a style="text-decoration:none;" href="services_brgyid.php">
+                    <div class="col"> 
+                        <a href="services_brgyid.php">
                             <div class="zoom1">
                                 <div class="card"> 
                                     <div class="card-body text-center"> 
                                         <img style="height: 139px;" src="icons/ResidentHomepage/brgyid.png">
-                                        <h4 class="text-primary"> Barangay ID </h4>
+                                        <h4> Barangay ID </h4>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-4 mt-2"> 
-                        <a style="text-decoration:none;" href="services_certofindigency.php">
+                    <div class="col"> 
+                        <a href="services_certofindigency.php">
                             <div class="zoom1">
                                 <div class="card"> 
                                     <div class="card-body text-center"> 
                                         <img src="icons/ResidentHomepage/indigency.png">
-                                        <h4 class="text-primary"> Certificate of Indigency </h4>
+                                        <h4> Certificate of Indigency </h4>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
+                </div>
 
-                    <div class="col-md-6 mt-2">
-                        <a style="text-decoration:none;" href="services_certofres.php"> 
+                <br>
+                <div class="row card-spacing"> 
+                    <div class="col">
+                        <a href="services_certofres.php"> 
                         <div class="zoom1">    
                             <div class="card"> 
                                 <div class="card-body text-center"> 
                                 <img src="icons/ResidentHomepage/residency.png">
-                                    <h4 class="text-primary"> Certificate of Residency </h4>
+                                    <h4> Certificate of Residency </h4>
                                 </div>
                             </div>
                         </div>
                         </a>
                     </div>
 
-                    <div class="col-md-6 mt-2">
-                        <a style="text-decoration:none;" href="services_brgyclearance.php"> 
+                    <div class="col">
+                        <a href="services_brgyclearance.php"> 
                         <div class="zoom1">    
                             <div class="card"> 
                                 <div class="card-body text-center">
                                 <img src="icons/ResidentHomepage/clearance.png"> 
-                                    <h4 class="text-primary"> Barangay Clearance </h4>
+                                    <h4> Barangay Clearance </h4>
                                 </div>
                             </div>
                         </div>
                         </a>
                     </div>
-                </div>
 
+                    <!--<div class="col">-->
+                    <!--    <a href="services_blotter.php"> -->
+                    <!--    <div class="zoom1">    -->
+                    <!--        <div class="card"> -->
+                    <!--            <div class="card-body text-center">-->
+                    <!--                <img src="icons/ResidentHomepage/complain.png"> -->
+                    <!--                <h4> Peace and Order</h4> -->
+                    <!--            </div>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--    </a>-->
+                    <!--</div>-->
+                </div>
             </div>
+        </section>
 
         <br>
-        <div class="row bg-primary p-3">
-            <div class="container footer">
-                <div class="row">
-                <div class="col-md-4">
-                <h4>Documentation</h4>
-                <h6>Barangay Clearance</h6>
-                <h6>Barangay ID</h6>
-                <h6>Business Recommendation</h6>
-                <h6>Residency</h6>
-                <h6>Indigency</h6>
-            </div>
-            <div class="col-md-4">
-                <h4>Other Services</h4>
-                <h6>Peace and Order</h6>
-            </div>
-            <div class="col-md-4">
-                <div class="card mt-3">
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="icons/Contact/charlene.png" style="width:50px;border-radius:30px;">
-                        </div>
-                        <div class="col-10">
-                            <h6 class="mt-2 text-primary">Charlene Turqueza | 09762866176</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mt-3">
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="icons/Contact/dan.png" style="width:50px;border-radius:30px;">
-                        </div>
-                        <div class="col-10">
-                        <h6 class="mt-2 text-primary">Dan Emmanuel Duarte | 09989120644</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mt-3">
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="icons/Contact/jerika.png" style="width:50px;border-radius:30px;">
-                        </div>
-                        <div class="col-10">
-                        <h6 class="mt-2 text-primary">Jerika Soriano | 09661385889</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-                </div>
-            </div>
-        </div>
+        <br>
+        <br>
 
         <!-- Footer -->
-        
+
+        <footer id="footer" class="bg-primary text-white d-flex-column text-center">
+            <hr class="mt-0">
+
+            <div class="text-center">
+                <h1 class="text-white">Services</h1>
+                <ul class="list-unstyled list-inline">
+
+                &nbsp;
+
+                <li class="list-inline-item">
+                    <a class="footerlinks" href="#!" class="sbtn btn-large mx-1" title="Documents">
+                    <i class="fas fa-file fa-2x"></i>
+                    </a>
+                </li>
+
+                &nbsp;
+
+                <li class="list-inline-item">
+                    <a href="#!" class="footerlinks sbtn btn-large mx-1" title="Card">
+                    <i class="fas fa-id-card fa-2x"></i>
+                    </a>
+                </li>
+
+                &nbsp;
+
+                <li class="list-inline-item">
+                    <a class="footerlinks" href="#!" class="sbtn btn-large mx-1" title="Friends">
+                    <i class="fas fa-user-friends fa-2x"></i>
+                    </a>
+                </li>
+
+                &nbsp;
+
+                <li class="list-inline-item">
+                    <a class="footerlinks" href="#!" class="sbtn btn-large mx-1" title="Blotter">
+                    <i class="fas fa-user-shield fa-2x"></i>
+                    </a>
+                </li>
+
+                &nbsp;
+
+                <li class="list-inline-item">
+                    <a class="footerlinks" href="#!" class="sbtn btn-large mx-1" title="Contact">
+                    <i class="fas fa-phone fa-2x"></i>
+                    </a>
+                </li>
+                </ul>
+            </div>
+
+            <hr class="mb-0">
+
+            <!--Footer Links-->
+
+            <div class="container text-left text-md-center">
+                <div class="row">
+
+                    <!--First column-->
+
+                    <div class="col-md-3 mx-auto shfooter">
+                        <h5 class="my-2 font-weight-bold d-none d-md-block">Documentation</h5>
+                        <div class="d-md-none title" data-target="#Documentation" data-toggle="collapse">
+                            <div class="mt-3 font-weight-bold">Documentation
+                                <div class="float-right navbar-toggler">
+                                    <i class="fas fa-angle-down"></i>
+                                    <i class="fas fa-angle-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled collapse" id="Documentation">
+                            <li><a class="footerlinks" href="services_certofres.php">Certificate of Residency</a></li>
+                            <li><a class="footerlinks" href="services_brgyclearance.php">Barangay Clearance</a></li>
+                            <li><a class="footerlinks" href="services_certofindigency.php">Certificate of Indigency</a></li>
+                            <li><a class="footerlinks" href="services_business.php">Business Recommendation</a></li>
+                            <li><a class="footerlinks" href="services_brgyid.php">Barangay ID</a></li>
+                        </ul>
+                    </div>
+
+                    <!--/.First column-->
+
+                    <hr class="clearfix w-100 d-md-none mb-0">
+
+                    <!--Third column-->
+
+                    <!--<div class="col-md-3 mx-auto shfooter">-->
+                    <!--    <h5 class="my-2 font-weight-bold d-none d-md-block">Other Services</h5>-->
+                    <!--    <div class="d-md-none title" data-target="#OtherServices" data-toggle="collapse">-->
+                    <!--        <div class="mt-3 font-weight-bold">Other Services-->
+                    <!--            <div class="float-right navbar-toggler">-->
+                    <!--                <i class="fas fa-angle-down"></i>-->
+                    <!--                <i class="fas fa-angle-up"></i>-->
+                    <!--            </div>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+
+                    <!--    <ul class="list-unstyled collapse" id="OtherServices">-->
+                    <!--        <li><a class="footerlinks" href="services_blotter.php">Peace and Order</a></li>-->
+                    <!--    </ul>-->
+                    <!--</div>-->
+
+                    <!--/.Third column-->
+
+                    <hr class="clearfix w-100 d-md-none mb-0">
+ 
+                    <!--Fourth column-->
+
+                    <div class="col-md-3 mx-auto shfooter" id="down">
+                        <h5 class="my-2 font-weight-bold d-none d-md-block">Contact Us:</h5>
+                        <div class="d-md-none title" data-target="#Contact-Us" data-toggle="collapse">
+                        <div class="mt-3 font-weight-bold">Contact Us:
+                            <div class="float-right navbar-toggler">
+                            <i class="fas fa-angle-down"></i>
+                            <i class="fas fa-angle-up"></i>
+                            </div>
+                        </div>
+                        </div>
+                        <ul class="list-unstyled collapse" id="Contact-Us">
+                            <li>
+                                <div class="zoom">
+                                    <div class="chip" style="font-size:10px;">
+                                        <img src="icons/Contact/charlene.png" alt="Person" width="96" height="96">
+                                        Charlene Turqueza | 09762866176
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="zoom">
+                                    <div class="chip" style="font-size:10px;">
+                                        <img src="icons/Contact/dan.png" alt="Person" width="96" height="96">
+                                        Dan Emmanuel Duarte | 09989120644
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="zoom">
+                                    <div class="chip" style="font-size:10px;">
+                                        <img src="icons/Contact/jerika.png" alt="Person" width="96" height="96">
+                                        Jerika Soriano | 09661385889
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--/.Fourth column-->
+
+                </div>
+            </div>
+
             <!--/.Footer Links-->
 
-          
+            <hr class="mb-0">
 
-       
+            <!--Copyright-->
+
+            <div class="py-3 text-center">
+                Copyright
+                <script>
+                document.write(new Date().getFullYear())
+                </script> 
+                BI & ESMS
+            </div>
+
+        </footer>
 
         <script>
             // Set a variable for our button element.

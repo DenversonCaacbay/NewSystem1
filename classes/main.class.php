@@ -1,6 +1,6 @@
 
 <?php 
-
+ 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
@@ -1224,27 +1224,57 @@ class BMISClass {
 
     public function view_certofres(){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * from tbl_rescert WHERE form_status ='Pending'");
+        $stmt = $connection->prepare("
+            SELECT rc.*, r.email
+            FROM tbl_rescert rc
+            JOIN tbl_resident r ON rc.id_Resident = r.id_resident
+            WHERE rc.form_status = 'Pending'
+        ");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
     }
+    
     public function view_certofres_done(){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * from tbl_rescert WHERE form_status ='Done'");
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status ='Approved' OR form_status='Declined'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
     }
-
+ 
 
     public function reject_rescert() {
         $id_rescert = $_POST['id_rescert'];
+        $email = $_POST['email'];
     
         if (isset($_POST['reject_rescert'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Declined' WHERE id_rescert = ?");
             $stmt->execute([$id_rescert]);
+
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                $mail->Port = 587; // Change this to the appropriate port
+    
+                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Declined Request for Residency';
+                $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+    
+                $mail->send();
+                // echo 'Email has been sent';
+            } catch (Exception $e) {
+                echo "Mailer Error: {$mail->ErrorInfo}";
+            }
     
             header("Refresh:0");
         }
@@ -1252,11 +1282,36 @@ class BMISClass {
 
     public function approved_rescert() {
         $id_rescert = $_POST['id_rescert'];
+        $email = $_POST['email'];
     
         if (isset($_POST['approved_rescert'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Approved' WHERE id_rescert = ?");
             $stmt->execute([$id_rescert]);
+    
+            // Send email using PHPMailer
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                $mail->Port = 587; // Change this to the appropriate port
+    
+                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Approval Notification for Residency';
+                $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+    
+                $mail->send();
+                // echo 'Email has been sent';
+            } catch (Exception $e) {
+                echo "Mailer Error: {$mail->ErrorInfo}";
+            }
     
             header("Refresh:0");
         }
@@ -1323,9 +1378,29 @@ class BMISClass {
 
     
 
+    // public function view_certofindigency(){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * from tbl_indigency WHERE form_status='Pending'");
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    //     return $view;
+    // }
     public function view_certofindigency(){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * from tbl_indigency WHERE deleted_at IS NULL");
+        $stmt = $connection->prepare("
+            SELECT rc.*, r.email
+            FROM tbl_indigency rc
+            JOIN tbl_resident r ON rc.id_Resident = r.id_resident
+            WHERE rc.form_status = 'Pending'
+        ");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+
+    public function view_certofindigency_done(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status ='Approved' OR form_status='Declined'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -1363,13 +1438,61 @@ class BMISClass {
         }
     }
 
+    // public function reject_indigency() {
+    //     $id_indigency = $_POST['id_indigency'];
+    
+    //     if (isset($_POST['reject_indigency'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Declined' WHERE id_indigency = ?");
+    //         $stmt->execute([$id_indigency]);
+    
+    //         header("Refresh:0");
+    //     }
+    // }
+
+    // public function approved_indigency() {
+    //     $id_indigency = $_POST['id_indigency'];
+    
+    //     if (isset($_POST['approved_indigency'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Approved' WHERE id_indigency = ?");
+    //         $stmt->execute([$id_indigency]);
+    
+    //         header("Refresh:0");
+    //     }
+    // }
+
     public function reject_indigency() {
         $id_indigency = $_POST['id_indigency'];
+        $email = $_POST['email'];
     
         if (isset($_POST['reject_indigency'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Declined' WHERE id_indigency = ?");
             $stmt->execute([$id_indigency]);
+
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                $mail->Port = 587; // Change this to the appropriate port
+    
+                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Declined Request for Indigency';
+                $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+    
+                $mail->send();
+                // echo 'Email has been sent';
+            } catch (Exception $e) {
+                echo "Mailer Error: {$mail->ErrorInfo}";
+            }
     
             header("Refresh:0");
         }
@@ -1377,11 +1500,36 @@ class BMISClass {
 
     public function approved_indigency() {
         $id_indigency = $_POST['id_indigency'];
+        $email = $_POST['email'];
     
         if (isset($_POST['approved_indigency'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Approved' WHERE id_indigency = ?");
             $stmt->execute([$id_indigency]);
+    
+            // Send email using PHPMailer
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                $mail->Port = 587; // Change this to the appropriate port
+    
+                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Approval Notification for Indigency';
+                $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+    
+                $mail->send();
+                // echo 'Email has been sent';
+            } catch (Exception $e) {
+                echo "Mailer Error: {$mail->ErrorInfo}";
+            }
     
             header("Refresh:0");
         }
@@ -1466,13 +1614,34 @@ class BMISClass {
     }
 
 
+    // public function view_clearance(){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * from tbl_clearance WHERE form_status='Pending'  ");
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    //     return $view;
+    // }
     public function view_clearance(){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * from tbl_clearance WHERE deleted_at IS NULL  ");
+        $stmt = $connection->prepare("
+            SELECT rc.*, r.email
+            FROM tbl_clearance rc
+            JOIN tbl_resident r ON rc.id_Resident = r.id_resident
+            WHERE rc.form_status = 'Pending'
+        ");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
     }
+
+    public function view_clearance_done(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE form_status ='Approved' OR form_status='Declined'");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+
 
 
     public function delete_clearance(){
@@ -1487,25 +1656,97 @@ class BMISClass {
         }
     }
 
+    // public function reject_clearance() {
+    //     $id_clearance = $_POST['id_clearance'];
+    
+    //     if (isset($_POST['reject_clearance'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Declined' WHERE id_clearance = ?");
+    //         $stmt->execute([$id_clearance]);
+    
+    //         header("Refresh:0");
+    //     }
+    // }
+
+    // public function approved_clearance(){
+    //     $id_clearance = $_POST['id_clearance'];
+    
+    //     if (isset($_POST['approved_clearance'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Approved' WHERE id_clearance = ?");
+    //         $stmt->execute([$id_clearance]);
+    
+    //         header("Refresh:0");
+    //     }
+    // }
     public function reject_clearance() {
         $id_clearance = $_POST['id_clearance'];
+        $email = $_POST['email'];
     
         if (isset($_POST['reject_clearance'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Declined' WHERE id_clearance = ?");
             $stmt->execute([$id_clearance]);
+
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                $mail->Port = 587; // Change this to the appropriate port
+    
+                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Declined Request for Barangay Clearance';
+                $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+    
+                $mail->send();
+                // echo 'Email has been sent';
+            } catch (Exception $e) {
+                echo "Mailer Error: {$mail->ErrorInfo}";
+            }
     
             header("Refresh:0");
         }
     }
 
-    public function approved_clearance(){
+    public function approved_clearance() {
         $id_clearance = $_POST['id_clearance'];
+        $email = $_POST['email'];
     
         if (isset($_POST['approved_clearance'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Approved' WHERE id_clearance = ?");
             $stmt->execute([$id_clearance]);
+    
+            // Send email using PHPMailer
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                $mail->Port = 587; // Change this to the appropriate port
+    
+                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Approval Notification for Barangay Clearance';
+                $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+    
+                $mail->send();
+                // echo 'Email has been sent';
+            } catch (Exception $e) {
+                echo "Mailer Error: {$mail->ErrorInfo}";
+            }
     
             header("Refresh:0");
         }
@@ -1644,9 +1885,30 @@ class BMISClass {
     }
 
 
+    // public function view_bspermit(){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * from tbl_bspermit WHERE form_status='Pending'");
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    //     return $view;
+    // }
+
     public function view_bspermit(){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * from tbl_bspermit WHERE deleted_at IS NULL");
+        $stmt = $connection->prepare("
+            SELECT rc.*, r.email
+            FROM tbl_bspermit rc
+            JOIN tbl_resident r ON rc.id_Resident = r.id_resident
+            WHERE rc.form_status = 'Pending'
+        ");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+
+    public function view_bspermit_done(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status ='Approved' OR form_status='Declined'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -1702,25 +1964,97 @@ class BMISClass {
         }
     }
 
+    // public function reject_bspermit() {
+    //     $id_bspermit = $_POST['id_bspermit'];
+    
+    //     if (isset($_POST['reject_bspermit'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined' WHERE id_bspermit = ?");
+    //         $stmt->execute([$id_bspermit]);
+    
+    //         header("Refresh:0");
+    //     }
+    // }
+
+    // public function approved_bspermit(){
+    //     $id_bspermit = $_POST['id_bspermit'];
+    
+    //     if (isset($_POST['approved_bspermit'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Approved' WHERE id_bspermit = ?");
+    //         $stmt->execute([$id_bspermit]);
+    
+    //         header("Refresh:0");
+    //     }
+    // }
     public function reject_bspermit() {
         $id_bspermit = $_POST['id_bspermit'];
+        $email = $_POST['email'];
     
         if (isset($_POST['reject_bspermit'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined' WHERE id_bspermit = ?");
             $stmt->execute([$id_bspermit]);
+
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                $mail->Port = 587; // Change this to the appropriate port
+    
+                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Declined Request for Business Recommendation';
+                $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+    
+                $mail->send();
+                // echo 'Email has been sent';
+            } catch (Exception $e) {
+                echo "Mailer Error: {$mail->ErrorInfo}";
+            }
     
             header("Refresh:0");
         }
     }
 
-    public function approved_bspermit(){
+    public function approved_bspermit() {
         $id_bspermit = $_POST['id_bspermit'];
+        $email = $_POST['email'];
     
         if (isset($_POST['approved_bspermit'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Approved' WHERE id_bspermit = ?");
             $stmt->execute([$id_bspermit]);
+    
+            // Send email using PHPMailer
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                $mail->Port = 587; // Change this to the appropriate port
+    
+                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Approval Notification for Business Recommendation';
+                $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+    
+                $mail->send();
+                // echo 'Email has been sent';
+            } catch (Exception $e) {
+                echo "Mailer Error: {$mail->ErrorInfo}";
+            }
     
             header("Refresh:0");
         }
@@ -1796,14 +2130,34 @@ class BMISClass {
     }
 
 
+    // public function view_brgyid(){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * from tbl_brgyid WHERE form_status='Pending'");
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    //     return $view;
+    // }
+
     public function view_brgyid(){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * from tbl_brgyid WHERE deleted_at IS NULL");
+        $stmt = $connection->prepare("
+            SELECT rc.*, r.email
+            FROM tbl_brgyid rc
+            JOIN tbl_resident r ON rc.id_Resident = r.id_resident
+            WHERE rc.form_status = 'Pending'
+        ");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
     }
 
+    public function view_brgyid_done(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status ='Approved' OR form_status='Declined'");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
 
     public function delete_brgyid(){
         $id_brgyid = $_POST['id_brgyid'];
@@ -1818,25 +2172,97 @@ class BMISClass {
         }
     }
 
+    // public function reject_brgyid() {
+    //     $id_brgyid = $_POST['id_brgyid'];
+    
+    //     if (isset($_POST['reject_brgyid'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Declined' WHERE id_brgyid = ?");
+    //         $stmt->execute([$id_brgyid]);
+    
+    //         header("Refresh:0");
+    //     }
+    // }
+
+    // public function approved_brgyid(){
+    //     $id_brgyid = $_POST['id_brgyid'];
+    
+    //     if (isset($_POST['approved_brgyid'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Approved' WHERE id_brgyid = ?");
+    //         $stmt->execute([$id_brgyid]);
+    
+    //         header("Refresh:0");
+    //     }
+    // }
     public function reject_brgyid() {
         $id_brgyid = $_POST['id_brgyid'];
+        $email = $_POST['email'];
     
         if (isset($_POST['reject_brgyid'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Declined' WHERE id_brgyid = ?");
             $stmt->execute([$id_brgyid]);
+
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                $mail->Port = 587; // Change this to the appropriate port
+    
+                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Declined Request for Barangay ID';
+                $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+    
+                $mail->send();
+                // echo 'Email has been sent';
+            } catch (Exception $e) {
+                echo "Mailer Error: {$mail->ErrorInfo}";
+            }
     
             header("Refresh:0");
         }
     }
 
-    public function approved_brgyid(){
+    public function approved_brgyid() {
         $id_brgyid = $_POST['id_brgyid'];
+        $email = $_POST['email'];
     
         if (isset($_POST['approved_brgyid'])) {
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Approved' WHERE id_brgyid = ?");
             $stmt->execute([$id_brgyid]);
+    
+            // Send email using PHPMailer
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                $mail->Port = 587; // Change this to the appropriate port
+    
+                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                $mail->addAddress($email);
+    
+                $mail->isHTML(true);
+                $mail->Subject = 'Approval Notification for Barangay ID';
+                $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+    
+                $mail->send();
+                // echo 'Email has been sent';
+            } catch (Exception $e) {
+                echo "Mailer Error: {$mail->ErrorInfo}";
+            }
     
             header("Refresh:0");
         }
