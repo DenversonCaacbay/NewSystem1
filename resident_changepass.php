@@ -37,10 +37,8 @@
     }
     .btn-primary{
         background: #309464 !important;
+        border: 0;
     }
-    body::-webkit-scrollbar {
-            display: none;
-        }
         .top-link {
         transition: all 0.25s ease-in-out;
         position: fixed;
@@ -114,7 +112,7 @@
         color: white; /* White text */
         font-size: 16px; /* Set a font size */
         cursor: pointer; /* Mouse pointer on hover */
-        margin-left: 23%;
+        margin-left: 20%;
         padding: 8px 22px;
         }
 
@@ -163,7 +161,7 @@
 
         .icon {
         padding: 15px;
-        background: dodgerblue;
+        background: #309464 !important;
         color: white;
         min-width: 50px;
         text-align: center;
@@ -309,45 +307,30 @@
 
         <!-- Back-to-Top and Back Button -->
 
-        <a data-toggle="tooltip" title="Back-To-Top" class="top-link hide" href="" id="js-top">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>
-            <span class="screen-reader-text">Back to top</span>
-        </a>
+        <!--<a data-toggle="tooltip" title="Back-To-Top" class="top-link hide" href="" id="js-top">-->
+        <!--    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>-->
+        <!--    <span class="screen-reader-text">Back to top</span>-->
+        <!--</a>-->
 
         <!-- Eto yung navbar -->
 
-        <nav class="navbar navbar-dark navbar-expand-lg bg-primary sticky-top">
-    <div class="container-fluid w-100 d-flex justify-content-between align-items-center">
-        <!-- Brand -->
-        <div>
-            <!-- Desktop view -->
-            <a class="navbar-brand desk ms-3 d-none d-lg-block" style="color: white;">Barangay Santa Rita Information & E-Services</a>
-
-            <!-- Mobile view -->
-            <a class="navbar-brand mob mx-auto d-lg-none" style="color: white;">BSRI & E-Services</a>
-        </div>
-
-        <!-- Links and Dropdown -->
-        <div class="d-flex align-items-center">
-            <!-- Home Link -->
-            <a class="nav-link ml-auto" href="resident_homepage.php">Home</a>
-
-            <!-- Dropdown -->
-            <div class="dropdown me-3">
-                <a title="Your Account" class="nav-link text-white dropdown-toggle" style="margin-right: 2px;" type="button" data-toggle="dropdown">
-                    <?= $userdetails['surname'];?>, <?= $userdetails['firstname'];?>
+        <nav class="navbar navbar-dark bg-primary sticky-top">
+            <a class="navbar-brand" href="index.php">Barangay Santa Rita Information & E-Services</a>
+            <a href="index.php" data-toggle="tooltip" title="Home" class="btn3 bg-primary"><i class="fa fa-home fa-lg"></i></a>
+            <!--<a href="#down1" data-toggle="tooltip" title="Change Password" class="btn5 bg-primary"><i class="fa fa-user-lock fa-lg"></i></a>-->
+            <!--<a href="#down" data-toggle="tooltip" title="Contact" class="btn4 bg-primary"><i class="fa fa-phone fa-lg"></i></a>-->
+           
+            <div class="dropdown ml-auto">
+                <button title="Your Account" class="btn btn-primary dropdown-toggle" style="margin-right: 2px;" type="button" data-toggle="dropdown"><?= $userdetails['surname'];?>, <?= $userdetails['firstname'];?>
                     <span class="caret" style="margin-left: 2px;"></span>
-                </a>
-                <ul class="dropdown-menu" style="width: 175px; right: 0;" >
+                </button>
+                <ul class="dropdown-menu" style="width: 175px;" >
                     <a class="btn" href="resident_profile.php?id_resident=<?= $userdetails['id_resident'];?>"> <i class="fas fa-user"> &nbsp; </i>Personal Profile  </a>
                     <a class="btn" href="resident_changepass.php?id_resident=<?= $userdetails['id_resident'];?>"> <i class="fas fa-lock" >&nbsp;</i> Change Password  </a>
                     <a class="btn" href="logout.php"> <i class="fas fa-sign-out-alt">&nbsp;</i> Logout  </a>
                 </ul>
             </div>
-        </div>
-    </div>            
-</nav>
-
+        </nav>
 
         <div id="down1"></div>
 
@@ -363,7 +346,7 @@
                         <div class="col-3"> </div>
                         <div class="col-6">   
                             <div class="card mbottom">
-                            <div class="card-header bg-primary text-white text-center" style="font-size:20px"> Change Password </div>
+                            <div class="card-header bg-primary text-white text-center" style="font-size:30px"> Change Password </div>
                             <br>
 
                                 <div class="card-body">
@@ -399,7 +382,7 @@
                                                 <br>
                                                 <br>
 
-                                                <button class="btn2 btn-primary" type="submit" name="resident_changepass"> Change Password </button>
+                                                <button class="btn btn-primary w-100 p-3" type="submit" name="resident_changepass"> Change Password </button>
                                             </form>
                                         </div>  
                                     </div>   
@@ -407,12 +390,21 @@
                             </div>
                         </div> 
 
+                        <div class="col-3"> 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <br>
+        <br>
+        <br>
+        <br>
 
+        <!-- Footer -->
+
+       
         <script>
             $(".toggle-password").click(function() {
             $(this).toggleClass("fa-eye fa-eye-slash");

@@ -347,7 +347,7 @@
                                 </div>
                                 <input type="hidden" class="form-control" name="role" value="resident">
                                 <div class="row">
-                                    <div class="col-md-6"><a class="btn btn-danger w-100 mt-2" href="index.php"> Back to Login</a></div>
+                                    <div class="col-md-6"><a class="btn btn-danger w-100 mt-2" href="login.php"> Back to Login</a></div>
                                     <div class="col-md-6"><button class="btn btn-primary w-100 mt-2" type="submit" name="add_resident"> Submit </button></div>
                                 </div>
                             </form>

@@ -4,7 +4,7 @@
     "start_url": "login.php",
     "display": "fullscreen",
     "background_color": "#ffffff",
-    "theme_color": "#27329b",
+    "theme_color": "#309464",
     "icons": [
       {
         "src": "icon.png",

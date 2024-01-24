@@ -33,6 +33,13 @@
     <style>
 
         /* Back-to-Top */
+        .bg-primary{
+        background: #309464 !important;
+    }
+    .btn-primary{
+        background: #309464 !important;
+        border: 0;
+    }
 
         .top-link {
         transition: all 0.25s ease-in-out;
@@ -107,7 +114,7 @@
         color: white; /* White text */
         font-size: 16px; /* Set a font size */
         cursor: pointer; /* Mouse pointer on hover */
-        margin-left: 23%;
+        margin-left:20%;
         padding: 8px 22px;
         }
 
@@ -270,19 +277,19 @@
 
         <!-- Back-to-Top and Back Button -->
 
-        <a data-toggle="tooltip" title="Back-To-Top" class="top-link hide" href="" id="js-top">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>
-            <span class="screen-reader-text">Back to top</span>
-        </a>
+        <!--<a data-toggle="tooltip" title="Back-To-Top" class="top-link hide" href="" id="js-top">-->
+        <!--    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>-->
+        <!--    <span class="screen-reader-text">Back to top</span>-->
+        <!--</a>-->
 
         <!-- Eto yung navbar -->
 
         <nav class="navbar navbar-dark bg-primary sticky-top">
-            <a class="navbar-brand" href="resident_homepage.php">Barangay Santa Rita Information & E-Servicesㅤㅤㅤㅤㅤㅤㅤㅤㅤ</a>
-            <a href="resident_homepage.php" data-toggle="tooltip" title="Home" class="btn3 bg-primary"><i class="fa fa-home fa-lg"></i></a>
-            <a href="#down2" data-toggle="tooltip" title="View Information" class="btn6 bg-primary"><i class="fa fa-user-circle fa-lg"></i></a>
-            <a href="#down1" data-toggle="tooltip" title="Update Information" class="btn5 bg-primary"><i class="fa fa-user-edit fa-lg"></i></a>
-            <a href="#down" data-toggle="tooltip" title="Contact" class="btn4 bg-primary"><i class="fa fa-phone fa-lg"></i></a>
+            <a class="navbar-brand" href="index.php">Barangay Santa Rita Information & E-Services</a>
+            <a href="index.php" data-toggle="tooltip" title="Home" class="btn3 bg-primary"><i class="fa fa-home fa-lg"></i></a>
+            <!--<a href="#down2" data-toggle="tooltip" title="View Information" class="btn6 bg-primary"><i class="fa fa-user-circle fa-lg"></i></a>-->
+            <!--<a href="#down1" data-toggle="tooltip" title="Update Information" class="btn5 bg-primary"><i class="fa fa-user-edit fa-lg"></i></a>-->
+            <!--<a href="#down" data-toggle="tooltip" title="Contact" class="btn4 bg-primary"><i class="fa fa-phone fa-lg"></i></a>-->
            
             <div class="dropdown ml-auto">
                 <button title="Your Account" class="btn btn-primary dropdown-toggle" style="margin-right: 2px;" type="button" data-toggle="dropdown"><?= $userdetails['surname'];?>, <?= $userdetails['firstname'];?>
@@ -301,32 +308,27 @@
         <br>
 
         <div class="container"> 
-            <div class="card" style="margin-top: 2em;">  
+            <div class="card">  
                     <div class="card-header bg-primary text-white" style="font-size:20px"> Personal Information </div>
                 <div class="card-body"> 
                     <form method="post">
 
-                        <h6>
-                            <i class="fas fa-user-circle"></i>
-                            View Information
-                        </h6>
-
-                        <hr>
+                        
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Last Name:</label>
                                     <input class="form-control" value="<?= $resident['lname'];?>" disabled>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>First Name:</label>
                                     <input class="form-control" value="<?= $resident['fname'];?>" disabled>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Middle Name:</label>
                                     <input class="form-control" value="<?= $resident['mi'];?>" disabled>
@@ -335,19 +337,19 @@
                         </div>
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email:</label>
                                     <input class="form-control" value="<?= $resident['email'];?>" disabled>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Sex:</label>
                                     <input class="form-control" value="<?= $resident['sex'];?>" disabled>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Nationality:</label>
                                     <input  class="form-control" value="<?= $resident['nationality'];?>" disabled>
@@ -356,13 +358,13 @@
                         </div>
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Birth Date:</label>
                                     <input class="form-control" value="<?= $resident['bdate'];?>" disabled>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-6">
                                 <div class="form-group" id="down1">
                                     <label>Birth Place:</label>
                                     <input class="form-control" value="<?= $resident['bplace'];?>" disabled>
@@ -370,29 +372,26 @@
                             </div>
                         </div>
 
-                        <hr>
-
-                        <h6>
-                            <i class="fas fa-user-edit"></i>
+                        <h6 class="mt-3">
                             Update Information
                         </h6>
 
-                        <hr>
+                        <hr class="w-100">
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Age:</label>
                                     <input class="form-control" type="number" name="age" value="<?= $resident['age'];?>">
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Status:</label>
                                     <input class="form-control" type="text" name="status" value="<?= $resident['status'];?>">
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Contact:</label>
                                     <input class="form-control" type="tel" name="contact" maxlength="11" pattern="[0-9]{11}" value="<?= $resident['contact'];?>">
@@ -401,21 +400,15 @@
                         </div>
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>House No:</label>
                                     <input class="form-control" type="text" name="houseno" value="<?= $resident['houseno'];?>">
                                 </div>
                             </div>
                             
-                            <!--<div class="col">-->
-                            <!--    <div class="form-group">-->
-                            <!--        <label>Street:</label>-->
-                            <!--        <input class="form-control" type="text" name="street" value="<?= $resident['street'];?>">-->
-                            <!--    </div>-->
-                            <!--</div>-->
                             
-                            <div class="col">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Purok:</label>
                                     <select id="purokDropdown" onchange="showStreets(this.value)" class="form-control" name="purok" value="<?= $resident['purok'];?>" aria-label="Default select example" required>
@@ -454,7 +447,7 @@
                                 </div>
                             </div>
                                     
-                                    <div class="col">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label> Street: </label>
                                             <select id="streetsDropdown" class="form-control" name="street" required>
@@ -465,7 +458,7 @@
                                         </div>
                                     </div>
                             
-                            <div class="col">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Barangay:</label>
                                     <input class="form-control" type="text" name="brgy" value="<?= $resident['brgy'];?>" readonly>
@@ -482,15 +475,14 @@
                         <!--    </div>-->
                         <!--</div>-->
 
-                        <hr>
 
                         <div class="row" style="margin-bottom: 5px;"> 
                             <div class="col-xl-12">
                                 <div class="form-inline">
                                     <input class="form-control" name="lname" type="hidden" value="<?= $resident['lname'];?>"/>
                                     <input class="form-control" name="mi" type="hidden" value="<?= $resident['mi'];?>" />
-                                    <button type="submit button" class="btn btn-info" style="margin-left: 37%; width:143px;"  name="search_household">View Household</button>
-                                    <button class="btn btn-primary" style="margin-left: .2%; width:143px;" type="submit" name="profile_update"> Update </button>
+                                    <button type="submit button" class="btn btn-info" style="width:49%" name="search_household">View Household</button>
+                                    <button class="btn btn-primary"  style="margin-left:20px;width:49%" type="submit" name="profile_update"> Update </button>
                                     <a href="resident_profile.php?id_resident=<?= $userdetails['id_resident'];?>"></a>   
                                     <div>
                                         <br><br>
@@ -504,176 +496,9 @@
             </div>
         </div>
 
-        <br>
-        <br>
-        <br>
-
         <!-- Footer -->
 
-        <footer id="footer" class="bg-primary text-white d-flex-column text-center">
-            <hr class="mt-0">
-
-            <div class="text-center">
-                <h1 class="text-white">Services</h1>
-                <ul class="list-unstyled list-inline">
-
-                &nbsp;
-
-                <li class="list-inline-item">
-                    <a class="footerlinks" href="#!" class="sbtn btn-large mx-1" title="Documents">
-                    <i class="fas fa-file fa-2x"></i>
-                    </a>
-                </li>
-
-                &nbsp;
-
-                <li class="list-inline-item">
-                    <a href="#!" class="footerlinks sbtn btn-large mx-1" title="Card">
-                    <i class="fas fa-id-card fa-2x"></i>
-                    </a>
-                </li>
-
-                &nbsp;
-
-                <li class="list-inline-item">
-                    <a class="footerlinks" href="#!" class="sbtn btn-large mx-1" title="Friend">
-                    <i class="fas fa-user-friends fa-2x"></i>
-                    </a>
-                </li>
-
-                &nbsp;
-
-                <li class="list-inline-item">
-                    <a class="footerlinks" href="#!" class="sbtn btn-large mx-1" title="Blotter">
-                    <i class="fas fa-user-shield fa-2x"></i>
-                    </a>
-                </li>
-
-                &nbsp;
-
-                <li class="list-inline-item">
-                    <a class="footerlinks" href="#!" class="sbtn btn-large mx-1" title="Contact">
-                    <i class="fas fa-phone fa-2x"></i>
-                    </a>
-                </li>
-                </ul>
-            </div>
-
-            <hr class="mb-0">
-
-            <!--Footer Links-->
-
-            <div class="container text-left text-md-center">
-                <div class="row">
-
-                    <!--First column-->
-
-                    <div class="col-md-3 mx-auto shfooter">
-                        <h5 class="my-2 font-weight-bold d-none d-md-block">Documentation</h5>
-                        <div class="d-md-none title" data-target="#Documentation" data-toggle="collapse">
-                            <div class="mt-3 font-weight-bold">Documentation
-                                <div class="float-right navbar-toggler">
-                                    <i class="fas fa-angle-down"></i>
-                                    <i class="fas fa-angle-up"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <ul class="list-unstyled collapse" id="Documentation">
-                            <li><a class="footerlinks" href="services_certofres.php">Certificate of Residency</a></li>
-                            <li><a class="footerlinks" href="services_brgyclearance.php">Barangay Clearance</a></li>
-                            <li><a class="footerlinks" href="services_certofindigency.php">Certificate of Indigency</a></li>
-                            <li><a class="footerlinks" href="services_business.php">Business Permit</a></li>
-                            <li><a class="footerlinks" href="services_brgyid.php">Barangay ID</a></li>
-                        </ul>
-                    </div>
-
-                    <!--/.First column-->
-
-                    <hr class="clearfix w-100 d-md-none mb-0">
-
-                    <!--Third column-->
-
-                    <div class="col-md-3 mx-auto shfooter">
-                        <h5 class="my-2 font-weight-bold d-none d-md-block">Other Services</h5>
-                        <div class="d-md-none title" data-target="#OtherServices" data-toggle="collapse">
-                            <div class="mt-3 font-weight-bold">Other Services
-                                <div class="float-right navbar-toggler">
-                                    <i class="fas fa-angle-down"></i>
-                                    <i class="fas fa-angle-up"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <ul class="list-unstyled collapse" id="OtherServices">
-                            <li><a class="footerlinks" href="services_blotter.php">Peace and Order</a></li>
-                        </ul>
-                    </div>
-
-                    <!--/.Third column-->
-
-                    <hr class="clearfix w-100 d-md-none mb-0">
- 
-                    <!--Fourth column-->
-
-                    <div class="col-md-3 mx-auto shfooter" id="down">
-                        <h5 class="my-2 font-weight-bold d-none d-md-block">Contact Us:</h5>
-                        <div class="d-md-none title" data-target="#Contact-Us" data-toggle="collapse">
-                        <div class="mt-3 font-weight-bold">Contact Us:
-                            <div class="float-right navbar-toggler">
-                            <i class="fas fa-angle-down"></i>
-                            <i class="fas fa-angle-up"></i>
-                            </div>
-                        </div>
-                        </div>
-                        <ul class="list-unstyled collapse" id="Contact-Us">
-                        <li>
-                                <div class="zoom">
-                                    <div class="chip" style="font-size:10px;">
-                                        <img src="icons/Contact/charlene.png" alt="Person" width="96" height="96">
-                                        Charlene Turqueza | 09762866176
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="zoom">
-                                    <div class="chip" style="font-size:10px;">
-                                        <img src="icons/Contact/dan.png" alt="Person" width="96" height="96">
-                                        Dan Emmanuel Duarte | 09989120644
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="zoom">
-                                    <div class="chip" style="font-size:10px;">
-                                        <img src="icons/Contact/jerika.png" alt="Person" width="96" height="96">
-                                        Jerika Soriano | 09661385889
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!--/.Fourth column-->
-
-                </div>
-            </div>
-
-            <!--/.Footer Links-->
-
-            <hr class="mb-0">
-
-            <!--Copyright-->
-
-            <div class="py-3 text-center">
-                Copyright
-                <script>
-                document.write(new Date().getFullYear())
-                </script> 
-                BI & ESMS 
-            </div>
-
-        </footer>
-        
+       
         <!---->
         <script src="js/purok-street.js" type="text/javascript"></script>
 

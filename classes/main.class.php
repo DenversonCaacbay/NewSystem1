@@ -79,7 +79,7 @@ class BMISClass {
 
                         else{
                             $this->set_userdata($user);
-                            header('Location: resident_homepage.php');
+                            header('Location: index.php');
                         }
                     }
                 }

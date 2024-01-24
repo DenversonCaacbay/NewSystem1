@@ -2,16 +2,7 @@
 <head>
     <title> Barangay Santa Rita Management System </title>
     <!-- put css/js here for clean look -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!-- responsive tags for screen compatibility -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- custom css --> 
-    <link href="css/pagestyle.css" rel="stylesheet" type="text/css">
-    <!-- bootstrap css --> 
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <!-- fontawesome icons --> 
-    <script src="https://kit.fontawesome.com/67a9b7069e.js" crossorigin="anonymous"></script>
+
 </head>
 <?php 
 use PHPMailer\PHPMailer\PHPMailer;

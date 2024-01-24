@@ -23,6 +23,16 @@
         <link rel="stylesheet" href="css/services-navbar.css">
         
         <style>
+        .bg-primary{
+        background: #309464 !important;
+    }
+        .btn-primary{
+        background: #309464 !important;
+        border: 0;
+    }
+.btn-primary:focus {
+            outline: none !important;
+        }
             /* Back-to-Top */
 
             .top-link {
@@ -295,18 +305,18 @@
 
         <!-- Back-to-Top and Back Button -->
 
-        <a data-toggle="tooltip" title="Back-To-Top" class="top-link hide" href="" id="js-top">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>
-            <span class="screen-reader-text">Back to top</span>
-        </a>
+        <!--<a data-toggle="tooltip" title="Back-To-Top" class="top-link hide" href="" id="js-top">-->
+        <!--    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>-->
+        <!--    <span class="screen-reader-text">Back to top</span>-->
+        <!--</a>-->
 
         <!-- Eto yung navbar -->
 
         <nav class="navbar navbar-dark bg-primary sticky-top">
-            <a class="navbar-brand" href="resident_homepage.php">Barangay Santa Rita Information & E-Servicesㅤㅤㅤㅤㅤㅤㅤㅤㅤ</a>
-            <a href="resident_homepage.php" data-toggle="tooltip" title="Home" class="btn5 bg-primary"><i class="fa fa-home fa-lg"></i></a>
+            <a class="navbar-brand" href="index.php">Barangay Santa Rita Information & E-Servicesㅤㅤㅤㅤㅤㅤㅤㅤㅤ         </a>
+            <a href="index.php" data-toggle="tooltip" title="Home" class="btn5 bg-primary"><i class="fa fa-home fa-lg"></i></a>
             <a href="#down3" data-toggle="tooltip" title="Procedure" class="btn5 bg-primary"><i class="fa fa-question fa-lg"></i></a>
-            <a href="#down2" data-toggle="tooltip" title="Information" class="btn4 bg-primary"><i class="fa fa-info fa-lg"></i></a>
+            <!--<a href="#down2" data-toggle="tooltip" title="Information" class="btn4 bg-primary"><i class="fa fa-info fa-lg"></i></a>-->
             <a href="#down1" data-toggle="tooltip" title="Registration" class="btn3 bg-primary"><i class="fa fa-edit fa-lg"></i></a>
             <a href="#down" data-toggle="tooltip" title="Contact" class="btn2 bg-primary"><i class="fa fa-phone fa-lg"></i></a>
            
@@ -322,7 +332,7 @@
             </div>
         </nav>
 
-        <div class="container-fluid container1"> 
+        <div class="container-fluid bg-primary text-light container1"> 
             <div class="row"> 
                 <div class="col"> 
                     <div class="header">
@@ -331,8 +341,6 @@
                         <br> a Mayor’s Permit or Business Permit from the Local Government Unit (LGU) where your 
                         <br> company office is located. </h5>
                     </div>
-
-                    <br>
 
                     <img class="picture" src="icons/Documents/santaritalogo.png">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -405,32 +413,23 @@
 
             <div id="down2"></div>
 
-            <br>
-            <br>
-            <br>
-
-            <div class="row">
-                <div class="col">
-                    <h1>Other Details</h1>
-                    <hr style="background-color: black;">
-                </div>
-            </div>
+            <!--<div class="row">-->
+            <!--    <div class="col">-->
+            <!--        <h1>Other Details</h1>-->
+            <!--        <hr style="background-color: black;">-->
+            <!--    </div>-->
+            <!--</div>-->
 
             <br> 
 
             <div class="row text2">
-                <div class="col" data-toggle="modal" data-target="#exampleModalCenter1">
-                    <div class="card bg-primary card1">
-                        <div class="card-header">
-                            <h5> Eligibility <br><br> <i class="fas fa-user-check fa-2x"></i>  </h5>
-                        </div>
-                        <!--<div class="card-body">-->
-                        <!--    <p class="card-text">-->
-                        <!--        A Philippines Resident.-->
-                        <!--    </p>-->
-                        <!--</div>-->
-                    </div>
-                </div>
+                <!--<div class="col" data-toggle="modal" data-target="#exampleModalCenter1">-->
+                    <!--<div class="card bg-primary card1">-->
+                    <!--    <div class="card-header">-->
+                    <!--        <h5> Eligibility <br><br> <i class="fas fa-user-check fa-2x"></i>  </h5>-->
+                    <!--    </div>-->
+                    <!--</div>-->
+                <!--</div>-->
                 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -461,14 +460,14 @@
                   </div>
                 </div>
                 
-                <div class="col" data-toggle="modal" data-target="#exampleModalCenter2">
-                    <div class="card bg-primary card2">
-                        <div class="card-header">
-                            <h5> Validity <br><br> <i class="fas fa-clipboard-check fa-2x"></i>  </h5>
-                        </div>
+                <!--<div class="col" data-toggle="modal" data-target="#exampleModalCenter2">-->
+                    <!--<div class="card bg-primary card2">-->
+                    <!--    <div class="card-header">-->
+                    <!--        <h5> Validity <br><br> <i class="fas fa-clipboard-check fa-2x"></i>  </h5>-->
+                    <!--    </div>-->
                         
-                    </div>
-                </div>
+                    <!--</div>-->
+                <!--</div>-->
                 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -499,13 +498,13 @@
                   </div>
                 </div>
                 
-                <div class="col" data-toggle="modal" data-target="#exampleModalCenter3">
-                    <div class="card bg-primary card3">
-                        <div class="card-header">
-                            <h5> Fees <br><br> <i class="fas fa-coins fa-2x"></i>  </h5>
-                        </div>
-                    </div>
-                </div>
+                <!--<div class="col" data-toggle="modal" data-target="#exampleModalCenter3">-->
+                <!--    <div class="card bg-primary card3">-->
+                <!--        <div class="card-header">-->
+                <!--            <h5> Fees <br><br> <i class="fas fa-coins fa-2x"></i>  </h5>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
                 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -538,13 +537,13 @@
                   </div>
                 </div>
                 
-                <div class="col" data-toggle="modal" data-target="#exampleModalCenter4">
-                    <div class="card bg-primary card4">
-                        <div class="card-header">
-                            <h5 style="font-size: 19.4px;"> Processing Time <br><br> <i class="fas fa-clock fa-2x"></i>  </h5>
-                        </div>
-                    </div>
-                </div>
+                <!--<div class="col" data-toggle="modal" data-target="#exampleModalCenter4">-->
+                <!--    <div class="card bg-primary card4">-->
+                <!--        <div class="card-header">-->
+                <!--            <h5 style="font-size: 19.4px;"> Processing Time <br><br> <i class="fas fa-clock fa-2x"></i>  </h5>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
                 
                                                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -575,14 +574,14 @@
                   </div>
                 </div>
                 
-                <div class="col"  data-toggle="modal" data-target="#exampleModalCenter5">
-                    <div class="card bg-primary card5">
-                        <div class="card-header">
-                            <h6> What you need <br><br> <i class="fas fa-file fa-2x"></i>  </h6>
-                        </div>
+                <!--<div class="col"  data-toggle="modal" data-target="#exampleModalCenter5">-->
+                <!--    <div class="card bg-primary card5">-->
+                <!--        <div class="card-header">-->
+                <!--            <h6> What you need <br><br> <i class="fas fa-file fa-2x"></i>  </h6>-->
+                <!--        </div>-->
 
-                    </div>
-                </div>
+                <!--    </div>-->
+                <!--</div>-->
                 
                                                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -630,10 +629,6 @@
         </div>
 
         <div id="down1"></div>
-
-        <br>
-        <br>
-        <br>
 
         <!-- Button trigger modal -->
 
@@ -848,10 +843,6 @@
             </div>
         </div>
         </form>
-
-        <br>
-        <br>
-        <br>
 
         <!-- Footer -->
 

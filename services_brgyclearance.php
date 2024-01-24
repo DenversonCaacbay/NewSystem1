@@ -23,7 +23,16 @@
   
         <style>
             /* Back-to-Top */
-
+        .bg-primary{
+        background: #309464 !important;
+    }
+    .btn-primary{
+        background: #309464 !important;
+        border: 0;
+    }
+.btn-primary:focus {
+            outline: none !important;
+        }
             .top-link {
             transition: all 0.25s ease-in-out;
             position: fixed;
@@ -302,10 +311,10 @@
         <!-- Eto yung navbar -->
 
         <nav class="navbar navbar-dark bg-primary sticky-top">
-            <a class="navbar-brand" href="resident_homepage.php">Barangay Santa Rita Information & E-Servicesㅤㅤㅤㅤㅤㅤㅤㅤㅤ</a>
-            <a href="resident_homepage.php" data-toggle="tooltip" title="Home" class="btn5 bg-primary"><i class="fa fa-home fa-lg"></i></a>
+            <a class="navbar-brand" href="index.php">Barangay Santa Rita Information & E-Servicesㅤㅤㅤㅤㅤㅤㅤㅤㅤ</a>
+            <a href="index.php" data-toggle="tooltip" title="Home" class="btn5 bg-primary"><i class="fa fa-home fa-lg"></i></a>
             <a href="#down3" data-toggle="tooltip" title="Procedure" class="btn5 bg-primary"><i class="fa fa-question fa-lg"></i></a>
-            <a href="#down2" data-toggle="tooltip" title="Information" class="btn4 bg-primary"><i class="fa fa-info fa-lg"></i></a>
+            <!--<a href="#down2" data-toggle="tooltip" title="Information" class="btn4 bg-primary"><i class="fa fa-info fa-lg"></i></a>-->
             <a href="#down1" data-toggle="tooltip" title="Registration" class="btn3 bg-primary"><i class="fa fa-edit fa-lg"></i></a>
             <a href="#down" data-toggle="tooltip" title="Contact" class="btn2 bg-primary"><i class="fa fa-phone fa-lg"></i></a>
            
@@ -321,7 +330,7 @@
             </div>
         </nav>
 
-        <div class="container-fluid container1"> 
+        <div class="container-fluid bg-primary text-light container1"> 
             <div class="row"> 
                 <div class="col"> 
                     <div class="header">
@@ -331,7 +340,6 @@
                         <br> of good moral character. Somehow, a smaller version of NBI or Police clearance.</h5>
                     </div>
 
-                    <br>
 
                     <img class="picture" src="icons/Documents/santaritalogo.png">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -398,227 +406,6 @@
             <br>
             <br>
 
-            <div class="row">
-                <div class="col">
-                    <h1>Other Details</h1>
-                    <hr style="background-color: black;">
-                </div>
-            </div>
-
-            <br> 
-
-            <div class="row text2">
-                <div class="col" data-toggle="modal" data-target="#exampleModalCenter1">
-                    <div class="card bg-primary card1">
-                        <div class="card-header">
-                            <h5> Eligibility <br><br> <i class="fas fa-user-check fa-2x"></i>  </h5>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="card bg-primary card1">
-                        <div class="card-header">
-                            <h5> Eligibility <br><br> <i class="fas fa-user-check fa-2x"></i>  </h5>
-                        </div>
-                        <div class="card-body">
-                            <ul style="text-align: left; font-size: 16px;">
-                                <p class="card-text">
-                                    <li> A Philippines Resident. </li>
-                                    <li> Have been living for six months or more in a barangay. </li>
-                                </p>
-                            </ul>
-                        </div>
-                    </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="col" data-toggle="modal" data-target="#exampleModalCenter2">
-                    <div class="card bg-primary card2">
-                        <div class="card-header">
-                            <h5> Validity <br><br> <i class="fas fa-clipboard-check fa-2x"></i>  </h5>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="card bg-primary card2">
-                        <div class="card-header">
-                            <h5> Validity <br><br> <i class="fas fa-clipboard-check fa-2x"></i>  </h5>
-                        </div>
-                        <div class="card-body">
-                            <ul style="text-align: left; font-size: 16px;">
-                                <p class="card-text">
-                                    <li> Valid for Six (6) Months. Not valid without Barangay dry seal. </li>
-                                </p>
-                            </ul>
-                        </div>
-                    </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="col" data-toggle="modal" data-target="#exampleModalCenter3">
-                    <div class="card bg-primary card3">
-                        <div class="card-header">
-                            <h5> Fees <br><br> <i class="fas fa-coins fa-2x"></i>  </h5>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="card bg-primary card3">
-                        <div class="card-header">
-                            <h5> Fees <br><br> <i class="fas fa-coins fa-2x"></i>  </h5>
-                        </div>
-                        <div class="card-body">
-                            <ul style="text-align: justify;">
-                                <p class="card-text">
-                                    <li> 100% Free </li>
-                                </p>
-                            </ul>
-                        </div>
-                    </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="col" data-toggle="modal" data-target="#exampleModalCenter4">
-                    <div class="card bg-primary card4">
-                        <div class="card-header">
-                            <h5 style="font-size: 19.4px;"> Processing Time <br><br> <i class="fas fa-clock fa-2x"></i>  </h5>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="card bg-primary card4">
-                        <div class="card-header">
-                            <h5 style="font-size: 19.4px;"> Processing Time <br><br> <i class="fas fa-clock fa-2x"></i>  </h5>
-                        </div>
-                        <div class="card-body">
-                            <ul style="text-align: justify;">
-                                <p class="card-text">
-                                    <li> Within Working Hours (8:00am - 5:00pm) </li>
-                                </p>
-                            </ul>
-                        </div>
-                    </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="col" data-toggle="modal" data-target="#exampleModalCenter5">
-                    <div class="card bg-primary card5">
-                        <div class="card-header">
-                            <h6> Reason to get a Barangay Clearance<br><br> <i class="fas fa-file fa-2x"></i>  </h6>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                                                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="card bg-primary card5">
-                        <div class="card-header">
-                            <h6> Reason to get a Barangay Clearance<br><br> <i class="fas fa-file fa-2x"></i>  </h6>
-                        </div>
-                        <div class="card-body">
-                            <ul style="text-align: left; font-size: 16px;">
-                                <p class="card-text">
-                                    <li> Job Requirement  </li>
-                                    <li> Open a Bank Account </li>
-                                    <li> NBI Clearance </li>
-                                    <li> Police Clearance </li>
-                                    <li> Postal ID </li>
-                                    <li> UMID Card</li>
-                                    <li> Driver's License </li>
-                                    <li> Business Requirement </li>
-                                    <li> Indigent Certification of Philhealth</li>
-                                </p>
-                            </ul>
-                        </div>
-                    </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-            </div>
         </div>
 
         <div id="down1"></div>

@@ -25,14 +25,14 @@
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="text-center mb-0">Barangay Staff Data</h1>
-            <button type="button" class="btn btn-primary ml-auto me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary ml-auto"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add Staff
             </button>
-            <div class="card border-left-primary shadow">
+            <div class="card border-left-primary" style="margin-left:10px;" shadow">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
                                 Number of Staff Registered</div>
                                 <div class="h5 mb-0 font-weight-bold text-dark"><?= $staffcount?></div>
                         </div>
@@ -123,7 +123,6 @@
                     </div>
                 </div>
             </div>
-    <hr>
 
     <div class="row"> 
         <div class="col-md-12">
@@ -131,12 +130,13 @@
                 <form action="" method="post">
                     <thead class="alert-info"> 
                         <tr>
-                            <th> Actions </th>
+                            
                             <th> Email </th>
                             <th> Surname </th>
                             <th> First name </th>
                             <th> Middle Name </th>
                             <th> Role </th>
+                            <th> Actions </th>
                         </tr>
                     </thead>
 
@@ -144,18 +144,19 @@
                         <?php if(is_array($view)) {?>
                             <?php foreach($view as $view) {?>
                                 <tr>
-                                    <td>    
-                                        <form action="" method="post">
-                                            <a href="update_staff_form.php?id_user=<?= $view['id_admin'];?>" class="btn btn-success"> Update </a>
-                                            <input type="hidden" name="id_user" value="<?= $view['id_admin'];?>">
-                                            <button class="btn btn-danger" type="submit" name="delete_staff" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
-                                        </form>
-                                    </td>
+                                    
                                     <td> <?= $view['email'];?> </td>
                                     <td> <?= $view['lname'];?> </td>
                                     <td> <?= $view['fname'];?> </td>
                                     <td> <?= $view['mi'];?> </td>
                                     <td> <?= $view['role'];?> </td>
+                                    <td>    
+                                        <form action="" method="post">
+                                            <a href="update_staff_form.php?id_user=<?= $view['id_admin'];?>" class="btn btn-primary"> Update </a>
+                                            <input type="hidden" name="id_user" value="<?= $view['id_admin'];?>">
+                                            <button class="btn btn-danger" type="submit" name="delete_staff" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             <?php }?>
                         <?php } ?>

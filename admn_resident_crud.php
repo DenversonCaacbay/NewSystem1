@@ -61,8 +61,8 @@
             </button>
             <?php $registered_users = $residentbmis->count_registered_resident(); ?>
                             
-            <a href="admn_registered_resident.php"><i class="fas fa-thumbs-up text-primary fa-2x me-4"></i></a>
-            <a href="admn_disapproved_resident.php"><i class="fas fa-thumbs-down text-primary fa-2x"></i></a>
+            <a href="admn_registered_resident.php"><i class="fas fa-thumbs-up text-color fa-2x me-4" style="margin-left:20px;"></i></a>
+            <a href="admn_disapproved_resident.php"><i class="fas fa-thumbs-down text-color fa-2x" style="margin-left:20px;"></i></a>
             
         </div>
     </div>
@@ -76,7 +76,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
                                 Number of Approved Residents</div>
                                     <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescount ?></div>
                             </div>
@@ -92,7 +92,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
                                 Total Household Head</div>
                                     <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescountfh ?></div>
                             </div>
@@ -108,7 +108,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
                                 Total Male Residents</div>
                                     <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescountm ?></div>
                             </div>
@@ -124,7 +124,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
                                 Total Female Residents</div>
                                     <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescountf ?></div>
                             </div>
