@@ -176,6 +176,32 @@ class BMISClass {
     }
 
 
+    // additionals
+    function generateBrgyId() {
+        $length = 5;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        
+        repeat:
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+
+        // generate again if has dups in table
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT track_id FROM tbl_brgyid WHERE track_id = ?");
+        $stmt->Execute([$randomString]);
+        $result = $stmt->rowCount();
+
+        if($result > 0) {
+            goto repeat;
+        }
+
+        return $randomString;
+    }
+
+
 
  //----------------------------------------------------- ADMIN CRUD ---------------------------------------------------------
     public function create_admin() {
@@ -2075,7 +2101,7 @@ class BMISClass {
             $municipal = ucfirst(strtolower($_POST['municipal']));
             $bplace = ucfirst(strtolower($_POST['bplace']));
             $bdate = $_POST['bdate'];
-            $track_id = uniqid();
+            $track_id = $this->generateBrgyId();
             
             // Process resident photo
             $res_photo = $_FILES['res_photo'];
