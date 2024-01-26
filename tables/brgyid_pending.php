@@ -156,9 +156,10 @@
                     </td>
                     <td width="20%">      
                         <form action="" method="post">
-                            <a class="btn btn-primary" target="blank"  href="barangayid_form.php?id_resident=<?= $view['id_resident'];?>"><i class="fas fa-print p-1"></i></a> 
+                            <!-- <a class="btn btn-primary" target="blank"  href="barangayid_form.php?id_resident=<?= $view['id_resident'];?>"><i class="fas fa-print p-1"></i></a>  -->
                             <input type="hidden" name="id_brgyid" value="<?= $view['id_brgyid'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
+                            <a href="generatePdf/generate_brgyid.php?pdf=1&id=<?= $view['id_brgyid']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
                             <button class="btn btn-primary" type="submit" name="approved_brgyid" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
                             <button class="btn btn-danger" type="submit" name="reject_brgyid" onclick="return confirm('Are you sure you want to decline this data?')"> Decline </button>
                         </form>
