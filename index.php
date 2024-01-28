@@ -326,63 +326,70 @@
 
         <div  id="down2"></div>
 
-        <?php 
-            $view = $bmis->view_announcement();
+        <?php
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $recordsPerPage = 1;
+            $view = $bmis->view_announcement($page, $recordsPerPage);
+        ?>
 
-            if($view > 0 ) { ?>
-            <table class="table table-dark table-responsive">
-                <thead style="display:none;"> 
-                    <tr>
-                        <th> Announcement </th>
-                    </tr>
-                </thead>
-                <tbody style="display:none"> 
-                <?php if(is_array($view)) {?>
-                    <?php foreach($view as $view) {?>
-                        <tr>
-                            <td> <?= $view['event'];?> </td>             
-                        </tr>
-                    <?php }?>
-                <?php } ?>
-                </tbody>
-            </table>
+        <!-- Displaying Announcement Data -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
 
-            <div class="alert bg-primary alert-info alert-dismissible fade show" role="alert"
-                 style="margin-top: 4%; 
-                        margin-left: 17.5%;
-                        margin-bottom: 1.5%;
-                        border-radius:30px; 
-                        width:65%;
-                        color: white;">
-                <strong><h3 class="text-center">ANNOUNCEMENT!<h3></strong> 
-                <hr> 
-                <div class="text-center">
-                        <?php if (is_null($view['announcement_image'])): ?>
-                            <img id="blah" src="assets/default-thumbnail.jpg" class="text-center">
-                        <?php else: ?>
-                            <img class="text-center" src="<?= $view['announcement_image'] ?>"  width="250"></div>
-                        <?php endif; ?>
-                        <p class="mt-3" style="font-size: 18px;text-align:center"> 
-                            <?= $view['event'];?> 
-                        </p>
-                        <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> -->
+                    <div class="alert bg-primary alert-info alert-dismissible fade show" role="alert"
+                        style="margin-top: 4%;
+                                        margin-left: 17.5%;
+                                        margin-bottom: 1.5%;
+                                        border-radius:30px;
+                                        width:65%;
+                                        color: white;">
+
+
+
+                        <strong><h3 class="text-center">ANNOUNCEMENT!<h3></strong>
+                        <ul>
+                            <?php foreach($view as $announcement): ?>
+                                <div class="text-center">
+                                    <?php if (is_null($announcement['announcement_image'])): ?>
+                                        <img id="blah" src="assets/default-thumbnail.jpg" class="text-center">
+                                    <?php else: ?>
+                                        <img class="text-center" src="<?= $announcement['announcement_image'] ?>"  width="500"></div>
+                                    <?php endif; ?>
+                                    <p class="mt-3" style="font-size: 18px;text-align:center">
+                                        <?= $announcement['event'];?>
+                                    </p>
+                                </div>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
                 </div>
-
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
 
-        <?php 
-            }
 
-            else {
-            
-            }
+            <!-- Pagination -->
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" style="text-align: center;">
+                            <?php
+                            // Previous Page Link
+                            if ($page > 1) {
+                                echo '<li class="page-item"><a class="page-link" href="?page='.($page - 1).'" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+                            }
+                            // Next Page Link (Only if there are more records)
+                            if (count($view) == $recordsPerPage && count($bmis->view_announcement($page + 1, $recordsPerPage)) > 0) {
+                                echo '<li class="page-item"><a class="page-link" href="?page='.($page + 1).'" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+                            }
+                            ?>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
 
-        ?>
+        </div>
+
+
 
         <div id="down1"></div>
 

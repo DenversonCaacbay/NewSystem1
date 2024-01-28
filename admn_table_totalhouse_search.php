@@ -9,48 +9,49 @@
 	<thead class="alert-info">
 		<tr>
 			<th> Family Surname </th>
-			<th> Family Middle name </th>
 			<th> House no. </th>
 			<th> Street </th>
-			<th> Barangay</th>
-			<th> Municipality </th>
+			<th> Barangay</th>  
+			<th> Municipality </th> 
+			<th> Total </th>
 		</tr>
 	</thead>
 
 	<tbody>
 		<?php
 			
-			$stmnt = $conn->prepare("SELECT *
-				FROM `tbl_resident`
-				WHERE (
-					`lname` IN (
-						SELECT lname
-						FROM `tbl_resident`
-						GROUP BY lname
-						HAVING COUNT(*) >= 1
-					)
-					AND `family_role` = 'Yes'
-				)
-				AND (
-					`lname` LIKE '%$keyword%'
-					OR  `mi` LIKE '%$keyword%'
-					OR  `fname` LIKE '%$keyword%'
-					OR `houseno` LIKE '%$keyword%'
-					OR  `street` LIKE '%$keyword%'
-					OR  `brgy` LIKE '%$keyword%'
-				)
-			");
+			$stmnt = $conn->prepare("SELECT 
+					sub.* 
+				FROM (
+					SELECT 
+						houseno, 
+						COUNT(*) AS houseno_count,
+						MAX(lname) AS lname,
+						MAX(street) AS street,
+						MAX(brgy) AS brgy,
+						MAX(municipal) AS municipal
+					FROM 
+						tbl_resident
+					GROUP BY 
+						houseno
+				) AS sub
+				WHERE 
+					sub.lname LIKE '%$keyword%'
+					OR sub.street LIKE '%$keyword%'
+					OR sub.brgy LIKE '%$keyword%'
+					OR sub.municipal LIKE '%$keyword%';
+		");
 			$stmnt->execute();
 			
 			while($view = $stmnt->fetch()){
 		?>
 			<tr>
 				<td> <?= $view['lname'];?> </td>
-				<td> <?= $view['mi'];?> </td>
 				<td> <?= $view['houseno'];?> </td>
 				<td> <?= $view['street'];?> </td>
 				<td> <?= $view['brgy'];?> </td>
 				<td> <?= $view['municipal'];?> </td>
+				<td> <?= $view['houseno_count'];?> </td>
 			</tr>
 		<?php
 		}
@@ -66,11 +67,11 @@
 	<thead class="alert-info">
 		<tr>
 			<th> Family Surname </th>
-			<th> Family Middle name </th>
 			<th> House no. </th>
 			<th> Street </th>
 			<th> Barangay</th>  
 			<th> Municipality </th> 
+			<th> Total </th>
 		</tr>
 	</thead>
 
@@ -79,11 +80,11 @@
 			<?php foreach($view as $view) {?>
 				<tr>
 					<td> <?= $view['lname'];?> </td>
-					<td> <?= $view['mi'];?> </td>
 					<td> <?= $view['houseno'];?> </td>
 					<td> <?= $view['street'];?> </td>
 					<td> <?= $view['brgy'];?> </td>
 					<td> <?= $view['municipal'];?> </td>
+					<td> <?= $view['houseno_count'];?> </td>
 				</tr>
 			<?php
 				}

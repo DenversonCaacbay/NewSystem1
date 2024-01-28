@@ -452,7 +452,7 @@ use PHPMailer\PHPMailer\Exception;
     public function count_head_resident() {
         $connection = $this->openConn();
 
-        $stmt = $connection->prepare("SELECT COUNT(houseno) FROM tbl_resident GROUP BY houseno");
+        $stmt = $connection->prepare("SELECT COUNT(*) AS total_residents FROM tbl_resident");
         // $stmt = $connection->prepare("SELECT COUNT(*) as count, lname FROM tbl_resident GROUP BY houseno, lname");
         // $stmt = $connection->prepare("SELECT SUM(count) as total_count FROM (SELECT COUNT(*) as count FROM tbl_resident GROUP BY houseno, lname) AS subquery");
         $stmt->execute();
@@ -667,16 +667,18 @@ use PHPMailer\PHPMailer\Exception;
 
     public function view_resident_household(){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT *
-            FROM tbl_resident
-            WHERE lname IN (
-                SELECT lname
-                FROM tbl_resident
-                GROUP BY lname
-                HAVING COUNT(*) >= 1
-            )
-            AND family_role = 'Yes'
-        ");
+        $stmt = $connection->prepare("SELECT 
+        houseno, 
+        COUNT(*) AS houseno_count,
+        MAX(lname) AS lname,
+        MAX(street) AS street,
+        MAX(brgy) AS brgy,
+        MAX(municipal) AS municipal
+    FROM 
+        tbl_resident
+    GROUP BY 
+        houseno;
+    ");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;

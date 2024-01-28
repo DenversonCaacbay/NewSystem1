@@ -348,9 +348,12 @@ class BMISClass {
 }
 
 
-    public function view_announcement(){
+    public function view_announcement($page = 1, $recordsPerPage = 1){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * from tbl_announcement");
+        $startFrom = ($page - 1) * $recordsPerPage;
+        $stmt = $connection->prepare("SELECT * FROM tbl_announcement ORDER BY start_date DESC LIMIT :startFrom, :recordsPerPage");
+        $stmt->bindParam(':startFrom', $startFrom, PDO::PARAM_INT);
+        $stmt->bindParam(':recordsPerPage', $recordsPerPage, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
