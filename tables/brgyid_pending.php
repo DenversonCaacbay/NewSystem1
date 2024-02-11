@@ -10,6 +10,7 @@
         
     <tr>
             <th hidden> Resident ID </th>
+            <th> Pick Up Date</th>
             <th> Track ID </th>
             <th> Full Name </th>
             <th> Address </th>
@@ -41,6 +42,7 @@
         ?>
                 <tr>
                     <td hidden> <?= $view['id_resident'];?> </td> 
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
@@ -96,29 +98,28 @@
 <?php		
 	}else{
 ?>
-
-<table class="table table-hover text-center table-bordered">
-
-    <thead class="alert-info">
+<table class="table table-hover text-center">
+    <thead class="bg-primary sticky-top">
         <tr>
             <th hidden> Resident ID </th>
-            <th> Track ID </th>
-            <th> Full Name </th>
-            <th> Address </th>
-            <th> Birth Date </th>
-            <th> Birth Place </th>
-            <th> Emergency Contact Person </th>
-            <th> Emergency Contact Number </th>
-            <th> Image </th>
-            <th> Actions</th>
+            <th class="bg text-light"> Pick Up Date </th>
+            <th class="bg text-light"> Track ID </th>
+            <th class="bg text-light"> Full Name </th>
+            <th class="bg text-light"> Address </th>
+            <th class="bg text-light"> Birth Date </th>
+            <th class="bg text-light"> Birth Place </th>
+            <th class="bg text-light"> Emergency Contact Person </th>
+            <th class="bg text-light"> Emergency Contact Number </th>
+            <th class="bg text-light"> Image </th>
+            <th class="bg text-light"> Actions</th>
         </tr>
     </thead>
-    
     <tbody>
         <?php if(is_array($view)) {?>
             <?php foreach($view as $view) {?>
                 <tr>
                     <td hidden> <?= $view['id_resident'];?> </td> 
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>

@@ -6,15 +6,15 @@
 ?>
 <table class="table table-hover text-center table-bordered" >
 
-    <thead class="alert-info">
+    <thead class="alert-info sticky-top">
     <tr>
-            <th> Tracking ID </th>
-            <th> Full Name </th>
-            <th> Address </th>
-            <th> Purpose </th>
-            <th> Date </th>
-            <th> Image </th>
-            <th> Actions</th>
+            <th class="bg text-light"> Pick Up Date </th>
+            <th class="bg text-light"> Tracking ID </th>
+            <th class="bg text-light"> Full Name </th>
+            <th class="bg text-light"> Address </th>
+            <th class="bg text-light"> Purpose </th>
+            <th class="bg text-light"> Image </th>
+            <th class="bg text-light"> Actions</th>
         </tr>
     </thead>
 
@@ -39,6 +39,7 @@
             while($view = $stmnt->fetch()){
         ?>
 <tr>
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?> </td>
@@ -95,15 +96,15 @@
 ?>
 
 <table class="table table-hover text-center table-bordered">
-    <thead class="alert-info">
+    <thead class="alert-info sticky-top">
         <tr>
-            <th> Tracking ID </th>
-            <th> Full Name </th>
-            <th> Address </th>
-            <th> Purpose </th>
-            <th> Date </th>
-            <th> Image </th>
-            <th> Actions</th>
+            <th class="bg text-light"> Pick Up Date </th>
+            <th class="bg text-light"> Tracking ID </th>
+            <th class="bg text-light"> Full Name </th>
+            <th class="bg text-light"> Address </th>
+            <th class="bg text-light"> Purpose </th>
+            <th class="bg text-light"> Image </th>
+            <th class="bg text-light"> Actions</th>
         </tr>
     </thead>
     
@@ -111,11 +112,12 @@
         <?php if(is_array($view)) {?>
             <?php foreach($view as $view) {?>
                 <tr>
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?> </td>
                     <td> <?= $view['purpose'];?> </td>
-                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
+                    
                     <td>
                         <?php if (is_null($view['certofindigency_photo'])): ?>
                             <span>No Image Available</span>

@@ -145,9 +145,15 @@
                     <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
                 </div>
 			</form>
-		<?php 
-            include('resident_register/resident_pending.php');
-        ?>
+            <div class="row">
+                <div class="col-md-12" style="height: 380px;overflow: auto;">
+                    <?php 
+        
+                        include('resident_register/resident_pending.php');
+                    ?>
+                </div>
+            </div>
+		
 	</div>
 <!-- Modal for Registering Residents -->
     <div class="modal fade" id="register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

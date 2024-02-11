@@ -68,7 +68,7 @@
     </div>
 
     <div class="row"> 
-        <div class="col-md-12"> 
+        <div class="col-md-12" style="height: 450px;overflow: auto;"> 
             <?php 
                 include('tables/bspermit_pending.php');
             ?>

@@ -4,21 +4,21 @@
 	if(isset($_POST['search_bspermit'])){
 		$keyword = $_POST['keyword'];
 ?>
-	<table class="table table-hover text-center table-bordered">
+	<table class="table table-hover text-center table-bordered responsive">
 
-    <thead class="alert-info">
+    <thead class="alert-info sticky-stop">
     <tr>
             <th hidden> Resident ID </th>
-            <th> Tracking ID </th>
-            <th> Full Name </th>
-            <th> Business Name </th>
-            <th> Address </th>
-            <th> Business Industry </th>
-            <th> Area of Establishment </th>
-            <th> Date</th>
-            <th> Image</th>
+            <th class="bg text-light"> Pick Up Date </th>
+            <th class="bg text-light"> Tracking ID </th>
+            <th class="bg text-light"> Full Name </th>
+            <th class="bg text-light"> Business Name </th>
+            <th class="bg text-light"> Address </th>
+            <th class="bg text-light"> Business Industry </th>
+            <th class="bg text-light"> Area of Establishment </th>
+            <th class="bg text-light"> Image</th>
             
-                        <th> Actions</th>
+                        <th class="bg text-light"> Actions</th>
         </tr>
     </thead>
 
@@ -55,13 +55,14 @@
         ?>
             <tr>
                     <td hidden> <?= $view['id_resident'];?> </td> 
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['bsname'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
                     <td> <?= $view['bsindustry'];?> </td>
                     <td> <?= $view['aoe'];?> </td>
-                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
+                    
                     <td>
                         <?php if (is_null($view['bspermit_photo'])): ?>
                             <span>No Image Available</span>
@@ -109,21 +110,20 @@
 <?php		
 	}else{
 ?>
-<table class="table table-hover text-center table-bordered">
+<table class="table table-hover text-center table-bordered responsive">
 
-    <thead class="alert-info">
+    <thead class="alert-info sticky-top">
         <tr>
             <th hidden> Resident ID </th>
-            <th> Tracking ID </th>
-            <th> Full Name </th>
-            <th> Business Name </th>
-            <th> Address </th>
-            <th> Business Industry </th>
-            <th> Area of Establishment </th>
-            <th> Date</th>
-            <th> Image</th>
-            
-                        <th> Actions</th>
+            <th class="bg text-light"> Pick Up Date </th>
+            <th class="bg text-light"> Tracking ID </th>
+            <th class="bg text-light"> Full Name </th>
+            <th class="bg text-light"> Business Name </th>
+            <th class="bg text-light"> Address </th>
+            <th class="bg text-light"> Business Industry </th>
+            <th class="bg text-light"> Area of Establishment </th>
+            <th class="bg text-light"> Image</th>
+            <th class="bg text-light"> Actions</th>
         </tr>
     </thead>
 
@@ -132,13 +132,14 @@
             <?php foreach($view as $view) {?>
                 <tr>
                     <td hidden> <?= $view['id_resident'];?> </td> 
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['bsname'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
                     <td> <?= $view['bsindustry'];?> </td>
                     <td> <?= $view['aoe'];?> </td>
-                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
+                   
                     <td>
                         <?php if (is_null($view['bspermit_photo'])): ?>
                             <span>No Image Available</span>

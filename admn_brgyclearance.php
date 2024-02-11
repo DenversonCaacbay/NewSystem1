@@ -66,7 +66,7 @@
     </div>
 
     <div class="row"> 
-        <div class="col"> 
+        <div class="col-md-12" style="height: 450px;overflow: auto;"> 
             <?php 
                 include('tables/brgyclearance_pending.php');
             ?>
@@ -79,4 +79,7 @@
 <!-- End of Main Content -->
 
 
+<?php 
+    include('dashboard_sidebar_end.php');
+?>
 

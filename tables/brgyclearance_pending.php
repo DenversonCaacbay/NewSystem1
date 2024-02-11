@@ -6,14 +6,15 @@
 ?>
 
 <table class="table table-hover text-center table-bordered" >
-    <thead class="alert-info">
+    <thead class="bg sticky-top">
         
     <tr>
-            <th> Tracking ID </th>
-            <th> Full Name </th>
-            <th> Purpose </th>
-            <th> Address </th>
-            <th> Actions</th>
+            <th class="bg text-light"> Pick Up Date </th>
+            <th class="bg text-light"> Tracking ID </th>
+            <th class="bg text-light"> Full Name </th>
+            <th class="bg text-light"> Purpose </th>
+            <th class="bg text-light"> Address </th>
+            <th class="bg text-light"> Actions</th>
         </tr>
     </thead>
 
@@ -45,6 +46,7 @@
         ?>
             <tr>
                     <td hidden> <?= $view['id_clearance'];?> </td> 
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['purpose'];?> </td>
@@ -75,13 +77,14 @@
 
 <table class="table table-hover text-center table-bordered">
 
-    <thead class="alert-info">
+    <thead class="alert-info sticky-top">
         <tr>
-            <th> Tracking ID </th>
-            <th> Full Name </th>
-            <th> Purpose </th>
-            <th> Address </th>
-            <th> Actions</th>
+            <th class="bg text-light"> Pick Up Date </th>
+            <th class="bg text-light"> Tracking ID </th>
+            <th class="bg text-light"> Full Name </th>
+            <th class="bg text-light"> Purpose </th>
+            <th class="bg text-light"> Address </th>
+            <th class="bg text-light"> Actions</th>
         </tr>
     </thead>
 
@@ -90,6 +93,7 @@
             <?php foreach($view as $view) {?>
                 <tr>
                     <td hidden> <?= $view['id_clearance'];?> </td> 
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['purpose'];?> </td>

@@ -9,10 +9,11 @@
         
     <tr>
                 <th hidden> Resident ID </th>
+                <th> Pick Up Date </th>
                 <th> Tracking ID </th>
                 <th> Full Name </th>
                 <th> Address </th>
-                <th> Date </th>
+                <!-- <th> Date </th> -->
                 <th> Purpose </th>
                 <th> Actions</th>
 			</tr>
@@ -38,10 +39,11 @@
         ?>
 <tr>
                         <td hidden> <?= $view['id_resident'];?> </td> 
+                        <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                         <td> <?= $view['track_id'];?> </td> 
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?>  </td>
                         <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
-                        <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
+                       
                         <td> <?= $view['purpose'];?> </td>
                         <td width="20%">    
                             <form action="" method="post">
@@ -65,16 +67,16 @@
 	}else{
 ?>
 
-<table class="table table-hover text-center table-bordered">
+<table class="table table-hover text-center table-bordered responsive">
 		<thead class="alert-info">
 			<tr>
                 <th hidden> Resident ID </th>
-                <th> Tracking ID </th>
-                <th> Full Name </th>
-                <th> Address </th>
-                <th> Date </th>
-                <th> Purpose </th>
-                <th> Actions</th>
+                <th class="bg text-light"> Pick Up Date </th>
+                <th class="bg text-light"> Tracking ID </th>
+                <th class="bg text-light"> Full Name </th>
+                <th class="bg text-light"> Address </th>
+                <th class="bg text-light"> Purpose </th>
+                <th class="bg text-light"> Actions</th>
 			</tr>
 		</thead>
 
@@ -83,10 +85,11 @@
                 <?php foreach($view as $view) {?>
                     <tr>
                         <td hidden> <?= $view['id_resident'];?> </td> 
+                        <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                         <td> <?= $view['track_id'];?> </td> 
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?>  </td>
                         <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
-                        <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
+                        
                         <td> <?= $view['purpose'];?> </td>
                         <td width="20%">    
                             <form action="" method="post">
