@@ -1547,6 +1547,7 @@ class BMISClass {
             $lname = $_POST['lname'];
             $fname = $_POST['fname'];
             $mi = $_POST['mi'];
+            $pickup_date = $_POST['date'];
             $track_id = uniqid();
             
             // purpose checker
@@ -1582,11 +1583,11 @@ class BMISClass {
     
                 $connection = $this->openConn();
                 $stmt = $connection->prepare("INSERT INTO tbl_clearance (`id_resident`, `lname`, `fname`, `mi`,
-                 `purpose`, `houseno`, `street`,`brgy`, `municipal`, `status`, `brgyclearance_photo`, `track_id`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                 `purpose`, `houseno`, `street`,`brgy`, `municipal`, `status`, `brgyclearance_photo`, `track_id`, `date`)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
                 $stmt->execute([$id_resident, $lname, $fname, $mi,  $purpose, 
-                    $houseno,  $street, $brgy,   $municipal, $status, $target_file, $track_id]);
+                    $houseno,  $street, $brgy,   $municipal, $status, $target_file, $track_id, $pickup_date]);
     
                 $message2 = "Application Applied, you will receive our text message for further details";
                 echo "<script type='text/javascript'>alert('$message2');</script>";
@@ -1833,6 +1834,7 @@ class BMISClass {
             $municipal = $_POST['municipal'];
             $bsindustry = $_POST['bsindustry'];
             $aoe = $_POST['aoe'];
+            $pickup_date = $_POST['date'];
             $track_id = uniqid();
     
             // Set the target directory
@@ -1854,10 +1856,10 @@ class BMISClass {
     
                 $connection = $this->openConn();
                 $stmt = $connection->prepare("INSERT INTO tbl_bspermit (`id_resident`, `lname`, `fname`, `mi`,
-                 `bsname`, `houseno`, `street`,`brgy`, `municipal`, `bsindustry`, `aoe`, `bspermit_photo`, `track_id`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                 `bsname`, `houseno`, `street`,`brgy`, `municipal`, `bsindustry`, `aoe`, `bspermit_photo`, `track_id`, `date`)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
-                $stmt->execute([$id_resident, $lname, $fname, $mi, $bsname, $houseno, $street, $brgy, $municipal, $bsindustry, $aoe, $target_file, $track_id]);
+                $stmt->execute([$id_resident, $lname, $fname, $mi, $bsname, $houseno, $street, $brgy, $municipal, $bsindustry, $aoe, $target_file, $track_id, $pickup_date]);
     
                 $message2 = "Application Applied, you will receive our text message for further details";
                 echo "<script type='text/javascript'>alert('$message2');</script>";
@@ -2078,6 +2080,7 @@ class BMISClass {
             $municipal = ucfirst(strtolower($_POST['municipal']));
             $bplace = ucfirst(strtolower($_POST['bplace']));
             $bdate = $_POST['bdate'];
+            $pickup_date = $_POST['date'];
             $track_id = uniqid();
             
             // Process resident photo
@@ -2100,12 +2103,12 @@ class BMISClass {
             $connection = $this->openConn();
             $stmt = $connection->prepare("INSERT INTO tbl_brgyid (`id_resident`, `lname`, `fname`, `mi`,
             `houseno`, `street`, `brgy`, `municipal`, `bplace`, `bdate`, `res_photo`, `inc_lname`,
-            `inc_fname`, `inc_mi`, `inc_contact`, `inc_houseno`, `inc_street`, `inc_brgy`, `track_id`)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            `inc_fname`, `inc_mi`, `inc_contact`, `inc_houseno`, `inc_street`, `inc_brgy`, `track_id`, `date`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
             $stmt->execute([$id_resident, $lname, $fname, $mi, $houseno, $street, $brgy, $municipal, 
                 $bplace, $bdate, $target_file_res, $inc_lname, $inc_fname, $inc_mi, $inc_contact, 
-                $inc_houseno, $inc_street, $inc_brgy, $track_id]);
+                $inc_houseno, $inc_street, $inc_brgy, $track_id, $pickup_date]);
     
             $message2 = "Application Applied, you will receive our text message for further details";
             echo "<script type='text/javascript'>alert('$message2');</script>";

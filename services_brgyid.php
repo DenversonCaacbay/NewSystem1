@@ -1,4 +1,5 @@
-<?php 
+<?php
+    error_reporting(E_ALL ^ E_WARNING);
     require('classes/main.class.php');
     require('classes/resident.class.php');
     
