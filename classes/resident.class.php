@@ -37,8 +37,8 @@ use PHPMailer\PHPMailer\Exception;
                 $email = $_POST['email'];
                 $password = ($_POST['password']);
                 $confirm_password = ($_POST['confirm_password']);
-                $lname = ucfirst(strtolower($_POST['lname'])); // Convert to uppercase
-                $fname = ucfirst(strtolower($_POST['fname'])); // Convert to uppercase
+                $lname = ucwords(strtolower($_POST['lname'])); // Convert to uppercase
+                $fname = ucwords(strtolower($_POST['fname'])); // Convert to uppercase
                 $mi = ucfirst(strtolower($_POST['mi']));
                 $sex = $_POST['sex'];
                 $status = $_POST['status'];
