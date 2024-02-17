@@ -164,7 +164,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form method="post" class="was-validated"> 
+            <form method="post" class="was-validated" enctype='multipart/form-data'> 
                         <div class="row">
                                     <div class="col">
                                         <div class="form-group">
@@ -248,8 +248,49 @@
 
                                     <div class="col">
                                         <div class="form-group">
+                                            <label> Purok: </label>
+                                            <select id="purokDropdown" class="form-select" onchange="showStreets(this.value)" name="purok" aria-label="Default select example" required>
+                                                <option value="" selected>Select Purok</option>
+                                                <option value="1A">1A</option>
+                                                <option value="1B">1B</option>
+                                                <option value="2">2</option>
+                                                <option value="3A">3A</option>
+                                                <option value="3B">3B</option>
+                                                <option value="3C">3C</option>
+                                                <option value="3E">3E</option>
+                                                <option value="3F">3F</option>
+                                                <option value="4A">4A</option>
+                                                <option value="4B">4B</option>
+                                                <option value="4C">4C</option>
+                                                <option value="4D">4D</option>
+                                                <option value="5A">5A</option>
+                                                <option value="5A-1">5A-1</option>
+                                                <option value="5B">5B</option>
+                                                <option value="5C">5C</option>
+                                                <option value="5D">5D</option>
+                                                <option value="5E">5E</option>
+                                                <option value="5F">5F</option>
+                                                <option value="6A">6A</option>
+                                                <option value="6AEXT">6AEXT</option>
+                                                <option value="6B1">6B1</option>
+                                                <option value="6B2">6B2</option>
+                                                <option value="6C1">6C1</option>
+                                                <option value="6C2">6C2</option>
+                                                <option value="6D">6D</option>
+                                                <option value="6E">6E</option>
+                                                <option value="7">7</option>
+                                            </select>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <div class="form-group">
                                             <label> Street: </label>
-                                            <input type="text" class="form-control" name="street" placeholder="Enter Street" value="<?php echo isset($_POST['street']) ? htmlspecialchars($_POST['street']) : ''; ?>" required>
+                                            <select id="streetsDropdown" class="form-select" name="street" disabled required style="text-transform: none !important;">
+                                                <option value="" disabled selected>Select Street</option>
+                                            </select>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -258,7 +299,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label> Barangay: </label>
-                                            <input type="text" class="form-control" name="brgy" placeholder="Enter Barangay" value="<?php echo isset($_POST['brgy']) ? htmlspecialchars($_POST['brgy']) : ''; ?>" required>
+                                            <input type="text" class="form-control" name="brgy" placeholder="Enter Barangay" value="Sta.Rita" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -267,7 +308,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label> Municipality: </label>
-                                            <input type="text" class="form-control" name="municipal" placeholder="Enter Municipality" value="<?php echo isset($_POST['municipal']) ? htmlspecialchars($_POST['municipal']) : ''; ?>" required>
+                                            <input type="text" class="form-control" name="municipal" placeholder="Enter Municipality" value="Olongapo" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -297,6 +338,26 @@
                                         <div class="form-group">
                                             <label class="mtop">Nationality: </label>
                                             <input type="text" class="form-control" name="nationality" placeholder="Enter Nationality" value="<?php echo isset($_POST['nationality']) ? htmlspecialchars($_POST['nationality']) : ''; ?>" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="formFile" class="form-label mt-1"  style="font-size:15px;">Valid ID with an address or any proof of billing. </label>
+                                            <input class="form-control" type="file" id="formFile" name="id_picture" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label mt-1">When did you live in this barangay? </label>
+                                            <input type="date" class="form-control" id="myDateInput" onchange="checkBdate('myDateInput')" name="date_live" value="<?php echo isset($_POST['date_live']) ? htmlspecialchars($_POST['date_live']) : ''; ?>" required>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -360,16 +421,12 @@
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                     </div>
-
                                 </div>
-
-                            <br>
-                                
-                            
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <input type="hidden" class="form-control" name="role" value="resident">
+                <input type="hidden" class="form-control" name="is_in_admin" value="1">
                             <button class="btn btn-primary" type="submit" name="add_resident"> Register </button>
                         </form>
             </div>
@@ -383,6 +440,9 @@
     
 </div>
 <!-- End of Main Content -->
+
+<script src="js/password-match.js"></script>
+<script src="js/purok-street.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous"></script>

@@ -61,6 +61,8 @@ use PHPMailer\PHPMailer\Exception;
                 $voter = $_POST['voter'];
                 $familyrole = $_POST['family_role'];
                 $role = $_POST['role'];
+
+                $is_in_admin = $_POST['is_in_admin'];
         
                 // Check if user is 18
                 if ($age < 18) {
@@ -114,7 +116,11 @@ use PHPMailer\PHPMailer\Exception;
                         $message2 = "Your account has been added. Please await approval from the administrator via email before logging in.";
                         echo "<script type='text/javascript'>alert('$message2');</script>";
         
-                        echo '<script>window.location.replace("index.php")</script>';
+                        if($is_in_admin == "1"){
+                            echo '<script>window.location.replace("admn_resident_crud.php")</script>';
+                        }else{
+                            echo '<script>window.location.replace("index.php")</script>';
+                        }
                     } else {
                         echo "Sorry, there was an error uploading your file.";
                     }

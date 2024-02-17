@@ -1,6 +1,7 @@
 <?php
     error_reporting(E_ALL ^ E_WARNING);
     require('classes/staff.class.php');
+    require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     //$bmis->validate_admin();
     $view = $staffbmis->view_staff();
@@ -31,7 +32,7 @@
         <div class="col-md-2"> </div>
         <div class="col-md-8">
             <div class="card"> 
-                <div class="card-header bg-primary text-white"> Update Barangay Staff Data </div>
+                <div class="card-header bg text-white"> Update Barangay Staff Data </div>
                 <div class="card-body"> 
                     <form method="post">
                         <div class="row">
