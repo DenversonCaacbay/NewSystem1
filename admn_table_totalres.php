@@ -49,16 +49,19 @@
 
     <!-- Page Heading -->
 
-    <div class="row"> 
+    <!-- <div class="row"> 
         <div class="col text-center"> 
-            <h1> Barangay Resident Table</h1>
+            <h1><a href="#" class="btn btn-primary">Back</a> TOTAL REGISTERED BARANGAY RESIDENTS</h1>
+        </div>
+    </div> -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8"> <h1 class="mb-0">Registered Barangay Residents Table</h1></div>
+            <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_dashboard.php"> Back </a></div>
         </div>
     </div>
 
     <hr>
-    <br>
-    <br>
-
     <div class="row"> 
         <div class="col">
             <form method="POST" action="">
@@ -70,7 +73,6 @@
                     <a href="admn_table_totalres.php" class="btn btn-info" style="width: 90px; font-size: 18px; border-radius:30px;">Reload</a>
             </form>
 
-            <br>
             <br>
 
             <?php 

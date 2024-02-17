@@ -122,13 +122,10 @@
         <section class="main-section"> 
             <div class="container-fluid mt-2"> 
                 <div class="row">
-                    <div class="col-sm"></div>
-                        <div class="col-sm main-heading text-center text-white" > 
-                        <img src="icon.png" width="150">
+                        <div class="col-sm-12 main-heading text-center text-white" > 
+                            <img src="icon.png" width="150">
                             <h3> Barangay Santa Rita Management System </h3>
-
                         </div>
-                    <div class="col-sm"></div>
                 </div>
                 <div class="row">
                     <div class="col-sm"></div>

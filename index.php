@@ -12,6 +12,7 @@
 
 
 
+
 <script> 
     function logout() {
     window.location.href = "logout.php";
@@ -193,7 +194,7 @@
                 <a href="resident_registration.php" class="btn btn-primary ml-2">Create an Account</a>
             <?php else : ?>
                 <button title="Your Account" class="btn btn-primary dropdown-toggle ml-2" type="button" data-toggle="dropdown">
-                    <?= $userdetails['surname']; ?>, <?= $userdetails['firstname']; ?>
+                 <?= $userdetails['surname']; ?>, <?= $userdetails['firstname']; ?>
                     <span class="caret" style="margin-left: 2px;"></span>
                 </button>
                 <ul class="dropdown-menu" style="">
@@ -335,6 +336,8 @@
                             </div>
                         </a>
                     </div>
+
+
                     <div class="col-md-6 mt-2">
                         <a href="services_certofres.php" onclick="checkUserData(event)"> 
                         <div class="zoom1">    

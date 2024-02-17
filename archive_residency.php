@@ -61,9 +61,9 @@
                     <button class="btn btn-success ms-2" name="search_certofres">Search</button>
                     <a href="archive_residency.php" class="btn btn-info ms-2 me-5" style="font-size: 17px;width:200px;padding-top:10px;">View All</a>
                     Export Data By: 
-                    <a class="btn btn-primary ms-2" style="padding-top:12px; " target="_blank" href="generatePdf/residency/week.php">Week</a>
-                    <a class="btn btn-primary ms-2" style="padding-top:12px; " target="_blank" href="generatePdf/residency/month.php">Monthly</a>
-                    <a class="btn btn-primary ms-2" style="padding-top:12px; " target="_blank" href="generatePdf/residency/year.php">Yearly</a>
+                    <a class="btn btn-primary ms-2" style="padding-top:13px; " target="_blank" href="generatePdf/residency/week.php">Week</a>
+                    <a class="btn btn-primary ms-2" style="padding-top:13px; " target="_blank" href="generatePdf/residency/month.php">Monthly</a>
+                    <a class="btn btn-primary ms-2" style="padding-top:13px; " target="_blank" href="generatePdf/residency/year.php">Yearly</a>
                 </div>
             </form>
         </div>

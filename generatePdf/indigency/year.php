@@ -12,7 +12,7 @@ $currentMonth = date('Y-m');
 
 
 // Fetch data from the shop_inventory table based on today's date
-$query = "SELECT * FROM tbl_indigency WHERE form_status='Approved' AND DATE_FORMAT(created_at, '%Y-%m') = '$currentMonth'";
+$query = "SELECT * FROM tbl_indigency WHERE form_status='Approved' AND DATE_FORMAT(date, '%Y-%m') = '$currentMonth'";
 $result = $conn->query($query);
 
 // Generate the report HTML
@@ -64,7 +64,7 @@ if ($rowCount > 0) {
     $html .= '<tr>';
     $html .= '<td>' . $row['track_id'] .  '</td>';
     $html .= '<td>' . $row['lname'] .  ', ' . $row['fname'] .  '</td>';
-    $html .= '<td>' . date('F d,Y', strtotime($row['created_at'])) . '</td>';
+    $html .= '<td>' . date('F d,Y', strtotime($row['date'])) . '</td>';
     $html .= '</tr>';
   }
     // Display total sales row

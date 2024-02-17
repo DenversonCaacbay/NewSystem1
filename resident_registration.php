@@ -173,7 +173,7 @@
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                     </div>
-                                     <div class="col-md-6">
+                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="mtop">Birth Place </label>
                                             <input type="text" class="form-control" name="bplace" placeholder="Enter Birth Place" value="<?php echo isset($_POST['bplace']) ? htmlspecialchars($_POST['bplace']) : ''; ?>" required>
@@ -182,10 +182,18 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="mtop">Nationality: </label>
                                             <input type="text" class="form-control" name="nationality" placeholder="Enter Nationality" value="<?php echo isset($_POST['nationality']) ? htmlspecialchars($_POST['nationality']) : ''; ?>" required>
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="mtop">When did you live in this barangay? </label>
+                                            <input type="date" class="form-control" id="myDateInput" onchange="checkBdate('myDateInput')" name="date_live" value="<?php echo isset($_POST['date_live']) ? htmlspecialchars($_POST['date_live']) : ''; ?>" required>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -265,7 +273,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label> Municipality: </label>
-                                            <input type="text" class="form-control" name="municipal" placeholder="Enter Municipality" value="Olongapo" readonly>
+                                            <input type="text" class="form-control" name="municipal" placeholder="Enter Municipality" value="Olongapo City" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>

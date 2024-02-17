@@ -56,7 +56,7 @@ a{
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
-                                Total Barangay Residents</div>
+                                TOTAL REGISTERED BARANGAY RESIDENTS</div>
                                 <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescount?></div>
                                 <br>
                                 <a href="admn_table_totalres.php"> View Records </a>
@@ -78,7 +78,7 @@ a{
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
-                                Total Household Count</div>
+                            TOTAL REGISTERED HOUSEHOLD COUNT</div>
                                 <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescountfh?></div>
                                 <br>
                                 <a href="admn_table_totalhouse.php"> View Records </a>
@@ -119,7 +119,7 @@ a{
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
-                                Total Male Residents</div>
+                            TOTAL REGISTERED MALE RESIDENTS</div>
                                 <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescountm?></div>
                                 <br>
                                 <a href="admn_table_maleres.php"> View Records </a>
@@ -138,7 +138,7 @@ a{
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
-                                Total Female Residents</div>
+                            TOTAL REGISTERED FEMALE RESIDENTS</div>
                                 <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescountf?></div>
                                 <br>
                                 <a href="admn_table_femaleres.php"> View Records </a>
@@ -158,7 +158,7 @@ a{
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
-                                Total Senior Residents</div>
+                            TOTAL REGISTERED SENIOR RESIDENTS</div>
                                 <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescountsenior?></div>
                                 <br>
                                 <a href="admn_table_senior.php"> View Records </a>
@@ -186,8 +186,8 @@ a{
                 <option <?php echo ($_POST['selected_category'] ?? '') == 'brgyid' ? 'selected' : ''; ?> value="brgyid">Barangay ID</option>
                 <option <?php echo ($_POST['selected_category'] ?? '') == 'bspermit' ? 'selected' : ''; ?> value="bspermit">Business Recommendation</option>
                 <option <?php echo ($_POST['selected_category'] ?? '') == 'clearance' ? 'selected' : ''; ?> value="clearance">Barangay Clearance</option>
-                <option <?php echo ($_POST['selected_category'] ?? '') == 'indigency' ? 'selected' : ''; ?> value="indigency">Indigency</option>
-                <option <?php echo ($_POST['selected_category'] ?? '') == 'rescert' ? 'selected' : ''; ?> value="rescert">Resident Certificate</option>
+                <option <?php echo ($_POST['selected_category'] ?? '') == 'indigency' ? 'selected' : ''; ?> value="indigency">Certificate of Indigency</option>
+                <option <?php echo ($_POST['selected_category'] ?? '') == 'rescert' ? 'selected' : ''; ?> value="rescert">Certificate of Residency</option>
             </select>
             <input type="submit" class="btn btn-success" name="get_category" style="display: none;">
             </form>

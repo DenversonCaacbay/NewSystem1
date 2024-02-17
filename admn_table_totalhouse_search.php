@@ -5,7 +5,7 @@
 		$keyword = $_POST['keyword'];
 ?>
 
-<table class="table table-hover table-bordered table-responsive text-center" >
+<table class="table table-hover table-bordered text-center" >
 	<thead class="alert-info">
 		<tr>
 			<th> Family Surname </th>
@@ -63,7 +63,7 @@
 	}else{
 ?>
 
-<table class="table table-hover table-bordered table-responsive text-center">
+<table class="table table-hover table-bordered text-center">
 	<thead class="alert-info">
 		<tr>
 			<th> Family Surname </th>

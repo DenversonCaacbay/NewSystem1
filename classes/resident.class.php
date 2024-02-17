@@ -49,6 +49,7 @@ use PHPMailer\PHPMailer\Exception;
                 $municipal = $_POST['municipal'];
                 $address = isset($_POST['address']) ? $_POST['address'] : NULL;
                 $contact = $_POST['contact'];
+                $date_live = $_POST['date_live'];
         
                 $bdate = $_POST['bdate'];
                 $current_year = date("Y");
@@ -103,12 +104,12 @@ use PHPMailer\PHPMailer\Exception;
                         $stmt = $connection->prepare("INSERT INTO tbl_resident (
                             `email`, `password`, `lname`, `fname`, `mi`, `age`, `sex`, `status`, `houseno`, 
                             `purok`, `street`, `brgy`, `municipal`, `address`, `contact`, `bdate`, 
-                            `bplace`, `nationality`, `voter`, `family_role`, `role`, `valid_id_photo`
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            `bplace`, `nationality`, `date_live`, `voter`, `family_role`, `role`, `valid_id_photo`
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
                         $stmt->Execute([$email, $hashed_password, $lname, $fname, $mi, $age, $sex, $status, 
                         $houseno, $purok, $street, $brgy, $municipal, $address, $contact, $bdate, 
-                        $bplace, $nationality, $voter, $familyrole, $role, $target_file]);
+                        $bplace, $nationality, $date_live, $voter, $familyrole, $role, $target_file]);
         
                         $message2 = "Your account has been added. Please await approval from the administrator via email before logging in.";
                         echo "<script type='text/javascript'>alert('$message2');</script>";

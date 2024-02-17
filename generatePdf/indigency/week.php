@@ -9,7 +9,7 @@ $startOfWeek = date('Y-m-d', strtotime('this week', strtotime($today)));
 $endOfWeek = date('Y-m-d', strtotime('next week', strtotime($today)));
 
 
-$query = "SELECT * FROM tbl_indigency WHERE form_status='Approved' AND created_at >= '$startOfWeek' AND created_at < '$endOfWeek'";
+$query = "SELECT * FROM tbl_indigency WHERE form_status='Approved' AND date >= '$startOfWeek' AND date < '$endOfWeek'";
 $result = $conn->query($query);
 
 $html = '
@@ -60,7 +60,7 @@ if ($rowCount > 0) {
     $html .= '<tr>';
     $html .= '<td>' . $row['track_id'] .  '</td>';
     $html .= '<td>' . $row['lname'] .  ', ' . $row['fname'] .  '</td>';
-    $html .= '<td>' . date('F d,Y', strtotime($row['created_at'])) . '</td>';
+    $html .= '<td>' . date('F d,Y', strtotime($row['date'])) . '</td>';
     $html .= '</tr>';
   }
     // Display total sales row

@@ -61,9 +61,9 @@
                     <button class="btn btn-success ms-2" name="search_bspermit">Search</button>
                     <a href="archive_bspermit.php" class="btn btn-info ms-2 me-5" style="font-size: 17px;width:200px;padding-top:10px;">View All</a>
                     Export Data By: 
-                    <a class="btn btn-primary ms-2" target="_blank" href="generatePdf/bspermit/week.php">Week</a>
-                    <a class="btn btn-primary ms-2" target="_blank" href="generatePdf/bspermit/month.php">Monthly</a>
-                    <a class="btn btn-primary ms-2" target="_blank" href="generatePdf/bspermit/year.php">Yearly</a>
+                    <a class="btn btn-primary ms-2"  style="padding-top:13px; " target="_blank" href="generatePdf/bspermit/week.php">Week</a>
+                    <a class="btn btn-primary ms-2"  style="padding-top:13px; " target="_blank" href="generatePdf/bspermit/month.php">Monthly</a>
+                    <a class="btn btn-primary ms-2"  style="padding-top:13px; " target="_blank" href="generatePdf/bspermit/year.php">Yearly</a>
                 </div>
             </form>
         </div>

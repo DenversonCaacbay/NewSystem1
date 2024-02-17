@@ -163,7 +163,7 @@ class BMISClass {
             "address" => $array['address'],
             "contact" => $array['contact'],
             "bdate" => $array['bdate'],
-            "bplace" => $array['bplace'],
+            "date_live" => $array['date_live'],
             "nationality" => $array['nationality'],
             "family_role" => $array['family_role'],
             "role" => $array['role'],
@@ -1228,11 +1228,7 @@ class BMISClass {
     public function view_certofres(){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-            SELECT rc.*, r.email
-            FROM tbl_rescert rc
-            JOIN tbl_resident r ON rc.id_Resident = r.id_resident
-            WHERE rc.form_status = 'Pending'
-        ");
+            SELECT * FROM tbl_rescert WHERE form_status = 'Pending'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -1391,11 +1387,7 @@ class BMISClass {
     public function view_certofindigency(){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-            SELECT rc.*, r.email
-            FROM tbl_indigency rc
-            JOIN tbl_resident r ON rc.id_Resident = r.id_resident
-            WHERE rc.form_status = 'Pending'
-        ");
+        SELECT * FROM tbl_indigency WHERE form_status = 'Pending'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -1628,11 +1620,7 @@ class BMISClass {
     public function view_clearance(){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-            SELECT rc.*, r.email
-            FROM tbl_clearance rc
-            JOIN tbl_resident r ON rc.id_Resident = r.id_resident
-            WHERE rc.form_status = 'Pending'
-        ");
+        SELECT * FROM tbl_clearance WHERE form_status = 'Pending'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -1901,11 +1889,7 @@ class BMISClass {
     public function view_bspermit(){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-            SELECT rc.*, r.email
-            FROM tbl_bspermit rc
-            JOIN tbl_resident r ON rc.id_Resident = r.id_resident
-            WHERE rc.form_status = 'Pending'
-        ");
+        SELECT * FROM tbl_bspermit WHERE form_status = 'Pending'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -2147,11 +2131,7 @@ class BMISClass {
     public function view_brgyid(){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-            SELECT rc.*, r.email
-            FROM tbl_brgyid rc
-            JOIN tbl_resident r ON rc.id_Resident = r.id_resident
-            WHERE rc.form_status = 'Pending'
-        ");
+        SELECT * FROM tbl_brgyid WHERE form_status = 'Pending'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;

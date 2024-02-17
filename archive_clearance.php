@@ -60,9 +60,9 @@
                     <button class="btn btn-success ms-2" name="search_clearance">Search</button>
                     <a href="archive_clearance.php" class="btn btn-info ms-2 me-5" style="font-size: 17px;width:200px;padding-top:10px;">View All</a>
                     Export Data By: 
-                    <a class="btn btn-primary ms-2" target="_blank" href="generatePdf/clearance/week.php">Week</a>
-                    <a class="btn btn-primary ms-2" target="_blank" href="generatePdf/clearance/month.php">Monthly</a>
-                    <a class="btn btn-primary ms-2" target="_blank" href="generatePdf/clearance/year.php">Yearly</a>
+                    <a class="btn btn-primary ms-2"  style="padding-top:13px; " target="_blank" href="generatePdf/clearance/week.php">Week</a>
+                    <a class="btn btn-primary ms-2"  style="padding-top:13px; " target="_blank" href="generatePdf/clearance/month.php">Monthly</a>
+                    <a class="btn btn-primary ms-2"  style="padding-top:13px; " target="_blank" href="generatePdf/clearance/year.php">Yearly</a>
                 </div>
             </form>
         </div>

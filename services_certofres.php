@@ -38,6 +38,9 @@ img{
     width: 150px;
     padding: 10px;
 }
+.applybutton{
+    font-size: 30px;
+}
 .btn1 {
 border-radius: 20px;
 border: none; /* Remove borders */
@@ -217,10 +220,29 @@ color: black;
             <hr style="background-color:black;">
 
                 <div class="col">   
-                    <button type="button" class="btn btn-primary applybutton p-3 w-100" data-toggle="modal" data-target="#exampleModalCenter">
-                        Request Form
-                    </button>
-                </div>
+                <?php
+// Get today's date in Unix timestamp
+$today = strtotime(date('Y-m-d'));
+
+// Calculate the date 6 months ago from today in Unix timestamp
+$sixMonthsAgo = strtotime('-6 months', $today);
+
+// Convert $userdetails['date_live'] to a Unix timestamp
+$dateLive = strtotime($userdetails['date_live']);
+
+// Check if $dateLive is greater than or equal to 6 months ago
+if ($dateLive <= $sixMonthsAgo) {
+    $disableAttr = ''; // No need for disabled attribute
+} else {
+    $disableAttr = 'disabled'; // Add the disabled attribute
+}
+?>
+
+<button type="button" <?= $disableAttr ?> class="btn btn-primary applybutton p-2 w-100" data-toggle="modal" data-target="#exampleModalCenter">
+    View Form
+</button>
+
+
 
 
             <!-- Modal -->
@@ -366,7 +388,7 @@ color: black;
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="mtop">Pick-Up Date: </label>
-                                            <input type="date" id="myDateInput" onchange="checkDateValidity('myDateInput')"  class="form-control" name="date" required>
+                                            <input type="date" id="myDateInput" class="form-control" name="date" required min="<?php echo date('Y-m-d'); ?>">
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>

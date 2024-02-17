@@ -39,14 +39,15 @@
 
     <!-- Page Heading -->
 
-    <div class="row"> 
-        <div class="col-md-12 text-center"> 
-            <h1> Barangay Senior Citizen Table</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8"> <h1 class="mb-0">Registered Barangay Senior's Residents Table</h1></div>
+            <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_dashboard.php"> Back </a></div>
         </div>
     </div>
 
     <hr>
-    <br><br>
+    <br>
 
     <div class="row"> 
         <br> 
@@ -59,17 +60,17 @@
                 <button class="btn btn-success" style="width: 90px; font-size: 18px; border-radius:30px; margin-left:41.5%;" name="search_senior">Search</button>
                 <a href="admn_table_senior.php" style="width: 90px; font-size: 18px; border-radius:30px;" class="btn btn-info">Reload</a>
             </form>
-            <br><br>
+            <br>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+        
+        <div class="col-md-12">
             <?php 
                 include('admn_table_senior_search.php');
             ?>
         </div>
-        <div class="col-md-1"></div>
+       
     </div>
     
     <!-- /.container-fluid -->

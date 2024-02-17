@@ -39,14 +39,15 @@
 
     <!-- Page Heading -->
 
-    <div class="row"> 
-        <div class="col text-center"> 
-            <h1> Barangay Household Table </h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8"> <h1 class="mb-0">Registered Barangay Household Table</h1></div>
+            <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_dashboard.php"> Back </a></div>
         </div>
     </div>
 
     <hr>
-    <br><br> 
+    <br>
     
     <div class="row"> 
         <div class="col">
@@ -59,20 +60,17 @@
                     <a href="admn_table_totalhouse.php" class="btn btn-info" style="width: 90px; font-size: 18px; border-radius:30px;">Reload</a>
                 
             </form>
-            <br>
         </div>
     </div>
 
     <br>
 
-    <div class="row"> 
-        <div class="col-md-3"> </div>
-        <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-12">
             <?php
                 include('admn_table_totalhouse_search.php');
             ?>
         </div>
-        <div class="col-md-3"></div>
     </div>
 
 </div>

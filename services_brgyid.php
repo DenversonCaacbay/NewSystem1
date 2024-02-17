@@ -41,6 +41,9 @@ img{
     width: 150px;
     padding: 10px;
 }
+.applybutton{
+    font-size: 30px;
+}
 .btn1 {
 border-radius: 20px;
 border: none; /* Remove borders */
@@ -227,8 +230,8 @@ color: black;
             <hr style="background-color:black;">
 
             <div class="col">   
-                <button type="button" class="btn btn-primary applybutton w-100 p-3" data-toggle="modal" data-target="#exampleModalCenter">
-                    Request Form
+                <button type="button" class="btn btn-primary applybutton w-100 p-2" data-toggle="modal" data-target="#exampleModalCenter">
+                    View Form
                 </button>
             </div>
 
@@ -509,7 +512,7 @@ color: black;
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="mtop">Pick-Up Date: </label>
-                                            <input type="date" id="myDateInput" onchange="checkDateValidity('myDateInput')"  class="form-control" name="date" required>
+                                            <input type="date" id="myDateInput" class="form-control" name="date" required min="<?php echo date('Y-m-d'); ?>">
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>

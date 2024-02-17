@@ -4,7 +4,7 @@
 	if(isset($_POST['search_resident'])){
 		$keyword = $_POST['keyword'];
 ?>
-	<table class="table table-hover text-center table-bordered" >
+	<table class="table table-hover text-center responsive table-bordered" >
 
 		<thead class="alert-info">
 			<tr>
@@ -33,7 +33,9 @@
                         <td> <?= $view['email'];?> </td>
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                         <td> <?= $view['age'];?> </td>
-                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?> </td>
+                        <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 10ch;">
+    <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>
+</td>
                         <td> <?= $view['contact'];?> </td>
                         <td>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['valid_id_photo'] ?>', '<?= $view['lname'];?>', '<?= $view['fname'];?> <?= $view['mi'];?>')">
@@ -59,7 +61,7 @@
 <?php		
 	}else{
 ?>
-<table class="table table-hover table-bordered text-center">
+<table class="table table-hover table-bordered responsive text-center">
 <thead class="alert-info">
 			<tr>
                 
@@ -83,11 +85,14 @@
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                         <td> <?= $view['email'];?> </td>
                         <td> <?= $view['age'];?> </td>
-                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?> </td>
+                        <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 10ch;">
+    <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>
+</td>
+
                         <td> <?= $view['contact'];?> </td>
                         <td>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['valid_id_photo'] ?>', '<?= $view['lname'];?>', '<?= $view['fname'];?> <?= $view['mi'];?>')">
-                                <img src="<?= $view['valid_id_photo'] ?>" class="img-fluid" alt="Modal Image" width="80">
+                                <img src="<?= $view['valid_id_photo'] ?>" class="img-fluid" alt="Modal Image" width="50">
                             </a></td>
                         <td width="20%">    
                             <form action="" method="post">

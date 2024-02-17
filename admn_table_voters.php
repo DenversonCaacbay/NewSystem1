@@ -39,9 +39,10 @@
 
     <!-- Page Heading -->
 
-    <div class="row"> 
-        <div class="col-md-12 text-center"> 
-            <h1> Registered Voters in the Barangay </h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8"> <h1 class="mb-0">Registered Barangay Voters Table</h1></div>
+            <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_dashboard.php"> Back </a></div>
         </div>
     </div>
 
@@ -65,13 +66,11 @@
     <br>
 
     <div class="row">
-        <div class="col-md-2"> </div>
-        <div class="col-md-8"> 
+        <div class="col-md-12"> 
             <?php 
                 include('admn_table_voters_search.php');
             ?>
         </div>
-        <div class="col-md-2"> </div>
     </div>
     
 </div>

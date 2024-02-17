@@ -38,14 +38,15 @@
 
     <!-- Page Heading -->
 
-    <div class="row"> 
-        <div class="col text-center"> 
-            <h1> Barangay Female Residents Table</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8"> <h1 class="mb-0">Registered Barangay Female Residents Table</h1></div>
+            <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_dashboard.php"> Back </a></div>
         </div>
     </div>
 
     <hr>
-    <br><br>
+    <br>
 
     <div class="row"> 
         <div class="col">
@@ -57,7 +58,6 @@
                 <button class="btn btn-success" name="search_femaleres" style="width: 90px; font-size: 18px; border-radius:30px; margin-left:41.5%;">Search</button>
                 <a href="admn_table_femaleres.php" class="btn btn-info" style="width: 90px; font-size: 18px; border-radius:30px;">Reload</a>
             </form>
-            <br>
         </div>
     </div>
 

@@ -43,6 +43,10 @@ img{
     width: 150px;
     padding: 10px;
 }
+
+.applybutton{
+    font-size: 30px;
+}
 .btn1 {
 border-radius: 20px;
 border: none; /* Remove borders */
@@ -225,8 +229,8 @@ color: black;
             <hr style="background-color:black;">
 
             <div class="col">   
-                <button type="button" class="btn btn-primary applybutton w-100 mb-5 p-3" data-toggle="modal" data-target="#exampleModalCenter">
-                    Request Form
+                <button type="button" class="btn btn-primary applybutton w-100 mb-5 p-2" data-toggle="modal" data-target="#exampleModalCenter">
+                    View Form
                 </button>
             </div>
 
@@ -237,7 +241,7 @@ color: black;
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Business Permit Form</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Business Recommendation Form</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -390,7 +394,10 @@ color: black;
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="mtop">Pick-Up Date: </label>
-                                            <input type="date" id="myDateInput" onchange="checkDateValidity('myDateInput')"  class="form-control" name="date" required>
+                                            <input type="date" id="myDateInput" class="form-control" name="date" required 
+                                                min="<?php echo date('Y-m-d'); ?>"  Start date
+                                                max="<?php echo date('Y-m-d', strtotime('+60 days')); ?>"> end expiration date
+
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>

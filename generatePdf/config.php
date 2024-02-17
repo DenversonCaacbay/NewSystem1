@@ -1,8 +1,12 @@
 <?php
+// $servername = "localhost";
+// $username = "u445806455_bmis";
+// $password = "DanDuarte123";
+// $dbname = "u445806455_bmis";
 $servername = "localhost";
-$username = "u445806455_bmis";
-$password = "DanDuarte123";
-$dbname = "u445806455_bmis";
+$username = "root";
+$password = "";
+$dbname = "bmis";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
