@@ -45,7 +45,7 @@
         </div>
     </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Add Stafft</h1>
@@ -106,7 +106,13 @@
                                             <label>Confirm Password:</label>
                                             <input type="password" class="form-control" id="confirm-password-field" name="confirm_password" placeholder="Enter Confirm Password" required>
                                             <div class="valid-feedback">Valid.</div>
-                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                            <div class="invalid-feedback">Password do not match.</div>
+                                        </div>
+                                        <div class="form-check" style="margin-left: 34%">
+                                            <input class="form-check-input" type="checkbox" value="" id="show-password-checkbox">
+                                            <label class="form-check-label" for="show-password-checkbox">
+                                                Show Password
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -114,10 +120,7 @@
 
                                 <input type="hidden" class="form-control" name="role" value="administrator">
 
-                                <br>
-                                <hr>
-
-                                <button class="btn btn-primary w-100" type="submit" name="add_staff" style="border-radius:10px;"> Submit </button>  
+                                <button class="btn btn-primary w-100 mt-3" type="submit" name="add_staff" id="submit-button" style="border-radius:10px;" disabled> Submit </button>  
                             </form>    
                         </div>
                     </div>
@@ -168,6 +171,36 @@
 </div>
 
 <!-- End of Main Content -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const passwordField = document.getElementById("password-field");
+        const confirmPasswordField = document.getElementById("confirm-password-field");
+        const showPasswordCheckbox = document.getElementById("show-password-checkbox");
+        const submitButton = document.getElementById("submit-button");
+
+        function togglePasswordVisibility() {
+            const type = showPasswordCheckbox.checked ? 'text' : 'password';
+            passwordField.type = type;
+            confirmPasswordField.type = type;
+        }
+
+        showPasswordCheckbox.addEventListener('change', togglePasswordVisibility);
+
+        function checkPasswords() {
+            if (passwordField.value === confirmPasswordField.value) {
+                confirmPasswordField.setCustomValidity('');
+                submitButton.disabled = false;
+            } else {
+                confirmPasswordField.setCustomValidity('Passwords do not match.');
+                submitButton.disabled = true;
+            }
+        }
+
+        passwordField.addEventListener("keyup", checkPasswords);
+        confirmPasswordField.addEventListener("keyup", checkPasswords);
+    });
+</script>
 
 
 <script src="js/password-match.js"></script>

@@ -1,5 +1,7 @@
 <?php 
      require('classes/resident.class.php');
+     error_reporting(E_ALL ^ E_WARNING);
+     ini_set('display_errors',0);
     $residentbmis->create_resident();
      //$data = $bms->get_userdata();
 
@@ -19,7 +21,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         
         <!-- fontawesome icons -->
-        <script src="https://kit.fontawesome.com/67a9b7069e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     </head>
 
@@ -31,12 +33,47 @@
                     background: #309464 !important;
                 }
         
-        .field-icon {
+        /* .field-icon {
             margin-left: 78%;
             margin-top: -8.5%;
             position: absolute;
             z-index: 2;
-        }
+        } */
+        /* .field-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    } */
+    .field-icon {
+        position: absolute;
+        right: 27%;
+        top: 83%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+    .field-icon i {
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        font-size: 1rem; /* Adjust font size as needed */
+        color: inherit;
+    }
+    
+    .field-icon1 {
+        position: absolute;
+        right: 25px;
+        top: 83%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
         body::-webkit-scrollbar {
             display: none;
         }
@@ -340,29 +377,38 @@
                                     </div>
 
                                     <div class="col-md-3">
-    <div class="form-group">
-        <label>Password:</label>
-        <input type="password" class="form-control" id="password-field" name="password" placeholder="Enter Password" required>
-        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-        <div class="valid-feedback">Valid.</div>
-        <div class="invalid-feedback">Please fill out this field.</div>
-    </div>
-</div>
+                                        <div class="form-group">
+                                            <label>Password:</label>
+                                            <input type="password" class="form-control" id="password-field" name="password" placeholder="Enter Password" required>
+                                            <!-- <i class="fa-solid fa-eye field-icon toggle-password"></i> -->
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                        </div>
+                                    </div>
 
-<div class="col-md-3">
-    <div class="form-group">
-        <label>Confirm Password:</label>
-        <input type="password" class="form-control" id="confirm-password-field" name="confirm_password" placeholder="Enter Confirm Password" required>
-        <span toggle="#confirm-password-field" class="fa fa-fw fa-eye field-icon toggle-confirm-password"></span>
-        <div class="valid-feedback">Valid.</div>
-        <div class="invalid-feedback">Passwords do not match.</div> <!-- Updated error message -->
-    </div>
-</div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Confirm Password:</label>
+                                            <input type="password" class="form-control" id="confirm-password-field" name="confirm_password" placeholder="Enter Confirm Password" required>
+                                            <!-- <i class="fa-solid fa-eye field-icon1 toggle-confirm-password"></i> -->
+                                            <div class="valid-feedback">Valid.</div>
+                                            <div class="invalid-feedback">Passwords do not match.</div> <!-- Updated error message -->
+                                        </div>
+                                        <div class="form-check" style="margin-left: 54%">
+                                            <input class="form-check-input" type="checkbox" value="" id="show-password-checkbox">
+                                            <label class="form-check-label" for="show-password-checkbox">
+                                                Show Password
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        
+                                    </div>
                                 </div>
                                 <input type="hidden" class="form-control" name="role" value="resident">
                                 <div class="row">
                                     <div class="col-md-6"><a class="btn btn-danger w-100 mt-2" href="login.php"> Back to Login</a></div>
-                                    <button class="btn btn-primary w-100 mt-2" type="submit" name="add_resident" id="submit-button">Submit</button>
+                                    <div class="col-md-6"><button class="btn btn-primary w-100 mt-2" type="submit" name="add_resident" id="submit-button" disabled>Submit</button></div>
                                 </div>
                             </form>
                         </div>
@@ -373,7 +419,36 @@
 
         <!-- Footer -->
 
-        <footer id="footer" class="bg-primary text-white d-flex-column text-center">
+        <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const passwordField = document.getElementById("password-field");
+        const confirmPasswordField = document.getElementById("confirm-password-field");
+        const showPasswordCheckbox = document.getElementById("show-password-checkbox");
+        const submitButton = document.getElementById("submit-button");
+
+        function togglePasswordVisibility() {
+            const type = showPasswordCheckbox.checked ? 'text' : 'password';
+            passwordField.type = type;
+            confirmPasswordField.type = type;
+        }
+
+        showPasswordCheckbox.addEventListener('change', togglePasswordVisibility);
+
+        function checkPasswords() {
+            if (passwordField.value === confirmPasswordField.value) {
+                confirmPasswordField.setCustomValidity('');
+                submitButton.disabled = false;
+            } else {
+                confirmPasswordField.setCustomValidity('Passwords do not match.');
+                submitButton.disabled = true;
+            }
+        }
+
+        passwordField.addEventListener("keyup", checkPasswords);
+        confirmPasswordField.addEventListener("keyup", checkPasswords);
+    });
+</script>
+        <!-- <footer id="footer" class="bg-primary text-white d-flex-column text-center"> -->
 
             <!-- Copyright--> 
 <!-- 
@@ -390,28 +465,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    -->
-    <script>
-    // Function to handle form submission and password validation
-    function validateForm(event) {
-        var password = document.getElementById("password-field").value;
-        var confirmPassword = document.getElementById("confirm-password-field").value;
-        var errorMessage = document.querySelector('#confirm-password-field + .invalid-feedback');
-        var submitButton = document.getElementById('submit-button');
-
-        if (password !== confirmPassword) {
-            errorMessage.style.display = 'block'; // Display error message if passwords don't match
-            submitButton.disabled = true; // Disable submit button
-            event.preventDefault(); // Prevent form submission if validation fails
-        } else {
-            errorMessage.style.display = 'none'; // Hide error message if passwords match
-            submitButton.disabled = false; // Enable submit button
-        }
-    }
-
-    // Add event listener to form submission
-    document.querySelector('form').addEventListener('submit', validateForm);
-</script>
+ -->
         <script src="js/purok-street.js"></script>
         
         <script>
@@ -426,18 +480,18 @@
             });
 
             $(".toggle-confirm-password").click(function() {
-        $(this).toggleClass("fa-eye fa-eye-slash");
-        var input = $($(this).attr("toggle"));
-        if (input.attr("type") == "password") {
-            input.attr("type", "text");
-        } else {
-            input.attr("type", "password");
-        }
-    });
+                $(this).toggleClass("fa-eye fa-eye-slash");
+                var input = $($(this).attr("toggle"));
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
         </script>
         
 
-        <script src="..//bootstrap/js/bootstrap.bundle.js" type="text/javascript"> </script>
+        <!-- <script src="bootstrap/js/bootstrap.bundle.js" type="text/javascript"> </script> -->
     </body>
 </html>
 
