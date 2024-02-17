@@ -59,7 +59,7 @@
                             <!-- make this in dropdown form -->
                             <div class="col">
                                 <label class="form-group">Role: </label>
-                                <input type="text" class="form-control" name="role"  placeholder="Enter Role" value="<?= $staff['role'];?>" required>
+                                <input type="text" class="form-control" name="role"  placeholder="Enter Role" value="<?= $staff['role'];?>" readonly>
                             </div>
                         </div>
                         

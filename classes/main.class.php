@@ -1182,6 +1182,7 @@ class BMISClass {
             $brgy = $_POST['brgy'];
             $municipal = $_POST['municipal'];
             $date = $_POST['date'];
+            $date_live = $_POST['date_live'];
             $track_id = uniqid();
             
             // purpose checker
@@ -1210,10 +1211,10 @@ class BMISClass {
     
                 $connection = $this->openConn();
                 $stmt = $connection->prepare("INSERT INTO tbl_rescert (`id_resident`, `lname`, `fname`, `mi`,
-                 `age`,`nationality`, `houseno`, `street`,`brgy`, `municipal`, `date`,`purpose`, `certofres_photo`, `track_id`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                 `age`,`nationality`, `houseno`, `street`,`brgy`, `municipal`, `date`,`date_live`,`purpose`, `certofres_photo`, `track_id`)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
-                $stmt->execute([$id_resident, $lname, $fname, $mi,  $age, $nationality, $houseno,  $street, $brgy, $municipal, $date, $purpose, $target_file, $track_id]);
+                $stmt->execute([$id_resident, $lname, $fname, $mi,  $age, $nationality, $houseno,  $street, $brgy, $municipal, $date,$date_live, $purpose, $target_file, $track_id]);
     
                 $message2 = "Application Applied, you will receive our text message for further details";
                 echo "<script type='text/javascript'>alert('$message2');</script>";

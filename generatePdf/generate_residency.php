@@ -32,10 +32,11 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
     $file_name = '';
 
     // Query to get clearance information
-    $statement = $connect->prepare("SELECT * FROM tbl_rescert WHERE id_resident = :id_resident LIMIT 1");
-    $statement->execute(array(':id_resident' => $_GET["id"]));
+    $statement = $connect->prepare("SELECT * FROM tbl_rescert WHERE id_rescert = :id_rescert LIMIT 1");
+    $statement->execute(array(':id_rescert' => $_GET["id"]));
     $result = $statement->fetch(PDO::FETCH_ASSOC);
 
+    $date_live = date('F Y', strtotime($result["date_live"]));
     // Check if clearance record exists
     if ($result) {
         // Start building HTML content
@@ -143,8 +144,8 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
             <td style="padding: 5px;">
               
               <h5 style="text-indent: 50px;text-align: justify;">  This is to CERTIFY that ' . $result["lname"] . ', ' . $result["fname"] . ' ' . $result["mi"] . ', ' . $result["age"] . ' years old and residing at 
-              ' . $result["houseno"] . ' ' . $result["street"] . ' STA. RITA, OLONGAPO CITY is a bonafide resident of this Barangay since 1978 up to present.</h5>
-              <h5>This CERTIFICATION is being issued upon the request of the above said person for BONAFIDE purposes only</h5>
+              ' . $result["houseno"] . ' ' . $result["street"] . ' STA. RITA, OLONGAPO CITY is a bonafide resident of this Barangay since  ' . $date_live. ' up to present.</h5>
+              <h5>This CERTIFICATION is being issued upon the request of the above said person for BONAFIDE purposes only.</h5>
 
 
               <table>

@@ -340,29 +340,29 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Password:</label>
-                                            <input type="password" class="form-control" id="password-field" name="password" placeholder="Enter Password" required>
-                                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                                            <div class="valid-feedback">Valid.</div>
-                                            <div class="invalid-feedback">Please fill out this field.</div>
-                                        </div>
-                                    </div>
+    <div class="form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" id="password-field" name="password" placeholder="Enter Password" required>
+        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+</div>
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Confirm Password:</label>
-                                            <input type="password" class="form-control" id="confirm-password-field" name="confirm_password" placeholder="Enter Confirm Password" required>
-                                            <span toggle="#confirm-password-field" class="fa fa-fw fa-eye field-icon toggle-confirm-password"></span>
-                                            <div class="valid-feedback">Valid.</div>
-                                            <div class="invalid-feedback">Please fill out this field.</div>
-                                        </div>
-                                    </div>
+<div class="col-md-3">
+    <div class="form-group">
+        <label>Confirm Password:</label>
+        <input type="password" class="form-control" id="confirm-password-field" name="confirm_password" placeholder="Enter Confirm Password" required>
+        <span toggle="#confirm-password-field" class="fa fa-fw fa-eye field-icon toggle-confirm-password"></span>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Passwords do not match.</div> <!-- Updated error message -->
+    </div>
+</div>
                                 </div>
                                 <input type="hidden" class="form-control" name="role" value="resident">
                                 <div class="row">
                                     <div class="col-md-6"><a class="btn btn-danger w-100 mt-2" href="login.php"> Back to Login</a></div>
-                                    <div class="col-md-6"><button class="btn btn-primary w-100 mt-2" type="submit" name="add_resident"> Submit </button></div>
+                                    <button class="btn btn-primary w-100 mt-2" type="submit" name="add_resident" id="submit-button">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -375,14 +375,14 @@
 
         <footer id="footer" class="bg-primary text-white d-flex-column text-center">
 
-            <!--Copyright-->
-
+            <!-- Copyright--> 
+<!-- 
             <div class="py-3 text-center">
                 Copyright
                 <script>
                 document.write(new Date().getFullYear())
-                </script> 
-                <!--BI & ESMS -->
+                </script>  -->
+                <!--BI & ESMS
             </div>
 
         </footer>
@@ -390,7 +390,28 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-        <!---->
+    -->
+    <script>
+    // Function to handle form submission and password validation
+    function validateForm(event) {
+        var password = document.getElementById("password-field").value;
+        var confirmPassword = document.getElementById("confirm-password-field").value;
+        var errorMessage = document.querySelector('#confirm-password-field + .invalid-feedback');
+        var submitButton = document.getElementById('submit-button');
+
+        if (password !== confirmPassword) {
+            errorMessage.style.display = 'block'; // Display error message if passwords don't match
+            submitButton.disabled = true; // Disable submit button
+            event.preventDefault(); // Prevent form submission if validation fails
+        } else {
+            errorMessage.style.display = 'none'; // Hide error message if passwords match
+            submitButton.disabled = false; // Enable submit button
+        }
+    }
+
+    // Add event listener to form submission
+    document.querySelector('form').addEventListener('submit', validateForm);
+</script>
         <script src="js/purok-street.js"></script>
         
         <script>

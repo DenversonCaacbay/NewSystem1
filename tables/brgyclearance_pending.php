@@ -101,7 +101,7 @@
                     <td width="20%">    
                         <form action="" method="post">
                             <!-- <a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a>  -->
-                            <a href="generatePdf/generate_clearance.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
+                            <a href="generatePdf/generate_clearance.php?pdf=1&id=<?= $view['id_clearance']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
 
                             <input type="hidden" name="id_clearance" value="<?= $view['id_clearance'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">

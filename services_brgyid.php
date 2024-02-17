@@ -510,13 +510,15 @@ color: black;
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <div class="form-group">
+                                    <div class="form-group">
                                             <label class="mtop">Pick-Up Date: </label>
-                                            <input type="date" id="myDateInput" class="form-control" name="date" required min="<?php echo date('Y-m-d'); ?>">
+                                            <input type="date" id="myDateInput" class="form-control" name="date" required 
+                                                min="<?php echo date('Y-m-d'); ?>"
+                                                max="<?php echo date('Y-m-d', strtotime('+7 days')); ?>"> <!-- end expiration date -->
+
                                             <div class="valid-feedback">Valid.</div>
-                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                            <div class="invalid-feedback">Please select a date other than Saturday or Sunday.</div>
                                         </div>
-                                    </div>
                                 </div>
                         </div>
 
@@ -684,6 +686,24 @@ color: black;
 
         
         <script src="bootstrap/js/bootstrap.bundle.js" type="text/javascript"> </script>
+        <script>
+    // Function to check if a given date is a Saturday or Sunday
+    function isWeekend(date) {
+        const day = date.getDay(); // 0 (Sunday) to 6 (Saturday)
+        return day === 0 || day === 6;
+    }
+
+    // Function to handle date input change event
+    document.getElementById('myDateInput').addEventListener('change', function() {
+        const selectedDate = new Date(this.value);
+        if (isWeekend(selectedDate)) {
+            this.setCustomValidity('Please select a date other than Saturday or Sunday.');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+</script>
+
 
     </body>
 </html>

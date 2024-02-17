@@ -93,7 +93,7 @@
                     </td>
                     <td width="20%">    
                         <form action="" method="post">
-                           <a href="generatePdf/generate_businesspermit.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
+                           <a href="generatePdf/generate_businesspermit.php?pdf=1&id=<?= $view['id_bspermit']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
                             <input type="hidden" name="id_bspermit" value="<?= $view['id_bspermit'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
                             <button class="btn btn-primary" type="submit" name="approved_bspermit" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
@@ -170,7 +170,7 @@
                     </td>
                     <td width="20%">    
                         <form action="" method="post">
-                           <a href="generatePdf/generate_businesspermit.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
+                           <a href="generatePdf/generate_businesspermit.php?pdf=1&id=<?= $view['id_bspermit']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
                             <input type="hidden" name="id_bspermit" value="<?= $view['id_bspermit'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
                             <button class="btn btn-primary" type="submit" name="approved_bspermit" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>

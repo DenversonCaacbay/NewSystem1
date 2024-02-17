@@ -48,7 +48,7 @@
                         <td width="20%">    
                             <form action="" method="post">
                                 <!--<a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> -->
-                                <a href="generatePdf/generate_residency.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
+                                <a href="generatePdf/generate_residency.php?pdf=1&id=<?= $view['id_rescert']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
                                 <input type="hidden" name="id_rescert" value="<?= $view['id_rescert'];?>">
                                 <input type="hidden" name="email" value="<?= $view['email'];?>">
                                 <button class="btn btn-primary" type="submit" name="approved_rescert" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
@@ -94,7 +94,7 @@
                         <td width="20%">    
                             <form action="" method="post">
                                 <!--<a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> -->
-                                <a href="generatePdf/generate_residency.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
+                                <a href="generatePdf/generate_residency.php?pdf=1&id=<?= $view['id_rescert']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
                                 <input type="hidden" name="id_rescert" value="<?= $view['id_rescert'];?>">
                                 <input type="hidden" name="email" value="<?= $view['email'];?>">
                                 <button class="btn btn-primary" type="submit" name="approved_rescert" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>

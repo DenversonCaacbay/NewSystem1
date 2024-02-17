@@ -5,13 +5,13 @@
 
             <!--Copyright-->
 
-            <div class="py-3 text-center">
+            <!-- <div class="py-3 text-center">
                 Copyright
                 <script>
                 document.write(new Date().getFullYear())
                 </script> 
                 BI & ESMS 
-            </div>
+            </div> -->
 
         </footer>
 

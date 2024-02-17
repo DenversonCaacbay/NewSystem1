@@ -76,7 +76,7 @@
                     <td width="20%">    
                         <form action="" method="post">
                             <!--<a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="indigency_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> -->
-                            <a href="generatePdf/generate_indigency.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
+                            <a href="generatePdf/generate_indigency.php?pdf=1&id=<?= $view['id_indigency']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
                             <input type="hidden" name="id_indigency" value="<?= $view['id_indigency'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
                             <button class="btn btn-primary" type="submit" name="approved_indigency" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
@@ -149,7 +149,7 @@
                     <td width="20%">    
                         <form action="" method="post">
                             <!--<a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="indigency_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> -->
-                            <a href="generatePdf/generate_indigency.php?pdf=1&id=<?= $view['id_resident']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
+                            <a href="generatePdf/generate_indigency.php?pdf=1&id=<?= $view['id_indigency']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
                             <input type="hidden" name="id_indigency" value="<?= $view['id_indigency'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
                             <button class="btn btn-primary" type="submit" name="approved_indigency" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
