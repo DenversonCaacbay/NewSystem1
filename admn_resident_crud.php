@@ -6,7 +6,7 @@
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
    $view = $residentbmis->view_resident();
-   $residentbmis->create_resident();
+   $residentbmis->create_resident_by_admin();
    $residentbmis->update_resident();
    $residentbmis->delete_resident();
    
@@ -214,11 +214,11 @@
                                     </div>
                                 </div>
                                 
-                                <div class="row">
+                                <div class="row" hidden>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Password:</label>
-                                            <input type="password" class="form-control" id="password-field" name="password" placeholder="Enter Password" required>
+                                            <input type="password" class="form-control" id="password-field" value="pass1234" name="password" placeholder="Enter Password" required>
                                             <!--<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>-->
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
@@ -228,7 +228,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Confirm Password:</label>
-                                            <input type="password" class="form-control" id="confirm-password-field" name="confirm_password" placeholder="Enter Confirm Password" required>
+                                            <input type="password" class="form-control" id="confirm-password-field" value="pass1234" name="confirm_password" placeholder="Enter Confirm Password" required>
                                             <!--<span toggle="#confirm-password-field" class="fa fa-fw fa-eye field-icon toggle-confirm-password"></span>-->
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
@@ -308,7 +308,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label> Municipality: </label>
-                                            <input type="text" class="form-control" name="municipal" placeholder="Enter Municipality" value="Olongapo" readonly>
+                                            <input type="text" class="form-control" name="municipal" placeholder="Enter Municipality" value="Olongapo City" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
