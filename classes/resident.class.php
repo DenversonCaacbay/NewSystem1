@@ -32,6 +32,7 @@ use PHPMailer\PHPMailer\Exception;
     class ResidentClass extends BMISClass {
         //------------------------------------ RESIDENT CRUD FUNCTIONS ----------------------------------------
 
+        // Create Resident by admin or staff
         public function create_resident() {
             if(isset($_POST['add_resident'])) {
                 $email = $_POST['email'];
@@ -62,7 +63,12 @@ use PHPMailer\PHPMailer\Exception;
                 $familyrole = $_POST['family_role'];
                 $role = $_POST['role'];
 
-                $is_in_admin = $_POST['is_in_admin'];
+                $is_in_admin = $_POST['is_in_admin'] ?: "0";
+                $is_verified = "Pending";
+
+                if($is_in_admin == "1"){
+                    $is_verified = "Yes";
+                }
         
                 // Check if user is 18
                 if ($age < 18) {
@@ -106,109 +112,13 @@ use PHPMailer\PHPMailer\Exception;
                         $stmt = $connection->prepare("INSERT INTO tbl_resident (
                             `email`, `password`, `lname`, `fname`, `mi`, `age`, `sex`, `status`, `houseno`, 
                             `purok`, `street`, `brgy`, `municipal`, `address`, `contact`, `bdate`, 
-                            `bplace`, `nationality`, `date_live`, `voter`, `family_role`, `role`, `valid_id_photo`
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            `bplace`, `nationality`, `date_live`, `voter`, `family_role`, `role`, `valid_id_photo`,
+                            `verified`
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
                         $stmt->Execute([$email, $hashed_password, $lname, $fname, $mi, $age, $sex, $status, 
                         $houseno, $purok, $street, $brgy, $municipal, $address, $contact, $bdate, 
-                        $bplace, $nationality, $date_live, $voter, $familyrole, $role, $target_file]);
-        
-                        $message2 = "Your account has been added. Please await approval from the administrator via email before logging in.";
-                        echo "<script type='text/javascript'>alert('$message2');</script>";
-        
-                        if($is_in_admin == "1"){
-                            echo '<script>window.location.replace("admn_resident_crud.php")</script>';
-                        }else{
-                            echo '<script>window.location.replace("index.php")</script>';
-                        }
-                    } else {
-                        echo "Sorry, there was an error uploading your file.";
-                    }
-                }
-            }
-        }
-
-        // Create Resident by admin or staff
-        public function create_resident_by_admin() {
-            if(isset($_POST['add_resident'])) {
-                $email = $_POST['email'];
-                $password = ($_POST['password']);
-                $confirm_password = ($_POST['confirm_password']);
-                $lname = ucwords(strtolower($_POST['lname'])); // Convert to uppercase
-                $fname = ucwords(strtolower($_POST['fname'])); // Convert to uppercase
-                $mi = ucfirst(strtolower($_POST['mi']));
-                $sex = $_POST['sex'];
-                $status = $_POST['status'];
-                $houseno = $_POST['houseno'];
-                $purok = $_POST['purok'];
-                $street = $_POST['street'];
-                $brgy = $_POST['brgy'];
-                $municipal = $_POST['municipal'];
-                $address = isset($_POST['address']) ? $_POST['address'] : NULL;
-                $contact = $_POST['contact'];
-                $date_live = $_POST['date_live'];
-        
-                $bdate = $_POST['bdate'];
-                $current_year = date("Y");
-                $birth_year = date("Y", strtotime($bdate));
-                $age = $current_year - $birth_year;
-        
-                $bplace = $_POST['bplace'];
-                $nationality = $_POST['nationality'];
-                $voter = $_POST['voter'];
-                $familyrole = $_POST['family_role'];
-                $role = $_POST['role'];
-
-                $is_in_admin = $_POST['is_in_admin'];
-        
-                // Check if user is 18
-                if ($age < 18) {
-                    $message = "Sorry, you are still underaged to register an account";
-                    echo "<script type='text/javascript'>alert('$message');</script>";
-                    return false;
-                }
-        
-                // Check if the password and confirm password match
-                if ($password !== $confirm_password) {
-                    $message = "Password and Confirm Password do not match";
-                    echo "<script type='text/javascript'>alert('$message');</script>";
-                    return false;
-                }
-        
-                // Check if the password is at least 8 characters long
-                if (strlen($password) < 8) {
-                    $message = "Password must be at least 8 characters long";
-                    echo "<script type='text/javascript'>alert('$message');</script>";
-                    return false;
-                }
-        
-                // Hash the password
-                $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        
-                $new_image = $_FILES['id_picture'];
-        
-                if (!empty($new_image['name'])) {
-                    $target_dir = "uploads/residents_id/";
-                    $file_extension = pathinfo($new_image['name'], PATHINFO_EXTENSION);
-        
-                    if (!is_dir($target_dir)) {
-                        mkdir($target_dir, 0755, true);
-                    }
-        
-                    $target_file = $target_dir . time() . '.' . $file_extension;
-        
-                    if (move_uploaded_file($new_image["tmp_name"], $target_file)) {
-                        // proceed to create resident with image
-                        $connection = $this->openConn();
-                        $stmt = $connection->prepare("INSERT INTO tbl_resident (
-                            `email`, `password`, `lname`, `fname`, `mi`, `age`, `sex`, `status`, `houseno`, 
-                            `purok`, `street`, `brgy`, `municipal`, `address`, `contact`, `bdate`, 
-                            `bplace`, `nationality`, `date_live`, `voter`, `family_role`, `role`, `valid_id_photo`
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            
-                        $stmt->Execute([$email, $hashed_password, $lname, $fname, $mi, $age, $sex, $status, 
-                        $houseno, $purok, $street, $brgy, $municipal, $address, $contact, $bdate, 
-                        $bplace, $nationality, $date_live, $voter, $familyrole, $role, $target_file]);
+                        $bplace, $nationality, $date_live, $voter, $familyrole, $role, $target_file, $is_verified]);
         
                         $message2 = "Your account has been added. Please await approval from the administrator via email before logging in.";
                         echo "<script type='text/javascript'>alert('$message2');</script>";

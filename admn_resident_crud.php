@@ -6,7 +6,7 @@
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
    $view = $residentbmis->view_resident();
-   $residentbmis->create_resident_by_admin();
+   $residentbmis->create_resident();
    $residentbmis->update_resident();
    $residentbmis->delete_resident();
    
