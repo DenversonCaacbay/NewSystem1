@@ -6,13 +6,13 @@
 ?>
 	<table class="table table-hover text-center responsive table-bordered" >
 
-		<thead class="alert-info">
+		<thead class="alert-info sticky-top">
 			<tr>
                 <th width="20%"> Actions</th>
                 <th width="20%"> Email </th>
                 <th width="20%"> Full Name </th>
                 <th width="5%"> Age </th>
-                <th width="20%"> Address </th>
+                <!-- <th width="20%"> Address </th> -->
                 <th width="10%"> Contact # </th>
                 <th width="5%">Verification ID</th>
                 <th width="5%"> View </th>
@@ -33,9 +33,9 @@
                         <td> <?= $view['email'];?> </td>
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                         <td> <?= $view['age'];?> </td>
-                        <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 10ch;">
+                        <!-- <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 10ch;">
     <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>
-</td>
+</td> -->
                         <td> <?= $view['contact'];?> </td>
                         <td>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['valid_id_photo'] ?>', '<?= $view['lname'];?>', '<?= $view['fname'];?> <?= $view['mi'];?>')">
@@ -62,14 +62,14 @@
 	}else{
 ?>
 <table class="table table-hover table-bordered responsive text-center">
-<thead class="alert-info">
+<thead class="alert-info sticky-top">
 			<tr>
                 
                 
                 <th width="15%"> Full Name </th>
                 <th width="20%"> Email </th>
                 <th width="5%"> Age </th>
-                <th width="20%"> Address </th>
+                <!-- <th width="20%"> Address </th> -->
                 <th width="10%"> Contact # </th>
                 <th width="5%">Verification ID</th>
                 <th width="15%"> Actions</th>
@@ -85,9 +85,9 @@
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                         <td> <?= $view['email'];?> </td>
                         <td> <?= $view['age'];?> </td>
-                        <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 10ch;">
+                        <!-- <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 10ch;">
     <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>
-</td>
+</td> -->
 
                         <td> <?= $view['contact'];?> </td>
                         <td>

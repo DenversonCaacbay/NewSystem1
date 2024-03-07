@@ -190,8 +190,8 @@
 
         <div class="dropdown ml-auto">
             <?php if (empty($userdetails)) : ?>
-                <a href="login.php" class="btn btn-primary ml-2">Login</a>
-                <a href="resident_registration.php" class="btn btn-primary ml-2">Create an Account</a>
+                <a href="login.php" class="btn btn-primary ml-2">Login | Create an Account</a>
+                <!-- <a href="resident_registration.php" class="btn btn-primary ml-2"></a> -->
             <?php else : ?>
                 <button title="Your Account" class="btn btn-primary dropdown-toggle ml-2" type="button" data-toggle="dropdown">
                  <?= $userdetails['surname']; ?>, <?= $userdetails['firstname']; ?>

@@ -379,7 +379,7 @@ use PHPMailer\PHPMailer\Exception;
 
     public function count_resident() {
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident");
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident WHERE verified = 'Yes'");
         $stmt->execute();
         $rescount = $stmt->fetchColumn();
         return $rescount;
@@ -456,7 +456,7 @@ use PHPMailer\PHPMailer\Exception;
     public function count_male_resident() {
         $connection = $this->openConn();
 
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident where sex = 'male' ");
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident where sex = 'male' AND verified = 'Yes' ");
         $stmt->execute();
         $rescount = $stmt->fetchColumn();
 
@@ -466,7 +466,7 @@ use PHPMailer\PHPMailer\Exception;
     public function count_female_resident() {
         $connection = $this->openConn();
 
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident where sex = 'female'");
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident where sex = 'female' AND verified = 'Yes'");
         $stmt->execute();
         $rescount = $stmt->fetchColumn();
 
@@ -476,7 +476,7 @@ use PHPMailer\PHPMailer\Exception;
     public function count_head_resident() {
         $connection = $this->openConn();
         
-        $stmt = $connection->prepare("SELECT COUNT(*) AS total_residents FROM tbl_resident");
+        $stmt = $connection->prepare("SELECT COUNT(*) AS total_residents FROM tbl_resident WHERE verified = 'Yes'");
         // $stmt = $connection->prepare("SELECT COUNT(houseno) FROM tbl_resident GROUP BY houseno");
         // $stmt = $connection->prepare("SELECT COUNT(*) as count, lname FROM tbl_resident GROUP BY houseno, lname");
         // $stmt = $connection->prepare("SELECT SUM(count) as total_count FROM (SELECT COUNT(*) as count FROM tbl_resident GROUP BY houseno, lname) AS subquery");
@@ -736,7 +736,7 @@ use PHPMailer\PHPMailer\Exception;
 
     public function count_voters() {
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident where `voter` = 'Yes' ");
+        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident where `voter` = 'Yes' AND verified = 'Yes' ");
         $stmt->execute();
         $rescount = $stmt->fetchColumn();
 

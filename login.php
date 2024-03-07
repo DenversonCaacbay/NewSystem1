@@ -109,6 +109,7 @@
             .btn:hover {
             opacity: 1;
             }
+            
         </style>
 
     </head>
@@ -166,7 +167,11 @@
                                         <br>
                                         <p1> Hindi ka pa rehistrado? </p1> 
                                         <br>
-                                        <button class="btn btn-success create-button" onclick="trying();"> Create Account </button> 
+                                        <button class="btn btn-success create-button" onclick="trying();" disabled> Create Account </button> 
+                                        <div class="custom-control custom-switch mt-3">
+                                            <input type="checkbox" onclick="enableCreate()" class="custom-control-input" id="switch2">
+                                            <a class="custom-control-label" href="communiserve_privacy_policy.html" target="_blank" for="switch1">Communiserve Privacy Policy</a>
+                                        </div> 
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +185,7 @@
 
         <!-- Footer -->
 
-        <footer id="footer" class="bg-primary text-white fixed-bottom d-flex-column text-center">
+        <footer id="footer" class="bg-primary text-white sticky-bottom d-flex-column text-center">
 
             <!--Copyright-->
 
@@ -201,6 +206,17 @@
                         x.type = "text";
                     } else {
                         x.type = "password";
+                }
+            }
+
+            function enableCreate() {
+                var checkbox = document.getElementById("switch2");
+                var button = document.querySelector(".create-button");
+
+                if (checkbox.checked === true) {
+                    button.disabled = false;
+                } else {
+                    button.disabled = true;
                 }
             }
 

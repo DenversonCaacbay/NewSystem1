@@ -37,12 +37,13 @@
     <div class="row"> 
         <div class="col-sm-4"> 
             <div class="card">
-                <div class="card-header bg text-white" style="font-size: 20px;"> Event Announcement Form </div>
+                <div class="card-header bg text-white" style="font-size: 20px;"> Event Announcement Form <a class="btn btn-primary " style="float: right; font-size: 15px" data-bs-toggle="modal" data-bs-target="#exampleModal">See Sample</a></div>
                 <div class="card-body">
+                
                     <form method="post" enctype="multipart/form-data">
+                    <code><i>Note:</i> Image should be like banner format, click see sample to view sample banner.</code>
                         <div class="row"> 
                             <div class="col">
-                                
                                 <input type="file" class="form-control" name="announcement_image" required>
                                 <label class="mt-2">Title</label>
                                 <input type="text" class="form-control" name="announcement_title" required>
@@ -111,6 +112,23 @@
         </div>
     </div>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Sample Banner Image</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <code>Image Size: 960 x 523</code>
+        <img src="uploads/announcements/1706245737.jpg" alt="" class="img-fluid">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <!-- /.container-fluid -->
