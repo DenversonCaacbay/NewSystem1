@@ -77,7 +77,10 @@
             width: 100%;
             margin-bottom: 10px;
             }
-
+            .card{
+                width: 50%;
+                margin: auto;
+            }
             .icon {
             padding: 15px;
             background: #309464 !important;
@@ -109,6 +112,11 @@
             .btn:hover {
             opacity: 1;
             }
+            @media (max-width: 767.98px) {
+                .card{
+                    width: 100%;
+                }
+            }
             
         </style>
 
@@ -129,8 +137,7 @@
                         </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm"></div>
-                        <div class="col-sm"> 
+                        <div class="col-md-12"> 
                             <div class="card main-card"> 
                                 <div class="card-body"> 
                                     <form method="post"> 
@@ -175,8 +182,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <div class="col-sm"></div>
+        </div>
                 </div>
                             
             </div>
@@ -221,7 +227,7 @@
             }
 
             function trying() {
-                window.location.href = "resident_registration.php";
+                window.location.href = "email_checker.php";
             }
         </script>
 

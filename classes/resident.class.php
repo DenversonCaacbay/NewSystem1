@@ -240,6 +240,8 @@ use PHPMailer\PHPMailer\Exception;
                 header("refresh: 0");
             }
         }
+
+
         
 
         public function approve_resident() {
