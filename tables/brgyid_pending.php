@@ -108,7 +108,6 @@
             <th class="bg text-light"> Full Name </th>
             <th class="bg text-light"> Address </th>
             <th class="bg text-light"> Birth Date </th>
-            <th class="bg text-light"> Birth Place </th>
             <th class="bg text-light"> Emergency Contact Person </th>
             <th class="bg text-light"> Emergency Contact Number </th>
             <th class="bg text-light"> Image </th>
@@ -125,7 +124,6 @@
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
                     <td> <?= $view['bdate'];?> </td>
-                    <td> <?= $view['bplace'];?> </td>
                     <td> <?= $view['inc_lname'];?>, <?= $view['inc_fname'];?> </td>
                     <td> <?= $view['inc_contact'];?> </td>
                     <td>

@@ -277,6 +277,14 @@ color: black;
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="mi">Birthdate </label>
+                                    <input name="bdate" type="date" class="form-control" value="<?= $userdetails['bdate']?>" readonly>
+                                        <div class="valid-feedback">Valid.</div>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                            </div>
 
                         </div>
 

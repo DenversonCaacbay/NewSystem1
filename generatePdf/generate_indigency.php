@@ -31,8 +31,8 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
     $file_name = '';
 
     // Query to get clearance information
-    $statement = $connect->prepare("SELECT * FROM tbl_clearance WHERE id_resident = :id_resident LIMIT 1");
-    $statement->execute(array(':id_resident' => $_GET["id"]));
+    $statement = $connect->prepare("SELECT * FROM tbl_indigency WHERE id_indigency = :id_indigency LIMIT 1");
+    $statement->execute(array(':id_indigency' => $_GET["id"]));
     $result = $statement->fetch(PDO::FETCH_ASSOC);
 
     // Check if clearance record exists
@@ -141,13 +141,11 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
           <table width="100%">
             <td style="padding: 5px;">
               
-                <h5 style="text-indent: 50px; text-align: justify;"> This is to CERTIFY that ' . $result["lname"] . ', ' . $result["fname"] . ' ' . $result["mi"] . ', bonafide resident of this barangay with the address of ' . $result["street"] . ' STA. RITA, Olongapo City belongs to an indigent family.
+                <h5 style="text-indent: 50px; text-align: justify;"> This is to <b>CERTIFY</b> that <b><span style="text-transform: uppercase">' . $result["lname"] . ', ' . $result["fname"] . ' ' . $result["mi"] . '</span></b>, bonafide resident of this barangay with the address of <b><span style="text-transform: uppercase">'.$result["houseno"].' ' . $result["street"] . '</span> STA. RITA, Olongapo City</b> belongs to an indigent family.
                 </h5>
+
                 <h5 style="text-indent: 50px; text-align: justify;">
-                This further certified that requestor has no permanent source of income and could hardly suffice her/his daily needs, Furthermore, she/he belongs to indigent families of this Barangay.
-                </h5>
-                <h5 style="text-indent: 50px; text-align: justify;">
-                    This certification is issued upon request of ' . $result["lname"] . ', ' . $result["fname"] . ' ' . $result["mi"] . ' for W of her W W and whatever legal purpose it may serve
+                    This <b>CERTIFICATION</b> is issued upon request for   <b><span style="text-transform: uppercase">' . $result["purpose"] . '</span></b> purposes.
                 </h5>
               <table>
                   <br>

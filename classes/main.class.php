@@ -1540,6 +1540,7 @@ class BMISClass {
             $lname = $_POST['lname'];
             $fname = $_POST['fname'];
             $mi = $_POST['mi'];
+            $bdate = $_POST['bdate'];
             $pickup_date = $_POST['date'];
             $track_id = uniqid();
             
@@ -1576,13 +1577,13 @@ class BMISClass {
     
                 $connection = $this->openConn();
                 $stmt = $connection->prepare("INSERT INTO tbl_clearance (`id_resident`, `lname`, `fname`, `mi`,
-                 `purpose`, `houseno`, `street`,`brgy`, `municipal`, `status`, `brgyclearance_photo`, `track_id`, `date`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                `purpose`, `houseno`, `street`,`brgy`, `municipal`, `status`, `brgyclearance_photo`, `track_id`, `date`, `bdate`)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
                 $stmt->execute([$id_resident, $lname, $fname, $mi,  $purpose, 
-                    $houseno,  $street, $brgy,   $municipal, $status, $target_file, $track_id, $pickup_date]);
+                $houseno,  $street, $brgy,   $municipal, $status, $target_file, $track_id, $pickup_date,$bdate,]);
     
-                $message2 = "Application Applied, you will receive our text message for further details";
+                $message2 = "Application Applied, you will receive our email for further details";
                 echo "<script type='text/javascript'>alert('$message2');</script>";
                 header("refresh: 0");
             } else {

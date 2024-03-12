@@ -30,8 +30,8 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
     $file_name = '';
 
     // Query to get clearance information
-    $statement = $connect->prepare("SELECT * FROM tbl_bspermit WHERE id_resident = :id_resident LIMIT 1");
-    $statement->execute(array(':id_resident' => $_GET["id"]));
+    $statement = $connect->prepare("SELECT * FROM tbl_bspermit WHERE id_bspermit = :id_bspermit LIMIT 1");
+    $statement->execute(array(':id_bspermit' => $_GET["id"]));
     $result = $statement->fetch(PDO::FETCH_ASSOC);
 
     // Check if clearance record exists

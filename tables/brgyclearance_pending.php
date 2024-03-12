@@ -82,6 +82,7 @@
             <th class="bg text-light"> Pick Up Date </th>
             <th class="bg text-light"> Tracking ID </th>
             <th class="bg text-light"> Full Name </th>
+            <th class="bg text-light"> Birthdate </th>
             <th class="bg text-light"> Purpose </th>
             <th class="bg text-light"> Address </th>
             <th class="bg text-light"> Actions</th>
@@ -96,6 +97,7 @@
                     <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
+                    <td> <?= $view['bdate'];?></td>
                     <td> <?= $view['purpose'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>,<?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
                     <td width="20%">    

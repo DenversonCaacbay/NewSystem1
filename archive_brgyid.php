@@ -49,18 +49,23 @@
     <div class="row mt-3"> 
             <div class="col">
             <form method="POST" action="" id="searchForm">
-                <div class="input-icons d-flex">
-                    <!-- Replace input with select dropdown -->
+                <div class="input-icons d-flex justify-content-between">
+                <div class="d-flex justify-content-between">
                     <select class="form-select search" name="form_status" id="formStatus" style="height:50px;" required="">
                         <option value="Approved">Approved</option>
                         <option value="Declined">Declined</option>
                     </select>
                     <button class="btn btn-success ms-2" name="search_brgyid">Search</button>
                     <a href="archive_brgyid.php" class="btn btn-info ms-2 me-5" style="font-size: 17px;width:200px;padding-top:10px;">View All</a>
-                    Export Data By: 
-                    <a class="btn btn-primary ms-2"  style="padding-top:13px; " target="_blank" href="generatePdf/brgyid/week.php">Week</a>
-                    <a class="btn btn-primary ms-2"  style="padding-top:13px; " target="_blank" href="generatePdf/brgyid/month.php">Monthly</a>
-                    <a class="btn btn-primary ms-2"  style="padding-top:13px; " target="_blank" href="generatePdf/brgyid/year.php">Yearly</a>
+                </div>
+                    <!-- Replace input with select dropdown -->
+                <div>
+                     Export Data By: 
+                    <a class="btn btn-primary" target="_blank" href="generatePdf/brgyid/week.php">Weekly</a>
+                    <a class="btn btn-primary" target="_blank" href="generatePdf/brgyid/month.php">Monthly</a>
+                    <a class="btn btn-primary" target="_blank" href="generatePdf/brgyid/year.php">Yearly</a>
+                </div>    
+                   
                 </div>
             </form>
         </div>

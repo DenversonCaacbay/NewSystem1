@@ -156,8 +156,8 @@ use PHPMailer\PHPMailer\Exception;
                 }
             } else {
                 // Handle case where email is not set
-                header("Location: your_form_page.php?error=email_not_provided");
-                exit();
+                // header("Location: your_form_page.php?error=email_not_provided");
+                // exit();
             }
         }
         

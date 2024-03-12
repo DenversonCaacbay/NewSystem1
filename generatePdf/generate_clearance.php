@@ -31,24 +31,24 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
     $file_name = '';
 
     // Query to get clearance information
-    $statement = $connect->prepare("SELECT * FROM tbl_clearance WHERE id_resident = :id_resident LIMIT 1");
-    $statement->execute(array(':id_resident' => $_GET["id"]));
+    $statement = $connect->prepare("SELECT * FROM tbl_clearance WHERE id_clearance = :id_clearance LIMIT 1");
+    $statement->execute(array(':id_clearance' => $_GET["id"]));
     $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-$imagePath_5 = $result["brgyclearance_photo"];  // Assuming the path is stored in the database
+// $imagePath_5 = $result["brgyclearance_photo"];  // Assuming the path is stored in the database
 
     // Check if clearance record exists
         if ($result) {
         // Read image file and convert to base64
-        $imagePath5 = $result["brgyclearance_photo"]; // Assuming the path is stored in the database
+        // $imagePath5 = $result["brgyclearance_photo"]; // Assuming the path is stored in the database
 
-        if (file_exists($imagePath5)) {
-            $imageData5 = file_get_contents($imagePath5);
-            $imageBase64_5 = base64_encode($imageData5);
-        } else {
-            // Handle the case when the image file is not found
-            $imageBase64_5 = ''; // Set a default value or handle accordingly
-        }
+        // if (file_exists($imagePath5)) {
+        //     $imageData5 = file_get_contents($imagePath5);
+        //     $imageBase64_5 = base64_encode($imageData5);
+        // } else {
+        //     // Handle the case when the image file is not found
+        //     $imageBase64_5 = ''; // Set a default value or handle accordingly
+        // }
         // Start building HTML content
         $output .= '
         <!doctype html>
@@ -156,19 +156,19 @@ $imagePath_5 = $result["brgyclearance_photo"];  // Assuming the path is stored i
               <h5 style="text-indent: 50px;text-align: justify;">  This is to certify that the person whose name, picture, thumb mark and signature print appear hereon is a bonafide resident of this barangay</h5>
               <table>
                   <tr>
-                      <td><b>Name:</b> ' . $result["fname"] . ' ' . $result["mi"] . ' ' . $result["lname"] . '</td>
+                      <td><b>Name:</b> <span style="text-transform: uppercase;">' . $result["lname"] . ', ' . $result["fname"] . ' ' . $result["mi"] . '</span></td>
                   </tr>
                   <tr>
-                      <td><b>Address:</b> ' . $result["street"] . ' STA. RITA, OLONGAPO CITY</td>
+                      <td><b>Address:</b> <span style="text-transform: uppercase;">'. $result["houseno"] . ' '. $result["street"] . '</span> STA. RITA, OLONGAPO CITY</td>
                   </tr>
                   <tr>
-                    <td><b>Birthdate: </b></td>
+                  <td><b>Birthdate: </b><span  style="text-transform: uppercase;">' . date('F d, Y', strtotime($result["bdate"])) . '</span></td>
                   </tr>
                   <tr>
-                      <td><b>Purpose:</b> ' . $result["purpose"] . '</td>
+                      <td><b>Purpose:</b> <span  style="text-transform: uppercase;">' . $result["purpose"] . '</span></td>
                   </tr>
                   <tr>
-                    <td><b>Remarks: </b></td>
+                  <td><b>Remarks: <span style="color: red">NO DEROGATORY RECORD ON FILE</span></b></td>
                   </tr>
 
                   <br>
