@@ -505,7 +505,14 @@ use PHPMailer\PHPMailer\Exception;
     public function count_head_resident() {
         $connection = $this->openConn();
         
-        $stmt = $connection->prepare("SELECT COUNT(*) AS total_residents FROM tbl_resident WHERE verified = 'Yes'");
+        $stmt = $connection->prepare("SELECT SUM(houseno_count) AS total_houseno_count
+            FROM (
+                SELECT COUNT(*) AS houseno_count
+                FROM tbl_resident
+                GROUP BY houseno
+            ) AS counts;");
+        // $stmt = $connection->prepare("SELECT COUNT(*) AS total_residents FROM tbl_resident WHERE verified = 'Yes'");
+        // $stmt = $connection->prepare("SELECT COUNT(*) AS total_residents FROM tbl_resident WHERE verified = 'Yes'");
         // $stmt = $connection->prepare("SELECT COUNT(houseno) FROM tbl_resident GROUP BY houseno");
         // $stmt = $connection->prepare("SELECT COUNT(*) as count, lname FROM tbl_resident GROUP BY houseno, lname");
         // $stmt = $connection->prepare("SELECT SUM(count) as total_count FROM (SELECT COUNT(*) as count FROM tbl_resident GROUP BY houseno, lname) AS subquery");
