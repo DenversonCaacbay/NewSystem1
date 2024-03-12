@@ -65,6 +65,9 @@
             body {
                 background: #309464 !important;
             }
+            body::-webkit-scrollbar{
+                display:none;
+            }
             .bg-primary{
                     background: #309464 !important;
                 }
@@ -154,16 +157,12 @@
                                             <input class="input-field" type="password" placeholder="Enter Password" id="myInput" name="password" required>
                                         </div>
 
-                                        <br>
-
-                                        <div class="custom-control custom-switch">
+                                        <div class="custom-control custom-switch mt-3">
                                             <input type="checkbox" onclick="myFunction()" class="custom-control-input" id="switch1">
                                             <label class="custom-control-label" for="switch1">Show Password</label>
                                         </div>
-
-                                        <br>
                                         
-                                        <button class="btn btn-primary login-button" type="submit" name="login"> Log-in </button>
+                                        <button class="btn btn-primary login-button mt-3" type="submit" name="login"> Log-in </button>
                                     
                                     </form>
 
@@ -191,7 +190,7 @@
 
         <!-- Footer -->
 
-        <footer id="footer" class="bg-primary text-white sticky-bottom d-flex-column text-center">
+        <footer id="footer" class="bg-primary text-white fixed-bottom d-flex-column text-center">
 
             <!--Copyright-->
 
@@ -200,7 +199,7 @@
                 <script>
                 document.write(new Date().getFullYear())
                 </script> 
-                BI & ESMS
+                CommuniServe
             </div>
 
         </footer>

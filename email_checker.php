@@ -1,9 +1,8 @@
 <?php 
-     require('classes/resident.class.php');
-     error_reporting(E_ALL ^ E_WARNING);
-     ini_set('display_errors',0);
+    require('classes/resident.class.php');
+    error_reporting(E_ALL ^ E_WARNING);
+    ini_set('display_errors',0);
     $residentbmis->email_checker();
-     //$data = $bms->get_userdata();
 
      
 ?>
@@ -71,6 +70,10 @@
                 margin: auto;
                 width: 50%;
             }
+
+            .container{
+                margin-top: 10%;
+            }
             .was-validated .form-control:valid, 
             .was-validated .form-control:invalid {
                 background-image: none; /* Remove background-image (validation icon) */
@@ -110,6 +113,9 @@
                 .desk {
                     display: none;
                 }
+                .container{
+                    margin-top: 50%;
+                }
                 .card{
                     width: 100%;
                 }
@@ -125,17 +131,20 @@
             <a class="navbar-brand mob mx-auto" style="color: white;">BSRI & E-Services</a>
         </nav>
 
-        <div class="container" style="margin-top: 1em;">
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <h3 class="text-center">Email Checker</h3>
                     <div class="card border-0 shadow p-3">
-                        <label>Enter Email</label>
-                        <input class="form-control mt-3" placeholder="sample@gmail.com">
+                        <form method="post">
+                            <label>Enter Email</label>
+                            <input class="form-control mt-3" placeholder="sample@gmail.com" name="email">
 
-                        <div class="d-flex justify-content-between">
-                        <a href="login.php" class="btn btn-danger mt-3">Back to Login</a>
-                        <button type="submit" class="btn btn-success mt-3">Check Email</button>
+                            <div class="d-flex justify-content-between">
+                            <a href="login.php" class="btn btn-danger mt-3">Back to Login</a>
+                            <button type="submit" class="btn btn-success mt-3">Check Email</button>
+                        </form>
+                        
                         </div>
                     </div>
                 </div>

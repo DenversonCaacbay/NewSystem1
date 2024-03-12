@@ -134,6 +134,33 @@ use PHPMailer\PHPMailer\Exception;
                 }
             }
         }
+
+        public function email_checker() {
+            $connection = $this->openConn();
+            $email = isset($_POST['email']) ? $_POST['email'] : null; // Check if email is set
+            
+            if ($email) {
+                // Check if the email already exists
+                $stmt = $connection->prepare("SELECT * FROM tbl_resident WHERE email = :email");
+                $stmt->bindParam(':email', $email);
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+                if ($result) {
+                    // Email already exists, show alert
+                    echo "<script>alert('Email is already in use.');</script>";
+                } else {
+                    // Email doesn't exist, redirect to registration page with email as parameter
+                    header("Location: resident_registration.php?email=" . urlencode($email));
+                    exit();
+                }
+            } else {
+                // Handle case where email is not set
+                header("Location: your_form_page.php?error=email_not_provided");
+                exit();
+            }
+        }
+        
         
 
         public function view_resident(){

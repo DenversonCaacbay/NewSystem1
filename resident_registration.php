@@ -370,7 +370,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Email: </label>
-                                            <input type="email" class="form-control" name="email" placeholder="Enter Email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
+                                            <input type="email" class="form-control" name="email" placeholder="Enter Email" id="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -418,6 +418,14 @@
         </div>
 
         <!-- Footer -->
+        <script>
+    // Retrieve the values from the query parameters
+        var params = new URLSearchParams(window.location.search);
+        var email = params.get('email');
+
+        // Set the values in the input fields
+        document.getElementById('email').value = email;
+    </script>
 
         <script>
     document.addEventListener("DOMContentLoaded", function() {
