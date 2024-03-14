@@ -28,7 +28,7 @@
             <button type="button" class="btn btn-primary ml-auto"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add Staff
             </button>
-            <div class="card border-left-primary" style="margin-left:10px;" shadow">
+            <!-- <div class="card border-left-primary" style="margin-left:10px;" shadow">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -41,14 +41,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Stafft</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Staff</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -86,7 +86,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Email: </label>
-                                            <input type="email" class="form-control" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" placeholder="Enter Email" required>
+                                            <input type="email" class="form-control" name="email" value="" placeholder="Enter Email" required>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -157,7 +157,7 @@
                                         <form action="" method="post">
                                             <a href="update_staff_form.php?id_user=<?= $view['id_admin'];?>" class="btn btn-primary"> Update </a>
                                             <input type="hidden" name="id_user" value="<?= $view['id_admin'];?>">
-                                            <button class="btn btn-danger" type="submit" name="delete_staff" onclick="return confirm('Are you sure you want to archive this data?')"> Archive </button>
+                                            <button class="btn btn-danger" type="submit" name="delete_staff" onclick="return confirm('Are you sure you want to Deactivate this Account?')"> Deactivate </button>
                                         </form>
                                     </td>
                                 </tr>

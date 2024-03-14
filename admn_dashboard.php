@@ -13,36 +13,17 @@
     $rescountfm = $residentbmis->count_member_resident();
     $rescountvoter = $residentbmis->count_voters();
     $rescountsenior = $residentbmis->count_resident_senior();
-
     $staffcount = $staffbmis->count_staff();
-    // $staffcountm = $staffbmis->count_mstaff();
-    // $staffcountf = $staffbmis->count_fstaff();
-    
-
-
-
 ?>
 
-<style> 
-.card-upper-space {
-    margin-top: 35px;
-}
-
-.card-row-gap {
-    margin-top: 3em;
-}
-a{
-    color: #309464 !important;
-}
-</style>
-
+<link rel="stylesheet" href="css/dashboard.css" />
 
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid dashboard--container">
 
 <!-- Page Heading -->
 

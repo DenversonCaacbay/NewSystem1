@@ -31,9 +31,8 @@
     }
         
     .input-icons {
-        width: 30%;
         margin-bottom: 20px;
-        margin-left: 34%;
+        margin-left: 0%;
     }
         
     .icon {
@@ -51,7 +50,7 @@
 
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="text-center mb-0">Viewing Pending Accounts</h1>
+            <h4 class="text-center mb-0">Viewing Pending Accounts</h4>
 
             
             
@@ -67,7 +66,7 @@
 
         <!-- Page Heading -->
                     
-        <div class="row"> 
+        <!-- <div class="row"> 
 
             <div class="col-md-3"> 
                 <div class="card border-left-primary shadow">
@@ -133,16 +132,16 @@
                     </div>
                 </div>
             </div> 
-        </div>
+        </div> -->
 
 
         <div class="col-md-12 mt-4">
-        <form method="POST" action="">
-                <div class="input-icons d-flex">
+            <form method="POST" action="">
+                <div class="input-icons w-100 d-flex">
                     <i class="fa fa-search icon"></i>
-                    <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
-                    <button class="btn btn-success" name="search_resident" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
-                    <a href="admn_resident_crud.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                    <input type="search" class="form-control search" name="keyword" value="" required=""/>
+                    <button class="btn btn-success ms-3" name="search_resident">Search</button>
+                    <a href="admn_resident_crud.php" class="btn btn-info ms-3">Reload</a>
                 </div>
 			</form>
             <div class="row">

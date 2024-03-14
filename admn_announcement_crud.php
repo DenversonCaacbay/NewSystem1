@@ -20,24 +20,66 @@
     include('dashboard_sidebar_start.php');
 ?>
 <style>
-   
+    .container--announcement{
+        height: 400px;
+    }
+    .announcement-text{
+        font-size: 20px;
+    }
+    .card-announcement{
+        height:700px; 
+        overflow: auto;
+    }
+    .card-header{
+        font-size:  20px;
+    }
+    .btn-sample{
+        font-size: 20px;
+    }
+    code{
+        font-size: 15px;
+    }
+    label{
+        font-size:15px;
+    }
+   @media screen and (max-width: 1420px) {
+    .announcement-text{
+        font-size: 12px;
+    }
+    .card-announcement{
+        height:400px; 
+        overflow: auto;
+    }
+    .card-header{
+        font-size: 13px;
+    }
+    .btn-sample{
+        font-size: 15px;
+    }
+    code{
+        font-size: 10px;
+    }
+    label{
+        font-size:10px;
+    }
+   }
 </style>
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid container--announcement">
 
     <!-- Page Heading -->
 
     <div class="row"> 
-        <div class="col-md-12"> 
-            <h4 class="mb-4 text-center">Event Announcement Page</h4>
+        <div class="col-md-12 d-flex"> 
+            <h4 class="mb-4 flex-grow-1">Event Announcement Page</h4>
         </div>
     </div>
       
     <div class="row"> 
-        <div class="col-sm-4"> 
+        <div class="col-md-4"> 
             <div class="card">
-                <div class="card-header bg text-white" style="font-size: 20px;"> Event Announcement Form <a class="btn btn-primary " style="float: right; font-size: 15px" data-bs-toggle="modal" data-bs-target="#exampleModal">See Sample</a></div>
+                <div class="card-header bg text-white"> Event Announcement Form <a class="btn btn-sample btn-primary " style="float: right;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-images"></i></a></div>
                 <div class="card-body">
                 
                     <form method="post" enctype="multipart/form-data">
@@ -48,7 +90,7 @@
                                 <label class="mt-2">Title</label>
                                 <input type="text" class="form-control" name="announcement_title" required>
                                 <label class="mt-2">Description</label>
-                                <textarea name="event" class="form-control" rows="6" placeholder="Enter Message Here" required></textarea>
+                                <textarea name="event" class="form-control" rows="4" placeholder="Enter Message Here" required></textarea>
                                 <label class="mt-2">Date and Time</label>
                                 <input type="datetime-local" class="form-control" name="announcement_datetime" required>
                                 <input type="text" name="status" value="Ongoing" hidden>
@@ -66,9 +108,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8"> 
-            <div class="card" style="height:550px; overflow: auto;">
-                <div class="card-header bg text-white sticky-top" style="font-size: 20px;"> Current Announcement Posted </div>
+        <div class="col-md-8"> 
+            <div class="card card-announcement">
+                <div class="card-header bg text-white sticky-top"> Current Announcement Posted </div>
                 <div class="card-body mb-2">
                     <!-- <div class="card p-2"> -->
                         <?php if(is_array($view)) {?>
@@ -88,11 +130,11 @@
                                         <?php endif; ?>
                                     </div>
                                     <div class="col-md-8">
-                                    <h4><b>Title:</b><br> <?= $view['announcement_title'];?> </h4>
-                                    <h4><b>Description:</b><br> <?= $view['event'];?> </h4>
-                                    <h4><b>Event Date:</b><br> <?= $view['announcement_datetime'];?> </h4>
-                                    <h4><b>Created at:</b> <?= date("F d, Y", strtotime($view['start_date'])); ?></h4>
-                                    <h4><b>Created by:</b> <?= $view['addedby'];?> </h4>   
+                                    <h4 class="announcement-text"><b>Title:</b><br> <?= $view['announcement_title'];?> </h4>
+                                    <h4 class="announcement-text"><b>Description:</b><br> <?= $view['event'];?> </h4>
+                                    <h4 class="announcement-text"><b>Event Date:</b><br> <?= $view['announcement_datetime'];?> </h4>
+                                    <h4 class="announcement-text"><b>Created at:</b> <?= date("F d, Y", strtotime($view['start_date'])); ?></h4>
+                                    <h4 class="announcement-text"><b>Created by:</b> <?= $view['addedby'];?> </h4>   
                                     <form action="" method="post">
                                             <input type="hidden" name="id_announcement" value="<?= $view['id_announcement'];?>">
                                             <button class="btn btn-danger" type="submit" name="delete_announcement"> Remove </button>

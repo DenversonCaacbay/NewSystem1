@@ -30,10 +30,25 @@
 </head>
 
 <style>
+    body::-webkit-scrollbar{
+        display: none;
+    }
     .sidebar{
         background: #309464 !important;
+        width: 250px !important;
+        height: 100vh;
+        overflow-y: auto !important;
     }
-     .bg{
+    .sidebar::-webkit-scrollbar{
+        display:none;
+    }
+    .sidebar .collapse {
+        left: calc(6.5rem + 1.5rem / 1) !important;
+    }
+    .nav-link span{
+        font-size: 12px !important;
+    }
+    .bg{
         background: #309464 !important;
     }
     .btn-primary{
@@ -61,53 +76,27 @@
 </style>
 
 <body id="page-top">
-
-    <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admn_dashboard.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    
-                </div>
-                <div class="sidebar-brand-text">Administrator Dashboard </div>
+            <a class="sidebar-brand bg sticky-top d-flex align-items-center justify-content-center" href="admn_dashboard.php">
+                <span class=" sidebar-brand-text">Administrator Dashboard </span>
             </a>
-
-            <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="admn_dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
             <div class="sidebar-heading">
                 User Management
             </div>
-
-            <!-- Barangay Staff CRUD -->
-            <!-- testing -->
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="admin_crud.php">
-                    <i class="fas fa-user-tie"></i>
-                    <span>Barangay Staffs</span></a>
-            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="admn_staff_crud.php">
                     <i class="fas fa-user-tie"></i>
                     <span>Barangay Staffs</span></a>
             </li>
-
-            <!-- Resident CRUD -->
             <li class="nav-item">
                 <a class="nav-link" href="admn_resident_crud.php">
                     <i class="fas fa-users"></i>
@@ -116,26 +105,17 @@
                     <?php if($registered_users > 0) : ?>
                         <span class="badge badge-danger" style="margin-left:20px;font-size:10px;"><?php echo $registered_users; ?></span>
                     <?php endif; ?>
-                </a>
-                    
+                </a>  
             </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
             <div class="sidebar-heading">
                 Barangay Services
             </div>
-
-            <!-- Announcement Management -->
             <li class="nav-item">
                 <a class="nav-link" href="admn_announcement_crud.php">
                     <i class="fas fa-bullhorn"></i>
                     <span>Announcements</span></a>
             </li>
-
-            <!-- Certificate of Residency -->
             <li class="nav-item">
                 <a class="nav-link" href="admn_certofres.php">
                     <i class="fas fa-file-word"></i>
@@ -146,7 +126,6 @@
                     <?php endif; ?>
                 </a>
             </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="admn_brgyid.php">
                     <i class="fas fa-id-card"></i>
@@ -156,7 +135,6 @@
                         <span class="badge badge-danger" style="margin-left:70px;font-size:10px;"><?php echo $registered_users; ?></span>
                     <?php endif; ?></a>
             </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="admn_bspermit.php">
                     <i class="fas fa-file-contract"></i>
@@ -166,10 +144,6 @@
                         <span class="badge badge-danger" style="margin-left:9px;font-size:10px;"><?php echo $registered_users; ?></span>
                     <?php endif; ?></a>
             </li>
-
-
-
-            <!-- Barangay Clearance -->
             <li class="nav-item">
                 <a class="nav-link" href="admn_brgyclearance.php">
                     <i class="fas fa-file"></i>
@@ -179,8 +153,6 @@
                         <span class="badge badge-danger" style="margin-left:27px;font-size:10px;"><?php echo $registered_users; ?></span>
                     <?php endif; ?></a>
             </li>
-
-            <!-- Certificate of Indigency -->
             <li class="nav-item">
                 <a class="nav-link" href="admn_certofindigency.php">
                     <i class="fas fa-fw fa-table"></i>
@@ -190,40 +162,24 @@
                         <span class="badge badge-danger" style="margin-left:2px;font-size:10px;"><?php echo $registered_users; ?></span>
                     <?php endif; ?></a>
             </li>
-
-            <!-- Complain Blotter Report -->
-            <!--<li class="nav-item">-->
-            <!--    <a class="nav-link" href="admn_blotterreport.php">-->
-            <!--        <i class="fas fa-user-shield"></i>-->
-            <!--        <span>Peace and Order Report</span></a>-->
-            <!--</li>-->
-
-            
-
-            <!-- Divider -->
             <hr class="sidebar-divider d-none">
             <li class="nav-item">
                 <a class="nav-link" href="admn_request_archives.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Archives</span></a>
             </li>
-
-            <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
         </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white mb-4 static-top sticky-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

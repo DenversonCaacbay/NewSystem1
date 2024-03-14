@@ -1,3 +1,47 @@
+<style>
+    .table{
+        width: 100%;
+    }
+    th{
+        background: #309464 !important;
+        color: #fff !important;
+        font-size: 20px;
+    }
+    td{
+        font-size: 20px;
+        padding: auto;
+    }
+    .pending--img{
+        width:50px;
+        height:50px;
+    }
+    .btn-table{
+        font-size: 20px;
+        padding: 10px;
+        margin:3px;
+        width:45px;
+    }
+
+    @media screen and (max-width: 1420px) {
+        th{
+            font-size: 12px;
+        }
+        td{
+            font-size: 12px;
+        }
+        .pending--img{
+            width:30px;
+            height:30px;
+        }
+        .btn-table{
+            font-size: 15px;
+            padding: 5px;
+            margin:3px;
+            width:25px;
+        }
+    }
+</style>
+
 <?php
 	// require the database connection
 	require 'classes/conn.php';
@@ -39,16 +83,16 @@
                         <td> <?= $view['contact'];?> </td>
                         <td>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['valid_id_photo'] ?>', '<?= $view['lname'];?>', '<?= $view['fname'];?> <?= $view['mi'];?>')">
-                                <img src="<?= $view['valid_id_photo'] ?>" class="img-fluid" alt="Modal Image" width="50">
+                                <img src="<?= $view['valid_id_photo'] ?>" class="pending--img" alt="Modal Image">
                             </a></td>
                         <td width="20%">    
                             <form action="" method="post">
                                 <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
                                 <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
                                 <input type="hidden" name="email" value="<?= $view['email'];?>">
-                                <a class="btn btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a>
-                                <button class="btn btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> Approve </button>
-                                <button class="btn btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline </button>
+                                <a class="btn btn-table btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a>
+                                <button class="btn btn-table btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> Approve </button>
+                                <button class="btn btn-table btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline </button>
                             </form>
                         </td>
                 </tr>
@@ -61,20 +105,19 @@
 <?php		
 	}else{
 ?>
-<table class="table table-hover table-bordered responsive text-center">
-<thead class="alert-info sticky-top">
-			<tr>
-                
-                
-                <th width="15%"> Full Name </th>
-                <th width="20%"> Email </th>
-                <th width="5%"> Age </th>
-                <!-- <th width="20%"> Address </th> -->
-                <th width="10%"> Contact # </th>
-                <th width="5%">Verification ID</th>
-                <th width="15%"> Actions</th>
-			</tr>
-		</thead>
+
+
+<table class="table table-hover table-bordered text-center">
+    <thead class="sticky-top">
+		<tr>
+            <th> Full Name </th>
+            <th> Email </th>
+            <th> Age </th>
+            <th> Contact # </th>
+            <th> Verification ID </th>
+            <th> Actions</th>
+		</tr>
+	</thead>
 
 		<tbody>
 		    <?php if(is_array($view)) {?>
@@ -86,22 +129,23 @@
                         <td> <?= $view['email'];?> </td>
                         <td> <?= $view['age'];?> </td>
                         <!-- <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 10ch;">
-    <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>
-</td> -->
+                        <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>
+                        </td> -->
 
                         <td> <?= $view['contact'];?> </td>
                         <td>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['valid_id_photo'] ?>', '<?= $view['lname'];?>', '<?= $view['fname'];?> <?= $view['mi'];?>')">
-                                <img src="<?= $view['valid_id_photo'] ?>" class="img-fluid" alt="Modal Image" width="50">
-                            </a></td>
+                                <img src="<?= $view['valid_id_photo'] ?>" class="pending--img" alt="Modal Image">
+                            </a>
+                        </td>
                         <td width="20%">    
                             <form action="" method="post">
                                 <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
                                 <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
                                 <input type="hidden" name="email" value="<?= $view['email'];?>">
-                                <a class="btn btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a>
-                                <button class="btn btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> Approve </button>
-                                <button class="btn btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline </button>
+                                <a class="btn btn-table btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> <i class="fas fa-eye"></i> </a>
+                                <button class="btn btn-table btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> <i class="fas fa-check"></i> </button>
+                                <button class="btn btn-table btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> <i class="fas fa-times"></i> </button>
                             </form>
                         </td>
                     </tr>
