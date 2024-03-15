@@ -19,6 +19,9 @@
 ?>
 
 <style>
+    .container--brgyid{
+        height: 500px;
+    }
     .input-icons i {
         position: absolute;
     }
@@ -26,7 +29,7 @@
     .input-icons {
         width: 30%;
         margin-bottom: 10px;
-        margin-left: 34%;
+        /* margin-left: 34%; */
     }
         
     .icon {
@@ -40,35 +43,33 @@
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid container--brgyid">
 
     <!-- Page Heading -->
 
     <div class="row"> 
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="text-center mb-0">Pending Barangay ID Requests</h1>
+                <h4 class="text-center mb-0 ">Pending Barangay ID Requests</h4>
                 <!-- <a href="admn_bspermit_done.php" class="btn btn-primary">View Done</a> -->
             </div>
         </div>
     </div>
-
-    <hr>
     <div class="row"> 
         <div class="col">
             <form method="POST" action="">
-                    <div class="input-icons d-flex">
+                    <div class="input-icons w-100 d-flex">
                         <i class="fa fa-search icon"></i>
-                        <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
-                        <button class="btn btn-success" name="search_brgyid" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
-                        <a href="admn_brgyid.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                        <input type="search" class="form-control search" name="keyword" value="" required=""/>
+                        <button class="btn btn-success ms-3" name="search_brgyid">Search</button>
+                        <a href="admn_brgyid.php" class="btn btn-info ms-3" >Reload</a>
                     </div>
                 </form>
         </div>
     </div>
 
     <div class="row"> 
-        <div class="col-md-12" style="height: 450px;overflow: auto;"> 
+        <div class="col-md-12" style="height: 400px;overflow: auto;"> 
             <?php 
                 include('tables/brgyid_pending.php');
             ?>

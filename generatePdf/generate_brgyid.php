@@ -111,7 +111,7 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
 
           <table width="100%">
             <td width="39%" style="padding:10px;">
-              <div style="height: 70px; width: 150px;height: 150px; border: 1px solid #000;"></div>
+              <div style="height: 70px; width: 150px;height: 150px; border: 1px solid #000;"><img src="../uploads/'.$result["res_photo"].'" alt="Image"/></div>
               <div style="text-align:center;font-size: 12px;">RES-037107015-'.$result["track_id"].'</div>
 
             </td>
