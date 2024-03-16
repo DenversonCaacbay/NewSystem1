@@ -71,12 +71,6 @@
     .bg-primary{
         background: #ffffff;
     }
-    /* .badge{
-        font-size: 6px !important;
-        padding: 5px;
-        margin:18px;
-        height:20px;
-    } */
 </style>
 
 <body id="page-top">
@@ -100,17 +94,6 @@
                     <i class="fas fa-user-tie"></i>
                     <span>Barangay Staffs</span></a>
             </li>
-            <!-- <li class="nav-item d-flex justify-content-between">
-                <a class="nav-link " href="admn_resident_crud.php">
-                    <i class="fas fa-users"></i>
-                    <span>Barangay Residents</span>
-                    <?php $registered_users = $residentbmis->count_registered_resident(); ?>   
-                </a>  
-                <?php if($registered_users > 0) : ?>
-                    <span class="badge badge-danger"><?php echo $registered_users; ?></span>
-                <?php endif; ?> 
-                
-            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="admn_resident_crud.php" style="display: flex; align-items: center;">
                     <i class="fas fa-users" style="margin-right: 5px;"></i>
@@ -131,9 +114,9 @@
                     <span>Announcements</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admn_certofres.php">
-                    <i class="fas fa-file-word"></i>
-                    <span>Certificate of Residency</span>
+                <a class="nav-link" href="admn_certofres.php" style="display: flex; align-items: center;">
+                    <i class="fas fa-file-word" style="margin-right: 5px;"></i>
+                    <span style="flex: 1;">Certificate of Residency</span>
                     <?php $registered_users = $residentbmis->count_residency(); ?>    
                     <?php if($registered_users > 0) : ?>
                         <span class="badge badge-danger" style="margin-left:6px;font-size:10px;"><?php echo $registered_users; ?></span>
@@ -141,36 +124,36 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admn_brgyid.php">
-                    <i class="fas fa-id-card"></i>
-                    <span>Barangay ID </span>
+                <a class="nav-link" href="admn_brgyid.php" style="display: flex; align-items: center;">
+                    <i class="fas fa-id-card" style="margin-right: 5px;"></i>
+                    <span style="flex: 1;">Barangay ID </span>
                     <?php $registered_users = $residentbmis->count_id(); ?>    
                     <?php if($registered_users > 0) : ?>
                         <span class="badge badge-danger" style="margin-left:70px;font-size:10px;"><?php echo $registered_users; ?></span>
                     <?php endif; ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admn_bspermit.php">
-                    <i class="fas fa-file-contract"></i>
-                    <span>Business Recommend..</span>
+                <a class="nav-link" href="admn_bspermit.php" style="display: flex; align-items: center;">
+                    <i class="fas fa-file-contract" style="margin-right: 5px;"></i>
+                    <span style="flex: 1;">Business Recommend..</span>
                     <?php $registered_users = $residentbmis->count_bussiness(); ?>    
                     <?php if($registered_users > 0) : ?>
                         <span class="badge badge-danger" style="margin-left:9px;font-size:10px;"><?php echo $registered_users; ?></span>
                     <?php endif; ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admn_brgyclearance.php">
-                    <i class="fas fa-file"></i>
-                    <span>Barangay Clearance</span>
+                <a class="nav-link" href="admn_brgyclearance.php" style="display: flex; align-items: center;">
+                    <i class="fas fa-file" style="margin-right: 5px;"></i>
+                    <span style="flex: 1;">Barangay Clearance</span>
                     <?php $registered_users = $residentbmis->count_clearance(); ?>    
                     <?php if($registered_users > 0) : ?>
                         <span class="badge badge-danger" style="margin-left:27px;font-size:10px;"><?php echo $registered_users; ?></span>
                     <?php endif; ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admn_certofindigency.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Certificate of Indigency</span>
+                <a class="nav-link" href="admn_certofindigency.php" style="display: flex; align-items: center;">
+                    <i class="fas fa-fw fa-table" style="margin-right: 5px;"></i>
+                    <span style="flex: 1;">Certificate of Indigency</span>
                     <?php $registered_users = $residentbmis->count_indigency(); ?>    
                     <?php if($registered_users > 0) : ?>
                         <span class="badge badge-danger" style="margin-left:2px;font-size:10px;"><?php echo $registered_users; ?></span>

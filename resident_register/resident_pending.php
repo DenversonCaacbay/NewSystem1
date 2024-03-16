@@ -5,7 +5,7 @@
     th{
         background: #309464 !important;
         color: #fff !important;
-        font-size: 20px;
+        font-size:13px;
     }
     td{
         font-size: 20px;
@@ -22,7 +22,7 @@
         width:45px;
     }
 
-    @media screen and (max-width: 1420px) {
+    @media screen and (max-width: 1620px) {
         th{
             font-size: 12px;
         }

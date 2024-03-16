@@ -146,11 +146,12 @@
 <?php		
 	}else{
 ?>
+
 <table class="table table-hover ">
     <thead class="bg-primary sticky-top">
         <tr>
             <th hidden> Resident ID </th>
-            <th hidden class="bg text-light"> Pick Up Date </th>
+            <th class="bg text-light"> Date Requested </th>
             <th class="bg text-light"> Track ID </th>
             <th class="bg text-light"> Full Name </th>
             <th hidden class="bg text-light"> Address </th>
@@ -166,7 +167,7 @@
             <?php foreach($view as $view) {?>
                 <tr>
                     <td hidden> <?= $view['id_resident'];?> </td> 
-                    <td hidden> <?= date("F d, Y", strtotime($view['date'])); ?></td>
+                    <td > <?= date("F d, Y", strtotime($view['date'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                     <td hidden> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
@@ -203,14 +204,10 @@
                     </td>
                     <td width="20%">      
                         <form action="" method="post">
-                            <!-- <a class="btn btn-primary" target="blank"  href="barangayid_form.php?id_resident=<?= $view['id_resident'];?>"><i class="fas fa-print p-1"></i></a>  -->
                             <input type="hidden" name="id_brgyid" value="<?= $view['id_brgyid'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
-                            <!-- <a href="generatePdf/generate_brgyid.php?pdf=1&id=<?= $view['id_brgyid']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a> -->
-                            <!-- <a href="view_request.php?id=<?= $view['id_brgyid']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a> -->
-                            <a class="btn btn-primary btn--approve"  href="pdf_viewer.php?pdf=1&id=<?= $view['id_brgyid'];?>" onclick="return confirm('Are you sure you want to approved this request?')">Approve</i></a>
-                            <!-- <button class="btn btn-primary" type="submit" name="approved_brgyid" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button> -->
-                            <button class="btn btn-danger btn--decline" type="submit" name="reject_brgyid" onclick="return confirm('Are you sure you want to decline this data?')"> Decline </button>
+                            <a class="btn btn-primary btn--approve"  href="pdf_viewer_id.php?pdf=1&id=<?= $view['id_brgyid'];?>">View</i></a>
+                            <button class="btn btn-danger btn--decline" type="submit" name="reject_brgyid" onclick="return confirm('Are you sure you want to decline <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> Request?')"> Decline </button>
                         </form>
                     </td>
                 </tr>
@@ -223,6 +220,7 @@
     </tbody>
 
 </table>
+
 
 <?php
 	}

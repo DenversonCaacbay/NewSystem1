@@ -1,3 +1,50 @@
+
+<style>
+    .table{
+        width: 100%;
+    }
+    th{
+        background: #309464 !important;
+        color: #fff !important;
+        font-size: 15px;
+    }
+    td{
+        font-size: 15px;
+        padding: auto;
+    }
+    .pending--img{
+        width:50px;
+        height:50px;
+    }
+
+    .btn--approve,
+    .btn--decline{
+        padding: 5px;
+        width: 80px;
+        text-align:center;
+        margin: 5px;
+        font-size: 13px;
+    }
+
+    @media screen and (max-width: 1420px) {
+        th{
+            font-size: 12px;
+        }
+        td{
+            font-size: 12px;
+        }
+        .pending--img{
+            width:30px;
+            height:30px;
+        }
+        .btn-table{
+            font-size: 15px;
+            padding: 5px;
+            margin:3px;
+            width:25px;
+        }
+    }
+</style>
 <?php
 	// require the database connection
 	require 'classes/conn.php';
@@ -76,11 +123,12 @@
                     <td width="20%">    
                         <form action="" method="post">
                             <!--<a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="indigency_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> -->
-                            <a href="generatePdf/generate_indigency.php?pdf=1&id=<?= $view['id_indigency']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
+                            <!-- <a href="generatePdf/generate_indigency.php?pdf=1&id=<?= $view['id_indigency']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a> -->
                             <input type="hidden" name="id_indigency" value="<?= $view['id_indigency'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
-                            <button class="btn btn-primary" type="submit" name="approved_indigency" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
-                            <button class="btn btn-danger" type="submit" name="reject_indigency" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
+                            <!-- <button class="btn btn-primary" type="submit" name="approved_indigency" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button> -->
+                            <a class="btn btn-primary btn--approve"  href="pdf_viewer_indigency.php?pdf=1&id=<?= $view['id_indigency'];?>">View</i></a>
+                            <button class="btn btn-danger btn-decline" type="submit" name="reject_indigency" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
                         </form>
                     </td>
                 </tr>
@@ -149,11 +197,12 @@
                     <td width="20%">    
                         <form action="" method="post">
                             <!--<a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="indigency_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a> -->
-                            <a href="generatePdf/generate_indigency.php?pdf=1&id=<?= $view['id_indigency']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
+                            <!-- <a href="generatePdf/generate_indigency.php?pdf=1&id=<?= $view['id_indigency']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a> -->
                             <input type="hidden" name="id_indigency" value="<?= $view['id_indigency'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
-                            <button class="btn btn-primary" type="submit" name="approved_indigency" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
-                            <button class="btn btn-danger" type="submit" name="reject_indigency" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
+                            <!-- <button class="btn btn-primary" type="submit" name="approved_indigency" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button> -->
+                            <a class="btn btn-primary btn--approve"  href="pdf_viewer_indigency.php?pdf=1&id=<?= $view['id_indigency'];?>">View</i></a>
+                            <button class="btn btn-danger btn--decline" type="submit" name="reject_indigency" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
                         </form>
                     </td>
                 </tr>

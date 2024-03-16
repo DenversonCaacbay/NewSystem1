@@ -40,7 +40,7 @@
             const reqId = urlParams.get('id');
             
             // Set the PDF URL with the req_id
-            const pdfUrl = "generatePdf/generate_brgyid.php?pdf=1&id=" + reqId;
+            const pdfUrl = "generatePdf/generate_businesspermit.php?pdf=1&id=" + reqId;
             
             // Embed the PDF within the page
             document.getElementById('pdfContainer').innerHTML = '<embed src="' + pdfUrl + '" width="500px" height="400px" type="application/pdf" />';
@@ -48,8 +48,8 @@
     </script>
     <div class="container-fluid container--viewer">
         <div class="d-flex justify-content-between">
-            <h3 class="viewer-text">PDF Viewer</h3>
-            <a href="#" class="btn btn-primary">Back</a>
+            <h3 class="viewer-text">Business Recommendation PDF Viewer</h3>
+            <a href="admn_bspermit.php" class="btn btn-primary">Back</a>
             
         </div>
         
@@ -75,10 +75,58 @@
             </div>
             <div class="mt-3">
                 <div id="pdfContainer"></div>
-                <button class="btn btn-primary mt-3">Print</button>
-                <button class="btn btn-primary mt-3">Mark As Done</button>
+                <button class="btn btn-primary mt-3" id="printButton">Print</button>
+                <button class="btn btn-primary mt-3" id="markAsDoneButton" disabled>Mark As Done</button>
             </div>
         </div>
         
     </div>
+
+    <script>
+    document.getElementById('printButton').addEventListener('click', function() {
+        // Get the req_id from the URL query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const reqId = urlParams.get('id');
+        
+        // Set the PDF URL with the req_id
+        const pdfUrl = "generatePdf/generate_brgyid.php?pdf=1&id=" + reqId;
+        
+        // Open the PDF in a new tab/window for printing
+        const printWindow = window.open(pdfUrl, '_blank');
+        
+        // Function to initiate print after the PDF loads
+        const printAfterLoad = function() {
+            printWindow.print();
+        };
+
+        // Wait for the PDF to load, then trigger the print dialog
+        if (printWindow === null) {
+            alert('Please allow pop-ups for this site to print the PDF.');
+        } else {
+            if (printWindow.document.readyState === 'complete') {
+                printAfterLoad();
+            } else {
+                printWindow.onload = printAfterLoad;
+            }
+        }
+
+        // Directly initiate download
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = 'barangay_id.pdf'; // Set the filename for download
+        link.style.display = 'none'; // Hide the link
+        document.body.appendChild(link);
+        link.click(); // Simulate a click on the link
+        document.body.removeChild(link); // Clean up the DOM
+
+        // Enable "Mark As Done" button
+        document.getElementById('markAsDoneButton').disabled = false;
+        document.getElementById('printButton').disabled = true;
+    });
+
+    document.getElementById('markAsDoneButton').addEventListener('click', function() {
+        // Perform actions when "Mark As Done" button is clicked
+        alert('Mark As Done button clicked.');
+    });
+</script>
     

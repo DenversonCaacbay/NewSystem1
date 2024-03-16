@@ -184,12 +184,16 @@
                 <span class="d-inline d-sm-none">Contact</span>
             </a>
         </li>
-        <li class="nav-item px-3">
+        <?php if (empty($userdetails)) : ?>
+        
+        <?php else : ?>
+            <li class="nav-item px-3">
             <a href="request.php" class="nav-link text-light btn3" data-toggle="tooltip" title="Requests">
                 <i class="fa fa-file fa-md d-none d-sm-inline"></i>
                 <span class="d-inline d-sm-none">Requests</span>
             </a>
         </li>
+        <?php endif; ?>
     </ul>
 
  

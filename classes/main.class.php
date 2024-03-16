@@ -1226,13 +1226,30 @@ class BMISClass {
     }
     
 
-    public function view_certofres(){
+    // public function view_certofres(){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("
+    //         SELECT * FROM tbl_rescert WHERE form_status = 'Pending'");
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    //     return $view;
+    // }
+
+    // New with Pagination
+    public function view_certofres($limit = 5, $offset = 0){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-            SELECT * FROM tbl_rescert WHERE form_status = 'Pending'");
+        SELECT * FROM tbl_rescert WHERE form_status = 'Pending' LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-        return $view;
+    
+        // Fetch one extra record beyond the limit to check if there are more records
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        $moreRecords = $stmt->rowCount() > 0;
+    
+        return [$view, $moreRecords];
     }
     
     public function view_certofres_done(){
@@ -1385,13 +1402,29 @@ class BMISClass {
     //     $view = $stmt->fetchAll();
     //     return $view;
     // }
-    public function view_certofindigency(){
+    // public function view_certofindigency(){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("
+    //     SELECT * FROM tbl_indigency WHERE form_status = 'Pending'");
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    //     return $view;
+    // }
+
+    public function view_certofindigency($limit = 5, $offset = 0){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-        SELECT * FROM tbl_indigency WHERE form_status = 'Pending'");
+        SELECT * FROM tbl_indigency WHERE form_status = 'Pending' LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-        return $view;
+    
+        // Fetch one extra record beyond the limit to check if there are more records
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        $moreRecords = $stmt->rowCount() > 0;
+    
+        return [$view, $moreRecords];
     }
 
     public function view_certofindigency_done(){
@@ -1619,13 +1652,28 @@ class BMISClass {
     //     $view = $stmt->fetchAll();
     //     return $view;
     // }
-    public function view_clearance(){
+    // public function view_clearance(){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("
+    //     SELECT * FROM tbl_clearance WHERE form_status = 'Pending'");
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    //     return $view;
+    // }
+    public function view_clearance($limit = 5, $offset = 0){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-        SELECT * FROM tbl_clearance WHERE form_status = 'Pending'");
+        SELECT * FROM tbl_clearance WHERE form_status = 'Pending' LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-        return $view;
+    
+        // Fetch one extra record beyond the limit to check if there are more records
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        $moreRecords = $stmt->rowCount() > 0;
+    
+        return [$view, $moreRecords];
     }
 
     public function view_clearance_done(){
@@ -1865,13 +1913,28 @@ class BMISClass {
     //     return $view;
     // }
 
-    public function view_bspermit(){
+    // public function view_bspermit(){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("
+    //     SELECT * FROM tbl_bspermit WHERE form_status = 'Pending'");
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    //     return $view;
+    // }
+    public function view_bspermit($limit = 5, $offset = 0){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-        SELECT * FROM tbl_bspermit WHERE form_status = 'Pending'");
+        SELECT * FROM tbl_bspermit WHERE form_status = 'Pending' LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-        return $view;
+    
+        // Fetch one extra record beyond the limit to check if there are more records
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        $moreRecords = $stmt->rowCount() > 0;
+    
+        return [$view, $moreRecords];
     }
 
     public function view_bspermit_done(){
@@ -2107,14 +2170,31 @@ class BMISClass {
     //     return $view;
     // }
 
-    public function view_brgyid(){
+    // public function view_brgyid(){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("
+    //     SELECT * FROM tbl_brgyid WHERE form_status = 'Pending'");
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    //     return $view;
+    // }
+    public function view_brgyid($limit = 5, $offset = 0){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-        SELECT * FROM tbl_brgyid WHERE form_status = 'Pending'");
+        SELECT * FROM tbl_brgyid WHERE form_status = 'Pending' LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-        return $view;
+    
+        // Fetch one extra record beyond the limit to check if there are more records
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        $moreRecords = $stmt->rowCount() > 0;
+    
+        return [$view, $moreRecords];
     }
+    
+    
 
     public function view_brgyid_done(){
         $connection = $this->openConn();

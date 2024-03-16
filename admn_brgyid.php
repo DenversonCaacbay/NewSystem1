@@ -5,10 +5,21 @@
     require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
-    // $bmis->delete_brgyid();
     $bmis->reject_brgyid();
     $bmis->approved_brgyid();
-    $view = $bmis->view_brgyid();
+    // $view = $bmis->view_brgyid();
+    // $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+    // $limit = 5;
+    // $offset = ($currentPage - 1) * $limit;
+
+    // $view =  $bmis->view_brgyid($limit, $offset);
+// Assuming $currentPage is the current page number, and $limit is the number of records per page
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+    $limit = 5;
+    $offset = ($currentPage - 1) * $limit;
+
+    list($view, $moreRecords) = $bmis->view_brgyid($limit, $offset);
+
     $id_resident = $_GET['id_resident'];
     $resident = $residentbmis->get_single_certofres($id_resident);
    
@@ -69,11 +80,25 @@
     </div>
 
     <div class="row"> 
-        <div class="col-md-12" style="height: 400px;overflow: auto;"> 
+        <div class="col-md-12" style="height: 500px;overflow: auto;"> 
             <?php 
                 include('tables/brgyid_pending.php');
             ?>
+            
         </div>
+        <!-- Pagination buttons -->
+        <div class="pagination d-flex justify-content-end">
+            <?php if ($currentPage > 1): ?>
+                <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
+            <?php endif; ?>
+
+            <span class="current-page mt-1 me-3 ms-3">Page <?= $currentPage ?></span>
+
+            <?php if ($moreRecords): ?>
+                <a class="btn btn-primary" href="?page=<?= $currentPage + 1 ?>">Next</a>
+            <?php endif; ?>
+        </div>
+
     </div>
     
     <!-- /.container-fluid -->

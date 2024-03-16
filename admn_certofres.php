@@ -7,10 +7,16 @@
     $bmis->validate_admin();
     $bmis->reject_rescert();
     $bmis->approved_rescert();
-    $view = $bmis->view_certofres();
+    // $view = $bmis->view_certofres();
     // $id_resident = $_GET['id_resident'];
     // $resident = $residentbmis->get_single_certofres($id_resident);
     // $resident = view_certofres();
+
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+    $limit = 5;
+    $offset = ($currentPage - 1) * $limit;
+
+    list($view, $moreRecords) = $bmis->view_certofres($limit, $offset);
     
 ?>
 
@@ -19,6 +25,9 @@
 ?>
 
 <style>
+    .container--residency{
+        height: 500px;
+    }
     .input-icons i {
         position: absolute;
     }
@@ -26,7 +35,7 @@
     .input-icons {
         width: 30%;
         margin-bottom: 10px;
-        margin-left: 34%;
+        /* margin-left: 34%; */
     }
         
     .icon {
@@ -47,22 +56,20 @@
     <div class="row"> 
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="text-center mb-0">Pending Residency Requests</h1>
+            <h4 class="text-center mb-0">Pending Residency Requests</h4>
             <!-- <a href="admn_certofres_done.php" class="btn btn-primary">View Done</a> -->
         </div>
     </div>
     </div>
 
-    <hr class="w-100">
-
     <div class="row">
         <div class="col">
             <form method="POST" action="">
-                <div class="input-icons d-flex">
+                <div class="input-icons  w-100 d-flex">
                     <i class="fa fa-search icon"></i>
-                    <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
-                    <button class="btn btn-success" name="search_certofres" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
-                    <a href="admn_certofres.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                    <input type="search" class="form-control search" name="keyword" value="" required=""/>
+                    <button class="btn btn-success ms-3" name="search_certofres" >Search</button>
+                    <a href="admn_certofres.php" class="btn btn-info  ms-3">Reload</a>
                 </div>
 			</form>
         </div>
@@ -70,10 +77,21 @@
 
 
     <div class="row"> 
-        <div class="col-md-12" style="height: 450px;overflow: auto;"> 
+        <div class="col-md-12" style="height: 500px;overflow: auto;"> 
             <?php 
                 include('tables/residency_pending.php');
             ?>
+        </div>
+        <div class="pagination d-flex justify-content-end">
+            <?php if ($currentPage > 1): ?>
+                <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
+            <?php endif; ?>
+
+            <span class="current-page mt-1 me-3 ms-3">Page <?= $currentPage ?></span>
+
+            <?php if ($moreRecords): ?>
+                <a class="btn btn-primary" href="?page=<?= $currentPage + 1 ?>">Next</a>
+            <?php endif; ?>
         </div>
     </div>
     
