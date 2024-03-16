@@ -94,7 +94,7 @@ class BMISClass {
                         return (0);
                     }
                     //kapag hindi admin ang role ng nag enter next na i c capture user login
-                    if($user['role'] == 'staff') {
+                    if($user['role'] == 'Staff') {
                         //statement na mag ch check kung user yung role
                         $this->set_userdata($user);
                         header('Location: staff_dashboard.php');
@@ -1650,29 +1650,6 @@ class BMISClass {
         }
     }
 
-    // public function reject_clearance() {
-    //     $id_clearance = $_POST['id_clearance'];
-    
-    //     if (isset($_POST['reject_clearance'])) {
-    //         $connection = $this->openConn();
-    //         $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Declined' WHERE id_clearance = ?");
-    //         $stmt->execute([$id_clearance]);
-    
-    //         header("Refresh:0");
-    //     }
-    // }
-
-    // public function approved_clearance(){
-    //     $id_clearance = $_POST['id_clearance'];
-    
-    //     if (isset($_POST['approved_clearance'])) {
-    //         $connection = $this->openConn();
-    //         $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Approved' WHERE id_clearance = ?");
-    //         $stmt->execute([$id_clearance]);
-    
-    //         header("Refresh:0");
-    //     }
-    // }
     public function reject_clearance() {
         $id_clearance = $_POST['id_clearance'];
         $email = $_POST['email'];

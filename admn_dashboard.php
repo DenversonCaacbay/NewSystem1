@@ -26,12 +26,50 @@
 <div class="container-fluid dashboard--container">
 
 <!-- Page Heading -->
-
-
+    <h4> Dashboard</h4>
     <div class="row"> 
         <div class="col-md-4">
-            <h4> Barangay Resident Data </h4>
-            <br>
+            <div class="card border-left-primary shadow">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
+                                All Pending Request</div>
+                                <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescount?></div>
+                                <br>
+                                <a href="admn_request_archives.php"> View Records </a>
+                        </div>
+                        <div class="col-auto">
+                            <span style="color: #309464;"> 
+                                <i class="fas fa-user-friends fa-2x text-color "></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-left-primary shadow">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
+                                Total Release Request</div>
+                                <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescount?></div>
+                                <br>
+                                <a href="admn_request_archives.php"> View Records </a>
+                        </div>
+                        <div class="col-auto">
+                            <span style="color: #309464;"> 
+                                <i class="fas fa-user-friends fa-2x text-color "></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
             <div class="card border-left-primary shadow">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -53,7 +91,6 @@
         </div>
 
         <div class="col-md-4">  
-            <br>
             <div class="card border-left-primary shadow card-upper-space">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -72,8 +109,7 @@
             </div>
         </div>
         
-        <div class="col-md-4"> 
-            <br>
+        <div class="col-md-4">
             <div class="card border-left-primary shadow card-upper-space">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -91,9 +127,8 @@
                 </div>
             </div>
         </div> 
-    </div>
+    
 
-    <div class="row"> 
         <div class="col-md-4">  
             <div class="card border-left-primary shadow card-upper-space">
                 <div class="card-body">

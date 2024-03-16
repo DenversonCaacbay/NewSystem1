@@ -128,8 +128,6 @@
 
 
     <body>
-
-
         <!-- This is the heading and card section --> 
         <section class="main-section"> 
             <div class="container-fluid mt-2"> 
@@ -154,7 +152,7 @@
                                         <label> Password </label>
                                         <div class="input-container">
                                             <i class="fa fa-key icon"></i>
-                                            <input class="input-field" type="password" placeholder="Enter Password" id="myInput" name="password" required>
+                                            <input class="input-field" type="password" placeholder="Enter Password" id="myInput" name="password" autocomplete="off" required>
                                         </div>
 
                                         <div class="custom-control custom-switch mt-3">

@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="utf-8">
+    <!-- <meta http-equiv="refresh" content="10"> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -35,18 +36,15 @@
     }
     .sidebar{
         background: #309464 !important;
-        width: 250px !important;
+        width: 300px !important;
         height: 100vh;
         overflow-y: auto !important;
     }
     .sidebar::-webkit-scrollbar{
         display:none;
     }
-    .sidebar .collapse {
-        left: calc(6.5rem + 1.5rem / 1) !important;
-    }
     .nav-link span{
-        font-size: 12px !important;
+        font-size: 13px !important;
     }
     .bg{
         background: #309464 !important;
@@ -73,11 +71,16 @@
     .bg-primary{
         background: #ffffff;
     }
+    /* .badge{
+        font-size: 6px !important;
+        padding: 5px;
+        margin:18px;
+        height:20px;
+    } */
 </style>
 
 <body id="page-top">
     <div id="wrapper">
-
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
             <a class="sidebar-brand bg sticky-top d-flex align-items-center justify-content-center" href="admn_dashboard.php">
                 <span class=" sidebar-brand-text">Administrator Dashboard </span>
@@ -97,15 +100,26 @@
                     <i class="fas fa-user-tie"></i>
                     <span>Barangay Staffs</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="admn_resident_crud.php">
+            <!-- <li class="nav-item d-flex justify-content-between">
+                <a class="nav-link " href="admn_resident_crud.php">
                     <i class="fas fa-users"></i>
                     <span>Barangay Residents</span>
-                    <?php $registered_users = $residentbmis->count_registered_resident(); ?>    
-                    <?php if($registered_users > 0) : ?>
-                        <span class="badge badge-danger" style="margin-left:20px;font-size:10px;"><?php echo $registered_users; ?></span>
-                    <?php endif; ?>
+                    <?php $registered_users = $residentbmis->count_registered_resident(); ?>   
                 </a>  
+                <?php if($registered_users > 0) : ?>
+                    <span class="badge badge-danger"><?php echo $registered_users; ?></span>
+                <?php endif; ?> 
+                
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" href="admn_resident_crud.php" style="display: flex; align-items: center;">
+                    <i class="fas fa-users" style="margin-right: 5px;"></i>
+                    <span style="flex: 1;">Barangay Residents</span>
+                    <?php $registered_users = $residentbmis->count_registered_resident(); ?>   
+                    <?php if($registered_users > 0) : ?>
+                        <span class="badge badge-danger"><?php echo $registered_users; ?></span>
+                    <?php endif; ?> 
+                </a>
             </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
@@ -168,9 +182,9 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Archives</span></a>
             </li>
-            <div class="text-center d-none d-md-inline">
+            <!-- <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+            </div> -->
 
         </ul>
         <div id="content-wrapper" class="d-flex flex-column">

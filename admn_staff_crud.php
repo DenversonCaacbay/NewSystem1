@@ -24,7 +24,7 @@
 
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="text-center mb-0">Barangay Staff Data</h1>
+            <h4 class="text-center mb-0">Barangay Staff Data</h4>
             <button type="button" class="btn btn-primary ml-auto"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add Staff
             </button>
@@ -52,7 +52,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" class="was-validated"> 
+                            <form method="post" class="was-validated" autocomplete="off"> 
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
@@ -86,7 +86,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Email: </label>
-                                            <input type="email" class="form-control" name="email" value="" placeholder="Enter Email" required>
+                                            <input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter Email" autocomplete="false" required>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -95,7 +95,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Password:</label>
-                                            <input type="password" class="form-control" id="password-field" name="password" placeholder="Enter Password" required>
+                                            <input type="password" class="form-control" id="password-field" name="password" placeholder="Enter Password" autocomplete="new-password" required>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -104,7 +104,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Confirm Password:</label>
-                                            <input type="password" class="form-control" id="confirm-password-field" name="confirm_password" placeholder="Enter Confirm Password" required>
+                                            <input type="password" class="form-control" id="confirm-password-field" name="confirm_password" placeholder="Enter Confirm Password"  required>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Password do not match.</div>
                                         </div>
@@ -118,7 +118,7 @@
                                 </div>
 
 
-                                <input type="hidden" class="form-control" name="role" value="administrator">
+                                <input type="hidden" class="form-control" name="role" value="Staff">
 
                                 <button class="btn btn-primary w-100 mt-3" type="submit" name="add_staff" id="submit-button" style="border-radius:10px;" disabled> Submit </button>  
                             </form>    
@@ -171,7 +171,13 @@
 </div>
 
 <!-- End of Main Content -->
-
+<script>
+    window.onload = function() {
+        document.getElementById("email").value = "";
+        document.getElementById("password-field").value = "";
+        // Repeat for other form fields if needed
+    }
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const passwordField = document.getElementById("password-field");

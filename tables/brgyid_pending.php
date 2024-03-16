@@ -5,24 +5,23 @@
     th{
         background: #309464 !important;
         color: #fff !important;
-        font-size: 20px;
+        font-size: 15px;
     }
     td{
-        font-size: 20px;
+        font-size: 15px;
         padding: auto;
     }
     .pending--img{
         width:50px;
         height:50px;
     }
-    .btn-table{
-        font-size: 20px;
-        padding: 10px;
-        margin:3px;
-        width:45px;
-    }
+
     .btn--approve,
     .btn--decline{
+        padding: 5px;
+        width: 80px;
+        text-align:center;
+        margin: 5px;
         font-size: 13px;
     }
 
