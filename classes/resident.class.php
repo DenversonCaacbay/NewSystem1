@@ -938,8 +938,46 @@ use PHPMailer\PHPMailer\Exception;
 
     }
 
+    // 
+    public function view_request($id_user){
+        $connection = $this->openConn();
 
+        // tbl_brgyid
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = {$id_user}");
+        $stmt->execute();
+        $brgyid_data = $stmt->fetchAll();
 
+        // tbl_bspermit
+        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_resident = {$id_user}");
+        $stmt->execute();
+        $bspermit_data = $stmt->fetchAll();
+
+        // tbl_clearance
+        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_resident = {$id_user}");
+        $stmt->execute();
+        $clearance_data = $stmt->fetchAll();
+
+        // tbl_indigency
+        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_resident = {$id_user}");
+        $stmt->execute();
+        $indigency_data = $stmt->fetchAll();
+
+        // tbl_rescert
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_resident = {$id_user}");
+        $stmt->execute();
+        $rescert_data = $stmt->fetchAll();
+    
+        // Combine the fetched data into one variable
+        $requests_data = array(
+            'brgyid' => $brgyid_data,
+            'bspermit' => $bspermit_data,
+            'clearance' => $clearance_data,
+            'indigency' => $indigency_data,
+            'rescert' => $rescert_data,
+        );
+    
+        return $requests_data;
+    }
 
 
 

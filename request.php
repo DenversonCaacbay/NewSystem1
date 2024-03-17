@@ -2,6 +2,7 @@
     error_reporting(E_ALL ^ E_WARNING);
     include('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
+    $requests = $residentbmis->view_request($userdetails['id_resident']);
 
     $dt = new DateTime("now", new DateTimeZone('Asia/Manila'));
     $tm = new DateTime("now", new DateTimeZone('Asia/Manila'));
@@ -184,8 +185,6 @@
         </div>
     </div>
 </nav>
-
-
 
 <div class="container-fluid" style="margin-top:5%">
     <h3>Requests</h3>
