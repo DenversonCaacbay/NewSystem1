@@ -9,6 +9,8 @@
    $view = $bmis->view_announcement();
    $announcementcount = $bmis->count_announcement();
 
+   $view = $residentbmis->view_single_residency();
+
    $dt = new DateTime("now", new DateTimeZone('Asia/Manila'));
    $tm = new DateTime("now", new DateTimeZone('Asia/Manila'));
    $cdate = $dt->format('Y/m/d');   
@@ -59,7 +61,7 @@
                 <div class="text-center"><img src="assets/default-thumbnail.jpg" alt="ID IMAGE" class="viewer--img"></div>
                 
                 <label class="mt-3">Name</label>
-                <input type="text" class="form-control"/>
+                <input type="text" value="<?= $view['fname']." ".$view['lname'] ?>" class="form-control"/>
                 <label class="mt-3">Address</label>
                 <input type="text" class="form-control"/>
                 <label class="mt-3">Birthdate</label>

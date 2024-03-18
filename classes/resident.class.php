@@ -1039,7 +1039,61 @@ use PHPMailer\PHPMailer\Exception;
         return $requests_data;
     }
 
+    // 
+    public function view_single_residency(){
+        $id = $_GET['id'];
+        
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_rescert = ?");
+        $stmt->execute([$id]);
+        $view = $stmt->fetch();
+    
+        return $view;
+    }
 
+    public function view_single_brgyid(){
+        $id = $_GET['id'];
+        
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_brgyid = ?");
+        $stmt->execute([$id]);
+        $view = $stmt->fetch();
+    
+        return $view;
+    }
+
+    public function view_single_bspermit(){
+        $id = $_GET['id'];
+        
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_bspermit = ?");
+        $stmt->execute([$id]);
+        $view = $stmt->fetch();
+    
+        return $view;
+    }
+
+    public function view_single_clearance(){
+        $id = $_GET['id'];
+        
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_clearance  = ?");
+        $stmt->execute([$id]);
+        $view = $stmt->fetch();
+    
+        return $view;
+    }
+
+    public function view_single_indigency(){
+        $id = $_GET['id'];
+        
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_indigency  = ?");
+        $stmt->execute([$id]);
+        $view = $stmt->fetch();
+    
+        return $view;
+    }
 
 
 
