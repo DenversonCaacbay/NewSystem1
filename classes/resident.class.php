@@ -966,17 +966,27 @@ use PHPMailer\PHPMailer\Exception;
         $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_resident = {$id_user}");
         $stmt->execute();
         $rescert_data = $stmt->fetchAll();
+
+        // Combine all fetched data into one array
+        $all_data = array_merge($brgyid_data, $bspermit_data, $clearance_data, $indigency_data, $rescert_data);
+
+        // Sort the combined array by 'created_at' timestamp in descending order
+        usort($all_data, function($a, $b) {
+            return strtotime($b['created_at']) - strtotime($a['created_at']);
+        });
+
+        return $all_data;
     
         // Combine the fetched data into one variable
-        $requests_data = array(
-            'brgyid' => $brgyid_data,
-            'bspermit' => $bspermit_data,
-            'clearance' => $clearance_data,
-            'indigency' => $indigency_data,
-            'rescert' => $rescert_data,
-        );
+        // $requests_data = array(
+        //     'brgyid' => $brgyid_data,
+        //     'bspermit' => $bspermit_data,
+        //     'clearance' => $clearance_data,
+        //     'indigency' => $indigency_data,
+        //     'rescert' => $rescert_data,
+        // );
     
-        return $requests_data;
+        // return $requests_data;
     }
 
 

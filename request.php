@@ -187,6 +187,7 @@
 </nav>
 
 <div class="container-fluid" style="margin-top:5%">
+<?php print_r($requests) ?>
     <h3>Requests</h3>
     <div class="card mt-3 mb-3">
         <div class="card-header bg-primary text-light d-flex justify-content-between">
