@@ -5,18 +5,17 @@
 		$keyword = $_POST['keyword'];
 ?>
 <table class="table table-hover text-center table-bordered" >
-    <thead class="alert-info">
-        
-    <tr>
-    <th> Tracking ID </th>
-                <th> Full Name </th>
-                <th> Age </th>
-                <th> Nationality </th>
-                <th> Address </th>
-                <th> Date </th>
-                <th> Purpose </th>
-                <th>Status</th>
-    </tr>
+    <thead class="alert-info">  
+        <tr>
+            <th> Tracking ID </th>
+            <th> Full Name </th>
+            <th> Age </th>
+            <th> Nationality </th>
+            <th> Address </th>
+            <th> Date </th>
+            <th> Purpose </th>
+            <th>Status</th>
+        </tr>
     </thead>
 
     <tbody>    
@@ -32,18 +31,17 @@
                OR `track_id` LIKE '%$keyword%') AND `form_status` = '$formStatus' ");
            $stmnt->execute();
             
-            while($view = $stmnt->fetch()){
-        ?>
+            while($view = $stmnt->fetch()){?>
             <tr>
-                        <td> <?= $view['track_id'];?> </td> 
-                        <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?>  </td>
-                        <td> <?= $view['age'];?> </td>
-                        <td> <?= $view['nationality'];?> </td>
-                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>                        
-                        <td> <?= $view['date'];?> </td>
-                        <td> <?= $view['purpose'];?> </td>
-                        <td> <?= $view['form_status'];?> </td>
-                    </tr>
+                <td> <?= $view['track_id'];?> </td> 
+                <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?>  </td>
+                <td> <?= $view['age'];?> </td>
+                <td> <?= $view['nationality'];?> </td>
+                <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>                        
+                <td> <?= $view['date'];?> </td>
+                <td> <?= $view['purpose'];?> </td>
+                <td> <?= $view['form_status'];?> </td>
+            </tr>
         <?php
         }
         ?>
@@ -54,43 +52,43 @@
 <?php		
 	}else{
 ?>
-
 <table class="table table-hover text-center table-bordered">
-		<thead class="alert-info">
-			<tr>
-                <th> Tracking ID </th>
-                <th> Full Name </th>
-                <th> Age </th>
-                <th> Nationality </th>
-                <th> Address </th>
-                <th> Date </th>
-                <th> Purpose </th>
-                <th>Status</th>
-			</tr>
-		</thead>
+    <thead class="alert-info">
+    	<tr>
+            <th> Tracking ID </th>
+            <th> Full Name </th>
+            <th> Age </th>
+            <th hidden> Nationality </th>
+            <th hidden> Address </th>
+            <th> Date </th>
+            <th> Purpose </th>
+            <th> Staff </th>
+            <th> Status</th>
+    	</tr>
+    </thead>
 
-		<tbody>
-		    <?php if(is_array($view)) {?>
-                <?php foreach($view as $view) {?>
-                    <tr>
-                        <td> <?= $view['track_id'];?> </td> 
-                        <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?>  </td>
-                        <td> <?= $view['age'];?> </td>
-                        <td> <?= $view['nationality'];?> </td>
-                        <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>                        
-                        <td> <?= $view['date'];?> </td>
-                        <td> <?= $view['purpose'];?> </td>
-                        <td> <?= $view['form_status'];?> </td>
-                    </tr>
-                <?php
-                    }
-                ?>
-			<?php
-				}
-			?>
-		</tbody>
-
-	</table>
+	<tbody>
+	    <?php if(is_array($view)) {?>
+            <?php foreach($view as $view) {?>
+                <tr>
+                    <td> <?= $view['track_id'];?> </td> 
+                    <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?>  </td>
+                    <td> <?= $view['age'];?> </td>
+                    <td hidden> <?= $view['nationality'];?> </td>
+                    <td hidden> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>                        
+                    <td> <?= $view['date'];?> </td>
+                    <td> <?= $view['purpose'];?> </td>
+                    <td> Turqueza, Charlene </td>
+                    <td> <?= $view['form_status'];?> </td>
+                </tr>
+            <?php
+                }
+            ?>
+		<?php
+			}
+		?>
+	</tbody>
+</table>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous"></script>

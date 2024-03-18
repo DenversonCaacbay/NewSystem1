@@ -5,11 +5,6 @@
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
    $view = $bmis->view_certofindigency_done();
-//    $bmis->create_announcement();
-//    $bmis->delete_announcement();
-//    $view = $bmis->view_announcement();
-//    $announcementcount = $bmis->count_announcement();
-
 
 ?>
 
@@ -17,16 +12,6 @@
     include('dashboard_sidebar_start.php');
 ?>
 <style>
-    /*.input-icons i {*/
-    /*    position: absolute;*/
-    /*}*/
-        
-    /*.input-icons {*/
-    /*    width: 30%;*/
-    /*    margin-bottom: 10px;*/
-    /*    margin-left: 34%;*/
-    /*}*/
-        
     .icon {
         padding: 10px;
         min-width: 40px;
@@ -63,7 +48,8 @@
                     </div>
                     <!-- Replace input with select dropdown -->
                     <div>
-                        Export Data By: 
+                    Export Data By: 
+                    <a class="btn btn-primary" target="_blank" href="generatePdf/indigency/week.php">Daily</a>
                     <a class="btn btn-primary" target="_blank" href="generatePdf/indigency/week.php">Weekly</a>
                     <a class="btn btn-primary" target="_blank" href="generatePdf/indigency/month.php">Monthly</a>
                     <a class="btn btn-primary" target="_blank" href="generatePdf/indigency/year.php">Yearly</a>

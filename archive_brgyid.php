@@ -5,10 +5,6 @@
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
    $view = $bmis->view_brgyid_done();
-//    $bmis->create_announcement();
-//    $bmis->delete_announcement();
-//    $view = $bmis->view_announcement();
-//    $announcementcount = $bmis->count_announcement();
 
 
 ?>
@@ -17,17 +13,7 @@
     include('dashboard_sidebar_start.php');
 ?>
 <style>
-        
-    /*.input-icons {*/
-    /*    width: 30%;*/
-    /*    margin-bottom: 10px;*/
-    /*    margin-left: 34%;*/
-    /*}*/
-        
-    /*.icon {*/
-    /*    padding: 10px;*/
-    /*    min-width: 40px;*/
-    /*}*/
+
     .form-control{
         text-align: center;
     }
@@ -40,8 +26,8 @@
     <!-- Page Heading -->
 
     <div class="row">
-        <div class="d-flex align-items-center">
-            <h1 class="flex-grow-1">Archives Barangay ID</h1>
+        <div class="d-flex align-items-center mb-3">
+            <h4 class="flex-grow-1">Archives Barangay ID</h4>
             <a href="admn_request_archives.php" class="btn btn-primary">Back</a>
         </div>
     </div>
@@ -60,7 +46,8 @@
                 </div>
                     <!-- Replace input with select dropdown -->
                 <div>
-                     Export Data By: 
+                    Export Data By: 
+                    <a class="btn btn-primary" target="_blank" href="generatePdf/brgyid/week.php">Daily</a>
                     <a class="btn btn-primary" target="_blank" href="generatePdf/brgyid/week.php">Weekly</a>
                     <a class="btn btn-primary" target="_blank" href="generatePdf/brgyid/month.php">Monthly</a>
                     <a class="btn btn-primary" target="_blank" href="generatePdf/brgyid/year.php">Yearly</a>

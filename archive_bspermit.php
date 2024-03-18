@@ -17,15 +17,6 @@
     include('dashboard_sidebar_start.php');
 ?>
 <style>
-    /*.input-icons i {*/
-    /*    position: absolute;*/
-    /*}*/
-        
-    /*.input-icons {*/
-    /*    width: 30%;*/
-    /*    margin-bottom: 10px;*/
-    /*    margin-left: 34%;*/
-    /*}*/
         
     .icon {
         padding: 10px;
@@ -43,8 +34,8 @@
     <!-- Page Heading -->
 
     <div class="row">
-        <div class="d-flex align-items-center">
-            <h1 class="flex-grow-1">Archives Business Recommendation</h1>
+        <div class="d-flex align-items-center mb-3">
+            <h4 class="flex-grow-1">Archives Business Recommendation</h4>
             <a href="admn_request_archives.php" class="btn btn-primary">Back</a>
         </div>
     </div>
@@ -63,7 +54,8 @@
                         <a href="archive_bspermit.php" class="btn btn-info ms-2 me-5" style="font-size: 17px;width:200px;padding-top:10px;">View All</a>
                     </div>
                 <div>
-                     Export Data By: 
+                     Export Data By:
+                    <a class="btn btn-primary" target="_blank" href="generatePdf/bspermit/week.php">Daily</a> 
                     <a class="btn btn-primary" target="_blank" href="generatePdf/bspermit/week.php">Weekly</a>
                     <a class="btn btn-primary" target="_blank" href="generatePdf/bspermit/month.php">Monthly</a>
                     <a class="btn btn-primary" target="_blank" href="generatePdf/bspermit/year.php">Yearly</a>

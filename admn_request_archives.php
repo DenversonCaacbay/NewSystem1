@@ -4,13 +4,8 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
-//    $bmis->create_announcement();
-//    $bmis->delete_announcement();
-//    $view = $bmis->view_announcement();
-//    $announcementcount = $bmis->count_announcement();
-
-    $clearance_approved = $residentbmis->count_clearance_approved();
-    $clearance_decline = $residentbmis->count_clearance_decline();
+   $clearance_approved = $residentbmis->count_clearance_approved();
+   $clearance_decline = $residentbmis->count_clearance_decline();
 
     $bspermit_approved = $residentbmis->count_bspermit_approved();
     $bspermit_decline = $residentbmis->count_bspermit_decline();
@@ -39,7 +34,7 @@
 
     <div class="row"> 
         <div class="col-md-12"> 
-            <h1 class=" text-center">Archives</h1>
+            <h4 class=" text-center">Archives</h4>
         </div>
     </div>
       
@@ -48,11 +43,11 @@
         <div class="col-sm-6 mt-2">
             <div class="card p-2">
                 <div class="card-body">
-                    <h2 class="card-title">Barangay Residency</h2>
+                    <h4 class="card-title">Barangay Residency</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h4 class="card-subtitle mb-2 text-muted">Approved: <?= $residency_approved?></h4>
-                            <h4 class="card-subtitle mb-2 text-muted">Decline: <?= $residency_decline?></h4>
+                            <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $residency_decline?></h5>
+                            <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $residency_approved?></h5>
                         </div>
                         <a href="archive_residency.php" class="btn btn-primary w-25 align-self-center">View</a>
                     </div>
@@ -62,11 +57,11 @@
         <div class="col-sm-6 mt-2">
             <div class="card p-2">
                 <div class="card-body">
-                    <h2 class="card-title">Barangay ID</h2>
+                    <h4 class="card-title">Barangay ID</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h4 class="card-subtitle mb-2 text-muted">Approved: <?= $brgyid_approved?></h4>
-                            <h4 class="card-subtitle mb-2 text-muted">Decline: <?= $brgyid_decline?></h4>
+                            <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $brgyid_approved?></h5>
+                            <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $brgyid_decline?></h5>
                         </div>
                         <a href="archive_brgyid.php" class="btn btn-primary w-25 align-self-center">View</a>
                     </div>
@@ -76,11 +71,11 @@
         <div class="col-sm-6 mt-2">
             <div class="card p-2">
                 <div class="card-body">
-                    <h2 class="card-title">Business Recommendation</h2>
+                    <h4 class="card-title">Business Recommendation</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h4 class="card-subtitle mb-2 text-muted">Approved: <?= $bspermit_approved?></h4>
-                            <h4 class="card-subtitle mb-2 text-muted">Decline: <?= $bspermit_decline?></h4>
+                            <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $bspermit_approved?></h5>
+                            <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $bspermit_decline?></h5>
                         </div>
                         <a href="archive_bspermit.php" class="btn btn-primary w-25 align-self-center">View</a>
                     </div>
@@ -90,11 +85,11 @@
         <div class="col-sm-6 mt-2">
             <div class="card p-2">
                 <div class="card-body">
-                    <h2 class="card-title">Barangay Clearance</h2>
+                    <h4 class="card-title">Barangay Clearance</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h4 class="card-subtitle mb-2 text-muted">Approved: <?= $clearance_approved?></h4>
-                            <h4 class="card-subtitle mb-2 text-muted">Decline: <?= $clearance_decline?></h4>
+                            <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $clearance_approved?></h5>
+                            <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $clearance_decline?></h5>
                         </div>
                         <a href="archive_clearance.php" class="btn btn-primary w-25 align-self-center">View</a>
                     </div>
@@ -104,11 +99,11 @@
         <div class="col-sm-6 mt-2">
             <div class="card p-2">
                 <div class="card-body">
-                    <h2 class="card-title">Certificate of Indigency</h2>
+                    <h4 class="card-title">Certificate of Indigency</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h4 class="card-subtitle mb-2 text-muted">Approved: <?= $indigency_approved?></h4>
-                            <h4 class="card-subtitle mb-2 text-muted">Decline: <?= $indigency_decline?></h4>
+                            <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $indigency_approved?></h5>
+                            <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $indigency_decline?></h5>
                         </div>
                         <a href="archive_indigency.php" class="btn btn-primary w-25 align-self-center">View</a>
                     </div>

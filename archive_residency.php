@@ -52,34 +52,77 @@
     <!-- Page Heading -->
 
     <div class="row">
-        <div class="d-flex align-items-center">
-            <h1 class="flex-grow-1">Archives Residency</h1>
+        <div class="d-flex align-items-center mb-3">
+            <h4 class="flex-grow-1">Archives Residency</h4>
             <a href="admn_request_archives.php" class="btn btn-primary">Back</a>
         </div>
     </div>
       
     <div class="row"> 
-        <div class="col">
-            <form method="POST" action="" id="searchForm">
-                <div class="input-icons d-flex justify-content-between">
+        <div class="col-md-12">
+            <div class="row">
+                 <div class="col-md-7">
+                    <form id="pdfForm" method="post" action="generatepdf/random/services.php" style="display: inline-block; margin-right: 10px;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group" style="margin-bottom: 5px;">
+                                    <label for="fromDate" style="display: block;">From Date:</label>
+                                    <input type="date" class="form-control" id="fromDate" name="fromDate" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" style="margin-bottom: 5px;">
+                                    <label for="toDate" style="display: block;">To Date:</label>
+                                    <input type="date" class="form-control" id="toDate" name="toDate" required>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-1 mt-4"><button type="submit" class="btn btn-primary p-2 mt-3" id="generatePDF"><i class="fas fa-search"></i></button></div> -->            
+                            <div class="col-md-2"><a href="#" class="btn btn-primary p-2" style="margin-top:33px" onclick="validateDates()" id="pdfLink"><i class="fas fa-print"></i></a></div>
+                        </div>
+                    </form> 
+                </div>
+                <div class="col-md-5">
+                    Select Pdf Generate
+                    <select class="form-select mt-2">
+                        <option>Generate All</option>
+                        <!-- <option>Generate All Done</option>
+                        <option>Generate All Declined</option> -->
+                        <option>Generate Daily</option>
+                        <!-- <option>Generate All Daily - Done</option>
+                        <option>Generate All Daily - Declined</option> -->
+                        <option>Generate Weekly</option>
+                        <!-- <option>Generate All Weekly - Done</option>
+                        <option>Generate All Weekly - Declined</option> -->
+                        <option>Generate Monthly</option>
+                        <!-- <option>Generate All Monthly - Done</option>
+                        <option>Generate All Monthly - Declined</option> -->
+                        <option>Generate Yearly</option>
+                        <!-- <option>Generate All Yearly - Done</option>
+                        <option>Generate All Yearly - Declined</option> -->
+                    </select>
+                </div>  
+            </div>
+
+           
+            <!-- <form method="POST" action="" id="searchForm"> -->
+                    
                     <!-- Replace input with select dropdown -->
-                    <div class="d-flex justify-content-between">
+                    <!-- <div class="d-flex justify-content-between">
                         <select class="form-select search" name="form_status" id="formStatus" style="height:50px" required="">
                             <option value="Approved">Approved</option>
                             <option value="Declined">Declined</option>
                         </select>
                         <button class="btn btn-success ms-2" name="search_certofres">Search</button>
-                        <a href="archive_residency.php" class="btn btn-info ms-2 me-5" style="font-size: 17px;width:200px;padding-top:10px;">View All</a>
+                        <a href="archive_residency.php" class="btn btn-info ms-2">View All</a>
                     </div>
                     <div>
                         Export Data By: 
+                        <a class="btn btn-primary" target="_blank" href="generatePdf/residency/week.php">Daily</a>
                         <a class="btn btn-primary" target="_blank" href="generatePdf/residency/week.php">Weekly</a>
                         <a class="btn btn-primary" target="_blank" href="generatePdf/residency/month.php">Monthly</a>
                         <a class="btn btn-primary" target="_blank" href="generatePdf/residency/year.php">Yearly</a>
-                    </div>
-                    
-                </div>
-            </form>
+                    </div> -->
+            <!-- </form> -->
         </div>
 
 <script>
