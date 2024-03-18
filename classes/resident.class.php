@@ -943,50 +943,50 @@ use PHPMailer\PHPMailer\Exception;
         $connection = $this->openConn();
 
         // tbl_brgyid
-        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = {$id_user}");
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = {$id_user} AND form_status='Pending'");
         $stmt->execute();
         $brgyid_data = $stmt->fetchAll();
 
         // tbl_bspermit
-        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_resident = {$id_user}");
+        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_resident = {$id_user} AND form_status='Pending'");
         $stmt->execute();
         $bspermit_data = $stmt->fetchAll();
 
         // tbl_clearance
-        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_resident = {$id_user}");
+        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_resident = {$id_user} AND form_status='Pending'");
         $stmt->execute();
         $clearance_data = $stmt->fetchAll();
 
         // tbl_indigency
-        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_resident = {$id_user}");
+        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_resident = {$id_user} AND form_status='Pending'");
         $stmt->execute();
         $indigency_data = $stmt->fetchAll();
 
         // tbl_rescert
-        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_resident = {$id_user}");
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_resident = {$id_user} AND form_status='Pending'");
         $stmt->execute();
         $rescert_data = $stmt->fetchAll();
 
-        // Combine all fetched data into one array
-        $all_data = array_merge($brgyid_data, $bspermit_data, $clearance_data, $indigency_data, $rescert_data);
+         // Combine all fetched data into one array
+        //  $all_data = array_merge($brgyid_data, $bspermit_data, $clearance_data, $indigency_data, $rescert_data);
 
-        // Sort the combined array by 'created_at' timestamp in descending order
-        usort($all_data, function($a, $b) {
-            return strtotime($b['created_at']) - strtotime($a['created_at']);
-        });
-
-        return $all_data;
+        //  // Sort the combined array by 'created_at' timestamp in descending order
+        //  usort($all_data, function($a, $b) {
+        //      return strtotime($b['created_at']) - strtotime($a['created_at']);
+        //  });
+ 
+        //  return $all_data;
     
         // Combine the fetched data into one variable
-        // $requests_data = array(
-        //     'brgyid' => $brgyid_data,
-        //     'bspermit' => $bspermit_data,
-        //     'clearance' => $clearance_data,
-        //     'indigency' => $indigency_data,
-        //     'rescert' => $rescert_data,
-        // );
+        $requests_data = array(
+            'brgyid' => $brgyid_data,
+            'bspermit' => $bspermit_data,
+            'clearance' => $clearance_data,
+            'indigency' => $indigency_data,
+            'rescert' => $rescert_data,
+        );
     
-        // return $requests_data;
+        return $requests_data;
     }
 
 

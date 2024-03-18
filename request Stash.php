@@ -107,7 +107,6 @@
     .alert{
         height: 400px;
     }
-
     @media (max-width: 767px) {
     .alert {
         margin-top: 20%;
@@ -184,61 +183,53 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid" style="margin-top:6%">
-<div class="d-flex justify-content-between">
+<div class="container-fluid" style="margin-top:5%">
     <h3>Requests</h3>
-    <button class="btn btn-primary">History</button>
-</div>
-    
     <div class="row">
-    <?php 
-    // Check if requests are available and sort them by date in descending order
-    if(is_array($requests)) {
-        // Combine all request data into one array
-        $all_requests = [];
-        foreach($requests as $request_data) {
-            $all_requests = array_merge($all_requests, $request_data);
-        }
-
-        // Sort all requests by date in descending order
-        usort($all_requests, function($a, $b) {
-            return strtotime($b['date']) - strtotime($a['date']);
-        });
-
-        // Iterate over sorted requests and display them
-        foreach($all_requests as $request) {?>
-            <div class="col-md-4">
-                <div class="card mt-3 mb-3">
+    <?php if(is_array($requests)) {?>
+        <?php foreach($requests as $request_type => $request_data) {?>
+            <?php foreach($request_data as $request) {?>
+        <div class="col-md-3">
+            <div class="card mt-3 mb-3">
                     <div class="card-header bg-primary text-light d-flex justify-content-between">
-                        Date Requested: <?= ucfirst(date("F d, Y", strtotime($request['date']))); ?>
+                        Date Requested: <?= $request['date'];?>
                         <button class="btn btn-danger"><i class="fas fa-trash text-white"></i></button>
                     </div>
                     <div class="card-body">
-                        <?php 
-                        // Display common request fields
-                        if($request['id_brgyid']) { ?>
-                            <h3 class="card-h1">Barangay ID</h3>
-                            <h5>Street: <?= $request['street'];?><?= $request['brgy'];?></h5>
-                        <?php } elseif($request['id_bspermit']) { ?>
-                            <h3 class="card-h1">Business Recommendation</h3>
+                        <h3 class="card-h1"><?= ucfirst($request_type); ?></h3>
+                        <?php if($request_type == 'brgyid') { ?>
+                            <h5>Street: <?= $request['street'];?></h5>
+                            <h5>Barangay: <?= $request['brgy'];?></h5>
+                            <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
+                        <?php } elseif($request_type == 'bspermit') { ?>
                             <h5>Business Name: <?= $request['bsname'];?></h5>
-                        <?php } elseif($request['id_clearance']) { ?>
-                            <h3 class="card-h1">Barangay Clearance</h3>
+                            <h5>Industry: <?= $request['bsindustry'];?></h5>
+                            <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
+                        <?php } elseif($request_type == 'clearance') { ?>
                             <h5>Purpose: <?= $request['purpose'];?></h5>
-                        <?php } elseif($request['id_indigency']) { ?>
-                            <h3 class="card-h1">Indigency</h3>
+                            <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
+                        <?php } elseif($request_type == 'indigency') { ?>
+                            <h5>Nationality: <?= $request['nationality'];?></h5>
                             <h5>Purpose: <?= $request['purpose'];?></h5>
-                        <?php } elseif($request['id_rescert']) { ?>
-                            <h3 class="card-h1">Residency</h3>
+                            <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
+                        <?php } elseif($request_type == 'rescert') { ?>
+                            <h5>Age: <?= $request['age'];?></h5>
                             <h5>Purpose: <?= $request['purpose'];?></h5>
+                            <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
                         <?php } ?>
-                        <h5>Status: <span class="pill-pending"><?= $request['form_status'];?></span></h5>
-                        <!-- Add more fields as needed -->
                     </div>
                 </div>
-            </div>
+        </div>
+        <?php } ?>
         <?php } ?>
     <?php } ?>
+    </div>
+
 </div>
 
 </div>
