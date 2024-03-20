@@ -230,6 +230,47 @@
     <?php } ?>
     </div>
 
+
+    <?php if(is_array($requests)) {?>
+        <?php foreach($requests as $request_type => $request_data) {?>
+            <?php foreach($request_data as $request) {?>
+                <div class="card mt-3 mb-3">
+                    <div class="card-header bg-primary text-light d-flex justify-content-between">
+                        Date Requested: <?= $request['date'];?>
+                        <button class="btn btn-danger"><i class="fas fa-trash text-white"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-h1"><?= ucfirst($request_type); ?></h3>
+                        <?php if($request_type == 'brgyid') { ?>
+                            <h5>Street: <?= $request['street'];?></h5>
+                            <h5>Barangay: <?= $request['brgy'];?></h5>
+                            <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
+                        <?php } elseif($request_type == 'bspermit') { ?>
+                            <h5>Business Name: <?= $request['bsname'];?></h5>
+                            <h5>Industry: <?= $request['bsindustry'];?></h5>
+                            <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
+                        <?php } elseif($request_type == 'clearance') { ?>
+                            <h5>Purpose: <?= $request['purpose'];?></h5>
+                            <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
+                        <?php } elseif($request_type == 'indigency') { ?>
+                            <h5>Nationality: <?= $request['nationality'];?></h5>
+                            <h5>Purpose: <?= $request['purpose'];?></h5>
+                            <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
+                        <?php } elseif($request_type == 'rescert') { ?>
+                            <h5>Age: <?= $request['age'];?></h5>
+                            <h5>Purpose: <?= $request['purpose'];?></h5>
+                            <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } ?>
+    <?php } ?>
 </div>
 
 </div>

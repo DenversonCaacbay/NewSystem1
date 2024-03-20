@@ -52,44 +52,34 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-
     <div class="d-flex justify-content-between mb-3">
-        <h4 class="mb-0">Pending Residency Requests</h4>
-        <a href="admn_certofres_walkin.php" class="btn btn-primary">For Walk'in</a>
+        <h4 class="text-center mb-0">Walk'in Request</h4>
+        <a href="admn_certofres.php" class="btn btn-primary">Back</a>
     </div>
 
-    <div class="row">
-        <div class="col">
-            <form method="POST" action="">
-                <div class="input-icons  w-100 d-flex">
-                    <i class="fa fa-search icon"></i>
-                    <input type="search" class="form-control search" name="keyword" value="" required=""/>
-                    <button class="btn btn-success ms-3" name="search_certofres" >Search</button>
-                    <a href="admn_certofres.php" class="btn btn-info  ms-3">Reload</a>
+    <div class="container">
+        <div class="card p-3">
+            <form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="formGroupExampleInput" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="formGroupExampleInput" class="form-label">Middle Name</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="formGroupExampleInput" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
                 </div>
-			</form>
+            </form>
         </div>
+        
     </div>
 
 
-    <div class="row"> 
-        <div class="col-md-12" style="height: 500px;overflow: auto;"> 
-            <?php 
-                include('tables/residency_pending.php');
-            ?>
-        </div>
-        <div class="pagination d-flex justify-content-end">
-            <?php if ($currentPage > 1): ?>
-                <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
-            <?php endif; ?>
-
-            <span class="current-page mt-1 me-3 ms-3">Page <?= $currentPage ?></span>
-
-            <?php if ($moreRecords): ?>
-                <a class="btn btn-primary" href="?page=<?= $currentPage + 1 ?>">Next</a>
-            <?php endif; ?>
-        </div>
-    </div>
     
     <!-- /.container-fluid -->
     
