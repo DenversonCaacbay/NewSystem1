@@ -61,22 +61,66 @@
         <div class="card p-3">
             <form>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Middle Name</label>
                         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Last Name</label>
                         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
                     </div>
+                    <div class="col-md-6 mt-3">
+                        <label for="formGroupExampleInput" class="form-label">Age</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label for="formGroupExampleInput" class="form-label">Nationality</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+
+                    <!-- Address -->
+                    <div class="col-md-3 mt-3">
+                        <label for="formGroupExampleInput" class="form-label">House No:</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <label for="formGroupExampleInput" class="form-label">Street</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <label for="formGroupExampleInput" class="form-label">Barangay</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" value="Sta. Rita" placeholder="Example input placeholder" readonly>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <label for="formGroupExampleInput" class="form-label">Municipality</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" value="Olongapo City" placeholder="Example input placeholder" readonly>
+                    </div>
+                    
+                    <div class="col-md-12 mt-3">
+                        <label for="formGroupExampleInput" class="form-label">Purpose:</label>
+                        <select class="form-select">
+                            <option>Choose Purpose</option>
+                            <option>Job / Employment</option>
+                            <option>Business Establishment</option>
+                            <option>Financial Transaction</option>
+                            <option>Certify that you are living in a certain barangay</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="formGroupExampleInput" class="form-label">Other Purpose</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                    
+                    
                 </div>
             </form>
         </div>
-        
     </div>
 
 
