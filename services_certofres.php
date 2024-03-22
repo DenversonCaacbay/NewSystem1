@@ -12,129 +12,114 @@
 <html>
   <head> 
     <title> Barangay Santa Rita Management System </title>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous"></script>
-      <!-- responsive tags for screen compatibility -->
-      <meta name="viewport" content="width=device-width, initial-scale=1"><!-- bootstrap css --> 
-      <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
-      <!-- fontawesome icons --> 
-      <script src="https://kit.fontawesome.com/67a9b7069e.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous"></script>
+    <!-- responsive tags for screen compatibility -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- bootstrap css --> 
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <!-- fontawesome icons --> 
+    <script src="https://kit.fontawesome.com/67a9b7069e.js" crossorigin="anonymous"></script>
   
-        <style>
+    <style>
         .bg-primary{
-    background: #309464 !important;
-}
-.btn-primary{
-    background: #309464 !important;
-    border: 0;
-}
-.btn-primary:focus {
-        outline: none !important;
-    }
-h4{
-    color: #309464 !important;
-}
-img{
-    width: 150px;
-    padding: 10px;
-}
-.applybutton{
-    font-size: 30px;
-}
-.btn1 {
-border-radius: 20px;
-border: none; /* Remove borders */
-color: white; /* White text */
-font-size: 16px; /* Set a font size */
-cursor: pointer; /* Mouse pointer on hover */
-/* margin-left: 16%; */
-padding: 12px 22px;
-}
+            background: #309464 !important;
+        }
+        .btn-primary{
+            background: #309464 !important;
+            border: 0;
+        }
+        .btn-primary:focus {
+                outline: none !important;
+            }
+        h4{
+            color: #309464 !important;
+        }
+        img{
+            width: 150px;
+            padding: 10px;
+        }
+        .applybutton{
+            font-size: 30px;
+        }
+        .btn1 {
+        border-radius: 20px;
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+        /* margin-left: 16%; */
+        padding: 12px 22px;
+        }
 
-.btn2 {
-border-radius: 20px;
-border: none; /* Remove borders */
-color: white; /* White text */
-font-size: 16px; /* Set a font size */
-cursor: pointer; /* Mouse pointer on hover */
-padding: 12px 22px;
-margin-left: .1%;
-}
+        .btn2 {
+        border-radius: 20px;
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+        padding: 12px 22px;
+        margin-left: .1%;
+        }
 
-.btn3 {
-border-radius: 20px;
-border: none; /* Remove borders */
-color: white; /* White text */
-font-size: 16px; /* Set a font size */
-cursor: pointer; /* Mouse pointer on hover */
-padding: 12px 22px;
-margin-left: .1%;
-}
+        .btn3 {
+        border-radius: 20px;
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+        padding: 12px 22px;
+        margin-left: .1%;
+        }
 
-/* Darker background on mouse-over */
-/* .btn1:hover {
-background-color: #ffffff;
-color: black;
-}
 
-.btn2:hover {
-background-color: #ffffff;
-color: black;
-}
+        .fa{
+            color: #309464 ;
+            background: #fff !important;
+            padding: 10px;
+            border-radius: 50px;
+        }
+        .fas{
+            color: #309464 ;
+        }
+        .card{
+            border:none;
+            box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
+        -webkit-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
+        -moz-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
+        }
+        .alert{
+            height: 400px;
+        }
+        @media (max-width: 767px) {
+        .alert {
+            margin-top: 20%;
+            height: auto; /* Set height to auto for mobile view */
+            max-height: 400px; /* Optionally set a maximum height if needed */
+            overflow-y: scroll; /* Add vertical scroll for overflow content */
+        }
+        .alert h3{
+            font-size: 18px;
+        }
+        .col-lg-8 h4{
+            font-size: 13px;
+        }
+        .col-lg-8 h3{
+            font-size: 15px;
+        }
+        .icon-item{
+            padding: none;
+        }
+        .header h2{
+            font-size: 18px;
+        }
 
-.btn3:hover {
-background-color: #ffffff;
-color: black;
-} */
+        .header h3{
+            font-size: 15px;
+        }
 
-.fa{
-    color: #309464 ;
-    background: #fff !important;
-    padding: 10px;
-    border-radius: 50px;
-}
-.fas{
-    color: #309464 ;
-}
-.card{
-    border:none;
-    box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
--webkit-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
--moz-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
-}
-.alert{
-    height: 400px;
-}
-@media (max-width: 767px) {
-.alert {
-    margin-top: 20%;
-    height: auto; /* Set height to auto for mobile view */
-    max-height: 400px; /* Optionally set a maximum height if needed */
-    overflow-y: scroll; /* Add vertical scroll for overflow content */
-}
-.alert h3{
-    font-size: 18px;
-}
-.col-lg-8 h4{
-    font-size: 13px;
-}
-.col-lg-8 h3{
-    font-size: 15px;
-}
-.icon-item{
-    padding: none;
-}
-.header h2{
-    font-size: 18px;
-}
-
-.header h3{
-    font-size: 15px;
-}
-
-}
-        </style>
-  </head>
+        }
+    </style>
+</head>
 
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
@@ -221,26 +206,26 @@ color: black;
 
                 <div class="col">   
                 <?php
-// Get today's date in Unix timestamp
-$today = strtotime(date('Y-m-d'));
+                // Get today's date in Unix timestamp
+                $today = strtotime(date('Y-m-d'));
 
-// Calculate the date 6 months ago from today in Unix timestamp
-$sixMonthsAgo = strtotime('-6 months', $today);
+                // Calculate the date 6 months ago from today in Unix timestamp
+                $sixMonthsAgo = strtotime('-6 months', $today);
 
-// Convert $userdetails['date_live'] to a Unix timestamp
-$dateLive = strtotime($userdetails['date_live']);
+                // Convert $userdetails['date_live'] to a Unix timestamp
+                $dateLive = strtotime($userdetails['date_live']);
 
-// Check if $dateLive is greater than or equal to 6 months ago
-if ($dateLive <= $sixMonthsAgo) {
-    $disableAttr = ''; // No need for disabled attribute
-} else {
-    $disableAttr = 'disabled'; // Add the disabled attribute
-}
-?>
+                // Check if $dateLive is greater than or equal to 6 months ago
+                if ($dateLive <= $sixMonthsAgo) {
+                    $disableAttr = ''; // No need for disabled attribute
+                } else {
+                    $disableAttr = 'disabled'; // Add the disabled attribute
+                }
+                ?>
 
-<button type="button" <?= $disableAttr ?> class="btn btn-primary applybutton p-2 w-100" data-toggle="modal" data-target="#exampleModalCenter">
-    View Form
-</button>
+                <button type="button" <?= $disableAttr ?> class="btn btn-primary applybutton p-2 w-100" data-toggle="modal" data-target="#exampleModalCenter">
+                    View Form
+                </button>
 
 
 

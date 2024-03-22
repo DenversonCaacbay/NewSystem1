@@ -83,22 +83,29 @@
                 </div>
                 <div class="col-md-5">
                     Select Pdf Generate
-                    <select class="form-select mt-2">
+                    <!-- <select class="form-select mt-2">
                         <option>Generate All</option>
-                        <!-- <option>Generate All Done</option>
-                        <option>Generate All Declined</option> -->
+                        <option>Generate All Done</option>
+                        <option>Generate All Declined</option>
                         <option>Generate Daily</option>
-                        <!-- <option>Generate All Daily - Done</option>
-                        <option>Generate All Daily - Declined</option> -->
-                        <option>Generate Weekly</option>
-                        <!-- <option>Generate All Weekly - Done</option>
-                        <option>Generate All Weekly - Declined</option> -->
-                        <option>Generate Monthly</option>
-                        <!-- <option>Generate All Monthly - Done</option>
-                        <option>Generate All Monthly - Declined</option> -->
-                        <option>Generate Yearly</option>
-                        <!-- <option>Generate All Yearly - Done</option>
-                        <option>Generate All Yearly - Declined</option> -->
+                        <option>Generate All Daily - Done</option>
+                        <option>Generate All Daily - Declined</option>
+                        <option><a target="_blank" href="generatePdf/residency/week.php">Weekly</a></option>
+                        <option>Generate All Weekly - Done</option>
+                        <option>Generate All Weekly - Declined</option>
+                        <option><a target="_blank" href="generatePdf/residency/month.php">Monthly</a></option>
+                        <option>Generate All Monthly - Done</option>
+                        <option>Generate All Monthly - Declined</option>
+                        <option><a  target="_blank" href="generatePdf/residency/year.php">Yearly</a></option>
+                        <option>Generate All Yearly - Done</option>
+                        <option>Generate All Yearly - Declined</option>
+                    </select> -->
+                    <select class="form-select mt-2" id="pdfGenerateSelect">
+                        <option value="generatePdf/residency/all.php">Generate All</option>
+                        <option value="generatePdf/residency/daily.php">Generate Daily</option>
+                        <option value="generatePdf/residency/week.php">Weekly</option>
+                        <option value="generatePdf/residency/month.php">Monthly</option>
+                        <option value="generatePdf/residency/year.php">Yearly</option>
                     </select>
                 </div>  
             </div>
@@ -140,6 +147,16 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('formStatus', selectedFormStatus);
     });
 });
+</script>
+
+<!-- For Redirecting to PDF's -->
+
+<script>
+    // Add event listener to the select element
+    document.getElementById("pdfGenerateSelect").addEventListener("change", function() {
+        // Redirect to the selected option's value
+        window.open(this.value, "_blank");
+    });
 </script>
 
     </div>

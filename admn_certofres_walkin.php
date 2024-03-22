@@ -59,65 +59,67 @@
 
     <div class="container">
         <div class="card p-3">
-            <form>
+            <form method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                        <input type="text" class="form-control" id="formGroupExampleInput">
                     </div>
                     <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Middle Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-6 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Age</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-6 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Nationality</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
 
                     <!-- Address -->
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">House No:</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Street</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Barangay</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" value="Sta. Rita" placeholder="Example input placeholder" readonly>
+                        <input type="text" class="form-control" id="formGroupExampleInput" value="Sta. Rita" placeholder="" readonly>
                     </div>
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Municipality</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" value="Olongapo City" placeholder="Example input placeholder" readonly>
+                        <input type="text" class="form-control" id="formGroupExampleInput" value="Olongapo City" placeholder="" readonly>
                     </div>
                     
                     <div class="col-md-12 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Purpose:</label>
-                        <select class="form-select">
+                        <label for="formGroupExampleInput"  id="purpose" class="form-label">Purpose:</label>
+                        <select class="form-select" onchange="checkOptions(this)">
                             <option>Choose Purpose</option>
                             <option>Job / Employment</option>
                             <option>Business Establishment</option>
                             <option>Financial Transaction</option>
                             <option>Certify that you are living in a certain barangay</option>
-                            <option>Other</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
 
-                    <div class="col-md-12 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Other Purpose</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    <div class="form-group" id="otherDiv" style="display: none">
+                        <input type="text" class="form-control mt-3" name="otherInput" id='otherInput' placeholder="Enter Other" style="display: none" />
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
-                    
-                    
+                    <div class="col-md-12">
+                        <button class="btn btn-primary mt-3 w-100 p-2">Add Request</button>
+                    </div>
                 </div>
             </form>
         </div>
