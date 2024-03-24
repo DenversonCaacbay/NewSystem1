@@ -45,7 +45,7 @@
             const pdfUrl = "generatePdf/generate_residency.php?pdf=1&id=" + reqId;
             
             // Embed the PDF within the page
-            document.getElementById('pdfContainer').innerHTML = '<embed src="' + pdfUrl + '" width="500px" height="400px" type="application/pdf" />';
+            document.getElementById('pdfContainer').innerHTML = '<embed src="' + pdfUrl + '" width="500px" height="500px" type="application/pdf" />';
         }
     </script>
     <div class="container-fluid container--viewer">
