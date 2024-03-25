@@ -50,35 +50,30 @@
     </script>
     <div class="container-fluid container--viewer">
         <div class="d-flex justify-content-between">
-            <h3 class="viewer-text">Barangay Residency PDF Viewer</h3>
-            <a href="admn_certofres.php" class="btn btn-primary">Back</a>
+            <div class="d-flex">
+                <button href="admn_certofres.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                <h3 class="viewer-text">Barangay Residency PDF Viewer</h3>
+            </div>
+            <div class="d-flex">
+                <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
+                <button class="btn btn-primary " id="markAsDoneButton" disabled>Mark As Done <i class="fas fa-check"></i></button>
+            </div>
+            
             
         </div>
-        
         <div class="d-flex justify-content-between">
-            <div class="w-100 me-3">
-                Resident<br>
-                <div class="text-center"><img src="assets/default-thumbnail.jpg" alt="ID IMAGE" class="viewer--img"></div>
+            <div class="w-100 mt-3 me-3">
+                <div class="text-center"><img src="<?= $view['certofres_photo'] ?>" alt="Residency IMAGE" class="viewer--img"></div>
                 
                 <label class="mt-3">Name</label>
                 <input type="text" value="<?= $view['fname']." ".$view['lname'] ?>" class="form-control"/>
                 <label class="mt-3">Address</label>
-                <input type="text" class="form-control"/>
-                <label class="mt-3">Birthdate</label>
-                <input type="text" class="form-control"/>
-
-                Contact Incase of Emergency:<br>
-                <label class="mt-3">Name</label>
-                <input type="text" class="form-control"/>
-                <label class="mt-3">Contact Number</label>
-                <input type="text" class="form-control"/>
-                <label class="mt-3">Address</label>
-                <input type="text" class="form-control"/>
+                <input type="text" class="form-control" value="<?= $view['houseno']." ".$view['street']." ".$view['brgy']." ".$view['municipal'] ?>"/>
+                <label class="mt-3">Purpose</label>
+                <input type="text" class="form-control" value="<?= $view['purpose'] ?>">
             </div>
             <div class="mt-3">
                 <div id="pdfContainer"></div>
-                <button class="btn btn-primary mt-3" id="printButton">Print</button>
-                <button class="btn btn-primary mt-3" id="markAsDoneButton" disabled>Mark As Done</button>
             </div>
         </div>
         
@@ -91,7 +86,7 @@
         const reqId = urlParams.get('id');
         
         // Set the PDF URL with the req_id
-        const pdfUrl = "generatePdf/generate_brgyid.php?pdf=1&id=" + reqId;
+        const pdfUrl = "generatePdf/generate_residency.php?pdf=1&id=" + reqId;
         
         // Open the PDF in a new tab/window for printing
         const printWindow = window.open(pdfUrl, '_blank');
