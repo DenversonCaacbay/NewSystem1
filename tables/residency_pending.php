@@ -24,6 +24,10 @@
         margin: 5px;
         font-size: 13px;
     }
+    .img--td{
+        width:50px;
+        height: 50px;
+    }
 
     @media screen and (max-width: 1420px) {
         th{
@@ -60,7 +64,6 @@
                 <th> Tracking ID </th>
                 <th> Full Name </th>
                 <th> Address </th>
-                <!-- <th> Date </th> -->
                 <th> Purpose </th>
                 <th> Actions</th>
 			</tr>
@@ -144,7 +147,7 @@
                             <span>No Image Available</span>
                         <?php else: ?>
                             <a href="#" data-toggle="modal" data-target="#imageModal<?= $view['id_rescert'] ?>">
-                                <img src="<?= $view['certofres_photo'] ?>" class="img-fluid" alt="Modal Image" width="50">
+                                <img src="<?= $view['certofres_photo'] ?>" class="img--td" alt="Modal Image">
                             </a>
                     
                             <div class="modal fade" id="imageModal<?= $view['id_rescert'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
@@ -157,7 +160,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <a href="<?= $view['res_photo'] ?>" target="_blank"><img src="<?= $view['res_photo'] ?>" class="img-fluid" alt="Modal Image"></a>
+                                            <a href="<?= $view['certofres_photo'] ?>" target="_blank"><img src="<?= $view['certofres_photo'] ?>" class="img-fluid" alt="Modal Image"></a>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
