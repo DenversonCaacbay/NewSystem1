@@ -132,9 +132,9 @@
         <section class="main-section"> 
             <div class="container-fluid mt-2"> 
                 <div class="row">
-                        <div class="col-sm-12 main-heading text-center text-white" > 
+                        <div class="col-sm-12 main-heading text-center text-white"> 
                             <img src="icon.png" width="150">
-                            <h3> Barangay Santa Rita Management System </h3>
+                            <h3> Barangay Santa Rita Management System</h3>
                         </div>
                 </div>
                 <div class="row">
@@ -143,13 +143,13 @@
                                 <div class="card-body"> 
                                     <form method="post"> 
 
-                                        <label> Email </label>
+                                        <label> Email: </label>
                                         <div class="input-container">
                                             <i class="fa fa-envelope icon"></i>
                                             <input class="input-field" type="email" placeholder="Enter Email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
                                         </div>
 
-                                        <label> Password </label>
+                                        <label> Password: </label>
                                         <div class="input-container">
                                             <i class="fa fa-key icon"></i>
                                             <input class="input-field" type="password" placeholder="Enter Password" id="myInput" name="password" autocomplete="off" required>

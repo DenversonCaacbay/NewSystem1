@@ -51,7 +51,7 @@
     <div class="container-fluid container--viewer">
         <div class="d-flex justify-content-between">
             <div class="d-flex">
-                <button href="admn_certofres.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</button>
+                <a href="admn_certofres.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
                 <h3 class="viewer-text">Barangay Residency PDF Viewer</h3>
             </div>
             <div class="d-flex">

@@ -45,6 +45,10 @@
     .form-control{
         text-align: center;
     }
+    .pagination{
+        margin-bottom: 20px;
+        margin-right: 30px;
+    }
 </style>
 
 <!-- Begin Page Content -->
@@ -55,7 +59,7 @@
 
     <div class="d-flex justify-content-between mb-3">
         <h4 class="mb-0">Pending Residency Requests</h4>
-        <a href="admn_certofres_walkin.php" class="btn btn-primary">For Walk'in <i class="fas fa-walking ms-2"></i></a>
+        <a href="admn_certofres_walkin.php" class="btn btn-primary"><i class="fas fa-walking me-2"></i>For Walk'in </a>
     </div>
 
     <div class="row">
@@ -78,7 +82,7 @@
                 include('tables/residency_pending.php');
             ?>
         </div>
-        <div class="pagination d-flex justify-content-end">
+        <div class="pagination d-flex justify-content-end fixed-bottom">
             <?php if ($currentPage > 1): ?>
                 <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
             <?php endif; ?>
@@ -86,7 +90,7 @@
             <span class="current-page mt-1 me-3 ms-3">Page <?= $currentPage ?></span>
 
             <?php if ($moreRecords): ?>
-                <a class="btn btn-primary" href="?page=<?= $currentPage + 1 ?>">Next</a>
+                <a class="btn btn-primary me-2" href="?page=<?= $currentPage + 1 ?>">Next</a>
             <?php endif; ?>
         </div>
     </div>

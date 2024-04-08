@@ -24,6 +24,10 @@
         margin: 5px;
         font-size: 13px;
     }
+    .img--td{
+        width:50px;
+        height: 50px;
+    }
 
     @media screen and (max-width: 1420px) {
         th{
@@ -179,7 +183,7 @@
                             <span>No Image Available</span>
                         <?php else: ?>
                             <a href="#" data-toggle="modal" data-target="#imageModal<?= $view['id_brgyid'] ?>">
-                                <img src="<?= $view['res_photo'] ?>" class="img-fluid" alt="Modal Image" width="50">
+                                <img src="<?= $view['res_photo'] ?>" class="img--td" alt="Modal Image" width="50" height="50">
                             </a>
                     
                             <div class="modal fade" id="imageModal<?= $view['id_brgyid'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">

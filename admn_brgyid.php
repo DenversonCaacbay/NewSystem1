@@ -58,13 +58,9 @@
 
     <!-- Page Heading -->
 
-    <div class="row"> 
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="text-center mb-0 ">Pending Barangay ID Requests</h4>
-                <!-- <a href="admn_bspermit_done.php" class="btn btn-primary">View Done</a> -->
-            </div>
-        </div>
+    <div class="d-flex justify-content-between mb-3">
+        <h4 class="mb-0">Pending Barangay ID Requests</h4>
+        <a href="admn_certofres_walkin.php" class="btn btn-primary"><i class="fas fa-walking me-2"></i>For Walk'in </a>
     </div>
     <div class="row"> 
         <div class="col">

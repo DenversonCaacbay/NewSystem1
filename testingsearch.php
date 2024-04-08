@@ -48,7 +48,7 @@
                 <td><?php echo $row['age']?></td>
                 <td><?php echo $row['sex']?></td>
                 <td><?php echo $row['status']?></td>
-				<td><?php echo $row['address']?></td>
+				<td><?php echo $row['houseno']?><?php echo $row['purok']?> <?php echo $row['street']?></td>
                 <td><?php echo $row['contact']?></td>
                 <td><?php echo $row['bdate']?></td>
                 <td><?php echo $row['bplace']?></td>

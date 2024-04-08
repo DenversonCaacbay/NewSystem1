@@ -85,6 +85,11 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="admn_feedbacks.php">
+                    <i class="fas fa-fw fa-comment"></i>
+                    <span>Feedbacks</span></a>
+            </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 User Management

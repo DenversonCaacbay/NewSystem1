@@ -118,7 +118,7 @@
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="col-md-12">
-                        <button class="btn btn-primary mt-3 w-100 p-2">Add Request</button>
+                        <button class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
                     </div>
                 </div>
             </form>
