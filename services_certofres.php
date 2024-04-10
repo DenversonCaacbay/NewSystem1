@@ -371,14 +371,25 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                    <div class="form-group">
-                                            <label class="mtop">Pick-Up Date: </label>
-                                            <input type="date" id="myDateInput" class="form-control" name="date" required 
-                                                min="<?php echo date('Y-m-d'); ?>"
-                                                max="<?php echo date('Y-m-d', strtotime('+7 days')); ?>"> <!-- end expiration date -->
-
+                                        <div class="d-flex">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Not Urgent
+                                                </label>
+                                            </div>
+                                            <div class="form-check ms-3">
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    Urgent
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="urgentRequest" style="display: none;">
+                                            <label class="mtop">Urgent Request: <code>Note: 50 pesos payment upon getting request</code></label>
+                                            <textarea class="form-control" required></textarea>
                                             <div class="valid-feedback">Valid.</div>
-                                            <div class="invalid-feedback">Please select a date other than Saturday or Sunday.</div>
+                                            <div class="invalid-feedback">Please Fill out this field</div>
                                         </div>
                                     </div>
                                             <input type="hidden" class="form-control" name="date_live" value="<?= $userdetails['date_live']?>" placeholder="Enter Other" />
@@ -547,6 +558,23 @@
             });
             });
         </script>
+        <script>
+    // Get the radio buttons
+    const notUrgentRadio = document.getElementById('flexRadioDefault1');
+    const urgentRadio = document.getElementById('flexRadioDefault2');
+
+    // Get the form group div
+    const urgentRequestDiv = document.getElementById('urgentRequest');
+
+    // Add event listeners to the radio buttons
+    notUrgentRadio.addEventListener('change', () => {
+        urgentRequestDiv.style.display = 'none'; // Hide the div when "Not Urgent" is selected
+    });
+
+    urgentRadio.addEventListener('change', () => {
+        urgentRequestDiv.style.display = 'block'; // Show the div when "Urgent" is selected
+    });
+</script>
 
         <script src="bootstrap/js/bootstrap.bundle.js" type="text/javascript"> </script>
 

@@ -40,19 +40,19 @@
     <style>
 
     /* Navbar Buttons */
-.bg-primary{
+    .bg-primary{
         background: #309464 !important;
     }
     .btn-primary{
         background: #309464 !important;
         border: 0;
     }
-.btn-primary:focus {
+    .btn-primary:focus {
             outline: none !important;
         }
-    h4{
+    /* h4{
         color: #309464 !important;
-    }
+    } */
     .btn1 {
     border-radius: 20px;
     border: none; /* Remove borders */
@@ -83,22 +83,6 @@
     margin-left: .1%;
     }
 
-    /* Darker background on mouse-over */
-    /* .btn1:hover {
-    background-color: #ffffff;
-    color: black;
-    }
-
-    .btn2:hover {
-    background-color: #ffffff;
-    color: black;
-    }
-
-    .btn3:hover {
-    background-color: #ffffff;
-    color: black;
-    } */
-
     .fa{
         color: #309464 ;
         background: #fff !important;
@@ -114,14 +98,76 @@
     .fas{
         color: #309464 ;
     }
-    .card{
+    /* Service Container */
+    .services--container a{
+        text-decoration: none;
+    }
+    .services--card{
         border:none;
-        box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
--webkit-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
--moz-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        transition:  all .2s ease;
+    }
+    .services--card:hover{
+        background: #208454;
+        border:none;
+        color: #fff !important;
+        transform: scale(1.075);
+    }
+    .services--card img{
+        width: 150px;
+        height: 100px;
+        
     }
     .alert{
         height: 400px;
+    }
+    /* Extras */
+    .feedback--btn {
+    position: fixed;
+    bottom: 20px;
+    z-index: 99;
+    background-color: #208454;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    /* Adjustments for vertical position */
+    padding: 20px 10px;
+    writing-mode: vertical-rl; /* Set vertical writing mode */
+    transform: rotate(-180deg); /* Rotate the text */
+    letter-spacing: 2px;
+}
+
+    
+    /* Style for the button on hover */
+    .feedback--btn:hover {
+        background-color: #e8f2ed;
+        color: #208454;
+    }
+
+    .checkbox-container {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .checkbox-container input[type="checkbox"] {
+        display: none;
+    }
+    
+    .checkbox-container label {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 5px;
+        background-color: #e9ecef;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .checkbox-container input[type="checkbox"]:checked + label {
+        background-color: #208454;
+        color: white;
     }
     @media (max-width: 767px) {
     .alert {
@@ -188,7 +234,7 @@
         
         <?php else : ?>
             <li class="nav-item px-3">
-            <a href="request.php" class="nav-link text-light btn3" data-toggle="tooltip" title="Requests">
+            <a href="request_pending.php" class="nav-link text-light btn3" data-toggle="tooltip" title="Requests">
                 <i class="fa fa-file fa-md d-none d-sm-inline"></i>
                 <span class="d-inline d-sm-none">Requests</span>
             </a>
@@ -301,7 +347,7 @@
                 </div>
             </div>
 
-            <div class="container mt-5"> 
+            <div class="container mt-5 services--container"> 
                 <div class="row title-spacing">
                     <div class="col"> 
                         <h3 class="text-center"> E-Services</h3>
@@ -310,34 +356,34 @@
                 </div>
                 
                 <div class="row">
-                    <div class="col-md-4 mt-2"> 
+                    <div class="col-md-4 mt-3"> 
                         <a href="services_business.php" onclick="checkUserData(event)">
                             <div class="zoom1"> 
-                                <div class="card"> 
+                                <div class="card services--card"> 
                                     <div class="card-body text-center"> 
                                         <img src="icons/ResidentHomepage/busper.png">
-                                        <h4> Business Recommendation </h4> 
+                                        <h4 class="services--title"> Business Recommendation </h4> 
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-4 mt-2"> 
+                    <div class="col-md-4 mt-3"> 
                         <a href="services_brgyid.php" onclick="checkUserData(event)">
                             <div class="zoom1">
-                                <div class="card"> 
+                                <div class="card services--card"> 
                                     <div class="card-body text-center"> 
-                                        <img style="height: 139px;" src="icons/ResidentHomepage/brgyid.png">
+                                        <img src="icons/ResidentHomepage/brgyid.png">
                                         <h4> Barangay ID </h4>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-4 mt-2"> 
+                    <div class="col-md-4 mt-3"> 
                         <a href="services_certofindigency.php" onclick="checkUserData(event)">
                             <div class="zoom1">
-                                <div class="card"> 
+                                <div class="card services--card"> 
                                     <div class="card-body text-center"> 
                                         <img src="icons/ResidentHomepage/indigency.png">
                                         <h4> Certificate of Indigency </h4>
@@ -348,10 +394,10 @@
                     </div>
 
 
-                    <div class="col-md-6 mt-2">
+                    <div class="col-md-6 mt-3">
                         <a href="services_certofres.php" onclick="checkUserData(event)"> 
                         <div class="zoom1">    
-                            <div class="card"> 
+                            <div class="card services--card"> 
                                 <div class="card-body text-center"> 
                                 <img src="icons/ResidentHomepage/residency.png">
                                     <h4> Certificate of Residency </h4>
@@ -361,10 +407,10 @@
                         </a>
                     </div>
 
-                    <div class="col-md-6 mt-2">
+                    <div class="col-md-6 mt-3">
                         <a href="services_brgyclearance.php" onclick="checkUserData(event)"> 
                         <div class="zoom1">    
-                            <div class="card"> 
+                            <div class="card services--card"> 
                                 <div class="card-body text-center">
                                 <img src="icons/ResidentHomepage/clearance.png"> 
                                     <h4> Barangay Clearance </h4>
@@ -374,15 +420,11 @@
                         </a>
                     </div>
                 </div>
-
-
-                <div class="row "> 
-                    
+                <div class="row ">      
                 </div>
             </div>
         </section>
         <br>
-
         <br>
         <div id="down"></div>
         <div class="container-fluid bg-primary text-center text-light">
@@ -407,21 +449,47 @@
                 </div>
             </div>
         </div>
+        <?php if (empty($userdetails)) : ?>
+        
+        <?php else : ?>
+        <button class="feedback--btn" data-bs-toggle="modal" data-bs-target="#exampleModal">FEEDBACK</button>
+        <?php endif; ?>
+        <!-- Feedback Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form>
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Feedback</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label class="fw-bold">Comment</label>
+                            <textarea class="form-control"></textarea>
+                            <h5 class="text-center fw-bold mt-3">Rate</h5>
+                            <div class="checkbox-container " id="checkboxContainer"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
         <!-- Footer -->
-
-        <script>
-            $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();   
-            });
-        </script>
-        <script>
+<script>
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script>
+<script>
     document.querySelectorAll('[data-slide="prev"]').forEach(function (element) {
         element.addEventListener('click', function () {
             $('#announcementCarousel').carousel('prev');
         });
     });
-
     document.querySelectorAll('[data-slide="next"]').forEach(function (element) {
         element.addEventListener('click', function () {
             $('#announcementCarousel').carousel('next');
@@ -433,55 +501,75 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
-
     // Hide tooltips on mobile devices
     if (window.innerWidth <= 576) {
         $('[data-toggle="tooltip"]').tooltip('disable');
     }
 </script>
-
-        <script>
-            $(document).ready(function(){
-            // Add smooth scrolling to all links
-            $("a").on('click', function(event) {
-
-                // Make sure this.hash has a value before overriding default behavior
-                if (this.hash !== "") {
-                // Prevent default anchor click behavior
-                event.preventDefault();
-
-                // Store hash
-                var hash = this.hash;
-
-                // Using jQuery's animate() method to add smooth page scroll
-                // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-                $('html, body').animate({
-                    scrollTop: $(hash).offset().top
-                }, 800, function(){
-
-                    // Add hash (#) to URL when done scrolling (default click behavior)
-                    window.location.hash = hash;
-                });
-                } // End if
-            });
-            });
-        </script>
-
-        <script src="bootstrap/js/bootstrap.bundle.js" type="text/javascript"> </script>
-        <script>
-            function checkUserData(event) {
-                // Assuming $userdata is a JavaScript variable containing user data
-                var userdata = <?php echo json_encode($userdetails); ?>;
-
-                // Check if userdata is empty or null
-                if (!userdata) {
-                    // Prevent the link from navigating
-                    event.preventDefault();
-
-                    // Show an alert
-                    alert('Please login first.');
-                }
-            }
-        </script>
-    </body>
+<script>
+    $(document).ready(function(){
+    // Add smooth scrolling to all links
+    $("a").on('click', function(event) {
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+        // Prevent default anchor click behavior
+        event.preventDefault();
+        // Store hash
+        var hash = this.hash;
+        // Using jQuery's animate() method to add smooth page scroll
+        // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+        $('html, body').animate({
+            scrollTop: $(hash).offset().top
+        }, 800, function(){
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+        });
+        } // End if
+    });
+    });
+</script>
+<script src="bootstrap/js/bootstrap.bundle.js" type="text/javascript"> </script>
+<script>
+    function checkUserData(event) {
+        // Assuming $userdata is a JavaScript variable containing user data
+        var userdata = <?php echo json_encode($userdetails); ?>;
+        // Check if userdata is empty or null
+        if (!userdata) {
+            // Prevent the link from navigating
+            event.preventDefault();
+            // Show an alert
+            alert('Please login first.');
+        }
+    }
+</script>
+<script>
+// Function to create checkboxes
+function createCheckboxes() {
+    const checkboxContainer = document.getElementById('checkboxContainer');
+    for (let i = 1; i <= 5; i++) {
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = `checkbox${i}`;
+    checkbox.value = i;
+    checkbox.addEventListener('change', () => handleCheckboxChange(checkbox));   
+    const label = document.createElement('label');
+    label.htmlFor = `checkbox${i}`;
+    label.textContent = i;
+    checkboxContainer.appendChild(checkbox);
+    checkboxContainer.appendChild(label);
+    }
+}
+// Function to handle checkbox change event
+function handleCheckboxChange(clickedCheckbox) {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+    if (checkbox !== clickedCheckbox) {
+        checkbox.checked = false;
+    }
+    });
+}
+// Call the function to create checkboxes
+createCheckboxes();
+</script>
+</body>
 </html>

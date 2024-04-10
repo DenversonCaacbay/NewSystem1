@@ -38,112 +38,148 @@
       <script src="https://kit.fontawesome.com/67a9b7069e.js" crossorigin="anonymous"></script>
 
         <!-- css & js for resident is on resident.class.php -->
-    <style>
+        <style>
 
-    /* Navbar Buttons */
+/* Navbar Buttons */
 .bg-primary{
-        background: #309464 !important;
-    }
-    .btn-primary{
-        background: #309464 !important;
-        border: 0;
-    }
-    .btn-primary:focus {
-        outline: none !important;
-    }
-    h4{
-        color: #309464 !important;
-    }
-    .btn1 {
-        border-radius: 20px;
-        border: none; /* Remove borders */
-        color: white; /* White text */
-        font-size: 16px; /* Set a font size */
-        cursor: pointer; /* Mouse pointer on hover */
-        padding: 12px 22px;
-    }
+    background: #309464 !important;
+}
+.btn-primary{
+    background: #309464 !important;
+    border: 0;
+}
+.btn-primary:focus {
+    outline: none !important;
+}
+h4{
+    color: #309464 !important;
+}
+.btn1 {
+    border-radius: 20px;
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    padding: 12px 22px;
+}
 
-    .pill-pending{
-        background: #ffc107;
-        color: #fff;
-        padding: 5px;
-        font-size: 13px;
-        border-radius: 15px;
-    }
-    .pill-primary{
-        background: #309464 ;
-        color: #fff;
-        padding: 5px;
-        font-size: 13px;
-        border-radius: 15px;
-    }
-    .pill-danger{
-        background: #dc3545;
-        color: #fff;
-        padding: 5px;
-        font-size: 13px;
-        border-radius: 15px;
-    }
-    .fa{
-        color: #309464 ;
-        background: #fff !important;
-        padding: 10px;
-        border-radius: 50px;
-    }
-    .fa-angle-left, .fa-angle-right {
-        color: #309464 ;
-        background: #fff !important;
-        padding: 10px;
-        border-radius: 50px;
-    }
-    .fas{
-        color: #309464 ;
-    }
-    .card{
-        border:none;
-        box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
-        -webkit-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
-        -moz-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
-    }
-    .alert{
-        height: 400px;
-    }
+.pill-pending{
+    background: #ffc107;
+    color: #fff;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 15px;
+}
+.pill-primary{
+    background: #309464 ;
+    color: #fff;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 15px;
+}
+.pill-danger{
+    background: #dc3545;
+    color: #fff;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 15px;
+}
+.fa{
+    color: #309464 ;
+    background: #fff !important;
+    padding: 10px;
+    border-radius: 50px;
+}
+.fa-angle-left, .fa-angle-right {
+    color: #309464 ;
+    background: #fff !important;
+    padding: 10px;
+    border-radius: 50px;
+}
+.fas{
+    color: #309464 ;
+}
+.card{
+    border:none;
+    box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
+    -webkit-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
+    -moz-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
+}
+.alert{
+    height: 400px;
+}
+.tabs--div{
+    background: #309464 !important;
+    padding:5px 5px;
+    border-radius: 10px;
+}
+.request--btn{
+    width:33.3%;
+    border:none;
+    font-weight: bold;
+    letter-spacing: 3px !important;
+    color: #fff !important;
+    
+}
+.request--btn:hover{
+    color: #309464 !important;
+    background-color: #fff !important;
+    
+}
+.request--btn.active{
+    color: #309464 !important;
+    background-color: #fff !important;
+}
+.request--container{
+    margin-top:5%;
+}
 
-    @media (max-width: 767px) {
-    .alert {
-        margin-top: 20%;
-        height: auto; /* Set height to auto for mobile view */
-        max-height: 400px; /* Optionally set a maximum height if needed */
-        overflow-y: scroll; /* Add vertical scroll for overflow content */
-    }
-    .alert h3{
-        font-size: 18px;
-    }
-    .col-lg-8 h4{
-        font-size: 13px;
-    }
-    .col-lg-8 h3{
-        font-size: 15px;
-    }
-    .icon-item{
-        padding: none;
-    }
-    .header h2{
-        font-size: 18px;
-    }
+@media (max-width: 767px) {
+.request--container{
+    margin-top:20%;
+}
+.request--btn{
+    width:33.3%;
+    border:none;
+    font-weight: bold;
+    letter-spacing: 0px !important;
+    color: #fff !important;
+    
+}
+.alert {
+    margin-top: 20%;
+    height: auto; /* Set height to auto for mobile view */
+    max-height: 400px; /* Optionally set a maximum height if needed */
+    overflow-y: scroll; /* Add vertical scroll for overflow content */
+}
+.alert h3{
+    font-size: 18px;
+}
+.col-lg-8 h4{
+    font-size: 13px;
+}
+.col-lg-8 h3{
+    font-size: 15px;
+}
+.icon-item{
+    padding: none;
+}
+.header h2{
+    font-size: 18px;
+}
 
-    .header h3{
-        font-size: 15px;
-    }
+.header h3{
+    font-size: 15px;
+}
 
 }
 
-    </style>
+</style>
     <body> 
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
          
-        <a class="navbar-brand d-none d-lg-block" href="resident_homepage.php">CommuniServe</a>
+        <a class="navbar-brand d-none d-lg-block" href="resident_homepage.php">Barangay Santa Rita Information & E-Services</a>
 
         <a class="navbar-brand d-lg-none" href="resident_homepage.php">BSRI&E-S</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -185,13 +221,14 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid" style="margin-top:6%">
-<div class="d-flex justify-content-between">
-    <h3>Requests</h3>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">History</button>
-</div>
+<div class="container-fluid request--container">
+    <div class="tabs--div d-flex justify-content-between">
+        <a href="request_pending.php" class="btn request--btn active">PENDING</a>
+        <a href="request_approved.php" class="btn request--btn">APPROVED</a>
+        <a href="request_done.php" class="btn request--btn">DONE</a>
+    </div>
     
-    <div class="row">
+    <div class="row mt-3">  
     <?php 
     // Check if requests are available and sort them by date in descending order
     if(is_array($requests)) {
