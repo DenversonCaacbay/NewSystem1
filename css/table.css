@@ -1,0 +1,57 @@
+.page--container{
+    height: 75vh;
+}
+
+.page--container .page--table{
+    height: 400px;
+    overflow: auto;
+}
+
+.table{
+    width: 100%;
+}
+th{
+    background: #309464 !important;
+    color: #fff !important;
+    font-size: 15px;
+}
+td{
+    font-size: 15px;
+    padding: auto;
+}
+.pending--img{
+    width:50px;
+    height:50px;
+}
+
+.btn--approve,
+.btn--decline{
+    padding: 5px;
+    width: 80px;
+    text-align:center;
+    margin: 5px;
+    font-size: 13px;
+}
+.img--td{
+    width:50px;
+    height: 50px;
+}
+
+@media screen and (max-width: 1420px) {
+    th{
+        font-size: 12px;
+    }
+    td{
+        font-size: 12px;
+    }
+    .pending--img{
+        width:30px;
+        height:30px;
+    }
+    .btn-table{
+        font-size: 15px;
+        padding: 5px;
+        margin:3px;
+        width:25px;
+    }
+}

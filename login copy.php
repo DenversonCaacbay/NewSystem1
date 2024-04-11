@@ -80,20 +80,9 @@
             width: 100%;
             margin-bottom: 10px;
             }
-
             .card{
-                border-radius: 10px;
-                width: 80%;
-                top:50px;
-            }
-            .company--title{
-                width: 100%;
-                padding-left: 50px;
-                padding-top: 60px;
-            }
-            .login--title{
-                color: #309464;
-                font-size: 30px;
+                width: 50%;
+                margin: auto;
             }
             .icon {
             padding: 15px;
@@ -143,52 +132,54 @@
         <section class="main-section"> 
             <div class="container-fluid mt-2"> 
                 <div class="row">
-                        <div class="col-md-6 text-white align-content-center"> 
-                            <div class="company--title">
-                                <img src="icon.png" width="150">
-                                <h1> Barangay Sta. Rita Information & Management System</h1>
-                                <h5><i>“Your one stop barangay solution”</i></h5>
-                            </div>
+                        <div class="col-sm-12 main-heading text-center text-white"> 
+                            <img src="icon.png" width="150">
+                            <h3> Barangay Santa Rita Management System</h3>
                         </div>
-                        <div class="col-md-6 align-content-center"> 
-                        <div class="card m-auto main-card"> 
-                            <div class="card-body"> 
-                                <h4 class="login--title">Login</h4>
-                                <form method="post"> 
-                                    <label> Email: </label>
-                                    <div class="input-container">
-                                        <i class="fa fa-envelope icon"></i>
-                                        <input class="input-field" type="email" placeholder="Enter Email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
-                                    </div>
-                                    <label> Password: </label>
-                                    <div class="input-container">
-                                        <i class="fa fa-key icon"></i>
-                                        <input class="input-field" type="password" placeholder="Enter Password" id="myInput" name="password" autocomplete="off" required>
-                                    </div>
-                                    <div class="custom-control custom-switch mt-3">
-                                        <input type="checkbox" onclick="myFunction()" class="custom-control-input" id="switch1">
-                                        <label class="custom-control-label" for="switch1">Show Password</label>
-                                    </div>
-                                    <button class="btn btn-primary login-button mt-3" type="submit" name="login"> Login </button>
-                                </form>
-                                <hr>
-                                <div class="registration-section"> 
-                                    <p1> <strong> Haven't registered yet? </strong> </p1> 
-                                    <br>
-                                    <p1> Hindi ka pa rehistrado? </p1> 
-                                    <br>
-                                    <button class="btn btn-success create-button" onclick="trying();" disabled> Create Account </button> 
-                                    <div class="custom-control custom-switch mt-3">
-                                        <input type="checkbox" onclick="enableCreate()" class="custom-control-input" id="switch2">
-                                        <a class="custom-control-label" href="communiserve_privacy_policy.html" target="_blank" for="switch1">Communiserve Privacy Policy</a>
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
-                    
+                        <div class="col-md-12"> 
+                            <div class="card main-card"> 
+                                <div class="card-body"> 
+                                    <form method="post"> 
+
+                                        <label> Email: </label>
+                                        <div class="input-container">
+                                            <i class="fa fa-envelope icon"></i>
+                                            <input class="input-field" type="email" placeholder="Enter Email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
+                                        </div>
+
+                                        <label> Password: </label>
+                                        <div class="input-container">
+                                            <i class="fa fa-key icon"></i>
+                                            <input class="input-field" type="password" placeholder="Enter Password" id="myInput" name="password" autocomplete="off" required>
+                                        </div>
+
+                                        <div class="custom-control custom-switch mt-3">
+                                            <input type="checkbox" onclick="myFunction()" class="custom-control-input" id="switch1">
+                                            <label class="custom-control-label" for="switch1">Show Password</label>
+                                        </div>
+                                        
+                                        <button class="btn btn-primary login-button mt-3" type="submit" name="login"> Log-in </button>
+                                    
+                                    </form>
+
+                                    <hr>
+
+                                    <div class="registration-section"> 
+                                        <p1> <strong> Haven't registered yet? </strong> </p1> 
+                                        <br>
+                                        <p1> Hindi ka pa rehistrado? </p1> 
+                                        <br>
+                                        <button class="btn btn-success create-button" onclick="trying();" disabled> Create Account </button> 
+                                        <div class="custom-control custom-switch mt-3">
+                                            <input type="checkbox" onclick="enableCreate()" class="custom-control-input" id="switch2">
+                                            <a class="custom-control-label" href="communiserve_privacy_policy.html" target="_blank" for="switch1">Communiserve Privacy Policy</a>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+        </div>
                 </div>
                             
             </div>

@@ -23,11 +23,9 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
+<link rel="stylesheet" href="css/table.css"/>
 
 <style>
-    .container--residency{
-        height: 500px;
-    }
     .input-icons i {
         position: absolute;
     }
@@ -49,6 +47,10 @@
         margin-bottom: 20px;
         margin-right: 30px;
     }
+    .page--table{
+        height: 400px;
+        overflow: auto;
+    }
 </style>
 
 <!-- Begin Page Content -->
@@ -59,7 +61,7 @@
 
     <div class="d-flex justify-content-between mb-3">
         <h4 class="mb-0">Pending Residency Requests</h4>
-        <a href="admn_certofres_walkin.php" class="btn btn-primary"><i class="fas fa-walking me-2"></i>For Walk'in </a>
+        <a href="walkin_certofres.php" class="btn btn-primary"><i class="fas fa-walking me-2"></i>For Walk'in </a>
     </div>
 
     <div class="row">
@@ -77,12 +79,12 @@
 
 
     <div class="row"> 
-        <div class="col-md-12" style="height: 500px;overflow: auto;"> 
+        <div class="col-md-12 page--table"> 
             <?php 
                 include('tables/residency_pending.php');
             ?>
         </div>
-        <div class="pagination d-flex justify-content-end fixed-bottom">
+        <div class="pagination d-flex justify-content-end mt-3 me-3">
             <?php if ($currentPage > 1): ?>
                 <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
             <?php endif; ?>

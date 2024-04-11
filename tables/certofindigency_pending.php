@@ -1,50 +1,4 @@
 
-<style>
-    .table{
-        width: 100%;
-    }
-    th{
-        background: #309464 !important;
-        color: #fff !important;
-        font-size: 15px;
-    }
-    td{
-        font-size: 15px;
-        padding: auto;
-    }
-    .pending--img{
-        width:50px;
-        height:50px;
-    }
-
-    .btn--approve,
-    .btn--decline{
-        padding: 5px;
-        width: 80px;
-        text-align:center;
-        margin: 5px;
-        font-size: 13px;
-    }
-
-    @media screen and (max-width: 1420px) {
-        th{
-            font-size: 12px;
-        }
-        td{
-            font-size: 12px;
-        }
-        .pending--img{
-            width:30px;
-            height:30px;
-        }
-        .btn-table{
-            font-size: 15px;
-            padding: 5px;
-            margin:3px;
-            width:25px;
-        }
-    }
-</style>
 <?php
 	// require the database connection
 	require 'classes/conn.php';
@@ -146,7 +100,7 @@
 <table class="table table-hover text-center table-bordered">
     <thead class="alert-info sticky-top">
         <tr>
-            <th class="bg text-light"> Pick Up Date </th>
+            <th class="bg text-light"> Date Requested </th>
             <th class="bg text-light"> Tracking ID </th>
             <th class="bg text-light"> Full Name </th>
             <th class="bg text-light"> Address </th>
@@ -171,7 +125,7 @@
                             <span>No Image Available</span>
                         <?php else: ?>
                             <a href="#" data-toggle="modal" data-target="#imageModal<?= $view['id_indigency'] ?>">
-                                <img src="<?= $view['certofindigency_photo'] ?>" class="img-fluid" alt="Modal Image" width="50">
+                                <img src="<?= $view['certofindigency_photo'] ?>" class="pending--img" alt="Modal Image">
                             </a>
                     
                             <div class="modal fade" id="imageModal<?= $view['id_indigency'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
@@ -201,8 +155,11 @@
                             <input type="hidden" name="id_indigency" value="<?= $view['id_indigency'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
                             <!-- <button class="btn btn-primary" type="submit" name="approved_indigency" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button> -->
-                            <a class="btn btn-primary btn--approve"  href="pdf_viewer_indigency.php?pdf=1&id=<?= $view['id_indigency'];?>">View</i></a>
-                            <button class="btn btn-danger btn--decline" type="submit" name="reject_indigency" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
+                            <div class="d-flex">
+                                <a class="btn btn-primary btn--approve"  href="pdf_viewer_indigency.php?pdf=1&id=<?= $view['id_indigency'];?>">View</i></a>
+                                <button class="btn btn-danger btn--decline" type="submit" name="reject_indigency" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
+                            </div>
+                            
                         </form>
                     </td>
                 </tr>

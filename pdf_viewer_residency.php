@@ -19,9 +19,37 @@
 ?>
 
 <?php 
-    include('dashboard_sidebar_start.php');
+    // include('dashboard_sidebar_start.php');
 ?>
 <style>
+    .container--viewer{
+        margin-top: 30px;
+    }
+    .bg{
+        background: #309464 !important;
+    }
+    .btn-primary{
+            background: #309464 !important;
+            border: 0;
+        }
+    .btn-primary:focus {
+                outline: none !important;
+            }
+    .border-left-primary{
+        border-left: 0.25rem solid #309464 !important;
+    }
+    .text-color{
+        color: #309464 !important;
+    }
+    .nav-link{
+        color: #ffffff !important;
+    }
+    .sidebar-brand-text{
+        color: #ffffff !important;
+    }
+    .bg-primary{
+        background: #ffffff;
+    }
     .container--viewer{
         height: 400px;
     }
@@ -56,7 +84,8 @@
             </div>
             <div class="d-flex">
                 <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
-                <button class="btn btn-primary " id="markAsDoneButton" disabled>Mark As Done <i class="fas fa-check"></i></button>
+                <button class="btn btn-primary me-3" id="markAsDoneButton" disabled>Mark As Done <i class="fas fa-check"></i></button>
+                <button class="btn btn-danger"> Decline <i class="fas fa-times"></i></button>
             </div>
             
             
@@ -64,13 +93,14 @@
         <div class="d-flex justify-content-between">
             <div class="w-100 mt-3 me-3">
                 <div class="text-center"><img src="<?= $view['certofres_photo'] ?>" alt="Residency IMAGE" class="viewer--img"></div>
-                
-                <label class="mt-3">Name</label>
-                <input type="text" value="<?= $view['fname']." ".$view['lname'] ?>" class="form-control"/>
-                <label class="mt-3">Address</label>
-                <input type="text" class="form-control" value="<?= $view['houseno']." ".$view['street']." ".$view['brgy']." ".$view['municipal'] ?>"/>
-                <label class="mt-3">Purpose</label>
-                <input type="text" class="form-control" value="<?= $view['purpose'] ?>">
+                <label class="mt-3">Tracking ID:</label>
+                <input type="text" value="<?= $view['track_id']?>" class="form-control" readonly/>
+                <label class="mt-3">Name:</label>
+                <input type="text" value="<?= $view['fname']." ".$view['lname'] ?>" class="form-control" readonly/>
+                <label class="mt-3">Address:</label>
+                <input type="text" class="form-control" value="<?= $view['houseno']." ".$view['street']." ".$view['brgy']." ".$view['municipal'] ?>" readonly/>
+                <label class="mt-3">Purpose:</label>
+                <input type="text" class="form-control" value="<?= $view['purpose'] ?>" readonly>
             </div>
             <div class="mt-3">
                 <div id="pdfContainer"></div>
@@ -110,13 +140,14 @@
         // Directly initiate download
         const link = document.createElement('a');
         link.href = pdfUrl;
-        link.download = 'barangay_id.pdf'; // Set the filename for download
+        link.download = 'barangay_residency.pdf'; // Set the filename for download
         link.style.display = 'none'; // Hide the link
         document.body.appendChild(link);
         link.click(); // Simulate a click on the link
         document.body.removeChild(link); // Clean up the DOM
 
         // Enable "Mark As Done" button
+        document.getElementById('backButton').disabled = false;
         document.getElementById('markAsDoneButton').disabled = false;
         document.getElementById('printButton').disabled = true;
     });

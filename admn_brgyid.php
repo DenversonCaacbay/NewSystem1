@@ -28,10 +28,11 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
+<link rel="stylesheet" href="css/table.css"/>
 
 <style>
     .container--brgyid{
-        height: 500px;
+        height: 300px;
     }
     .input-icons i {
         position: absolute;
@@ -42,7 +43,6 @@
         margin-bottom: 10px;
         /* margin-left: 34%; */
     }
-        
     .icon {
         padding: 10px;
         min-width: 40px;
@@ -54,7 +54,7 @@
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid container--brgyid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
 
@@ -76,14 +76,13 @@
     </div>
 
     <div class="row"> 
-        <div class="col-md-12" style="height: 500px;overflow: auto;"> 
+        <div class="col-md-12 page--table"> 
             <?php 
                 include('tables/brgyid_pending.php');
             ?>
             
         </div>
-        <!-- Pagination buttons -->
-        <div class="pagination d-flex justify-content-end">
+        <div class="pagination d-flex justify-content-end mt-3 me-3">
             <?php if ($currentPage > 1): ?>
                 <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
             <?php endif; ?>

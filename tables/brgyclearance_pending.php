@@ -1,49 +1,4 @@
-<style>
-    .table{
-        width: 100%;
-    }
-    th{
-        background: #309464 !important;
-        color: #fff !important;
-        font-size: 15px;
-    }
-    td{
-        font-size: 15px;
-        padding: auto;
-    }
-    .pending--img{
-        width:50px;
-        height:50px;
-    }
 
-    .btn--approve,
-    .btn--decline{
-        padding: 5px;
-        width: 80px;
-        text-align:center;
-        margin: 5px;
-        font-size: 13px;
-    }
-
-    @media screen and (max-width: 1420px) {
-        th{
-            font-size: 12px;
-        }
-        td{
-            font-size: 12px;
-        }
-        .pending--img{
-            width:30px;
-            height:30px;
-        }
-        .btn-table{
-            font-size: 15px;
-            padding: 5px;
-            margin:3px;
-            width:25px;
-        }
-    }
-</style>
 <?php
 	// require the database connection
 	require 'classes/conn.php';
@@ -154,8 +109,11 @@
                             <input type="hidden" name="id_clearance" value="<?= $view['id_clearance'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
                             <!-- <button class="btn btn-primary" type="submit" name="approved_clearance" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button> -->
-                            <a class="btn btn-primary btn--approve"  href="pdf_viewer_clearance.php?pdf=1&id=<?= $view['id_clearance'];?>">View</i></a>
-                            <button class="btn btn-danger btn--decline" type="submit" name="reject_clearance" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
+                            <div class="d-flex">
+                                <a class="btn btn-primary btn--approve"  href="pdf_viewer_clearance.php?pdf=1&id=<?= $view['id_clearance'];?>">View</i></a>
+                                <button class="btn btn-danger btn--decline" type="submit" name="reject_clearance" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
+                            </div>
+                            
                         </form>
                     </td>
 

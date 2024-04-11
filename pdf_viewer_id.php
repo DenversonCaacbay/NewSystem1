@@ -17,9 +17,37 @@
 ?>
 
 <?php 
-    include('dashboard_sidebar_start.php');
+    // include('dashboard_sidebar_start.php');
 ?>
 <style>
+    .container--viewer{
+        margin-top: 30px;
+    }
+    .bg{
+        background: #309464 !important;
+    }
+    .btn-primary{
+            background: #309464 !important;
+            border: 0;
+        }
+    .btn-primary:focus {
+                outline: none !important;
+            }
+    .border-left-primary{
+        border-left: 0.25rem solid #309464 !important;
+    }
+    .text-color{
+        color: #309464 !important;
+    }
+    .nav-link{
+        color: #ffffff !important;
+    }
+    .sidebar-brand-text{
+        color: #ffffff !important;
+    }
+    .bg-primary{
+        background: #ffffff;
+    }
     .container--viewer{
         height: 400px;
     }
@@ -43,40 +71,43 @@
             const pdfUrl = "generatePdf/generate_brgyid.php?pdf=1&id=" + reqId;
             
             // Embed the PDF within the page
-            document.getElementById('pdfContainer').innerHTML = '<embed src="' + pdfUrl + '" width="500px" height="400px" type="application/pdf" />';
+            document.getElementById('pdfContainer').innerHTML = '<embed src="' + pdfUrl + '" width="500px" height="500px" type="application/pdf" />';
         }
     </script>
     <div class="container-fluid container--viewer">
         <div class="d-flex justify-content-between">
-            <h3 class="viewer-text">Barangay ID PDF Viewer</h3>
-            <a href="admn_brgyid.php" class="btn btn-primary">Back</a>
+            <div class="d-flex">
+                <a href="admn_brgyid.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
+                <h3 class="viewer-text">Barangay ID PDF Viewer</h3>
+            </div>
+            <div class="d-flex">
+                <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
+                <button class="btn btn-primary me-3" id="markAsDoneButton" disabled>Mark As Done <i class="fas fa-check"></i></button>
+                <button class="btn btn-danger"> Decline <i class="fas fa-times"></i></button>
+            </div>
             
         </div>
         
         <div class="d-flex justify-content-between">
             <div class="w-100 me-3">
-                Resident<br>
-                <div class="text-center"><img src="assets/default-thumbnail.jpg" alt="ID IMAGE" class="viewer--img"></div>
+                <div class="text-center mt-3"><img src="assets/default-thumbnail.jpg" alt="ID IMAGE" class="viewer--img"></div>
                 
-                <label class="mt-3">Name</label>
+                <label class="mt-3">Name: </label>
                 <input type="text" class="form-control"/>
-                <label class="mt-3">Address</label>
+                <label class="mt-3">Address: </label>
                 <input type="text" class="form-control"/>
-                <label class="mt-3">Birthdate</label>
+                <label class="mt-3">Birthdate: </label>
                 <input type="text" class="form-control"/>
-
-                Contact Incase of Emergency:<br>
-                <label class="mt-3">Name</label>
+                <p class="fw-bold mt-3">Contact in Case of Emergency: </p>
+                <label class="">Name</label>
                 <input type="text" class="form-control"/>
                 <label class="mt-3">Contact Number</label>
-                <input type="text" class="form-control"/>
-                <label class="mt-3">Address</label>
                 <input type="text" class="form-control"/>
             </div>
             <div class="mt-3">
                 <div id="pdfContainer"></div>
-                <button class="btn btn-primary mt-3" id="printButton">Print</button>
-                <button class="btn btn-primary mt-3" id="markAsDoneButton" disabled>Mark As Done</button>
+                <!-- <button class="btn btn-primary mt-3" id="printButton">Print</button>
+                <button class="btn btn-primary mt-3" id="markAsDoneButton" disabled>Mark As Done</button> -->
             </div>
         </div>
         
