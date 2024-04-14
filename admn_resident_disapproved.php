@@ -5,7 +5,13 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
-   $view = $residentbmis->view_approved_account();
+//    $view = $residentbmis->view_rejected_account();
+
+   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+   $limit = 5;
+   $offset = ($currentPage - 1) * $limit;
+
+   list($view, $moreRecords) = $residentbmis->view_rejected_account($limit, $offset);
    $residentbmis->create_resident();
    $residentbmis->update_resident();
    $residentbmis->delete_resident();
@@ -22,15 +28,15 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     .input-icons i {
         position: absolute;
     }
         
     .input-icons {
-        width: 30%;
         margin-bottom: 20px;
-        margin-left: 34%;
+        margin-left: 0px;
     }
         
     .icon {
@@ -44,11 +50,11 @@
 </style>
 
     <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <div class="container-fluid page--container">
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8"> <h1 class="mb-0">Viewing Approved Accounts</h1></div>
+            <div class="col-md-8"> <h4 class="mb-0">Viewing Declined Accounts</h4></div>
             <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_resident_crud.php"> Back </a></div>
            
         </div>
@@ -58,17 +64,33 @@
 
 
         <div class="col-md-12 mt-4">
-			<form method="POST" action="">
+        <form method="POST" action="">
                 <div class="input-icons d-flex">
                     <i class="fa fa-search icon"></i>
-                    <input type="search" class="form-control search" name="keyword" style="border-radius: 30px;" value="" required=""/>
-                    <button class="btn btn-success" name="search_resident" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Search</button>
-                    <a href="admn_registered_resident.php" class="btn btn-info" style="width: 90px; font-size: 17px; border-radius:30px; margin-left:10px;">Reload</a>
+                    <input type="search" class="form-control search" name="keyword" style="border-radius: 5px;" value="" required=""/>
+                    <button class="btn btn-success ms-3" name="search_resident" >Search</button>
+                    <a href="admn_disapproved_resident.php" class="btn btn-info ms-3" >Reload</a>
                 </div>
 			</form>
-		<?php 
-            include('resident_register/resident_approved.php');
-        ?>
+            <div class="row ">
+                <div class="col-md-12 page--table">
+                    <?php 
+                        include('resident_register/resident_disapproved.php');
+                    ?>
+                </div>
+                <div class="pagination d-flex justify-content-end mt-3 me-3">
+                    <?php if ($currentPage > 1): ?>
+                        <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
+                    <?php endif; ?>
+
+                    <span class="current-page mt-1 me-3 ms-3">Page <?= $currentPage ?></span>
+
+                    <?php if ($moreRecords): ?>
+                        <a class="btn btn-primary me-2" href="?page=<?= $currentPage + 1 ?>">Next</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+		
 	</div>
 
 

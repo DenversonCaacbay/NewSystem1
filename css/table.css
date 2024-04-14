@@ -1,10 +1,8 @@
-.page--container{
-    height: 75vh;
-}
 
-.page--container .page--table{
-    height: 400px;
-    overflow: auto;
+.page--container{
+    padding: 30px 20px;
+    height: 90vh;
+    overflow: hidden;
 }
 
 .table{
@@ -37,8 +35,42 @@ td{
     height: 50px;
 }
 
-@media screen and (max-width: 1420px) {
+/* @media screen and (max-width: 1420px) {
+
+} */
+
+@media screen and (max-width: 1536px){
+    .page--container{
+        padding: 20px 20px;
+        height: 90vh;
+        overflow:auto;
+    }
     th{
+        
+        font-size: 13px;
+        align-content: center;
+    }
+    td{
+        font-size: 13px;
+        align-content: center;
+    }
+    .pending--img{
+        width:30px;
+        height:30px;
+    }
+    .btn-table{
+        font-size: 15px;
+        padding: 5px;
+        margin:3px;
+        width:25px;
+    }
+  }
+  @media screen and (max-width: 1280px){
+    .page--table{
+        height: 40%;
+    }
+    th{
+        background-color: blue !important;
         font-size: 12px;
     }
     td{
@@ -54,4 +86,27 @@ td{
         margin:3px;
         width:25px;
     }
-}
+  }
+  @media screen and (max-width: 1024px){
+    .page--table{
+        height: 200%;
+    }
+    th{
+        background-color: red !important;
+        font-size: 12px;
+    }
+    td{
+        font-size: 12px;
+    }
+    .pending--img{
+        width:30px;
+        height:30px;
+    }
+    .btn-table{
+        font-size: 15px;
+        padding: 5px;
+        margin:3px;
+        width:25px;
+    }
+  }
+ 

@@ -20,8 +20,8 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="text-center mb-0">Viewing Resident Details</h4>
             <div>
-                <!-- <button class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal">Banned Details</button> -->
-                <a class="btn btn-primary" href="admn_resident_disapproved.php">Back</a>
+                <button class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal">Banned Details</button>
+                <a class="btn btn-primary" href="admn_resident_banned.php">Back</a>
             </div>
             
         </div>
@@ -105,6 +105,32 @@
             </div>
 	    </div>
 <!-- Modal for Registering Residents -->
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Banned Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card p-2">
+                    <p>Request: Barangay Clearance</p>
+                    <p>Reason: BOBO KASI DI KINUHA YUNG REQUEST HAYS!</p>
+                </div>
+                <div class="card p-2">
+                    <p>Request: Barangay Clearance</p>
+                    <p>Reason: BOBO KASI DI KINUHA YUNG REQUEST HAYS!</p>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
     </div>
 
 

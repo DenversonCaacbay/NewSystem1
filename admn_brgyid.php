@@ -7,13 +7,6 @@
     $bmis->validate_admin();
     $bmis->reject_brgyid();
     $bmis->approved_brgyid();
-    // $view = $bmis->view_brgyid();
-    // $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-    // $limit = 5;
-    // $offset = ($currentPage - 1) * $limit;
-
-    // $view =  $bmis->view_brgyid($limit, $offset);
-// Assuming $currentPage is the current page number, and $limit is the number of records per page
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     $limit = 5;
     $offset = ($currentPage - 1) * $limit;
@@ -31,9 +24,6 @@
 <link rel="stylesheet" href="css/table.css"/>
 
 <style>
-    .container--brgyid{
-        height: 300px;
-    }
     .input-icons i {
         position: absolute;
     }
@@ -76,7 +66,7 @@
     </div>
 
     <div class="row"> 
-        <div class="col-md-12 page--table"> 
+        <div class="col-md-12"> 
             <?php 
                 include('tables/brgyid_pending.php');
             ?>

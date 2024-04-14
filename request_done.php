@@ -2,7 +2,6 @@
     error_reporting(E_ALL ^ E_WARNING);
     include('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
-    $requests = $residentbmis->view_request($userdetails['id_resident']);
     $requests_done = $residentbmis->view_request_done($userdetails['id_resident']);
 
     $dt = new DateTime("now", new DateTimeZone('Asia/Manila'));
@@ -226,15 +225,16 @@
         <a href="request_pending.php" class="btn request--btn ">PENDING</a>
         <a href="request_approved.php" class="btn request--btn">APPROVED</a>
         <a href="request_done.php" class="btn request--btn active">DONE</a>
+        <a href="request_declined.php" class="btn request--btn">DECLINED</a>
     </div>
     
     <div class="row mt-3">
     <?php 
     // Check if requests are available and sort them by date in descending order
-    if(is_array($requests)) {
+    if(is_array($requests_done)) {
         // Combine all request data into one array
         $all_requests = [];
-        foreach($requests as $request_data) {
+        foreach($requests_done as $request_data) {
             $all_requests = array_merge($all_requests, $request_data);
         }
 
@@ -249,7 +249,6 @@
                 <div class="card mt-3 mb-3">
                     <div class="card-header bg-primary text-light d-flex justify-content-between">
                         Date Requested: <?= ucfirst(date("F d, Y", strtotime($request['date']))); ?>
-                        <button class="btn btn-danger"><i class="fas fa-trash text-white"></i></button>
                     </div>
                     <div class="card-body">
                         <?php 
@@ -270,77 +269,13 @@
                             <h3 class="card-h1">Residency</h3>
                             <h5>Purpose: <?= $request['purpose'];?></h5>
                         <?php } ?>
-                        <h5>Status: <span class="pill-pending"><?= $request['form_status'];?></span></h5>
+                        <h5>Status: <span class="pill-primary"><?= $request['form_status'];?></span></h5>
                         <!-- Add more fields as needed -->
                     </div>
                 </div>
             </div>
         <?php } ?>
     <?php } ?>
-</div>
-
-<!-- History Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">History</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body p-0">
-      <?php 
-    // Check if requests are available and sort them by date in descending order
-    if(is_array($requests_done)) {
-        // Combine all request data into one array
-        $all_requests = [];
-        foreach($requests_done as $request_data) {
-            $all_requests = array_merge($all_requests, $request_data);
-        }
-
-        // Sort all requests by date in descending order
-        usort($all_requests, function($a, $b) {
-            return strtotime($b['date']) - strtotime($a['date']);
-        });
-
-        // Iterate over sorted requests and display them
-        foreach($all_requests as $request_done) {?>
-            <div class="col-md-12">
-                <div class="card mt-3 mb-3">
-                    <div class="card-header bg-primary text-light d-flex justify-content-between p-2">
-                        Date Requested: <?= ucfirst(date("F d, Y", strtotime($request_done['date']))); ?>
-                    </div>
-                    <div class="card-body">
-                        <?php 
-                        // Display common request fields
-                        if($request_done['id_brgyid']) { ?>
-                            <h5 class="card-h1">Barangay ID</h5>
-                            <h6>Street: <?= $request_done['street'];?><?= $request_done['brgy'];?></h6>
-                        <?php } elseif($request_done['id_bspermit']) { ?>
-                            <h5 class="card-h1">Business Recommendation</h5>
-                            <h6>Business Name: <?= $request_done['bsname'];?></h6>
-                        <?php } elseif($request_done['id_clearance']) { ?>
-                            <h5 class="card-h1">Barangay Clearance</h5>
-                            <h6>Purpose: <?= $request_done['purpose'];?></h6>
-                        <?php } elseif($request_done['id_indigency']) { ?>
-                            <h5 class="card-h1">Indigency</h5>
-                            <h6>Purpose: <?= $request_done['purpose'];?></h6>
-                        <?php } elseif($request_done['id_rescert']) { ?>
-                            <h5 class="card-h1">Residency</h5>
-                            <h6>Purpose: <?= $request_done['purpose'];?></h6>
-                        <?php } ?>
-                        <h6>Status: <span class="pill-primary"><?= $request_done['form_status'];?></span></h6>
-                        <!-- Add more fields as needed -->
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
-    <?php } ?>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 </div>

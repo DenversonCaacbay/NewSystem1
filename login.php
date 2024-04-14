@@ -41,14 +41,11 @@
         <title> Barangay Santa Rita Management System </title>
         <!-- responsive tags for screen compatibility -->
         <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
-        <!-- custom css --> 
-        <link href="..//css/index.css" rel="stylesheet" type="text/css">
         <!-- bootstrap css -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"> 
         <!-- fontawesome icons --> 
         <script src="https://kit.fontawesome.com/67a9b7069e.js" crossorigin="anonymous"></script>
-        <!-- fontawesome icons --> 
-        <script src="..//customjs/main.js" type="text/javascript"></script>
+ 
         <link rel="manifest" href="manifest.json">
         <script>
         if ('serviceWorker' in navigator) {
@@ -84,7 +81,8 @@
             .card{
                 border-radius: 10px;
                 width: 80%;
-                top:50px;
+                top:100px;
+                margin-bottom: 0px;
             }
             .company--title{
                 width: 100%;
@@ -126,9 +124,37 @@
             .btn:hover {
             opacity: 1;
             }
+            .footer{
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                margin-top: 0px;
+                color: #fff; /* Change the text color as needed */
+                text-align: center;
+                padding: 0px 0; /* Adjust the padding as needed */
+            }
             @media (max-width: 767.98px) {
                 .card{
+                    top:20px;
                     width: 100%;
+                    margin-bottom: 50px;
+                }
+                .company--title{
+                    width: 100%;
+                    text-align: center;
+                    padding-left: 0px;
+                    padding-top: 20px;
+                }
+                .footer{
+                    position: relative;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    margin-top:30px;
+                    color: #fff; /* Change the text color as needed */
+                    text-align: center;
+                    padding: 0px 0; /* Adjust the padding as needed */
                 }
             }
             
@@ -169,7 +195,7 @@
                                         <input type="checkbox" onclick="myFunction()" class="custom-control-input" id="switch1">
                                         <label class="custom-control-label" for="switch1">Show Password</label>
                                     </div>
-                                    <button class="btn btn-primary login-button mt-3" type="submit" name="login"> Login </button>
+                                    <button class="btn btn-success mt-3" type="submit" name="login"> Login </button>
                                 </form>
                                 <hr>
                                 <div class="registration-section"> 
@@ -187,17 +213,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    
-                </div>
                             
             </div>
 
-        </section>
-
-        <!-- Footer -->
-
-        <footer id="footer" class="bg-primary text-white fixed-bottom d-flex-column text-center">
+            <footer id="footer" class="footer bg-primary text-white text-center">
 
             <!--Copyright-->
 
@@ -210,6 +229,9 @@
             </div>
 
         </footer>
+
+        </section>
+        
 
         <script>
             function myFunction() {

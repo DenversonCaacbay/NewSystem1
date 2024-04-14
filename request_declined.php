@@ -2,7 +2,8 @@
     error_reporting(E_ALL ^ E_WARNING);
     include('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
-    $requests = $residentbmis->view_request($userdetails['id_resident']);
+    // $requests = $residentbmis->view_request($userdetails['id_resident']);
+    $requests_decline = $residentbmis->view_request_decline($userdetails['id_resident']);
 
     $dt = new DateTime("now", new DateTimeZone('Asia/Manila'));
     $tm = new DateTime("now", new DateTimeZone('Asia/Manila'));
@@ -37,143 +38,143 @@
       <script src="https://kit.fontawesome.com/67a9b7069e.js" crossorigin="anonymous"></script>
 
         <!-- css & js for resident is on resident.class.php -->
-        <style>
+    <style>
 
-/* Navbar Buttons */
-.bg-primary{
-    background: #309464 !important;
-}
-.btn-primary{
-    background: #309464 !important;
-    border: 0;
-}
-.btn-primary:focus {
-    outline: none !important;
-}
-h4{
-    color: #309464 !important;
-}
-.btn1 {
-    border-radius: 20px;
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    font-size: 16px; /* Set a font size */
-    cursor: pointer; /* Mouse pointer on hover */
-    padding: 12px 22px;
+    /* Navbar Buttons */
+    .bg-primary{
+        background: #309464 !important;
+    }
+    .btn-primary{
+        background: #309464 !important;
+        border: 0;
+    }
+    .btn-primary:focus {
+        outline: none !important;
+    }
+    h4{
+        color: #309464 !important;
+    }
+    .btn1 {
+        border-radius: 20px;
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+        padding: 12px 22px;
+    }
+
+    .pill-pending{
+        background: #ffc107;
+        color: #fff;
+        padding: 5px;
+        font-size: 13px;
+        border-radius: 15px;
+    }
+    .pill-primary{
+        background: #309464 ;
+        color: #fff;
+        padding: 5px;
+        font-size: 13px;
+        border-radius: 15px;
+    }
+    .pill-danger{
+        background: #dc3545;
+        color: #fff;
+        padding: 5px;
+        font-size: 13px;
+        border-radius: 15px;
+    }
+    .fa{
+        color: #309464 ;
+        background: #fff !important;
+        padding: 10px;
+        border-radius: 50px;
+    }
+    .fa-angle-left, .fa-angle-right {
+        color: #309464 ;
+        background: #fff !important;
+        padding: 10px;
+        border-radius: 50px;
+    }
+    .fas{
+        color: #309464 ;
+    }
+    .card{
+        border:none;
+        box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
+        -webkit-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
+        -moz-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
+    }
+    .alert{
+        height: 400px;
+    }
+    .tabs--div{
+        background: #309464 !important;
+        padding:5px 5px;
+        border-radius: 10px;
+    }
+    .request--btn{
+        width:33.3%;
+        border:none;
+        font-weight: bold;
+        letter-spacing: 3px !important;
+        color: #fff !important;
+        
+    }
+    .request--btn:hover{
+        color: #309464 !important;
+        background-color: #fff !important;
+        
+    }
+    .request--btn.active{
+        color: #309464 !important;
+        background-color: #fff !important;
+    }
+    .request--container{
+        margin-top:5%;
+    }
+
+    @media (max-width: 767px) {
+    .request--container{
+        margin-top:20%;
+    }
+    .request--btn{
+        width:33.3%;
+        border:none;
+        font-weight: bold;
+        letter-spacing: 0px !important;
+        color: #fff !important;
+        
+    }
+    .alert {
+        margin-top: 20%;
+        height: auto; /* Set height to auto for mobile view */
+        max-height: 400px; /* Optionally set a maximum height if needed */
+        overflow-y: scroll; /* Add vertical scroll for overflow content */
+    }
+    .alert h3{
+        font-size: 18px;
+    }
+    .col-lg-8 h4{
+        font-size: 13px;
+    }
+    .col-lg-8 h3{
+        font-size: 15px;
+    }
+    .icon-item{
+        padding: none;
+    }
+    .header h2{
+        font-size: 18px;
+    }
+
+    .header h3{
+        font-size: 15px;
+    }
+
 }
 
-.pill-pending{
-    background: #ffc107;
-    color: #fff;
-    padding: 5px;
-    font-size: 13px;
-    border-radius: 15px;
-}
-.pill-primary{
-    background: #309464 ;
-    color: #fff;
-    padding: 5px;
-    font-size: 13px;
-    border-radius: 15px;
-}
-.pill-danger{
-    background: #dc3545;
-    color: #fff;
-    padding: 5px;
-    font-size: 13px;
-    border-radius: 15px;
-}
-.fa{
-    color: #309464 ;
-    background: #fff !important;
-    padding: 10px;
-    border-radius: 50px;
-}
-.fa-angle-left, .fa-angle-right {
-    color: #309464 ;
-    background: #fff !important;
-    padding: 10px;
-    border-radius: 50px;
-}
-.fas{
-    color: #309464 ;
-}
-.card{
-    border:none;
-    box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
-    -webkit-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
-    -moz-box-shadow: 0px 7px 17px -3px rgba(0,0,0,0.36);
-}
-.alert{
-    height: 400px;
-}
-.tabs--div{
-    background: #309464 !important;
-    padding:5px 5px;
-    border-radius: 10px;
-}
-.request--btn{
-    width:33.3%;
-    border:none;
-    font-weight: bold;
-    letter-spacing: 3px !important;
-    color: #fff !important;
-    
-}
-.request--btn:hover{
-    color: #309464 !important;
-    background-color: #fff !important;
-    
-}
-.request--btn.active{
-    color: #309464 !important;
-    background-color: #fff !important;
-}
-.request--container{
-    margin-top:5%;
-}
-
-@media (max-width: 767px) {
-.request--container{
-    margin-top:20%;
-}
-.request--btn{
-    width:33.3%;
-    border:none;
-    font-weight: bold;
-    letter-spacing: 0px !important;
-    color: #fff !important;
-    
-}
-.alert {
-    margin-top: 20%;
-    height: auto; /* Set height to auto for mobile view */
-    max-height: 400px; /* Optionally set a maximum height if needed */
-    overflow-y: scroll; /* Add vertical scroll for overflow content */
-}
-.alert h3{
-    font-size: 18px;
-}
-.col-lg-8 h4{
-    font-size: 13px;
-}
-.col-lg-8 h3{
-    font-size: 15px;
-}
-.icon-item{
-    padding: none;
-}
-.header h2{
-    font-size: 18px;
-}
-
-.header h3{
-    font-size: 15px;
-}
-
-}
-
-</style>
+    </style>
     <body> 
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
@@ -222,19 +223,19 @@ h4{
 </nav>
 <div class="container-fluid request--container">
     <div class="tabs--div d-flex justify-content-between">
-        <a href="request_pending.php" class="btn request--btn active">PENDING</a>
+        <a href="request_pending.php" class="btn request--btn ">PENDING</a>
         <a href="request_approved.php" class="btn request--btn">APPROVED</a>
         <a href="request_done.php" class="btn request--btn">DONE</a>
-        <a href="request_declined.php" class="btn request--btn">DECLINED</a>
+        <a href="request_declined.php" class="btn request--btn active">DECLINED</a>
     </div>
     
-    <div class="row mt-3">  
+    <div class="row mt-3">
     <?php 
     // Check if requests are available and sort them by date in descending order
-    if(is_array($requests)) {
+    if(is_array($requests_decline)) {
         // Combine all request data into one array
         $all_requests = [];
-        foreach($requests as $request_data) {
+        foreach($requests_decline as $request_data) {
             $all_requests = array_merge($all_requests, $request_data);
         }
 
@@ -249,7 +250,6 @@ h4{
                 <div class="card mt-3 mb-3">
                     <div class="card-header bg-primary text-light d-flex justify-content-between">
                         Date Requested: <?= ucfirst(date("F d, Y", strtotime($request['date']))); ?>
-                        <button class="btn btn-danger"><i class="fas fa-trash text-white"></i></button>
                     </div>
                     <div class="card-body">
                         <?php 
@@ -270,7 +270,7 @@ h4{
                             <h3 class="card-h1">Residency</h3>
                             <h5>Purpose: <?= $request['purpose'];?></h5>
                         <?php } ?>
-                        <h5>Status: <span class="pill-pending"><?= $request['form_status'];?></span></h5>
+                        <h5>Status: <span class="pill-danger"><?= $request['form_status'];?></span></h5>
                         <!-- Add more fields as needed -->
                     </div>
                 </div>
@@ -279,90 +279,9 @@ h4{
     <?php } ?>
 </div>
 
-<!-- History Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">History</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body p-0">
-      <?php 
-    // Check if requests are available and sort them by date in descending order
-    if(is_array($requests_done)) {
-        // Combine all request data into one array
-        $all_requests = [];
-        foreach($requests_done as $request_data) {
-            $all_requests = array_merge($all_requests, $request_data);
-        }
-
-        // Sort all requests by date in descending order
-        usort($all_requests, function($a, $b) {
-            return strtotime($b['date']) - strtotime($a['date']);
-        });
-
-        // Iterate over sorted requests and display them
-        foreach($all_requests as $request_done) {?>
-            <div class="col-md-12">
-                <div class="card mt-3 mb-3">
-                    <div class="card-header bg-primary text-light d-flex justify-content-between p-2">
-                        Date Requested: <?= ucfirst(date("F d, Y", strtotime($request_done['date']))); ?>
-                    </div>
-                    <div class="card-body">
-                        <?php 
-                        // Display common request fields
-                        if($request_done['id_brgyid']) { ?>
-                            <h5 class="card-h1">Barangay ID</h5>
-                            <h6>Street: <?= $request_done['street'];?><?= $request_done['brgy'];?></h6>
-                        <?php } elseif($request_done['id_bspermit']) { ?>
-                            <h5 class="card-h1">Business Recommendation</h5>
-                            <h6>Business Name: <?= $request_done['bsname'];?></h6>
-                        <?php } elseif($request_done['id_clearance']) { ?>
-                            <h5 class="card-h1">Barangay Clearance</h5>
-                            <h6>Purpose: <?= $request_done['purpose'];?></h6>
-                        <?php } elseif($request_done['id_indigency']) { ?>
-                            <h5 class="card-h1">Indigency</h5>
-                            <h6>Purpose: <?= $request_done['purpose'];?></h6>
-                        <?php } elseif($request_done['id_rescert']) { ?>
-                            <h5 class="card-h1">Residency</h5>
-                            <h6>Purpose: <?= $request_done['purpose'];?></h6>
-                        <?php } ?>
-                        <h6>Status: <span class="pill-primary"><?= $request_done['form_status'];?></span></h6>
-                        <!-- Add more fields as needed -->
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
-    <?php } ?>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
 </div>
 
-</div>
 
-        <script>
-            $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();   
-            });
-        </script>
-        <script>
-    document.querySelectorAll('[data-slide="prev"]').forEach(function (element) {
-        element.addEventListener('click', function () {
-            $('#announcementCarousel').carousel('prev');
-        });
-    });
-
-    document.querySelectorAll('[data-slide="next"]').forEach(function (element) {
-        element.addEventListener('click', function () {
-            $('#announcementCarousel').carousel('next');
-        });
-    });
-</script>
 <script>
     // Initialize tooltips
     $(function () {

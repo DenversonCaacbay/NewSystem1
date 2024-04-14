@@ -47,15 +47,11 @@
         margin-bottom: 20px;
         margin-right: 30px;
     }
-    .page--table{
-        height: 400px;
-        overflow: auto;
-    }
 </style>
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
 

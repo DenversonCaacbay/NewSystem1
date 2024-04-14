@@ -6,6 +6,8 @@
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
    $view = $residentbmis->view_single_resident();
+   $residentbmis->approve_resident();
+   $residentbmis->decline_resident();
    
 //    var_dump($view);
 ?>
@@ -13,6 +15,7 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     .input-icons i {
         position: absolute;
@@ -35,14 +38,12 @@
 </style>
 
     <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <div class="container-fluid page--container">
 
-        <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="text-center mb-0">Viewing Details</h1>
+                <h4 class="text-center mb-0">Viewing Resident Details</h4>
                 <a class="btn btn-primary" href="admn_resident_crud.php">Back</a>
             </div>
-        </div>
 
         <!-- Page Heading -->
 
@@ -83,8 +84,9 @@
                     <input type="text" class="form-control" value="<?= $view['sex'];?>">
                 </div>
                 <div class="col-md-12 mt-3" style="font-size: 18px; font-weight:bold;">Address Details</div>
-                <div class="col-md-2 mt-3">
-                <label>House No</label>
+                <div class="col-md-12 mt-3">
+                <input type="text" class="form-control" value="<?= $view['houseno'];?> <?= $view['purok'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?>">
+                <!-- <label>House No</label>
                     <input type="text" class="form-control" value="<?= $view['houseno'];?>">
                 </div>
                 <div class="col-md-2 mt-3">
@@ -102,34 +104,88 @@
                 <div class="col-md-3 mt-3">
                 <label>Municipality</label>
                     <input type="text" class="form-control" value="<?= $view['municipal'];?>">
+                </div> -->
+                <div class="row">
+                    <div class="col-md-6 mt-3">
+                    <label>Voter?</label>
+                        <input type="text" class="form-control" value="<?= $view['voter'];?>">
+                    </div>
+                    <div class="col-md-6 mt-3">
+                    <label>Family Head?</label>
+                        <input type="text" class="form-control" value="<?= $view['family_role'];?>">
+                    </div>
+                    <div class="col-md-12 mt-3" style="font-size: 18px; font-weight:bold;">Contact Details</div>
+                    <div class="col-md-6 mt-3">
+                    <label>Contact Number</label>
+                        <input type="text" class="form-control" value="<?= $view['contact'];?>">
+                    </div>
+                    <div class="col-md-6 mt-3">
+                    <label>Email Address</label>
+                        <input type="text" class="form-control" value="<?= $view['email'];?>">
+                    </div>
                 </div>
-                <div class="col-md-6 mt-3">
-                <label>Voter?</label>
-                    <input type="text" class="form-control" value="<?= $view['voter'];?>">
-                </div>
-                <div class="col-md-6 mt-3">
-                <label>Family Head?</label>
-                    <input type="text" class="form-control" value="<?= $view['family_role'];?>">
-                </div>
-                <div class="col-md-12 mt-3" style="font-size: 18px; font-weight:bold;">Contact Details</div>
-                <div class="col-md-6 mt-3">
-                <label>Contact Number</label>
-                    <input type="text" class="form-control" value="<?= $view['contact'];?>">
-                </div>
-                <div class="col-md-6 mt-3">
-                <label>Email Address</label>
-                    <input type="text" class="form-control" value="<?= $view['email'];?>">
-                </div>
+                
+                
             </div>
 	    </div>
-<!-- Modal for Registering Residents -->
+        <div class="d-flex justify-content-end mt-3">
+            <!-- <button class="btn btn-danger me-3" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline Account </button> -->
+            <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#declineModal"> Decline Account </button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#approvedModal">Approved Account</button>
+        </div>
+        
     </div>
 
+<!--Approved Modal -->
+<div class="modal fade" id="approvedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Approved</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to Approved this account?</p>
+      </div>
+      <div class="modal-footer">
+        <form action="" method="post">
+            <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
+            <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
+            <input type="hidden" name="email" value="<?= $view['email'];?>">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button  class="btn btn-primary" type="submit" name="approve_resident">Approve</button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!--Decline Modal -->
+<div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Reason to Decline</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" method="post">
+      <div class="modal-body">
+        <label>Enter Reason to Decline: </label>
+        <textarea class="form-control" name="reason"></textarea>
+      </div>
+      <div class="modal-footer">
+            <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
+            <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
+            <input type="hidden" name="email" value="<?= $view['email'];?>">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')">Decline</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-    
-    <!-- /.container-fluid -->
 
-<!-- End of Main Content -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous"></script>

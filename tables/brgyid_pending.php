@@ -102,19 +102,19 @@
 	}else{
 ?>
 
-<table class="table table-hover ">
+<table class="table table-hover text-center table-bordered">
     <thead class="bg-primary sticky-top">
         <tr>
             <th hidden> Resident ID </th>
-            <th class="bg text-light"> Date Requested </th>
-            <th class="bg text-light"> Track ID </th>
-            <th class="bg text-light"> Full Name </th>
+            <th class="text-light"> Date Requested </th>
+            <th class="text-light"> Track ID </th>
+            <th class="text-light"> Full Name </th>
             <th hidden class="bg text-light"> Address </th>
             <th hidden class="bg text-light"> Birth Date </th>
             <th hidden class="bg text-light"> Emergency Contact Person </th>
             <th hidden class="bg text-light"> Emergency Contact Number </th>
-            <th class="bg text-light"> Image </th>
-            <th class="bg text-light"> Actions</th>
+            <th class="text-light"> Image </th>
+            <th class="text-light"> Actions</th>
         </tr>
     </thead>
     <tbody>

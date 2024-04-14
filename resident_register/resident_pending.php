@@ -1,46 +1,3 @@
-<style>
-    .table{
-        width: 100%;
-    }
-    th{
-        background: #309464 !important;
-        color: #fff !important;
-        font-size:13px;
-    }
-    td{
-        font-size: 20px;
-        padding: auto;
-    }
-    .pending--img{
-        width:50px;
-        height:50px;
-    }
-    .btn-table{
-        font-size: 20px;
-        padding: 10px;
-        margin:3px;
-        width:45px;
-    }
-
-    @media screen and (max-width: 1620px) {
-        th{
-            font-size: 12px;
-        }
-        td{
-            font-size: 12px;
-        }
-        .pending--img{
-            width:30px;
-            height:30px;
-        }
-        .btn-table{
-            font-size: 15px;
-            padding: 5px;
-            margin:3px;
-            width:25px;
-        }
-    }
-</style>
 
 <?php
 	// require the database connection
@@ -143,9 +100,9 @@
                                 <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
                                 <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
                                 <input type="hidden" name="email" value="<?= $view['email'];?>">
-                                <a class="btn btn-table btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> <i class="fas fa-eye"></i> </a>
-                                <button class="btn btn-table btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> <i class="fas fa-check"></i> </button>
-                                <button class="btn btn-table btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> <i class="fas fa-times"></i> </button>
+                                <a class="btn btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a>
+                                <!-- <button class="btn btn-table btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> <i class="fas fa-check"></i> </button>
+                                <button class="btn btn-table btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> <i class="fas fa-times"></i> </button> -->
                             </form>
                         </td>
                     </tr>

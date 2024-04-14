@@ -162,14 +162,28 @@ use PHPMailer\PHPMailer\Exception;
         }
         
         
-
-        public function view_resident(){
+        public function view_resident($limit = 5, $offset = 0){
             $connection = $this->openConn();
-            $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified ='Pending'");
+            $stmt = $connection->prepare("
+            SELECT * FROM tbl_resident WHERE verified ='Pending' LIMIT :limit OFFSET :offset");
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
             $view = $stmt->fetchAll();
-            return $view;
+        
+            // Fetch one extra record beyond the limit to check if there are more records
+            $stmt->fetch(PDO::FETCH_ASSOC);
+            $moreRecords = $stmt->rowCount() > 0;
+        
+            return [$view, $moreRecords];
         }
+        // public function view_resident(){
+        //     $connection = $this->openConn();
+        //     $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified ='Pending'");
+        //     $stmt->execute();
+        //     $view = $stmt->fetchAll();
+        //     return $view;
+        // }
 
 
         public function view_single_resident() {
@@ -183,19 +197,69 @@ use PHPMailer\PHPMailer\Exception;
             return $view;
         }        
 
-        public function view_approved_account(){
+        // public function view_approved_account(){
+        //     $connection = $this->openConn();
+        //     $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified ='Yes'");
+        //     $stmt->execute();
+        //     $view = $stmt->fetchAll();
+        //     return $view;
+        // }
+        // With LIMIT
+        public function view_approved_account($limit = 5, $offset = 0){
             $connection = $this->openConn();
-            $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified ='Yes'");
+            $stmt = $connection->prepare("
+            SELECT * FROM tbl_resident WHERE verified ='Yes' LIMIT :limit OFFSET :offset");
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
             $view = $stmt->fetchAll();
-            return $view;
+        
+            // Fetch one extra record beyond the limit to check if there are more records
+            $stmt->fetch(PDO::FETCH_ASSOC);
+            $moreRecords = $stmt->rowCount() > 0;
+        
+            return [$view, $moreRecords];
         }
-        public function view_rejected_account(){
+
+
+        // public function view_rejected_account(){
+        //     $connection = $this->openConn();
+        //     $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified ='No'");
+        //     $stmt->execute();
+        //     $view = $stmt->fetchAll();
+        //     return $view;
+        // }
+        // With Limit
+        public function view_rejected_account($limit = 5, $offset = 0){
             $connection = $this->openConn();
-            $stmt = $connection->prepare("SELECT * from tbl_resident WHERE verified ='No'");
+            $stmt = $connection->prepare("
+            SELECT * FROM tbl_resident WHERE verified ='No' LIMIT :limit OFFSET :offset");
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
             $view = $stmt->fetchAll();
-            return $view;
+        
+            // Fetch one extra record beyond the limit to check if there are more records
+            $stmt->fetch(PDO::FETCH_ASSOC);
+            $moreRecords = $stmt->rowCount() > 0;
+        
+            return [$view, $moreRecords];
+        }
+
+        public function view_banned_account($limit = 5, $offset = 0){
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("
+            SELECT * FROM tbl_resident WHERE verified ='Banned' LIMIT :limit OFFSET :offset");
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            $view = $stmt->fetchAll();
+        
+            // Fetch one extra record beyond the limit to check if there are more records
+            $stmt->fetch(PDO::FETCH_ASSOC);
+            $moreRecords = $stmt->rowCount() > 0;
+        
+            return [$view, $moreRecords];
         }
 
         public function update_resident() {
@@ -300,7 +364,7 @@ use PHPMailer\PHPMailer\Exception;
                     // Content
                     $mail->isHTML(true);
                     $mail->Subject = 'Account Verification';
-                    $mail->Body = 'Your account has been verified. You can now login.';
+                    $mail->Body = 'Your account has been verified and Approved. You can now login <br> Here is the link: <br> https://communiserve.online/login.php.';
         
                     $mail->send();
                     
@@ -310,7 +374,7 @@ use PHPMailer\PHPMailer\Exception;
                 }
         
                 echo "<script type='text/javascript'>alert('$message2');</script>";
-                header("Refresh:0");
+                header("Refresh:1");
             }
         }
         
@@ -318,6 +382,7 @@ use PHPMailer\PHPMailer\Exception;
         public function decline_resident() {
             $id_resident = $_POST['id_resident'];
             $email = $_POST['email'];
+            $reason = $_POST['reason'];
         
             if (isset($_POST['decline_resident'])) {
                 $connection = $this->openConn();
@@ -328,6 +393,7 @@ use PHPMailer\PHPMailer\Exception;
                 $mail = new PHPMailer(true);
         
                 try {
+                    $reason = $_POST['reason'];
                     // Server settings
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';  // Replace with your SMTP server
@@ -344,7 +410,7 @@ use PHPMailer\PHPMailer\Exception;
                     // Content
                     $mail->isHTML(true);
                     $mail->Subject = 'Account Verification';
-                    $mail->Body = 'Your account verification was not successful. Please enter the right information or you may contact olongapobarangaysantarita@gmail.com for further assistance.';
+                    $mail->Body = "{$reason}. Please enter the right information or you may contact olongapobarangaysantarita@gmail.com for further assistance.";
         
                     $mail->send();
                     
@@ -938,7 +1004,7 @@ use PHPMailer\PHPMailer\Exception;
 
     }
 
-    // 
+    // Pending
     public function view_request($id_user){
         $connection = $this->openConn();
 
@@ -989,31 +1055,32 @@ use PHPMailer\PHPMailer\Exception;
         return $requests_data;
     }
 
-    public function view_request_done($id_user){
+    // Approved
+    public function view_request_approved($id_user){
         $connection = $this->openConn();
 
         // tbl_brgyid
-        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = {$id_user} AND form_status='Done'");
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = {$id_user} AND form_status='Approved'");
         $stmt->execute();
         $brgyid_data = $stmt->fetchAll();
 
         // tbl_bspermit
-        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_resident = {$id_user} AND form_status='Done'");
+        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_resident = {$id_user} AND form_status='Approved'");
         $stmt->execute();
         $bspermit_data = $stmt->fetchAll();
 
         // tbl_clearance
-        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_resident = {$id_user} AND form_status='Done'");
+        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_resident = {$id_user} AND form_status='Approved'");
         $stmt->execute();
         $clearance_data = $stmt->fetchAll();
 
         // tbl_indigency
-        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_resident = {$id_user} AND form_status='Done'");
+        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_resident = {$id_user} AND form_status='Approved'");
         $stmt->execute();
         $indigency_data = $stmt->fetchAll();
 
         // tbl_rescert
-        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_resident = {$id_user} AND form_status='Done'");
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_resident = {$id_user} AND form_status='Approved'");
         $stmt->execute();
         $rescert_data = $stmt->fetchAll();
 
@@ -1038,6 +1105,107 @@ use PHPMailer\PHPMailer\Exception;
     
         return $requests_data;
     }
+        // Decline
+        public function view_request_decline($id_user){
+            $connection = $this->openConn();
+    
+            // tbl_brgyid
+            $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = {$id_user} AND form_status='Declined'");
+            $stmt->execute();
+            $brgyid_data = $stmt->fetchAll();
+    
+            // tbl_bspermit
+            $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_resident = {$id_user} AND form_status='Declined'");
+            $stmt->execute();
+            $bspermit_data = $stmt->fetchAll();
+    
+            // tbl_clearance
+            $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_resident = {$id_user} AND form_status='Declined'");
+            $stmt->execute();
+            $clearance_data = $stmt->fetchAll();
+    
+            // tbl_indigency
+            $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_resident = {$id_user} AND form_status='Declined'");
+            $stmt->execute();
+            $indigency_data = $stmt->fetchAll();
+    
+            // tbl_rescert
+            $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_resident = {$id_user} AND form_status='Declined'");
+            $stmt->execute();
+            $rescert_data = $stmt->fetchAll();
+    
+             // Combine all fetched data into one array
+            //  $all_data = array_merge($brgyid_data, $bspermit_data, $clearance_data, $indigency_data, $rescert_data);
+    
+            //  // Sort the combined array by 'created_at' timestamp in descending order
+            //  usort($all_data, function($a, $b) {
+            //      return strtotime($b['created_at']) - strtotime($a['created_at']);
+            //  });
+     
+            //  return $all_data;
+        
+            // Combine the fetched data into one variable
+            $requests_data = array(
+                'brgyid' => $brgyid_data,
+                'bspermit' => $bspermit_data,
+                'clearance' => $clearance_data,
+                'indigency' => $indigency_data,
+                'rescert' => $rescert_data,
+            );
+        
+            return $requests_data;
+        }
+           // Done
+           public function view_request_done($id_user){
+            $connection = $this->openConn();
+    
+            // tbl_brgyid
+            $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = {$id_user} AND form_status='Done'");
+            $stmt->execute();
+            $brgyid_data = $stmt->fetchAll();
+    
+            // tbl_bspermit
+            $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_resident = {$id_user} AND form_status='Done'");
+            $stmt->execute();
+            $bspermit_data = $stmt->fetchAll();
+    
+            // tbl_clearance
+            $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_resident = {$id_user} AND form_status='Done'");
+            $stmt->execute();
+            $clearance_data = $stmt->fetchAll();
+    
+            // tbl_indigency
+            $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_resident = {$id_user} AND form_status='Done'");
+            $stmt->execute();
+            $indigency_data = $stmt->fetchAll();
+    
+            // tbl_rescert
+            $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_resident = {$id_user} AND form_status='Done'");
+            $stmt->execute();
+            $rescert_data = $stmt->fetchAll();
+    
+             // Combine all fetched data into one array
+            //  $all_data = array_merge($brgyid_data, $bspermit_data, $clearance_data, $indigency_data, $rescert_data);
+    
+            //  // Sort the combined array by 'created_at' timestamp in descending order
+            //  usort($all_data, function($a, $b) {
+            //      return strtotime($b['created_at']) - strtotime($a['created_at']);
+            //  });
+     
+            //  return $all_data;
+        
+            // Combine the fetched data into one variable
+            $requests_data = array(
+                'brgyid' => $brgyid_data,
+                'bspermit' => $bspermit_data,
+                'clearance' => $clearance_data,
+                'indigency' => $indigency_data,
+                'rescert' => $rescert_data,
+            );
+        
+            return $requests_data;
+        }
+
 
     // 
     public function view_single_residency(){
@@ -1148,11 +1316,11 @@ use PHPMailer\PHPMailer\Exception;
         
                 // Calculate the date 18 years ago
                 var eighteenYearsAgo = new Date();
-                eighteenYearsAgo.setFullYear(currentDate.getFullYear() - 18);
+                eighteenYearsAgo.setFullYear(currentDate.getFullYear() - 15);
         
                 // Check if the selected date is less than 18 years ago
                 if (selectedDate > eighteenYearsAgo) {
-                    alert('Invalid date. You must be 18 years or older to register.');
+                    alert('Invalid date. You must be 15 years or older to register.');
                     // Optionally, you can clear the input or perform any other actions here
                     document.getElementById(dateInputId).value = '';
                 }

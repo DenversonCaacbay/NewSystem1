@@ -5,7 +5,15 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
-   $view = $residentbmis->view_resident();
+//    $view = $residentbmis->view_resident();
+
+   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+   $limit = 5;
+   $offset = ($currentPage - 1) * $limit;
+
+   list($view, $moreRecords) = $residentbmis->view_resident($limit, $offset);
+
+
    $residentbmis->create_resident();
    $residentbmis->update_resident();
    $residentbmis->delete_resident();
@@ -13,18 +21,19 @@
    //    
    $residentbmis->approve_resident();
    $residentbmis->decline_resident();
-
-   $rescount = $residentbmis->count_resident();
-   $rescountm = $residentbmis->count_male_resident();
-   $rescountf = $residentbmis->count_female_resident();
-   $rescountfh = $residentbmis->count_head_resident();
-   $rescountfm = $residentbmis->count_member_resident();
+// Not useable
+//    $rescount = $residentbmis->count_resident();
+//    $rescountm = $residentbmis->count_male_resident();
+//    $rescountf = $residentbmis->count_female_resident();
+//    $rescountfh = $residentbmis->count_head_resident();
+//    $rescountfm = $residentbmis->count_member_resident();
    
 ?>
 
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     .input-icons i {
         position: absolute;
@@ -46,7 +55,7 @@
 </style>
 
     <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <div class="container-fluid page--container">
 
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -58,8 +67,11 @@
             <button type="button" class="btn btn-primary ml-auto me-3" data-bs-toggle="modal" data-bs-target="#register">Register Resident</button>
             <?php $registered_users = $residentbmis->count_registered_resident(); ?>
                             
-            <a href="admn_registered_resident.php"><i class="fas fa-thumbs-up text-color fa-2x me-4" style="margin-left:20px;"></i></a>
-            <a href="admn_disapproved_resident.php"><i class="fas fa-thumbs-down text-color fa-2x" style="margin-left:20px;"></i></a>
+            <a href="admn_resident_approved.php" class="me-3">Approved Residents</a>
+            <a class="me-3">/</a>
+            <a href="admn_resident_disapproved.php" class="me-3">Declined Residents</a>
+            <a class="me-3">/</a>
+            <a href="admn_resident_banned.php">Banned Residents</a>
             
         </div>
     </div>
@@ -144,12 +156,23 @@
                     <a href="admn_resident_crud.php" class="btn btn-info ms-3">Reload</a>
                 </div>
 			</form>
-            <div class="row">
-                <div class="col-md-12" style="height: 380px;overflow: auto;">
+            <div class="row ">
+                <div class="col-md-12 page--table">
                     <?php 
         
                         include('resident_register/resident_pending.php');
                     ?>
+                </div>
+                <div class="pagination d-flex justify-content-end mt-3 me-3">
+                    <?php if ($currentPage > 1): ?>
+                        <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
+                    <?php endif; ?>
+
+                    <span class="current-page mt-1 me-3 ms-3">Page <?= $currentPage ?></span>
+
+                    <?php if ($moreRecords): ?>
+                        <a class="btn btn-primary me-2" href="?page=<?= $currentPage + 1 ?>">Next</a>
+                    <?php endif; ?>
                 </div>
             </div>
 		

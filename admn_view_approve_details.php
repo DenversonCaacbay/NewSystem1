@@ -12,6 +12,7 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     .input-icons i {
         position: absolute;
@@ -34,14 +35,12 @@
 </style>
 
     <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <div class="container-fluid page--container">
 
-        <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="text-center mb-0">Viewing Details</h1>
-                <a class="btn btn-primary" href="admn_registered_resident.php">Back</a>
+                <h4 class="text-center mb-0">Viewing Details</h4>
+                <a class="btn btn-primary" href="admn_resident_approved.php">Back</a>
             </div>
-        </div>
 
         <!-- Page Heading -->
 
