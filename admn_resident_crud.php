@@ -56,10 +56,8 @@
 
     <!-- Begin Page Content -->
     <div class="container-fluid page--container">
-
-    <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-center mb-0">Viewing Pending Accounts</h4>
+            <h4 class="text-center mb-0 ms-2">Viewing Pending Accounts</h4>
 
             
             
@@ -74,7 +72,6 @@
             <a href="admn_resident_banned.php">Banned Residents</a>
             
         </div>
-    </div>
 
         <!-- Page Heading -->
                     
@@ -163,7 +160,7 @@
                         include('resident_register/resident_pending.php');
                     ?>
                 </div>
-                <div class="pagination d-flex justify-content-end mt-3 me-3">
+                <div class="pagination d-flex fixed-bottom mt-3 me-3">
                     <?php if ($currentPage > 1): ?>
                         <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
                     <?php endif; ?>

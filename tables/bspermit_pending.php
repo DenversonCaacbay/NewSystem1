@@ -175,9 +175,9 @@
                             <input type="hidden" name="id_bspermit" value="<?= $view['id_bspermit'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
                             <!-- <button class="btn btn-primary" type="submit" name="approved_bspermit" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button> -->
-                            <div class="d-flex">
-                                <a class="btn btn-primary btn--approve"  href="pdf_viewer_bspermit.php?pdf=1&id=<?= $view['id_bspermit'];?>">View</i></a>
-                                <button class="btn btn-danger btn--decline" type="submit" name="reject_bspermit" onclick="return confirm('Are you sure you want to deline this request?')"> Decline </button>
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-primary btn--approve "  href="pdf_viewer_bspermit.php?pdf=1&id=<?= $view['id_bspermit'];?>">View</i></a>
+                                <!-- <button class="btn btn-danger btn--decline" type="submit" name="reject_bspermit" onclick="return confirm('Are you sure you want to deline this request?')"> Decline </button> -->
                             </div>
                             
                         </form>

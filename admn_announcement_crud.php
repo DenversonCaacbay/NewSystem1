@@ -19,79 +19,31 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
-<style>
-    .container--announcement{
-        height: 400px;
-    }
-    .announcement-text{
-        font-size: 20px;
-    }
-    .card-announcement{
-        height:700px; 
-        overflow: auto;
-    }
-    .card-header{
-        font-size:  20px;
-    }
-    .btn-sample{
-        font-size: 20px;
-    }
-    code{
-        font-size: 15px;
-    }
-    label{
-        font-size:15px;
-    }
-   @media screen and (max-width: 1420px) {
-    .announcement-text{
-        font-size: 12px;
-    }
-    .card-announcement{
-        height:400px; 
-        overflow: auto;
-    }
-    .card-header{
-        font-size: 13px;
-    }
-    .btn-sample{
-        font-size: 15px;
-    }
-    code{
-        font-size: 10px;
-    }
-    label{
-        font-size:10px;
-    }
-   }
-</style>
+<link rel="stylesheet" href="css/table.css"/>
 <!-- Begin Page Content -->
 
-<div class="container-fluid container--announcement">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
 
-    <div class="row"> 
-        <div class="col-md-12 d-flex"> 
-            <h4 class="mb-4 flex-grow-1">Event Announcement Page</h4>
-        </div>
-    </div>
+    <h4 class="">Event / Announcement</h4>
       
-    <div class="row"> 
+    <div class="row mt-3"> 
         <div class="col-md-4"> 
             <div class="card">
-                <div class="card-header bg text-white"> Event Announcement Form <a class="btn btn-sample btn-primary " style="float: right;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-images"></i></a></div>
+                <div class="card-header bg text-white d-flex justify-content-between align-items-center"> Event Announcement Form <a class="btn btn-sample btn-primary " style="float: right;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-images"></i></a></div>
                 <div class="card-body">
                 
                     <form method="post" enctype="multipart/form-data">
-                    <code><i>Note:</i> Image should be like banner format, click see sample to view sample banner.</code>
+                    <!-- <code><i>Note:</i> Image should be like banner format, click see sample to view sample banner.</code> -->
                         <div class="row"> 
                             <div class="col">
                                 <input type="file" class="form-control" name="announcement_image" required>
-                                <label class="mt-2">Title</label>
+                                <label class="mt-2">Title:</label>
                                 <input type="text" class="form-control" name="announcement_title" required>
-                                <label class="mt-2">Description</label>
-                                <textarea name="event" class="form-control" rows="4" placeholder="Enter Message Here" required></textarea>
-                                <label class="mt-2">Date and Time</label>
+                                <label class="mt-2">Description:</label>
+                                <textarea name="event" class="form-control" rows="4" placeholder="Enter Description Here" required></textarea>
+                                <label class="mt-2">Date and Time: </label>
                                 <input type="datetime-local" class="form-control" name="announcement_datetime" required>
                                 <input type="text" name="status" value="Ongoing" hidden>
                             </div>

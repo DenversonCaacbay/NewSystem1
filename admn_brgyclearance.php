@@ -40,6 +40,8 @@
     .form-control{
         text-align: center;
     }
+
+
 </style>
 
     <!-- Begin Page Content -->
@@ -72,7 +74,7 @@
                 include('tables/brgyclearance_pending.php');
             ?>
         </div>
-        <div class="pagination d-flex justify-content-end mt-3 me-3">
+        <div class="pagination d-flex fixed-bottom mt-3 me-3">
             <?php if ($currentPage > 1): ?>
                 <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
             <?php endif; ?>

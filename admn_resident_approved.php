@@ -52,14 +52,11 @@
 
     <!-- Begin Page Content -->
     <div class="container-fluid page--container">
-
-    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8"> <h4 class="mb-0">Viewing Approved Accounts</h4></div>
-            <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_resident_crud.php"> Back </a></div>
+            <div class="col-md-8"> <h4 class="mb-0 ms-2">Viewing Approved Accounts</h4></div>
+            <div class="col-md-4"><a class="btn btn-primary me-3" style="float:right"  href="admn_resident_crud.php"> Back </a></div>
            
         </div>
-    </div>
 
         <!-- Page Heading -->
 
@@ -79,7 +76,7 @@
                         include('resident_register/resident_approved.php');
                     ?>
                 </div>
-                <div class="pagination d-flex justify-content-end mt-3 me-3">
+                <div class="pagination d-flex fixed-bottom mt-3 me-3">
                     <?php if ($currentPage > 1): ?>
                         <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
                     <?php endif; ?>

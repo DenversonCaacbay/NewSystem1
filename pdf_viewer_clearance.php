@@ -16,52 +16,14 @@
 
 ?>
 
-<?php 
-    // include('dashboard_sidebar_start.php');
-?>
-<style>
-    .container--viewer{
-        margin-top: 30px;
-    }
-    .bg{
-        background: #309464 !important;
-    }
-    .btn-primary{
-            background: #309464 !important;
-            border: 0;
-        }
-    .btn-primary:focus {
-                outline: none !important;
-            }
-    .border-left-primary{
-        border-left: 0.25rem solid #309464 !important;
-    }
-    .text-color{
-        color: #309464 !important;
-    }
-    .nav-link{
-        color: #ffffff !important;
-    }
-    .sidebar-brand-text{
-        color: #ffffff !important;
-    }
-    .bg-primary{
-        background: #ffffff;
-    }
-    .container--viewer{
-        height: 400px;
-    }
-    .viewer-text{
-        font-size: 25px;
-    }
-    .form-control{
-        width: 100%;
-    }
-    .viewer--img{
-        width: 100px;
-    }
-</style>
- <script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/pdf_viewer.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
         window.onload = function() {
             // Get the req_id from the URL query parameters
             const urlParams = new URLSearchParams(window.location.search);
@@ -74,9 +36,11 @@
             document.getElementById('pdfContainer').innerHTML = '<embed src="' + pdfUrl + '" width="500px" height="500px" type="application/pdf" />';
         }
     </script>
-    <div class="container-fluid container--viewer">
-        <div class="d-flex justify-content-between">
-            <div class="d-flex">
+</head>
+
+    <div class="container-fluid container--viewer p-0">
+        <div class="viewerTop d-flex justify-content-between">
+            <div class="d-flex align-items-center">
                 <a href="admn_brgyclearance.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
                 <h3 class="viewer-text">Barangay Clearance PDF Viewer</h3>
             </div>
@@ -89,9 +53,10 @@
             
         </div>
         
-        <div class="d-flex justify-content-between">
+        <div class="viewer-content d-flex justify-content-between">
+        <div class="text-center m-5"><img src="assets/default-thumbnail.jpg" alt="ID IMAGE" class="viewer--img"></div>
             <div class="w-100 me-3">
-                <div class="text-center mt-3"><img src="assets/default-thumbnail.jpg" alt="ID IMAGE" class="viewer--img"></div>
+                
                 
                 <label class="mt-3">Name:</label>
                 <input type="text" class="form-control"/>
@@ -104,7 +69,7 @@
                 <input type="text" class="form-control"/>
             </div>
             <div class="mt-3">
-                <div id="pdfContainer"></div>
+                <div class="pdfContainerUI" id="pdfContainer"></div>
             </div>
         </div>
         

@@ -16,34 +16,20 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
+<link rel="stylesheet" href="css/table.css"/>
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
 
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-center mb-0">Barangay Staff Data</h4>
-            <button type="button" class="btn btn-primary ml-auto"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Add Staff
-            </button>
-            <!-- <div class="card border-left-primary" style="margin-left:10px;" shadow">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
-                                Number of Staff Registered</div>
-                                <div class="h5 mb-0 font-weight-bold text-dark"><?= $staffcount?></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-user-tie fa-2x text-dark"></i>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="text-center mb-0">Barangay Staff Data</h4>
+        <button type="button" class="btn btn-primary ml-auto"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add Staff
+        </button>
     </div>
+    <!-- Modal Add Staff -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
@@ -54,6 +40,12 @@
                         <div class="modal-body">
                             <form method="post" class="was-validated" autocomplete="off"> 
                                 <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <select class="form-select" required>
+                                            <option></option>
+                                            <option>List of Barangay Staff</option>
+                                        </select>
+                                    </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label> Last Name: </label>

@@ -109,9 +109,9 @@
                             <input type="hidden" name="id_clearance" value="<?= $view['id_clearance'];?>">
                             <input type="hidden" name="email" value="<?= $view['email'];?>">
                             <!-- <button class="btn btn-primary" type="submit" name="approved_clearance" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button> -->
-                            <div class="d-flex">
+                            <div class="d-flex justify-content-center">
                                 <a class="btn btn-primary btn--approve"  href="pdf_viewer_clearance.php?pdf=1&id=<?= $view['id_clearance'];?>">View</i></a>
-                                <button class="btn btn-danger btn--decline" type="submit" name="reject_clearance" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button>
+                                <!-- <button class="btn btn-danger btn--decline" type="submit" name="reject_clearance" onclick="return confirm('Are you sure you want to decline this request?')"> Decline </button> -->
                             </div>
                             
                         </form>

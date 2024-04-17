@@ -22,8 +22,7 @@ td{
     height:50px;
 }
 
-.btn--approve,
-.btn--decline{
+.btn--approve{
     padding: 5px;
     width: 80px;
     text-align:center;
@@ -33,6 +32,28 @@ td{
 .img--td{
     width:50px;
     height: 50px;
+}
+
+.pagination{
+    margin-left: 250px;
+    width: 80%;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+}
+
+.announcement-text{
+    font-size: 20px;
+}
+.card-announcement{
+    height:700px; 
+    overflow: auto;
+}
+.card-header{
+    font-size:  20px;
+}
+.pending-btn{
+    font-size: 16px;
 }
 
 /* @media screen and (max-width: 1420px) {
@@ -66,11 +87,16 @@ td{
     }
   }
   @media screen and (max-width: 1280px){
-    .page--table{
-        height: 40%;
+    .page--container{
+        padding: 20px 20px;
+        height: 90vh;
+        overflow:auto;
     }
+    /* .page--table{
+        height: 40%;
+    } */
     th{
-        background-color: blue !important;
+        /* background-color: blue !important; */
         font-size: 12px;
     }
     td{
@@ -86,13 +112,35 @@ td{
         margin:3px;
         width:25px;
     }
+    .img--td{
+        width:35px;
+        height: 35px;
+    }
+
+    .announcement-text{
+        font-size: 12px;
+    }
+    .card-announcement{
+        height:500px; 
+        overflow: auto;
+    }
+    .card-header{
+        font-size:  12px;
+    }
+    .card-announcement label{
+        font-size:15px;
+    }
+    .pending-btn{
+        font-size: 12px;
+    }
+    
   }
   @media screen and (max-width: 1024px){
     .page--table{
         height: 200%;
     }
     th{
-        background-color: red !important;
+        /* background-color: red !important; */
         font-size: 12px;
     }
     td{

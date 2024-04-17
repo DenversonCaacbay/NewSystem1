@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+body::-webkit-scrollbar{
+    display: none;
+}
+.container--viewer{
+    /* margin-top: 30px; */
+    font-family: "Nunito", sans-serif !important;
+}
+
+.viewerTop{
+    padding: 10px 10px;
+    background: #309464;
+}
+
+.viewer-text{
+    color: #ffffff;
+    margin-top: 6px;
+    font-size: 20px !important;
+}
+.bg{
+    background: #309464 !important;
+}
+.btn-primary{
+        background: #fff !important;
+        border: 0 !important;
+        color: #309464 !important;
+        padding: 10px 16px !important;
+        outline: none !important;
+    }
+.btn-primary:focus {
+            outline: none !important;
+        }
+.border-left-primary{
+    border-left: 0.25rem solid #309464 !important;
+}
+.bg-primary{
+    background: #ffffff;
+}
+.viewer-text{
+    font-size: 25px;
+}
+.form-control{
+    width: 90% !important;
+    font-size: 14px;
+}
+.viewer--img{
+    width: 200px;
+    object-fit: cover;
+}
+
+.pdfContainerUI embed{
+    margin-right: 30px;
+    height: 800px !important;
+    width: 1000px !important;
+}
+
+@media screen and (max-width: 1280px){
+    .pdfContainerUI embed{
+        height: 540px !important;
+        width: 500px !important;
+    } 
+}
