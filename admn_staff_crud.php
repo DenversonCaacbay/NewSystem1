@@ -41,9 +41,11 @@
                             <form method="post" class="was-validated" autocomplete="off"> 
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
+                                        <label>Select Position:</label>
                                         <select class="form-select" required>
                                             <option></option>
-                                            <option>List of Barangay Staff</option>
+                                            <option>Secretary</option>
+                                            <option>Kagawad</option>
                                         </select>
                                     </div>
                                     <div class="col">
