@@ -61,6 +61,8 @@
                 <input type="text" class="form-control"/>
                 <label class="mt-3">Contact Number</label>
                 <input type="text" class="form-control"/>
+                <label class="mt-3">Urgent:</label>
+                <textarea class="form-control" name="urgent" id="" cols="30" rows="5" value="<?= $view['urgent'] ?>" readonly></textarea>
             </div>
             <div class="mt-3">
                 <div class="pdfContainerUI" id="pdfContainer"></div>
