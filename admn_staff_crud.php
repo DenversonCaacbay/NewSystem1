@@ -42,10 +42,10 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label>Select Position:</label>
-                                        <select class="form-select" required>
+                                        <select class="form-select" name="position" required>
                                             <option></option>
-                                            <option>Secretary</option>
-                                            <option>Kagawad</option>
+                                            <option value="Secretary">Secretary</option>
+                                            <option value="Kagawad">Kagawad</option>
                                         </select>
                                     </div>
                                     <div class="col">
@@ -112,9 +112,9 @@
                                 </div>
 
 
-                                <input type="hidden" class="form-control" name="role" value="Staff">
+                                <input type="hidden" class="form-control" name="role" value="administrator">
 
-                                <button class="btn btn-primary w-100 mt-3" type="submit" name="add_staff" id="submit-button" style="border-radius:10px;" disabled> Submit </button>  
+                                <button class="btn btn-primary w-100 mt-3 p-2" type="submit" name="add_staff" id="submit-button" style="border-radius:10px;" disabled> Submit </button>  
                             </form>    
                         </div>
                     </div>
@@ -127,12 +127,12 @@
                 <form action="" method="post">
                     <thead class="alert-info"> 
                         <tr>
-                            
+                            <th> Position </th>
                             <th> Email </th>
                             <th> Surname </th>
                             <th> First name </th>
                             <th> Middle Name </th>
-                            <th> Role </th>
+                            <th hidden> Role </th>
                             <th> Actions </th>
                         </tr>
                     </thead>
@@ -141,12 +141,12 @@
                         <?php if(is_array($view)) {?>
                             <?php foreach($view as $view) {?>
                                 <tr>
-                                    
+                                    <td> <?= $view['position'];?> </td>
                                     <td> <?= $view['email'];?> </td>
                                     <td> <?= $view['lname'];?> </td>
                                     <td> <?= $view['fname'];?> </td>
                                     <td> <?= $view['mi'];?> </td>
-                                    <td> <?= $view['role'];?> </td>
+                                    <td hidden> <?= $view['role'];?> </td>
                                     <td>    
                                         <form action="" method="post">
                                             <a href="update_staff_form.php?id_user=<?= $view['id_admin'];?>" class="btn btn-primary"> Update </a>
@@ -160,6 +160,8 @@
                     </tbody>
                 </form>
             </table>
+
+            
         </div>
     </div>
 </div>

@@ -57,7 +57,7 @@
     	<tr>
             <th> Tracking ID </th>
             <th> Full Name </th>
-            <th> Age </th>
+            <th hidden> Age </th>
             <th hidden> Nationality </th>
             <th hidden> Address </th>
             <th> Date </th>
@@ -73,7 +73,7 @@
                 <tr>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?>  </td>
-                    <td> <?= $view['age'];?> </td>
+                    <td hidden> <?= $view['age'];?> </td>
                     <td hidden> <?= $view['nationality'];?> </td>
                     <td hidden> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>                        
                     <td> <?= $view['date'];?> </td>

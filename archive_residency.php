@@ -4,11 +4,17 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
-   $view = $bmis->view_certofres_done();
+//    $view = $bmis->view_certofres_done();
 //    $bmis->create_announcement();
 //    $bmis->delete_announcement();
 //    $view = $bmis->view_announcement();
 //    $announcementcount = $bmis->count_announcement();
+
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+    $limit = 5;
+    $offset = ($currentPage - 1) * $limit;
+
+    list($view, $moreRecords) = $residentbmis->view_certofres_done($limit, $offset);
 
 
 ?>
@@ -16,6 +22,7 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     /*.input-icons i {*/
     /*    position: absolute;*/
@@ -47,7 +54,7 @@
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
 
@@ -83,53 +90,15 @@
                 </div>
                 <div class="col-md-5">
                     Select Pdf Generate
-                    <!-- <select class="form-select mt-2">
-                        <option>Generate All</option>
-                        <option>Generate All Done</option>
-                        <option>Generate All Declined</option>
-                        <option>Generate Daily</option>
-                        <option>Generate All Daily - Done</option>
-                        <option>Generate All Daily - Declined</option>
-                        <option><a target="_blank" href="generatePdf/residency/week.php">Weekly</a></option>
-                        <option>Generate All Weekly - Done</option>
-                        <option>Generate All Weekly - Declined</option>
-                        <option><a target="_blank" href="generatePdf/residency/month.php">Monthly</a></option>
-                        <option>Generate All Monthly - Done</option>
-                        <option>Generate All Monthly - Declined</option>
-                        <option><a  target="_blank" href="generatePdf/residency/year.php">Yearly</a></option>
-                        <option>Generate All Yearly - Done</option>
-                        <option>Generate All Yearly - Declined</option>
-                    </select> -->
                     <select class="form-select mt-2" id="pdfGenerateSelect">
-                        <option value="generatePdf/residency/all.php">Generate All</option>
-                        <option value="generatePdf/residency/daily.php">Generate Daily</option>
+                        <option value="generatePdf/residency/all.php">All</option>
+                        <option value="generatePdf/residency/daily.php">Daily</option>
                         <option value="generatePdf/residency/week.php">Weekly</option>
                         <option value="generatePdf/residency/month.php">Monthly</option>
                         <option value="generatePdf/residency/year.php">Yearly</option>
                     </select>
                 </div>  
             </div>
-
-           
-            <!-- <form method="POST" action="" id="searchForm"> -->
-                    
-                    <!-- Replace input with select dropdown -->
-                    <!-- <div class="d-flex justify-content-between">
-                        <select class="form-select search" name="form_status" id="formStatus" style="height:50px" required="">
-                            <option value="Approved">Approved</option>
-                            <option value="Declined">Declined</option>
-                        </select>
-                        <button class="btn btn-success ms-2" name="search_certofres">Search</button>
-                        <a href="archive_residency.php" class="btn btn-info ms-2">View All</a>
-                    </div>
-                    <div>
-                        Export Data By: 
-                        <a class="btn btn-primary" target="_blank" href="generatePdf/residency/week.php">Daily</a>
-                        <a class="btn btn-primary" target="_blank" href="generatePdf/residency/week.php">Weekly</a>
-                        <a class="btn btn-primary" target="_blank" href="generatePdf/residency/month.php">Monthly</a>
-                        <a class="btn btn-primary" target="_blank" href="generatePdf/residency/year.php">Yearly</a>
-                    </div> -->
-            <!-- </form> -->
         </div>
 
 <script>
@@ -164,10 +133,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <div class="row"> 
         <div class="col"> 
-            <div class="card" style="height:450px; overflow: auto;">
+            <div class="card">
             <?php 
                 include('tables/residency_done.php');
             ?></div>
+            <div class="pagination d-flex fixed-bottom mt-3 me-3">
+                    <?php if ($currentPage > 1): ?>
+                        <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
+                    <?php endif; ?>
+
+                    <span class="current-page mt-1 me-3 ms-3">Page <?= $currentPage ?></span>
+
+                    <?php if ($moreRecords): ?>
+                        <a class="btn btn-primary me-2" href="?page=<?= $currentPage + 1 ?>">Next</a>
+                    <?php endif; ?>
+                </div>
+
+            
             
         </div>
     </div>

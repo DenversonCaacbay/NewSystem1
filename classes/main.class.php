@@ -152,8 +152,8 @@ class BMISClass {
             "id_resident" => $array['id_resident'],
             "id_user" => $array['id_user'],
             "emailadd" => $array['email'],
+            "position" => $array['position'],
             "password" => $array['password'],
-            //"fullname" => $array['lname']. " ".$array['fname']. " ".$array['mi'],
             "surname" => $array['lname'],
             "firstname" => $array['fname'],
             "mname" => $array['mi'],
@@ -1252,12 +1252,29 @@ class BMISClass {
         return [$view, $moreRecords];
     }
     
-    public function view_certofres_done(){
+    // public function view_certofres_done(){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status ='Approved' OR form_status='Declined'");
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    //     return $view;
+    // }
+
+    // Pending
+    public function view_certofres_done($limit = 5, $offset = 0){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status ='Approved' OR form_status='Declined'");
+        $stmt = $connection->prepare("
+        SELECT * FROM tbl_rescert WHERE form_status ='Approved' OR form_status='Declined' LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-        return $view;
+    
+        // Fetch one extra record beyond the limit to check if there are more records
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        $moreRecords = $stmt->rowCount() > 0;
+    
+        return [$view, $moreRecords];
     }
  
 

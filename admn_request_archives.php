@@ -4,6 +4,8 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
+
+   
    $clearance_approved = $residentbmis->count_clearance_approved();
    $clearance_decline = $residentbmis->count_clearance_decline();
 
@@ -25,10 +27,11 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
+<link rel="stylesheet" href="css/table.css"/>
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
 
@@ -46,8 +49,9 @@
                     <h4 class="card-title">Barangay Residency</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $residency_decline?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $residency_approved?></h5>
+                            <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $residency_decline?></h5>
+                            
                         </div>
                         <a href="archive_residency.php" class="btn btn-primary w-25 align-self-center">View</a>
                     </div>

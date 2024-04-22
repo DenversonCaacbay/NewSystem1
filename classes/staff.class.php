@@ -46,51 +46,49 @@
 
     //------------------------------------- CRUD FUNCTIONS FOR STAFF -----------------------------------------------
 
-        public function create_staff() {
-
-            if(isset($_POST['add_staff'])) {
-                $email = $_POST['email'];
-                $password = $_POST['password'];
-                $confirm_password = ($_POST['confirm_password']);
-                $lname = ucwords(strtolower($_POST['lname'])); // Convert to uppercase
-                $fname = ucwords(strtolower($_POST['fname'])); // Convert to uppercase
-                $mi = strtoupper(substr($_POST['mi'], 0, 1)) . '.'; // Get first letter in uppercase and add '.'
-                $role = $_POST['role'];
-
-                // Check password length
-                if (strlen($password) < 8) {
-                    // Password is too short, show an error message
-                    $messageError = "Password must be at least 8 characters long.";
-                    echo "<script type='text/javascript'>alert('$messageError');</script>";
-                    return;
-                }
-
-                if ($this->check_staff($email) == 0 ) {
-
-                    // Check if the password and confirm password match
-                    if ($password !== $confirm_password) {
-                        $message = "Password and Confirm Password do not match";
-                        echo "<script type='text/javascript'>alert('$message');</script>";
-                        return false;
-                    }
-
-                    $password_hash = password_hash($password, PASSWORD_BCRYPT);
-
-                    $connection = $this->openConn();
-                    $stmt = $connection->prepare("INSERT INTO tbl_admin (`email`,`password`,`lname`,`fname`, `mi`,`role`) VALUES (?, ?, ?, ?, ?, ?)");
-                    $stmt->Execute([$email, $password_hash, $lname, $fname, $mi,$role]);
-                    $message2 = "New Staff Adedd";
+    public function create_staff() {
+        if(isset($_POST['add_staff'])) {
+            $position = $_POST['position'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $confirm_password = $_POST['confirm_password'];
+            $lname = ucwords(strtolower($_POST['lname'])); // Convert to uppercase
+            $fname = ucwords(strtolower($_POST['fname'])); // Convert to uppercase
+            $mi = strtoupper(substr($_POST['mi'], 0, 1)) . '.'; // Get first letter in uppercase and add '.'
+            $role = $_POST['role'];
     
-                    echo "<script type='text/javascript'>alert('$message2');</script>";
-                    header('refresh:0');
-    
-                }
-
-                else {
-                    echo "<script type='text/javascript'>alert('Email Account already exists');</script>";
-                }
+            // Check if the email already exists
+            if ($this->check_staff($email) > 0 ) {
+                // Email already exists
+                echo "<script type='text/javascript'>alert('Email Account already exists');</script>";
+                return;
             }
+    
+            // Check password length
+            if (strlen($password) < 8) {
+                // Password is too short, show an error message
+                $messageError = "Password must be at least 8 characters long.";
+                echo "<script type='text/javascript'>alert('$messageError');</script>";
+                return;
+            }
+    
+            // Check if the password and confirm password match
+            if ($password !== $confirm_password) {
+                $message = "Password and Confirm Password do not match";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                return;
+            }
+    
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+    
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("INSERT INTO tbl_admin (`position`, `email`,`password`,`lname`,`fname`, `mi`,`role`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->Execute([$position, $email, $password_hash, $lname, $fname, $mi,$role]);
+            $message2 = "New Staff Added";
+            echo "<script type='text/javascript'>alert('$message2');</script>";
+            header('refresh:1');
         }
+    }
 
 
         public function view_staff(){

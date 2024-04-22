@@ -217,7 +217,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="logout.php" id="userDropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-800 small"><?= $userdetails['surname']?>, <?= $userdetails['firstname']?></span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-800 small"><?= $userdetails['position']?>: <?= $userdetails['surname']?>, <?= $userdetails['firstname']?></span>
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-color"></i>
                                 </a>
                             </li>

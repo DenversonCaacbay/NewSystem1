@@ -19,7 +19,7 @@
         }
 
         if($user_role == 'staff'){
-            header('Location: staff_dashboard.php');
+            header('Location: admn_dashboard.php');
         }
 
         if($user_role == 'resident'){
