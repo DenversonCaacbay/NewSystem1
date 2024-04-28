@@ -1263,6 +1263,35 @@ use PHPMailer\PHPMailer\Exception;
         return $view;
     }
 
+    public function create_feedback($id_resident) {
+        if(isset($_POST['add_feedback'])) {
+            // $id_resident = $_POST['id'];
+            $comment = $_POST['comment'];
+            $rating = $_POST['feedback_box'][0];
+    
+    
+            if (!$comment) {
+                $messageError = "Comment cannot be empty.";
+                echo "<script type='text/javascript'>alert('$messageError');</script>";
+                return;
+            }
+
+            if (!$rating) {
+                $messageError = "Rating cannot be empty.";
+                echo "<script type='text/javascript'>alert('$messageError');</script>";
+                return;
+            }
+    
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("INSERT INTO tbl_feedback (`id_resident`, `comment`, `rating`) 
+                VALUES (?, ?, ?)");
+            $stmt->Execute([$id_resident, $comment, $rating]);
+            $message2 = "Thank you for your feedback!";
+            echo "<script type='text/javascript'>alert('$message2');</script>";
+            header('refresh:1');
+        }
+    }
+
 
 
     }

@@ -3,6 +3,8 @@
     include('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
 
+    $residentbmis->create_feedback($userdetails['id_resident']);
+
     $dt = new DateTime("now", new DateTimeZone('Asia/Manila'));
     $tm = new DateTime("now", new DateTimeZone('Asia/Manila'));
     $cdate = $dt->format('Y/m/d');
@@ -456,7 +458,7 @@
         <?php endif; ?>
         <!-- Feedback Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <form>
+            <form method="POST">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -465,13 +467,13 @@
                         </div>
                         <div class="modal-body">
                             <label class="fw-bold">Comment</label>
-                            <textarea class="form-control"></textarea>
+                            <textarea class="form-control" name="comment"></textarea>
                             <h5 class="text-center fw-bold mt-3">Rate</h5>
                             <div class="checkbox-container " id="checkboxContainer"></div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submitButton" name="add_feedback" disabled>Submit</button>
                         </div>
                     </div>
                 </div>
@@ -550,6 +552,7 @@ function createCheckboxes() {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.id = `checkbox${i}`;
+    checkbox.name = `feedback_box[]`;
     checkbox.value = i;
     checkbox.addEventListener('change', () => handleCheckboxChange(checkbox));   
     const label = document.createElement('label');
@@ -571,5 +574,28 @@ function handleCheckboxChange(clickedCheckbox) {
 // Call the function to create checkboxes
 createCheckboxes();
 </script>
+<script>
+        // Function to enable/disable submit button based on checkbox and content
+        function checkSubmitButton() {
+            var comment = document.querySelector('textarea[name="comment"]').value.trim();
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            var submitButton = document.getElementById('submitButton');
+
+            if (comment !== '' && checkboxes.length > 0) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+
+        // Attach event listeners to checkbox and textarea
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+                checkbox.addEventListener('change', checkSubmitButton);
+            });
+
+            document.querySelector('textarea[name="comment"]').addEventListener('input', checkSubmitButton);
+        });
+    </script>
 </body>
 </html>
