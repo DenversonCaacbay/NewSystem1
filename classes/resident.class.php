@@ -1292,6 +1292,36 @@ use PHPMailer\PHPMailer\Exception;
         }
     }
 
+    public function view_feedback() {
+        $connection = $this->openConn();
+
+        $stmt = $connection->prepare("SELECT * from tbl_feedback
+            INNER JOIN tbl_resident ON tbl_resident.id_resident = tbl_feedback.id_resident");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+
+        return $view;
+    }
+
+    public function view_resident_feedback(){
+        $id = $_GET['id'];
+        
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * from tbl_feedback
+            INNER JOIN tbl_resident ON tbl_resident.id_resident = tbl_feedback.id_resident
+            WHERE tbl_resident.id_resident = ?");
+        $stmt->execute([$id]);
+        $view = $stmt->fetchAll(); 
+        $total = $stmt->rowCount();
+
+        if($total > 0 )  {
+            return $view;
+        }
+        else{
+            return false;
+        }
+    }
+
 
 
     }
