@@ -15,6 +15,7 @@
             <th class="bg text-light"> Full Name </th>
             <th class="bg text-light"> Purpose </th>
             <th class="bg text-light"> Address </th>
+            <th class="bg text-light"> Urgent </th>
             <th class="bg text-light"> Actions</th>
         </tr>
     </thead>
@@ -52,6 +53,7 @@
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['purpose'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>,<?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
+                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
                     <td width="20%">    
                         <form action="" method="post">
                             <!-- <a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a>  -->
@@ -86,6 +88,7 @@
             <th class="bg text-light"> Birthdate </th>
             <th class="bg text-light"> Purpose </th>
             <th class="bg text-light"> Address </th>
+            <th class="bg text-light"> Urgent </th>
             <th class="bg text-light"> Actions</th>
         </tr>
     </thead>
@@ -101,6 +104,7 @@
                     <td> <?= $view['bdate'];?></td>
                     <td> <?= $view['purpose'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>,<?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
+                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
                     <td width="20%">    
                         <form action="" method="post">
                             <!-- <a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a>  -->

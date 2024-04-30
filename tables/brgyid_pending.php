@@ -113,6 +113,7 @@
             <th hidden class="bg text-light"> Birth Date </th>
             <th hidden class="bg text-light"> Emergency Contact Person </th>
             <th hidden class="bg text-light"> Emergency Contact Number </th>
+            <th class="text-light"> Urgent </th>
             <th class="text-light"> Image </th>
             <th class="text-light"> Actions</th>
         </tr>
@@ -129,6 +130,7 @@
                     <td hidden> <?= $view['bdate'];?> </td>
                     <td hidden> <?= $view['inc_lname'];?>, <?= $view['inc_fname'];?> </td>
                     <td hidden> <?= $view['inc_contact'];?> </td>
+                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
                     <td>
                         <?php if (is_null($view['res_photo'])): ?>
                             <span>No Image Available</span>

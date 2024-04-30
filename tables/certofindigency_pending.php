@@ -14,6 +14,7 @@
             <th class="bg text-light"> Full Name </th>
             <th class="bg text-light"> Address </th>
             <th class="bg text-light"> Purpose </th>
+            <th class="bg text-light"> Urgent </th>
             <th class="bg text-light"> Image </th>
             <th class="bg text-light"> Actions</th>
         </tr>
@@ -46,6 +47,7 @@
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?> </td>
                     <td> <?= $view['purpose'];?> </td>
                     <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
+                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
                     <td>
                         <?php if (is_null($view['certofindigency_photo'])): ?>
                             <span>No Image Available</span>
@@ -105,6 +107,7 @@
             <th class="bg text-light"> Full Name </th>
             <th class="bg text-light"> Address </th>
             <th class="bg text-light"> Purpose </th>
+            <th class="bg text-light"> Urgent </th>
             <th class="bg text-light"> Image </th>
             <th class="bg text-light"> Actions</th>
         </tr>
@@ -119,7 +122,7 @@
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?> </td>
                     <td> <?= $view['purpose'];?> </td>
-                    
+                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
                     <td>
                         <?php if (is_null($view['certofindigency_photo'])): ?>
                             <span>No Image Available</span>

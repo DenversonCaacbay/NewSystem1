@@ -5,6 +5,9 @@
 
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
+    $view = $residentbmis->view_feedback();
+
+    // var_dump($view);
 
     $rescount = $residentbmis->count_resident();
     $rescountm = $residentbmis->count_male_resident();
@@ -28,7 +31,18 @@
 <!-- Page Heading -->
     <h4> Feedbacks - Ongoing</h4>
     <div class="row">
-        <div class="col-md-4 mt-3">
+        <?php if(is_array($view)) {?>
+            <?php foreach($view as $view) {?>
+                <div class="col-md-4 mt-3">
+                    <div class="card p-3">
+                        <h4 class="fw-bold"><?= $view['fname'];?> <?= $view['lname'];?></h4>
+                        <h5><b>Comment:</b> <br><?= $view['comment'];?></h5>
+                        <h5><b>Rate:</b> <?= $view['rating'];?></h5>
+                    </div>
+                </div>
+            <?php }?>
+        <?php } ?>
+        <!-- <div class="col-md-4 mt-3">
             <div class="card p-3">
                 <h4 class="fw-bold">Unknown 1</h4>
                 <h5><b>Comment:</b> <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor at risus viverra adipiscing at.</h5>
@@ -55,7 +69,7 @@
                 <h5><b>Comment:</b> <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor at risus viverra adipiscing at.</h5>
                 <h5><b>Rate:</b> 3</h5>
             </div>
-        </div>
+        </div> -->
     </div>
 
 

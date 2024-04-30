@@ -17,6 +17,7 @@
             <th class="bg text-light"> Address </th>
             <th class="bg text-light"> Business Industry </th>
             <th class="bg text-light"> Area of Establishment </th>
+            <th class="bg text-light"> Urgent</th>
             <th class="bg text-light"> Image</th>
             
                         <th class="bg text-light"> Actions</th>
@@ -63,6 +64,7 @@
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
                     <td> <?= $view['bsindustry'];?> </td>
                     <td> <?= $view['aoe'];?> </td>
+                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
                     
                     <td>
                         <?php if (is_null($view['bspermit_photo'])): ?>
@@ -123,6 +125,7 @@
             <th class="bg text-light"> Address </th>
             <th class="bg text-light"> Business Industry </th>
             <th class="bg text-light"> Area of Establishment </th>
+            <th class="bg text-light"> Urgent</th>
             <th class="bg text-light"> Image</th>
             <th class="bg text-light"> Actions</th>
         </tr>
@@ -140,6 +143,7 @@
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
                     <td> <?= $view['bsindustry'];?> </td>
                     <td> <?= $view['aoe'];?> </td>
+                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
                    
                     <td>
                         <?php if (is_null($view['bspermit_photo'])): ?>
