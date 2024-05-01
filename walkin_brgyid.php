@@ -7,6 +7,7 @@
     $bmis->validate_admin();
     $bmis->reject_rescert();
     $bmis->approved_rescert();
+    $bmis->create_brgyid();
     // $view = $bmis->view_certofres();
     // $id_resident = $_GET['id_resident'];
     // $resident = $residentbmis->get_single_certofres($id_resident);
@@ -63,46 +64,46 @@
                 <div class="row">
                     <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput">
+                        <input type="text" name="fname" class="form-control" id="formGroupExampleInput">
                     </div>
                     <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Middle Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <input type="text" name="mi" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <input type="text" name="lname" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-6 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Age</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <input type="text" name="age" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-6 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Nationality</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <input type="text" name="nationality" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
 
                     <!-- Address -->
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">House No:</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <input type="text" name="houseno" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Street</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <input type="text" name="street" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Barangay</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" value="Sta. Rita" placeholder="" readonly>
+                        <input type="text" name="brgy" class="form-control" id="formGroupExampleInput" value="Sta. Rita" placeholder="" readonly>
                     </div>
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Municipality</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" value="Olongapo City" placeholder="" readonly>
+                        <input type="text" name="municipality" class="form-control" id="formGroupExampleInput" value="Olongapo City" placeholder="" readonly>
                     </div>
                     
                     <div class="col-md-12 mt-3">
                         <label for="formGroupExampleInput"  id="purpose" class="form-label">Purpose:</label>
-                        <select class="form-select" onchange="checkOptions(this)">
+                        <select name="purpose" class="form-select" onchange="checkOptions(this)">
                             <option>Choose Purpose</option>
                             <option>Job / Employment</option>
                             <option>Business Establishment</option>
@@ -118,7 +119,7 @@
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="col-md-12">
-                        <button class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
+                        <button name="create_brgyid" type="submit" class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
                     </div>
                 </div>
             </form>

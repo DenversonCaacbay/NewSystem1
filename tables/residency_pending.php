@@ -88,7 +88,7 @@
                 <?php foreach($view as $view) {?>
                     <tr>
                         <td hidden> <?= $view['id_resident'];?> </td> 
-                        <td> <?= date("F d, Y", strtotime($view['created_at'])); ?></td>
+                        <td> <?= $view['date'] ? date("F d, Y", strtotime($view['date'])) : "Walk in"; ?></td>
                         <td> <?= $view['track_id'];?> </td> 
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?>  </td>
                         <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>

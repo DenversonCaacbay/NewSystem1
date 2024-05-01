@@ -1171,7 +1171,7 @@ class BMISClass {
 
     public function create_certofres() {
         if(isset($_POST['create_certofres'])) {
-            $id_resident = $_POST['id_resident'];
+            $id_resident = $_POST['id_resident'] ?: NULL;
             $lname = $_POST['lname'];
             $fname = $_POST['fname'];
             $mi = $_POST['mi'];
@@ -1181,8 +1181,8 @@ class BMISClass {
             $street = $_POST['street'];
             $brgy = $_POST['brgy'];
             $municipal = $_POST['municipal'];
-            $date = $_POST['date'];
-            $date_live = $_POST['date_live'];
+            $date = $_POST['date'] ?: NULL;
+            $date_live = $_POST['date_live'] ?: NULL;
             $track_id = uniqid();
             
             // purpose checker
@@ -1194,36 +1194,53 @@ class BMISClass {
     
             // Set the target directory
             $target_dir = "uploads/certofres/";
-            $uploaded_file = $_FILES['certofres_photo'];
-            $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
     
-            // Check if the target directory exists, and create it if not
-            if (!is_dir($target_dir)) {
-                mkdir($target_dir, 0755, true);
-            }
+            // Check if the file was uploaded
+            if(isset($_FILES['certofres_photo'])) {
+                $uploaded_file = $_FILES['certofres_photo'];
     
-            // Generate a unique filename based on the current timestamp
-            $target_file = $target_dir . time() . '.' . $file_extension;
+                // Check if the file is empty or not
+                if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
+                    $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
     
-            // Move the uploaded file to the target directory
-            if (move_uploaded_file($_FILES['certofres_photo']["tmp_name"], $target_file)) {
-                // Your database insertion code goes here
+                    // Check if the target directory exists, and create it if not
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0755, true);
+                    }
     
-                $connection = $this->openConn();
-                $stmt = $connection->prepare("INSERT INTO tbl_rescert (`id_resident`, `lname`, `fname`, `mi`,
-                 `age`,`nationality`, `houseno`, `street`,`brgy`, `municipal`, `date`,`date_live`,`purpose`, `certofres_photo`, `track_id`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    // Generate a unique filename based on the current timestamp
+                    $target_file = $target_dir . time() . '.' . $file_extension;
     
-                $stmt->execute([$id_resident, $lname, $fname, $mi,  $age, $nationality, $houseno,  $street, $brgy, $municipal, $date,$date_live, $purpose, $target_file, $track_id]);
-    
-                $message2 = "Application Applied, you will receive our text message for further details";
-                echo "<script type='text/javascript'>alert('$message2');</script>";
-                header("refresh: 0");
+                    // Move the uploaded file to the target directory
+                    if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+                        // Image uploaded successfully, proceed with database insertion
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                        return; // Stop execution if file upload fails
+                    }
+                } else {
+                    // No file uploaded, set the target file to NULL or some default value
+                    $target_file = NULL; // Or set to a default image path if you have one
+                }
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                // No file input field found, set the target file to NULL or some default value
+                $target_file = NULL; // Or set to a default image path if you have one
             }
+    
+            // Insert data into the database, including the $target_file value
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("INSERT INTO tbl_rescert (`id_resident`, `lname`, `fname`, `mi`,
+             `age`,`nationality`, `houseno`, `street`,`brgy`, `municipal`, `date`,`date_live`,`purpose`, `certofres_photo`, `track_id`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+            $stmt->execute([$id_resident, $lname, $fname, $mi,  $age, $nationality, $houseno,  $street, $brgy, $municipal, $date,$date_live, $purpose, $target_file, $track_id]);
+    
+            $message2 = "Application Applied, you will receive our text message for further details";
+            echo "<script type='text/javascript'>alert('$message2');</script>";
+            header("refresh: 0");
         }
     }
+    
     
 
     // public function view_certofres(){
@@ -2113,7 +2130,7 @@ class BMISClass {
 
     public function create_brgyid() {
         if(isset($_POST['create_brgyid'])) {
-            $id_resident = $_POST['id_resident'];
+            $id_resident = $_POST['id_resident'] ?: NULL;
             $lname = ucfirst(strtolower($_POST['lname']));
             $fname = ucfirst(strtolower($_POST['fname']));
             $mi = ucfirst(strtolower($_POST['mi']));
@@ -2121,19 +2138,23 @@ class BMISClass {
             $street = $_POST['street'];
             $brgy = ucfirst(strtolower($_POST['brgy']));
             $municipal = ucfirst(strtolower($_POST['municipal']));
-            $bplace = ucfirst(strtolower($_POST['bplace']));
-            $bdate = $_POST['bdate'];
-            $pickup_date = $_POST['date'];
+            $bplace = ucfirst(strtolower($_POST['bplace'])) ?: NULL;
+            $bdate = $_POST['bdate'] ?: NULL;
+            $pickup_date = $_POST['date'] ?: NULL;
             $track_id = uniqid();
             
             // Process resident photo
-            $res_photo = $_FILES['res_photo'];
-            $uploaded_file = $_FILES['res_photo'];
-            $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
-
-            $target_dir_res = "uploads/brgyid/";
-            $target_file_res = $target_dir_res . time() . '.' . $file_extension;
-            move_uploaded_file($res_photo['tmp_name'], $target_file_res);
+            if(isset($_FILES['res_photo']) && $_FILES['res_photo']['error'] !== UPLOAD_ERR_NO_FILE) {
+                $res_photo = $_FILES['res_photo'];
+                $file_extension = pathinfo($res_photo['name'], PATHINFO_EXTENSION);
+    
+                $target_dir_res = "uploads/brgyid/";
+                $target_file_res = $target_dir_res . time() . '.' . $file_extension;
+                move_uploaded_file($res_photo['tmp_name'], $target_file_res);
+            } else {
+                // If no file uploaded, set default value for the photo path
+                $target_file_res = NULL; // Or set to a default image path if you have one
+            }
             
             $inc_lname = ucfirst(strtolower($_POST['inc_lname']));
             $inc_fname = ucfirst(strtolower($_POST['inc_fname']));
@@ -2157,7 +2178,7 @@ class BMISClass {
             echo "<script type='text/javascript'>alert('$message2');</script>";
             header("refresh: 0");
         }  
-    }
+    }    
     
 
     public function get_single_brgyid($id_resident){
