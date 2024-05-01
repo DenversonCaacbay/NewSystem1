@@ -42,34 +42,6 @@
                 </div>
             <?php }?>
         <?php } ?>
-        <!-- <div class="col-md-4 mt-3">
-            <div class="card p-3">
-                <h4 class="fw-bold">Unknown 1</h4>
-                <h5><b>Comment:</b> <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor at risus viverra adipiscing at.</h5>
-                <h5><b>Rate:</b> 3</h5>
-            </div>
-        </div>
-        <div class="col-md-4 mt-3">
-            <div class="card p-3">
-                <h4 class="fw-bold">Unknown 1</h4>
-                <h5><b>Comment:</b> <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor at risus viverra adipiscing at.</h5>
-                <h5><b>Rate:</b> 3</h5>
-            </div>
-        </div>
-        <div class="col-md-4 mt-3">
-            <div class="card p-3">
-                <h4 class="fw-bold">Unknown 1</h4>
-                <h5><b>Comment:</b> <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor at risus viverra adipiscing at.</h5>
-                <h5><b>Rate:</b> 3</h5>
-            </div>
-        </div>
-        <div class="col-md-4 mt-3">
-            <div class="card p-3">
-                <h4 class="fw-bold">Unknown 1</h4>
-                <h5><b>Comment:</b> <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor at risus viverra adipiscing at.</h5>
-                <h5><b>Rate:</b> 3</h5>
-            </div>
-        </div> -->
     </div>
 
 
