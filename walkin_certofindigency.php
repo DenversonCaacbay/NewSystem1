@@ -7,6 +7,7 @@
     $bmis->validate_admin();
     $bmis->reject_rescert();
     $bmis->approved_rescert();
+    $bmis->create_certofindigency();
 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     $limit = 5;
@@ -50,62 +51,127 @@
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
         <h4 class="text-center mb-0">Walk'in Request</h4>
-        <a href="admn_certofres.php" class="btn btn-primary">Back</a>
+        <a href="admn_certofindigency.php" class="btn btn-primary">Back</a>
     </div>
 
     <div class="container">
         <div class="card p-3">
             <form method="post" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-md-4 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput">
-                    </div>
-                    <div class="col-md-4 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Middle Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
-                    </div>
-                    <div class="col-md-4 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Age</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Nationality</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                <div class="row"> 
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="lname">Last Name:</label>
+                                <input name="lname" type="text" class="form-control" 
+                                placeholder="Enter Last Name">
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="fname">First Name:</label>
+                                <input name="fname" type="text" class="form-control" 
+                                placeholder="Enter First Name">
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="mi">Middle Name: </label>
+                                <input name="mi" type="text" class="form-control" 
+                                placeholder="Enter Middle Name">
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <!-- Address -->
-                    <div class="col-md-3 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">House No:</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                    <div class="row">
+                        
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="mtop">Nationality: </label>
+                                <input type="text" class="form-control" name="nationality"   
+                                placeholder="Enter Nationality">
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-md-3 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Street</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label> House No: </label>
+                                <input type="text" class="form-control" name="houseno"  
+                                placeholder="Enter House No.">
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label> Street: </label>
+                                <input type="text" class="form-control" name="street"  
+                                placeholder="Enter Street"">
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label> Barangay: </label>
+                                <input type="text" class="form-control" name="brgy"  
+                                placeholder="Enter Barangay" value="Sta.Rita" readonly>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label> Municipality: </label>
+                                <input type="text" class="form-control" name="municipal" 
+                                placeholder="Enter Municipality" value="Olongapo" readonly>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-md-3 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Barangay</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" value="Sta. Rita" placeholder="" readonly>
-                    </div>
-                    <div class="col-md-3 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Municipality</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" value="Olongapo City" placeholder="" readonly>
-                    </div>
-                    
-                    <div class="col-md-12 mt-3">
-                        <label for="formGroupExampleInput"  id="purpose" class="form-label">Purpose:</label>
-                        <select class="form-select" onchange="checkOptions(this)">
-                            <option>Choose Purpose</option>
-                            <option>Job / Employment</option>
-                            <option>Business Establishment</option>
-                            <option>Financial Transaction</option>
-                            <option>Certify that you are living in a certain barangay</option>
-                            <option value="Other">Other</option>
-                        </select>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="purposes" class="mtop">Purposes:</label>
+                                <select class="form-control" name="purpose" onchange="checkOptions(this)" id="purposes" required>
+                                    <option value="">Choose your Purposes</option>
+                                    <option value="Job/Employment">Job/Employment</option>
+                                    <option value="Business Establishment">Business Requirement</option>
+                                    <option value="Financial Transaction">Financial Transaction</option>
+                                    <option value="Scholarship">Scholarship</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+
+                            <!-- other -->
+                            <div class="form-group" id="otherDiv" style="display: none">
+                                <input type="text" class="form-control" name="otherInput" id='otherInput' placeholder="Enter Other" style="display: none" />
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>  
+
                     </div>
 
                     <div class="form-group" id="otherDiv" style="display: none">
@@ -114,7 +180,7 @@
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="col-md-12">
-                        <button class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
+                        <button name="create_certofindigency" type="submit" class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
                     </div>
                 </div>
             </form>

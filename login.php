@@ -203,7 +203,7 @@
                                     <br>
                                     <p1> Hindi ka pa rehistrado? </p1> 
                                     <br>
-                                    <button class="btn btn-success create-button" onclick="trying();" disabled> Create Account </button> 
+                                    <button class="btn btn-success create-button" onclick="trying();"> Create Account </button> 
                                     <div class="custom-control custom-switch mt-3">
                                         <input type="checkbox" onclick="enableCreate()" class="custom-control-input" id="switch2">
                                         <a class="custom-control-label" href="communiserve_privacy_policy.html" target="_blank" for="switch1">Communiserve Privacy Policy</a>

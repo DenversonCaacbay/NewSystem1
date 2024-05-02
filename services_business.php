@@ -232,7 +232,7 @@ margin-left: .1%;
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" class="was-validated" enctype="multipart/form-data">
+                            <form method="post" enctype="multipart/form-data">
                                 <div class="row"> 
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -393,7 +393,7 @@ margin-left: .1%;
                                         </div>
                                         <div class="form-group" id="urgentRequest" style="display: none;">
                                             <label class="mtop">Urgent Request: <code>Note: 50 pesos payment upon getting request</code></label>
-                                            <textarea class="form-control" required></textarea>
+                                            <textarea class="form-control"></textarea>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please Fill out this field</div>
                                         </div>
@@ -444,7 +444,7 @@ margin-left: .1%;
                                 <div class="modal-footer">
                                     <input name="id_resident" type="hidden" class="form-control" value="<?= $userdetails['id_resident']?>">
                                     <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-                                    <button name ="create_bspermit" type="submit" class="btn btn-primary">Submit Request</button>
+                                    <button name="create_bspermit" type="submit" class="btn btn-primary">Submit Request</button>
                                 </div> 
                             </form>
                         </div>

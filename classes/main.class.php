@@ -163,6 +163,7 @@ class BMISClass {
             "address" => $array['address'],
             "contact" => $array['contact'],
             "bdate" => $array['bdate'],
+            "bplace" => $array['bplace'],
             "date_live" => $array['date_live'],
             "nationality" => $array['nationality'],
             "family_role" => $array['family_role'],
@@ -1392,40 +1393,57 @@ class BMISClass {
                 $purpose = $_POST['purpose'];
             }
     
-            $date = $_POST['date'];
+            $date = $_POST['date'] ?: date("Y-m-d");
     
-            // Set the target directory
-            $target_dir = "uploads/certofindigency/";
-            $uploaded_file = $_FILES['certofindigency_photo'];
-            $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
+            // Check if a file was uploaded
+            if(isset($_FILES['certofindigency_photo'])) {
+                $uploaded_file = $_FILES['certofindigency_photo'];
     
-            // Check if the target directory exists, and create it if not
-            if (!is_dir($target_dir)) {
-                mkdir($target_dir, 0755, true);
-            }
+                // Set the target directory
+                $target_dir = "uploads/certofindigency/";
     
-            // Generate a unique filename based on the current timestamp
-            $target_file = $target_dir . time() . '.' . $file_extension;
+                // Check if the file is empty or not
+                if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
+                    $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
     
-            // Move the uploaded file to the target directory
-            if (move_uploaded_file($_FILES['certofindigency_photo']["tmp_name"], $target_file)) {
-                // Your database insertion code goes here
+                    // Check if the target directory exists, and create it if not
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0755, true);
+                    }
     
-                $connection = $this->openConn();
-                $stmt = $connection->prepare("INSERT INTO tbl_indigency (`id_resident`, `lname`, `fname`, `mi`,
-                 `nationality`, `houseno`, `street`,`brgy`, `municipal`,`purpose`, `date`, `certofindigency_photo`, `track_id`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    // Generate a unique filename based on the current timestamp
+                    $target_file = $target_dir . time() . '.' . $file_extension;
     
-                $stmt->execute([$id_resident, $lname, $fname, $mi,  $nationality, $houseno,  $street, $brgy, $municipal, $purpose, $date, $target_file, $track_id]);
-    
-                $message2 = "Application Applied, you will receive our text message for further details";
-                echo "<script type='text/javascript'>alert('$message2');</script>";
-                header("refresh: 0");
+                    // Move the uploaded file to the target directory
+                    if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+                        // Your database insertion code goes here
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                        return; // Stop execution if file upload fails
+                    }
+                } else {
+                    // No file uploaded, set the target file to NULL or some default value
+                    $target_file = NULL; // Or set to a default image path if you have one
+                }
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                // No file input field found, set the target file to NULL or some default value
+                $target_file = NULL; // Or set to a default image path if you have one
             }
+    
+            // Insert data into the database, including the $target_file value
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("INSERT INTO tbl_indigency (`id_resident`, `lname`, `fname`, `mi`,
+             `nationality`, `houseno`, `street`,`brgy`, `municipal`,`purpose`, `date`, `certofindigency_photo`, `track_id`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+            $stmt->execute([$id_resident, $lname, $fname, $mi, $nationality, $houseno, $street, $brgy, $municipal, $purpose, $date, $target_file, $track_id]);
+    
+            $message2 = "Application Applied, you will receive our text message for further details";
+            echo "<script type='text/javascript'>alert('$message2');</script>";
+            header("refresh: 0");
         }
-    }    
+    }
+    
 
     
 
@@ -1608,7 +1626,7 @@ class BMISClass {
             $fname = $_POST['fname'];
             $mi = $_POST['mi'];
             $bdate = $_POST['bdate'];
-            $pickup_date = $_POST['date'];
+            $pickup_date = $_POST['date'] ?: date("Y-m-d");
             $track_id = uniqid();
             
             // purpose checker
@@ -1625,39 +1643,55 @@ class BMISClass {
             $municipal = $_POST['municipal'];
             $status = $_POST['status'];
     
-            // Set the target directory
-            $target_dir = "uploads/brgyclearance/";
-            $uploaded_file = $_FILES['brgyclearance_photo'];
-            $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
+            // Check if a file was uploaded
+            if(isset($_FILES['brgyclearance_photo'])) {
+                $uploaded_file = $_FILES['brgyclearance_photo'];
     
-            // Check if the target directory exists, and create it if not
-            if (!is_dir($target_dir)) {
-                mkdir($target_dir, 0755, true);
-            }
+                // Set the target directory
+                $target_dir = "uploads/brgyclearance/";
     
-            // Generate a unique filename based on the current timestamp
-            $target_file = $target_dir . time() . '.' . $file_extension;
+                // Check if the file is empty or not
+                if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
+                    $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
     
-            // Move the uploaded file to the target directory
-            if (move_uploaded_file($_FILES['brgyclearance_photo']["tmp_name"], $target_file)) {
-                // Your database insertion code goes here
+                    // Check if the target directory exists, and create it if not
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0755, true);
+                    }
     
-                $connection = $this->openConn();
-                $stmt = $connection->prepare("INSERT INTO tbl_clearance (`id_resident`, `lname`, `fname`, `mi`,
-                `purpose`, `houseno`, `street`,`brgy`, `municipal`, `status`, `brgyclearance_photo`, `track_id`, `date`, `bdate`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    // Generate a unique filename based on the current timestamp
+                    $target_file = $target_dir . time() . '.' . $file_extension;
     
-                $stmt->execute([$id_resident, $lname, $fname, $mi,  $purpose, 
-                $houseno,  $street, $brgy,   $municipal, $status, $target_file, $track_id, $pickup_date,$bdate,]);
-    
-                $message2 = "Application Applied, you will receive our email for further details";
-                echo "<script type='text/javascript'>alert('$message2');</script>";
-                header("refresh: 0");
+                    // Move the uploaded file to the target directory
+                    if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+                        // Your database insertion code goes here
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                        return; // Stop execution if file upload fails
+                    }
+                } else {
+                    // No file uploaded, set the target file to NULL or some default value
+                    $target_file = NULL; // Or set to a default image path if you have one
+                }
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                // No file input field found, set the target file to NULL or some default value
+                $target_file = NULL; // Or set to a default image path if you have one
             }
+    
+            // Insert data into the database, including the $target_file value
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("INSERT INTO tbl_clearance (`id_resident`, `lname`, `fname`, `mi`,
+            `purpose`, `houseno`, `street`,`brgy`, `municipal`, `status`, `brgyclearance_photo`, `track_id`, `date`, `bdate`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+            $stmt->execute([$id_resident, $lname, $fname, $mi, $purpose, $houseno, $street, $brgy, $municipal, $status, $target_file, $track_id, $pickup_date, $bdate]);
+    
+            $message2 = "Application Applied, you will receive our email for further details";
+            echo "<script type='text/javascript'>alert('$message2');</script>";
+            header("refresh: 0");
         }
     }
+    
     
 
     public function get_single_clearance($id_resident){
@@ -1883,41 +1917,58 @@ class BMISClass {
             $municipal = $_POST['municipal'];
             $bsindustry = $_POST['bsindustry'];
             $aoe = $_POST['aoe'];
-            $pickup_date = $_POST['date'];
+            $pickup_date = $_POST['date'] ?: date("Y-m-d");
             $track_id = uniqid();
     
-            // Set the target directory
-            $target_dir = "uploads/bspermit/";
-            $uploaded_file = $_FILES['bspermit_photo'];
-            $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
+            // Check if a file was uploaded
+            if(isset($_FILES['bspermit_photo'])) {
+                $uploaded_file = $_FILES['bspermit_photo'];
     
-            // Check if the target directory exists, and create it if not
-            if (!is_dir($target_dir)) {
-                mkdir($target_dir, 0755, true);
-            }
+                // Set the target directory
+                $target_dir = "uploads/bspermit/";
     
-            // Generate a unique filename based on the current timestamp
-            $target_file = $target_dir . time() . '.' . $file_extension;
+                // Check if the file is empty or not
+                if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
+                    $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
     
-            // Move the uploaded file to the target directory
-            if (move_uploaded_file($_FILES['bspermit_photo']["tmp_name"], $target_file)) {
-                // Your database insertion code goes here
+                    // Check if the target directory exists, and create it if not
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0755, true);
+                    }
     
-                $connection = $this->openConn();
-                $stmt = $connection->prepare("INSERT INTO tbl_bspermit (`id_resident`, `lname`, `fname`, `mi`,
-                 `bsname`, `houseno`, `street`,`brgy`, `municipal`, `bsindustry`, `aoe`, `bspermit_photo`, `track_id`, `date`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    // Generate a unique filename based on the current timestamp
+                    $target_file = $target_dir . time() . '.' . $file_extension;
     
-                $stmt->execute([$id_resident, $lname, $fname, $mi, $bsname, $houseno, $street, $brgy, $municipal, $bsindustry, $aoe, $target_file, $track_id, $pickup_date]);
-    
-                $message2 = "Application Applied, you will receive our text message for further details";
-                echo "<script type='text/javascript'>alert('$message2');</script>";
-                header("refresh: 0");
+                    // Move the uploaded file to the target directory
+                    if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+                        // Your database insertion code goes here
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                        return; // Stop execution if file upload fails
+                    }
+                } else {
+                    // No file uploaded, set the target file to NULL or some default value
+                    $target_file = NULL; // Or set to a default image path if you have one
+                }
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                // No file input field found, set the target file to NULL or some default value
+                $target_file = NULL; // Or set to a default image path if you have one
             }
+    
+            // Insert data into the database, including the $target_file value
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("INSERT INTO tbl_bspermit (`id_resident`, `lname`, `fname`, `mi`,
+             `bsname`, `houseno`, `street`,`brgy`, `municipal`, `bsindustry`, `aoe`, `bspermit_photo`, `track_id`, `date`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+            $stmt->execute([$id_resident, $lname, $fname, $mi, $bsname, $houseno, $street, $brgy, $municipal, $bsindustry, $aoe, $target_file, $track_id, $pickup_date]);
+    
+            $message2 = "Application Applied, you will receive our text message for further details";
+            echo "<script type='text/javascript'>alert('$message2');</script>";
+            header("refresh: 0");
         }
     }
+    
     
 
     public function get_single_bspermit($id_resident){
@@ -2138,9 +2189,10 @@ class BMISClass {
             $street = $_POST['street'];
             $brgy = ucfirst(strtolower($_POST['brgy']));
             $municipal = ucfirst(strtolower($_POST['municipal']));
-            $bplace = ucfirst(strtolower($_POST['bplace'])) ?: NULL;
-            $bdate = $_POST['bdate'] ?: NULL;
-            $pickup_date = $_POST['date'] ?: NULL;
+            // $civil_status = $_POST['civil_status']);
+            $bplace = ucfirst(strtolower($_POST['bplace']));
+            $bdate = $_POST['bdate'];
+            $pickup_date = $_POST['date'] ?: date("Y-m-d");
             $track_id = uniqid();
             
             // Process resident photo
@@ -2163,16 +2215,17 @@ class BMISClass {
             $inc_houseno = $_POST['inc_houseno'];
             $inc_street = $_POST['inc_street'];
             $inc_brgy = $_POST['inc_brgy'];
+            $inc_municipal = $_POST['inc_municipal'];
     
             $connection = $this->openConn();
             $stmt = $connection->prepare("INSERT INTO tbl_brgyid (`id_resident`, `lname`, `fname`, `mi`,
             `houseno`, `street`, `brgy`, `municipal`, `bplace`, `bdate`, `res_photo`, `inc_lname`,
-            `inc_fname`, `inc_mi`, `inc_contact`, `inc_houseno`, `inc_street`, `inc_brgy`, `track_id`, `date`)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            `inc_fname`, `inc_mi`, `inc_contact`, `inc_houseno`, `inc_street`, `inc_brgy`, `track_id`, `date`,`inc_municipal`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
             $stmt->execute([$id_resident, $lname, $fname, $mi, $houseno, $street, $brgy, $municipal, 
                 $bplace, $bdate, $target_file_res, $inc_lname, $inc_fname, $inc_mi, $inc_contact, 
-                $inc_houseno, $inc_street, $inc_brgy, $track_id, $pickup_date]);
+                $inc_houseno, $inc_street, $inc_brgy, $track_id, $pickup_date, $inc_municipal]);
     
             $message2 = "Application Applied, you will receive our text message for further details";
             echo "<script type='text/javascript'>alert('$message2');</script>";

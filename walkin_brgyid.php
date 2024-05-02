@@ -55,7 +55,7 @@
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
         <h4 class="text-center mb-0">Walk'in Request</h4>
-        <a href="admn_certofres.php" class="btn btn-primary">Back</a>
+        <a href="admn_brgyid.php" class="btn btn-primary">Back</a>
     </div>
 
     <div class="container">
@@ -64,33 +64,53 @@
                 <div class="row">
                     <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">First Name</label>
-                        <input type="text" name="fname" class="form-control" id="formGroupExampleInput">
+                        <input type="text" name="fname" class="form-control" id="formGroupExampleInput" required />
                     </div>
                     <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Middle Name</label>
-                        <input type="text" name="mi" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <input type="text" name="mi" class="form-control" id="formGroupExampleInput" placeholder="" required />
                     </div>
                     <div class="col-md-4 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Last Name</label>
-                        <input type="text" name="lname" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <input type="text" name="lname" class="form-control" id="formGroupExampleInput" placeholder="" required />
                     </div>
-                    <div class="col-md-6 mt-3">
+
+                    <!-- <div class="col-md-6 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Age</label>
                         <input type="text" name="age" class="form-control" id="formGroupExampleInput" placeholder="">
                     </div>
                     <div class="col-md-6 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Nationality</label>
                         <input type="text" name="nationality" class="form-control" id="formGroupExampleInput" placeholder="">
+                    </div> -->
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Date"class="mtop">Date of Birth </label>
+                            <input name="bdate" id="myDateInput" onchange="checkBdate('myDateInput')" type="date" class="form-control" required />
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
                     </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="mtop">Birth Place </label>
+                            <input type="text" class="form-control" name="bplace"  
+                            placeholder="Enter Birth Place" required />
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                    </div>  
 
                     <!-- Address -->
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">House No:</label>
-                        <input type="text" name="houseno" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <input type="text" name="houseno" class="form-control" id="formGroupExampleInput" placeholder="" required />
                     </div>
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Street</label>
-                        <input type="text" name="street" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <input type="text" name="street" class="form-control" id="formGroupExampleInput" placeholder="" required />
                     </div>
                     <div class="col-md-3 mt-3">
                         <label for="formGroupExampleInput" class="form-label">Barangay</label>
@@ -113,6 +133,93 @@
                         </select>
                     </div>
 
+                    <hr>
+
+                    <h6>In case of emergency :</h6>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="fname">First Name:</label>
+                                <input name="inc_fname" type="text" class="form-control" placeholder="Enter First Name" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="mi" class="mtop">Middle Name </label>
+                                <input name="inc_mi" type="text" class="form-control" placeholder="Enter Middle Name" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="lname">Last Name:</label>
+                                <input name="inc_lname" type="text" class="form-control" placeholder="Enter Last Name" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        
+                        <div class="col-md-12">
+                            <div class="form-group">            
+                                <label for="cno">Contact Number:</label>
+                                <input name="inc_contact" type="text" maxlength="11" class="form-control" pattern="[0-9]{11}" placeholder="Enter Contact Number" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label> House No: </label>
+                                <input type="text" class="form-control" name="inc_houseno"  placeholder="Enter House No." required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label> Street: </label>
+                                <input type="text" class="form-control" name="inc_street"  placeholder="Enter Street" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label> Barangay: </label>
+                                <input type="text" class="form-control" name="inc_brgy"  placeholder="Enter Barangay" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label> Municipality: </label>
+                                <input type="text" class="form-control" name="inc_municipal" placeholder="Enter Municipality" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+
                     <div class="form-group" id="otherDiv" style="display: none">
                         <input type="text" class="form-control mt-3" name="otherInput" id='otherInput' placeholder="Enter Other" style="display: none" />
                         <div class="valid-feedback">Valid.</div>
@@ -133,6 +240,7 @@
 </div>
 <!-- End of Main Content -->
 
+<script src="js/bdate-checker.js" type="text/javascript"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous"></script>
 <!-- responsive tags for screen compatibility -->

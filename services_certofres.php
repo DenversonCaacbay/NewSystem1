@@ -387,7 +387,7 @@
                                         </div>
                                         <div class="form-group" id="urgentRequest" style="display: none;">
                                             <label class="mtop">Urgent Request: <code>Note: 50 pesos payment upon getting request</code></label>
-                                            <textarea class="form-control" required></textarea>
+                                            <textarea class="form-control"></textarea>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please Fill out this field</div>
                                         </div>

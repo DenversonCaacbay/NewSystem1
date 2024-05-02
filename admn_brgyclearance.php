@@ -52,7 +52,7 @@
 
     <div class="d-flex justify-content-between mb-3">
         <h4 class="mb-0">Pending Barangay Clearance Requests</h4>
-        <a href="walkin_certofres.php" class="btn btn-primary"><i class="fas fa-walking me-2"></i>For Walk'in </a>
+        <a href="walkin_clearance.php" class="btn btn-primary"><i class="fas fa-walking me-2"></i>For Walk'in </a>
     </div>
 
     <div class="row"> 
