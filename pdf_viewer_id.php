@@ -4,9 +4,11 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
-   $bmis->create_announcement();
-   $bmis->delete_announcement();
-   $view = $bmis->view_announcement();
+//    $bmis->create_announcement();
+//    $bmis->delete_announcement();
+//    $view = $bmis->view_announcement();
+   $view = $residentbmis->view_single_brgyid();
+   
    $announcementcount = $bmis->count_announcement();
 
    $dt = new DateTime("now", new DateTimeZone('Asia/Manila'));
@@ -51,18 +53,18 @@
             <div class="w-100 me-3">
                 
                 <label class="mt-3">Name: </label>
-                <input type="text" class="form-control"/>
+                <input type="text" class="form-control" value="<?= $view['fname']." ".$view['lname'] ?>" readonly />
                 <label class="mt-3">Address: </label>
-                <input type="text" class="form-control"/>
+                <textarea class="form-control" readonly><?= $view['houseno']." ".$view['street']." ".$view['brgy']." ".$view['municipal'] ?></textarea>                
                 <label class="mt-3">Birthdate: </label>
-                <input type="text" class="form-control"/>
+                <input type="text" class="form-control" value="<?= $view['bdate']?>" readonly />
                 <p class="fw-bold mt-3">Contact in Case of Emergency: </p>
                 <label class="">Name</label>
-                <input type="text" class="form-control"/>
+                <input type="text" value="<?= $view['inc_fname']." ".$view['inc_fname'] ?>" class="form-control" readonly/>
                 <label class="mt-3">Contact Number</label>
-                <input type="text" class="form-control"/>
+                <input type="text" class="form-control" value="<?= $view['inc_contact'] ?>" readonly/>
                 <label class="mt-3">Urgent:</label>
-                <textarea class="form-control" name="urgent" id="" cols="30" rows="5" value="<?= $view['urgent'] ?>" readonly></textarea>
+                <textarea class="form-control" name="urgent" id="" cols="30" rows="5"readonly><?= $view['is_urgent'] ?></textarea>
             </div>
             <div class="mt-3">
                 <div class="pdfContainerUI" id="pdfContainer"></div>

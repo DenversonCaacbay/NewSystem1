@@ -6,6 +6,9 @@
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
 
+    $pending_request = $residentbmis->count_pending_request();
+    $approved_request = $residentbmis->count_approved_request();
+
     $rescount = $residentbmis->count_resident();
     $rescountm = $residentbmis->count_male_resident();
     $rescountf = $residentbmis->count_female_resident();
@@ -35,7 +38,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
                                 All Pending Request</div>
-                                <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescount?></div>
+                                <div class="h5 mb-0 font-weight-bold text-dark"><?= $pending_request?></div>
                                 <br>
                                 <a href="admn_request_archives.php"> View Records </a>
                         </div>
@@ -55,7 +58,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
                                 Total Release Request</div>
-                                <div class="h5 mb-0 font-weight-bold text-dark"><?= $rescount?></div>
+                                <div class="h5 mb-0 font-weight-bold text-dark"><?= $approved_request?></div>
                                 <br>
                                 <a href="admn_request_archives.php"> View Records </a>
                         </div>

@@ -5,21 +5,32 @@
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
 
-   
-   $clearance_approved = $residentbmis->count_clearance_approved();
-   $clearance_decline = $residentbmis->count_clearance_decline();
+    $status_counts = $residentbmis->count_all_requests();
 
-    $bspermit_approved = $residentbmis->count_bspermit_approved();
-    $bspermit_decline = $residentbmis->count_bspermit_decline();
+    // Example usage for clearance
+    $clearance_approved = $status_counts['Clearance_Approved'];
+    $clearance_decline = $status_counts['Clearance_Declined'];
+    $clearance_pending = $status_counts['Clearance_Pending'];
 
-    $brgyid_approved = $residentbmis->count_brgyid_approved();
-    $brgyid_decline = $residentbmis->count_brgyid_decline();
+    // Example usage for bspermit
+    $bspermit_approved = $status_counts['BSPermit_Approved'];
+    $bspermit_decline = $status_counts['BSPermit_Declined'];
+    $bspermit_pending = $status_counts['BSPermit_Pending'];
 
-    $indigency_approved = $residentbmis->count_indigency_approved();
-    $indigency_decline = $residentbmis->count_indigency_decline();
+    // Example usage for brgyid
+    $brgyid_approved = $status_counts['Brgyid_Approved'];
+    $brgyid_decline = $status_counts['Brgyid_Declined'];
+    $brgyid_pending = $status_counts['Brgyid_Pending'];
 
-    $residency_approved = $residentbmis->count_residency_approved();
-    $residency_decline = $residentbmis->count_residency_decline();
+    // Example usage for indigency
+    $indigency_approved = $status_counts['Indigency_Approved'];
+    $indigency_decline = $status_counts['Indigency_Declined'];
+    $indigency_pending = $status_counts['Indigency_Pending'];
+
+    // Example usage for residency
+    $residency_approved = $status_counts['Rescert_Approved'];
+    $residency_decline = $status_counts['Rescert_Declined'];
+    $residency_pending = $status_counts['Rescert_Pending'];
 
 
 ?>
@@ -49,6 +60,7 @@
                     <h4 class="card-title">Barangay Residency</h4>
                     <div class="d-flex justify-content-between">
                         <div>
+                            <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $residency_pending?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $residency_approved?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $residency_decline?></h5>
                             
@@ -64,6 +76,7 @@
                     <h4 class="card-title">Barangay ID</h4>
                     <div class="d-flex justify-content-between">
                         <div>
+                            <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $brgyid_pending?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $brgyid_approved?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $brgyid_decline?></h5>
                         </div>
@@ -78,6 +91,7 @@
                     <h4 class="card-title">Business Recommendation</h4>
                     <div class="d-flex justify-content-between">
                         <div>
+                            <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $bspermit_pending?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $bspermit_approved?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $bspermit_decline?></h5>
                         </div>
@@ -92,6 +106,7 @@
                     <h4 class="card-title">Barangay Clearance</h4>
                     <div class="d-flex justify-content-between">
                         <div>
+                            <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $clearance_pending?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $clearance_approved?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $clearance_decline?></h5>
                         </div>
@@ -106,6 +121,7 @@
                     <h4 class="card-title">Certificate of Indigency</h4>
                     <div class="d-flex justify-content-between">
                         <div>
+                            <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $indigency_pending?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $indigency_approved?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $indigency_decline?></h5>
                         </div>

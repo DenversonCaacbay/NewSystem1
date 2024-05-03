@@ -63,11 +63,11 @@
                 <label class="mt-3">Name:</label>
                 <input type="text" value="<?= $view['fname']." ".$view['lname'] ?>" class="form-control" readonly/>
                 <label class="mt-3">Address:</label>
-                <input type="text" class="form-control" value="<?= $view['houseno']." ".$view['street']." ".$view['brgy']." ".$view['municipal'] ?>" readonly/>
+                <textarea class="form-control" readonly><?= $view['houseno']." ".$view['street']." ".$view['brgy']." ".$view['municipal'] ?></textarea>
                 <label class="mt-3">Purpose:</label>
                 <input type="text" class="form-control" value="<?= $view['purpose'] ?>" readonly>
                 <label class="mt-3">Urgent:</label>
-                <textarea class="form-control" name="urgent" id="" cols="30" rows="5" value="<?= $view['urgent'] ?>" readonly></textarea>
+                <textarea class="form-control" name="urgent" id="" cols="30" rows="5"readonly><?= $view['is_urgent'] ?></textarea>
             </div>
             <div class="mt-3">
                 <div class="pdfContainerUI" id="pdfContainer"></div>

@@ -472,6 +472,66 @@ use PHPMailer\PHPMailer\Exception;
         return $total;
     }
 
+    public function count_pending_request() {
+        $connection = $this->openConn();
+    
+        $stmt1 = $connection->prepare("SELECT COUNT(*) from tbl_brgyid WHERE form_status = 'Pending'");
+        $stmt1->execute();
+        $pending_brgyid = $stmt1->fetchColumn();
+    
+        $stmt2 = $connection->prepare("SELECT COUNT(*) from tbl_clearance WHERE form_status = 'Pending'");
+        $stmt2->execute();
+        $pending_clearance = $stmt2->fetchColumn();
+    
+        $stmt3 = $connection->prepare("SELECT COUNT(*) from tbl_indigency WHERE form_status = 'Pending'");
+        $stmt3->execute();
+        $pending_indigency = $stmt3->fetchColumn();
+    
+        $stmt4 = $connection->prepare("SELECT COUNT(*) from tbl_rescert WHERE form_status = 'Pending'");
+        $stmt4->execute();
+        $pending_rescert = $stmt4->fetchColumn();
+    
+        $stmt5 = $connection->prepare("SELECT COUNT(*) from tbl_bspermit WHERE form_status = 'Pending'");
+        $stmt5->execute();
+        $pending_bspermit = $stmt5->fetchColumn();
+    
+        // Sum up the counts from all tables
+        $total_pending = $pending_brgyid + $pending_clearance + $pending_indigency + $pending_rescert + $pending_bspermit;
+    
+        return $total_pending;
+    }
+    
+    
+    public function count_approved_request() {
+        $connection = $this->openConn();
+    
+        $stmt1 = $connection->prepare("SELECT COUNT(*) from tbl_brgyid WHERE form_status = 'Approved'");
+        $stmt1->execute();
+        $approved_brgyid = $stmt1->fetchColumn();
+    
+        $stmt2 = $connection->prepare("SELECT COUNT(*) from tbl_clearance WHERE form_status = 'Approved'");
+        $stmt2->execute();
+        $approved_clearance = $stmt2->fetchColumn();
+    
+        $stmt3 = $connection->prepare("SELECT COUNT(*) from tbl_indigency WHERE form_status = 'Approved'");
+        $stmt3->execute();
+        $approved_indigency = $stmt3->fetchColumn();
+    
+        $stmt4 = $connection->prepare("SELECT COUNT(*) from tbl_rescert WHERE form_status = 'Approved'");
+        $stmt4->execute();
+        $approved_rescert = $stmt4->fetchColumn();
+    
+        $stmt5 = $connection->prepare("SELECT COUNT(*) from tbl_bspermit WHERE form_status = 'Approved'");
+        $stmt5->execute();
+        $approved_bspermit = $stmt5->fetchColumn();
+    
+        // Sum up the counts from all tables
+        $total_approved = $approved_brgyid + $approved_clearance + $approved_indigency + $approved_rescert + $approved_bspermit;
+    
+        return $total_approved;
+    }
+    
+
     public function count_resident() {
         $connection = $this->openConn();
         $stmt = $connection->prepare("SELECT COUNT(*) from tbl_resident WHERE verified = 'Yes'");
@@ -626,77 +686,35 @@ use PHPMailer\PHPMailer\Exception;
 
     }
     // ------------------------------------ ARCHIVES COOUNT PER REQUEST ------------------------------------
-    // Done
-    public function count_clearance_approved() {
+    public function count_requests($table, $status) {
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_clearance WHERE form_status='Approved'");
+        $stmt = $connection->prepare("SELECT COUNT(*) FROM $table WHERE form_status=:status");
+        $stmt->bindParam(':status', $status);
         $stmt->execute();
         $rescount = $stmt->fetchColumn();
         return $rescount;
     }
-    public function count_bspermit_approved() {
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_bspermit WHERE form_status='Approved'");
-        $stmt->execute();
-        $rescount = $stmt->fetchColumn();
-        return $rescount;
-    }
-    public function count_indigency_approved() {
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_indigency WHERE form_status='Approved'");
-        $stmt->execute();
-        $rescount = $stmt->fetchColumn();
-        return $rescount;
-    }
-    public function count_residency_approved() {
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_rescert WHERE form_status='Approved'");
-        $stmt->execute();
-        $rescount = $stmt->fetchColumn();
-        return $rescount;
-    }
-    public function count_brgyid_approved() {
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_brgyid WHERE form_status='Approved'");
-        $stmt->execute();
-        $rescount = $stmt->fetchColumn();
-        return $rescount;
-    }
-    // Decline
-    public function count_clearance_decline() {
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_clearance WHERE form_status='Declined'");
-        $stmt->execute();
-        $rescount = $stmt->fetchColumn();
-        return $rescount;
-    }
-    public function count_bspermit_decline() {
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_bspermit WHERE form_status='Declined'");
-        $stmt->execute();
-        $rescount = $stmt->fetchColumn();
-        return $rescount;
-    }
-    public function count_indigency_decline() {
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_indigency WHERE form_status='Declined'");
-        $stmt->execute();
-        $rescount = $stmt->fetchColumn();
-        return $rescount;
-    }
-    public function count_residency_decline() {
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_rescert WHERE form_status='Declined'");
-        $stmt->execute();
-        $rescount = $stmt->fetchColumn();
-        return $rescount;
-    }
-    public function count_brgyid_decline() {
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT COUNT(*) from tbl_brgyid WHERE form_status='Declined'");
-        $stmt->execute();
-        $rescount = $stmt->fetchColumn();
-        return $rescount;
+    
+    public function count_all_requests() {
+        $certificate_types = array(
+            "Clearance",
+            "BSPermit",
+            "Indigency",
+            "Rescert",
+            "Brgyid"
+        );
+        $statuses = array("Pending", "Approved", "Declined");
+        $counts = array();
+    
+        foreach ($certificate_types as $certificate_type) {
+            foreach ($statuses as $status) {
+                $table = "tbl_" . strtolower($certificate_type);
+                $key = $certificate_type . "_" . $status;
+                $counts[$key] = $this->count_requests($table, $status);
+            }
+        }
+    
+        return $counts;
     }
     
 
