@@ -6,10 +6,8 @@
 ?>
 	<table class="table table-hover text-center table-bordered table-responsive" >
 
-		<thead class="alert-info">
+    <thead class="alert-info">
 			<tr>
-                
-                
                 <th width="20%"> Full Name </th>
                 <th width="20%"> Email </th>
                 <th width="5%"> Age </th>
@@ -23,16 +21,14 @@
 		<tbody>       
 			<?php
 				
-				$stmnt = $conn->prepare("SELECT * FROM `tbl_resident` WHERE `lname` LIKE '%$keyword%' or  `mi` LIKE '%$keyword%' or  `fname` LIKE '%$keyword%' 
+				$stmnt = $conn->prepare("SELECT * FROM `tbl_resident` WHERE (`lname` LIKE '%$keyword%' or  `mi` LIKE '%$keyword%' or  `fname` LIKE '%$keyword%' 
 				or  `age` LIKE '%$keyword%' or  `sex` LIKE '%$keyword%' or  `status` LIKE '%$keyword%' or  `address` LIKE '%$keyword%' or  `contact` LIKE '%$keyword%'
-				or  `bdate` LIKE '%$keyword%' or  `bplace` LIKE '%$keyword%' or  `nationality` LIKE '%$keyword%' or  `family_role` LIKE '%$keyword%' or  `role` LIKE '%$keyword%' or  `email` LIKE '%$keyword%' WHERE verified='Yes'");
+				or  `bdate` LIKE '%$keyword%' or  `bplace` LIKE '%$keyword%' or  `nationality` LIKE '%$keyword%' or  `family_role` LIKE '%$keyword%' or  `role` LIKE '%$keyword%' or  `email` LIKE '%$keyword%') AND verified='Yes'");
 				$stmnt->execute();
 				
 				while($view = $stmnt->fetch()){
 			?>
-                <tr>
-                
-                        
+               <tr>
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                         <td> <?= $view['email'];?> </td>
                         <td> <?= $view['age'];?> </td>
@@ -47,7 +43,7 @@
                                 <a class="btn btn-primary" href="admn_view_approve_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a>
                             </form>
                         </td>
-                </tr>
+                    </tr>
 			<?php
 			}
 			?>

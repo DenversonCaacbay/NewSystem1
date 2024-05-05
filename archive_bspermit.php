@@ -16,6 +16,7 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
+<link rel="stylesheet" href="css/table.css"/>
 <style>
         
     .icon {
@@ -29,7 +30,7 @@
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
 
@@ -41,30 +42,53 @@
     </div>
       
     <div class="row mt-3"> 
-    <div class="col">
-            <form method="POST" action="" id="searchForm">
-                <div class="input-icons d-flex justify-content-between">
-                    <!-- Replace input with select dropdown -->
-                    <div class="d-flex justify-content-between">
-                         <select class="form-select search" name="form_status" id="formStatus" style="height:50px;" required="">
-                        <option value="Approved">Approved</option>
-                        <option value="Declined">Declined</option>
-                        </select>
-                        <button class="btn btn-success ms-2" name="search_bspermit">Search</button>
-                        <a href="archive_bspermit.php" class="btn btn-info ms-2 me-5" style="font-size: 17px;width:200px;padding-top:10px;">View All</a>
+        <div class="col-md-12">
+            <div class="row">
+                 <div class="col-md-7">
+                 <form id="pdfForm" method="post" action="generatepdf/random/request_bspermit.php" target="_blank" style="display: inline-block; margin-right: 10px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group" style="margin-bottom: 5px;">
+                                <label for="fromDate" style="display: block;">From Date:</label>
+                                <input type="date" class="form-control" id="fromDate" name="fromDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" style="margin-bottom: 5px;">
+                                <label for="toDate" style="display: block;">To Date:</label>
+                                <input type="date" class="form-control" id="toDate" name="toDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2"><button type="button" class="btn btn-primary p-2" style="margin-top:33px" onclick="validateDates()" id="pdfLink"><i class="fas fa-print"></i></button></div>
                     </div>
-                <div>
-                     Export Data By:
-                    <a class="btn btn-primary" target="_blank" href="generatePdf/bspermit/week.php">Daily</a> 
-                    <a class="btn btn-primary" target="_blank" href="generatePdf/bspermit/week.php">Weekly</a>
-                    <a class="btn btn-primary" target="_blank" href="generatePdf/bspermit/month.php">Monthly</a>
-                    <a class="btn btn-primary" target="_blank" href="generatePdf/bspermit/year.php">Yearly</a>
-                </div>
-                   
-                </div>
-            </form>
-        </div>
+                </form>
 
+                <script>
+                    function validateDates() {
+                        var startDate = document.getElementById('fromDate').value;
+                        var endDate = document.getElementById('toDate').value;
+                        if (startDate === "" || endDate === "") {
+                            alert("Please select both start and end dates.");
+                        } else {
+                            // Perform other actions or submit the form
+                            var form = document.getElementById('pdfForm');
+                            form.submit();
+                        }
+                    }
+                </script>
+                </div>
+                <div class="col-md-5">
+                    Select Pdf Generate
+                    <select class="form-select mt-2" id="pdfGenerateSelect">
+                        <option value="">View Options</option>
+                        <option value="generatePdf/bspermit/daily.php">Daily</option>
+                        <option value="generatePdf/bspermit/week.php">Weekly</option>
+                        <option value="generatePdf/bspermit/month.php">Monthly</option>
+                        <option value="generatePdf/bspermit/year.php">Yearly</option>
+                    </select>
+                </div>  
+            </div>
+        </div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Retrieve the value from localStorage and set it as the selected value
@@ -80,6 +104,14 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('formStatus', selectedFormStatus);
     });
 });
+</script>
+
+<script>
+    // Add event listener to the select element
+    document.getElementById("pdfGenerateSelect").addEventListener("change", function() {
+        // Redirect to the selected option's value
+        window.open(this.value, "_blank");
+    });
 </script>
 
     </div>

@@ -4,9 +4,8 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
-//    $bmis->create_announcement();
-//    $bmis->delete_announcement();
-//    $view = $bmis->view_announcement();
+   $bmis->reject_clearance();
+   $bmis->approved_clearance();
 
     $view = $residentbmis->view_single_clearance();
 
@@ -42,18 +41,24 @@
 </head>
 
     <div class="container-fluid container--viewer p-0">
-        <div class="viewerTop d-flex justify-content-between">
-            <div class="d-flex align-items-center">
-                <a href="admn_brgyclearance.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
-                <h3 class="viewer-text">Barangay Clearance PDF Viewer</h3>
-            </div>
-            <div class="d-flex">
-                <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
-                <button class="btn btn-primary me-3" id="markAsDoneButton" disabled>Mark As Done <i class="fas fa-check"></i></button>
-                <button class="btn btn-danger"> Decline <i class="fas fa-times"></i></button>
-            </div>
-            
-            
+
+        <div class="viewerTop sticky-top p-0">
+            <form action="" method="post" class="p-2">
+                <div class="d-flex justify-content-between">
+                    <div class=" d-flex align-items-center">
+                        <a href="admn_brgyclearance.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
+                        <h5 class="viewer-text">Barangay Clearance PDF Viewer</h5>
+                    </div>
+                    <div>
+                        <input type="hidden" name="id_clearance" value="<?= $view['id_clearance'];?>">
+                        <input type="hidden" name="email" value="<?= $view['email'];?>">
+                        <input type="hidden" name="staff" value="<?= $userdetails['firstname']?> <?= $userdetails['surname']?> ">
+                        <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
+                        <button class="btn btn-primary me-3" id="markAsDoneButton" type="submit" name="approved_clearance" disabled> Mark As Done </button>
+                        <button class="btn btn-danger" id="declineButton" name="reject_clearance"> Decline <i class="fas fa-times"></i></button> 
+                    </div>  
+                </div>
+            </form>
         </div>
         
         <div class="viewer-content d-flex justify-content-between">
@@ -122,9 +127,9 @@
         document.getElementById('printButton').disabled = true;
     });
 
-    document.getElementById('markAsDoneButton').addEventListener('click', function() {
-        // Perform actions when "Mark As Done" button is clicked
-        alert('Mark As Done button clicked.');
-    });
+    // document.getElementById('markAsDoneButton').addEventListener('click', function() {
+    //     // Perform actions when "Mark As Done" button is clicked
+    //     alert('Mark As Done button clicked.');
+    // });
 </script>
     

@@ -1,7 +1,7 @@
 <?php
     
     error_reporting(E_ALL ^ E_WARNING);
-    ini_set('display_errors',0);
+    ini_set('display_errors',1);
     require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
@@ -12,7 +12,7 @@
     // $resident = $residentbmis->get_single_certofres($id_resident);
     // $resident = view_certofres();
 
-    $bmis->create_bspermit();
+    $bmis->create_bspermit_walkin();
 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     $limit = 5;
@@ -25,7 +25,7 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
-
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     .container--residency{
         height: 500px;
@@ -51,11 +51,11 @@
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h4 class="text-center mb-0">Walk'in Request</h4>
+        <h4 class="text-center mb-0">Walk'in Request Form</h4>
         <a href="admn_bspermit.php" class="btn btn-primary">Back</a>
     </div>
 
@@ -99,7 +99,9 @@
                             </div>
                         </div>
                     </div>
-                    <h6>Business Address:</h6>
+                    <div style="width: 100%; height:3px; background:#309464;margin-top:20px ;border-radius: 5px"></div>
+                    <h6 class="mt-3 fw-bold">Business Address:</h6>
+                    <div style="width: 140px; height:3px; background:#309464;margin: 0px 10px 10px 10px;border-radius: 5px"></div>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -213,8 +215,12 @@
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
+                    <div class="col-md-6 mt-3 d-none">
+                        <label for="formGroupExampleInput" class="form-label">Urgent</label>
+                        <input type="text" name="is_urgent" class="form-control" value="Walk In" id="formGroupExampleInput" placeholder="">
+                    </div>
                     <div class="col-md-12">
-                        <button name ="create_bspermit" type="submit" class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
+                        <button name ="create_bspermit_walkin" type="submit" class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
                     </div>
                 </div>
             </form>

@@ -1,18 +1,28 @@
 .dashboard--container{
+    /* margin-top: 20px !important; */
     height:400px;
 }
 .card-upper-space {
     margin-top: 35px;
 }
 
-.card-row-gap {
+/* .card-row-gap {
     margin-top: 3em;
-}
+} */
 a{
     color: #309464 !important;
     text-decoration: none !important;
 }
 
+.text-primary{
+    color: #309464 !important;
+}
+
 .dashboard--container::-webkit-scrollbar{
     display: none;
+}
+
+.table th{
+    background: #309464 !important;
+    color: #fff;
 }

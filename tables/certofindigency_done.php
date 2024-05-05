@@ -56,8 +56,10 @@
             <th> Nationality </th>
             <th> Address </th>
             <th> Purpose </th>
-            <th> Date </th>
+            <th> Date Requested</th>
+            <th> Staff </th>
             <th> Status </th>
+            <th> Date </th>
         </tr>
     </thead>
     
@@ -70,8 +72,10 @@
                     <td> <?= $view['nationality'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?> </td>
                     <td> <?= $view['purpose'];?> </td>
-                    <td> <?= $view['date'];?> </td>
+                    <td> <?= date('F d, Y', strtotime($view['date'])); ?> </td>
+                    <td> <?= $view['staff'];?> </td>
                     <td> <?= $view['form_status'];?> </td>
+                    <td> <?= date('F d, Y', strtotime($view['created_at'])); ?> </td>
                     
                     
                 </tr>

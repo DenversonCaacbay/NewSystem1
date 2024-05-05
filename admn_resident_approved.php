@@ -67,7 +67,7 @@
                     <i class="fa fa-search icon"></i>
                     <input type="search" class="form-control search" name="keyword" style="border-radius: 5px;" value="" required=""/>
                     <button class="btn btn-success ms-3" name="search_resident" >Search</button>
-                    <a href="admn_registered_resident.php" class="btn btn-info ms-3" >Reload</a>
+                    <a href="admn_resident_approved.php" class="btn btn-info ms-3" >Reload</a>
                 </div>
 			</form>
             <div class="row ">

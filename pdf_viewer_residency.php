@@ -7,6 +7,8 @@
    $bmis->create_announcement();
    $bmis->delete_announcement();
    $view = $bmis->view_announcement();
+   $bmis->reject_rescert();
+   $bmis->approved_rescert();
    $announcementcount = $bmis->count_announcement();
 
    $view = $residentbmis->view_single_residency();
@@ -42,20 +44,34 @@
 </head>
 <body>
     <div class="container-fluid container--viewer p-0">
-            <div class="viewerTop d-flex sticky-top justify-content-between">
-                <div class="d-flex align-items-center">
-                    <a href="admn_certofres.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
-                    <h5 class="viewer-text">Barangay Residency PDF Viewer</h5>
+        
+        <div class="viewerTop sticky-top p-0">
+            <form action="" method="post" class="p-2">
+                <div class="d-flex justify-content-between">
+                    <div class=" d-flex align-items-center">
+                        <a href="admn_certofres.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
+                        <h5 class="viewer-text">Barangay Residency PDF Viewer</h5>
+                    </div>
+                    <div>
+                        <input type="hidden" name="id_rescert" value="<?= $view['id_rescert'];?>">
+                        <input type="hidden" name="email" value="<?= $view['email'];?>">
+                        <input type="hidden" name="staff" value="<?= $userdetails['firstname']?> <?= $userdetails['surname']?> ">
+                        <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
+                        <button class="btn btn-primary me-3" id="markAsDoneButton" type="submit" name="approved_rescert" disabled> Mark As Done </button>
+                        <button class="btn btn-danger" id="declineButton"> Decline <i class="fas fa-times"></i></button> 
+                    </div>  
                 </div>
-                <div class="d-flex">
-                    <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
-                    <button class="btn btn-primary me-3" id="markAsDoneButton" disabled>Mark As Done <i class="fas fa-check"></i></button>
-                    <button class="btn btn-danger" id="declineButton"> Decline <i class="fas fa-times"></i></button>
-                </div>  
+            </form>
         </div>
         
         <div class="viewer-content d-flex justify-content-between">
-            <div class="text-center m-5"><img src="<?= $view['certofres_photo'] ?>" alt="Residency IMAGE" class="viewer--img"></div>
+        <div class="text-center m-5">
+            <?php if (isset($view['certofres_photo']) && !empty($view['certofres_photo'])) : ?>
+                <img src="<?= $view['certofres_photo'] ?>" alt="Residency IMAGE" class="viewer--img">
+            <?php else : ?>
+                <img src="assets/default-thumbnail.jpg" alt="Default Thumbnail" class="viewer--img">
+            <?php endif; ?>
+        </div>
             <div class="w-100 mt-3 me-3">
                 <h3 class="mt-4">Request:</h3>
                 <label class="mt-1">Tracking ID:</label>
@@ -68,6 +84,7 @@
                 <input type="text" class="form-control" value="<?= $view['purpose'] ?>" readonly>
                 <label class="mt-3">Urgent:</label>
                 <textarea class="form-control" name="urgent" id="" cols="30" rows="5"readonly><?= $view['is_urgent'] ?></textarea>
+                
             </div>
             <div class="mt-3">
                 <div class="pdfContainerUI" id="pdfContainer"></div>
@@ -127,9 +144,6 @@
         document.getElementById('declineButton').disabled = true;
     });
 
-    document.getElementById('markAsDoneButton').addEventListener('click', function() {
-        // Perform actions when "Mark As Done" button is clicked
-        alert('Mark As Done button clicked.');
-    });
+   
 </script>
     

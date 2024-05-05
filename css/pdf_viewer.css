@@ -27,15 +27,26 @@ body::-webkit-scrollbar{
     background: #309464 !important;
 }
 .btn-primary{
-        background: #fff !important;
-        border: 0 !important;
-        color: #309464 !important;
-        padding: 10px 16px !important;
-        outline: none !important;
-    }
+    background: #fff !important;
+    border: 0 !important;
+    color: #309464 !important;
+    padding: 10px 16px !important;
+    outline: none !important;
+}
 .btn-primary:focus {
-            outline: none !important;
-        }
+    outline: none !important;
+}
+
+.btn-danger{
+    /* background: #fff !important; */
+    border: 0 !important;
+    /* color: #309464 !important; */
+    padding: 10px 16px !important;
+    outline: none !important;
+}
+.btn-danger:focus {
+    outline: none !important;
+}
 .border-left-primary{
     border-left: 0.25rem solid #309464 !important;
 }

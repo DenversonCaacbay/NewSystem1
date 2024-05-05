@@ -7,20 +7,20 @@
 ?>
 	<table class="table table-hover text-center table-bordered responsive">
 
-    <thead class="alert-info sticky-stop">
-    <tr>
+    <thead class="alert-info sticky-top">
+        <tr>
             <th hidden> Resident ID </th>
-            <th class="bg text-light"> Pick Up Date </th>
+            <th class="bg text-light"> Date Requested </th>
             <th class="bg text-light"> Tracking ID </th>
             <th class="bg text-light"> Full Name </th>
             <th class="bg text-light"> Business Name </th>
             <th class="bg text-light"> Address </th>
             <th class="bg text-light"> Business Industry </th>
             <th class="bg text-light"> Area of Establishment </th>
-            <th class="bg text-light"> Urgent</th>
-            <th class="bg text-light"> Image</th>
             
-                        <th class="bg text-light"> Actions</th>
+            <th class="bg text-light"> Image</th>
+            <th class="bg text-light"> Urgent</th>
+            <th class="bg text-light"> Actions</th>
         </tr>
     </thead>
 
@@ -64,86 +64,7 @@
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
                     <td> <?= $view['bsindustry'];?> </td>
                     <td> <?= $view['aoe'];?> </td>
-                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
                     
-                    <td>
-                        <?php if (is_null($view['bspermit_photo'])): ?>
-                            <span>No Image Available</span>
-                        <?php else: ?>
-                            <!-- <a class="btn btn-primary" data-toggle="modal" data-target="#imageModal<?= $view['id_bspermit'] ?>">View</a> -->
-                            <a href="#" data-toggle="modal" data-target="#imageModal<?= $view['id_bspermit'] ?>">
-                                <img src="<?= $view['bspermit_photo'] ?>" class="img-fluid" alt="Modal Image" width="80">
-                            </a>
-                            <div class="modal fade" id="imageModal<?= $view['id_bspermit'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="imageModalTitle"><?= $view['fname'];?> <?= $view['lname'];?></h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a href="<?= $view['bspermit_photo'] ?>" target="_blank"><img src="<?= $view['bspermit_photo'] ?>" class="img-fluid" alt="Modal Image"></a>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    </td>
-                    <td width="20%">    
-                        <form action="" method="post">
-                           <a href="generatePdf/generate_businesspermit.php?pdf=1&id=<?= $view['id_bspermit']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a>
-                            <input type="hidden" name="id_bspermit" value="<?= $view['id_bspermit'];?>">
-                            <input type="hidden" name="email" value="<?= $view['email'];?>">
-                            <button class="btn btn-primary" type="submit" name="approved_bspermit" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button>
-                            <button class="btn btn-danger" type="submit" name="reject_bspermit" onclick="return confirm('Are you sure you want to deline this request?')"> Decline </button>
-                        </form>
-                    </td>
-                </tr>
-        <?php
-        }
-        ?>
-    </tbody>
-
-</table>
-<?php		
-	}else{
-?>
-<table class="table table-hover text-center table-bordered responsive">
-
-    <thead class="alert-info sticky-top">
-        <tr>
-            <th hidden> Resident ID </th>
-            <th class="bg text-light"> Date Requested </th>
-            <th class="bg text-light"> Tracking ID </th>
-            <th class="bg text-light"> Full Name </th>
-            <th class="bg text-light"> Business Name </th>
-            <th class="bg text-light"> Address </th>
-            <th class="bg text-light"> Business Industry </th>
-            <th class="bg text-light"> Area of Establishment </th>
-            <th class="bg text-light"> Urgent</th>
-            <th class="bg text-light"> Image</th>
-            <th class="bg text-light"> Actions</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <?php if(is_array($view)) {?>
-            <?php foreach($view as $view) {?>
-                <tr>
-                    <td hidden> <?= $view['id_resident'];?> </td> 
-                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
-                    <td> <?= $view['track_id'];?> </td> 
-                    <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
-                    <td> <?= $view['bsname'];?> </td>
-                    <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
-                    <td> <?= $view['bsindustry'];?> </td>
-                    <td> <?= $view['aoe'];?> </td>
-                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
                    
                     <td>
                         <?php if (is_null($view['bspermit_photo'])): ?>
@@ -173,6 +94,92 @@
                             </div>
                         <?php endif; ?>
                     </td>
+                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
+                    <td width="20%">    
+                        <form action="" method="post">
+                           <!-- <a href="generatePdf/generate_businesspermit.php?pdf=1&id=<?= $view['id_bspermit']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a> -->
+                            <input type="hidden" name="id_bspermit" value="<?= $view['id_bspermit'];?>">
+                            <input type="hidden" name="email" value="<?= $view['email'];?>">
+                            <!-- <button class="btn btn-primary" type="submit" name="approved_bspermit" onclick="return confirm('Are you sure you want to approved this request?')"> Approve </button> -->
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-primary btn--approve "  href="pdf_viewer_bspermit.php?pdf=1&id=<?= $view['id_bspermit'];?>">View</i></a>
+                                <!-- <button class="btn btn-danger btn--decline" type="submit" name="reject_bspermit" onclick="return confirm('Are you sure you want to deline this request?')"> Decline </button> -->
+                            </div>
+                            
+                        </form>
+                    </td>
+                </tr>
+        <?php
+        }
+        ?>
+    </tbody>
+
+</table>
+<?php		
+	}else{
+?>
+<table class="table table-hover text-center table-bordered responsive">
+
+    <thead class="alert-info sticky-top">
+        <tr>
+            <th hidden> Resident ID </th>
+            <th class="bg text-light"> Date Requested </th>
+            <th class="bg text-light"> Tracking ID </th>
+            <th class="bg text-light"> Full Name </th>
+            <th class="bg text-light"> Business Name </th>
+            <th class="bg text-light"> Address </th>
+            <th class="bg text-light"> Business Industry </th>
+            <th class="bg text-light"> Area of Establishment </th>
+            
+            <th class="bg text-light"> Image</th>
+            <th class="bg text-light"> Urgent</th>
+            <th class="bg text-light"> Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php if(is_array($view)) {?>
+            <?php foreach($view as $view) {?>
+                <tr>
+                    <td hidden> <?= $view['id_resident'];?> </td> 
+                    <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
+                    <td> <?= $view['track_id'];?> </td> 
+                    <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
+                    <td> <?= $view['bsname'];?> </td>
+                    <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
+                    <td> <?= $view['bsindustry'];?> </td>
+                    <td> <?= $view['aoe'];?> </td>
+                    
+                   
+                    <td>
+                        <?php if (is_null($view['bspermit_photo'])): ?>
+                            <span>No Image Available</span>
+                        <?php else: ?>
+                            <!-- <a class="btn btn-primary" data-toggle="modal" data-target="#imageModal<?= $view['id_bspermit'] ?>">View</a> -->
+                            <a href="#" data-toggle="modal" data-target="#imageModal<?= $view['id_bspermit'] ?>">
+                                <img src="<?= $view['bspermit_photo'] ?>" class="pending--img" alt="Modal Image">
+                            </a>
+                            <div class="modal fade" id="imageModal<?= $view['id_bspermit'] ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="imageModalTitle"><?= $view['fname'];?> <?= $view['lname'];?></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <a href="<?= $view['bspermit_photo'] ?>" target="_blank"><img src="<?= $view['bspermit_photo'] ?>" class="img-fluid" alt="Modal Image"></a>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </td>
+                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
                     <td width="20%">    
                         <form action="" method="post">
                            <!-- <a href="generatePdf/generate_businesspermit.php?pdf=1&id=<?= $view['id_bspermit']; ?>" class="btn btn-primary" target='_blank'><i class="fas fa-print p-1"></i></a> -->

@@ -53,8 +53,10 @@
             <th hidden> Resident ID </th>
             <th> Track ID </th>
             <th> Full Name </th>
-            <th> Date </th>
+            <th> Date Requested</th>
+            <th> Staff </th>
             <th> Status </th>
+            <th> Date</th>
         </tr>
     </thead>
     
@@ -65,8 +67,10 @@
                     <td hidden> <?= $view['id_resident'];?> </td> 
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
-                    <td> <?= $view['created_at'];?> </td>
+                    <td> <?= date('F d, Y', strtotime($view['date'])); ?> </td>
+                    <td> <?= $view['staff'];?> </td>
                     <td> <?= $view['form_status'];?> </td>
+                    <td> <?= date('F d, Y', strtotime($view['created_at'])); ?> </td>
                 </tr>
             <?php
                 }

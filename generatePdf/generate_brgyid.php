@@ -170,7 +170,7 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
         // Instantiate PDF class
         $pdf = new Pdf();
         // Generate PDF
-        $file_name = 'Barangay ID-' . $result["id_resident"] . '.pdf';
+        $file_name = 'Barangay ID-' . $result["lname"] . ', ' . $result["fname"] . ' ' . $result["mi"] . '.pdf';
         $pdf->loadHtml($output);
 
         // Set page margins

@@ -7,12 +7,11 @@ require_once '../pdf1.php';
 require_once '../config.php';
 // Fetch today's date
 $today = date('Y-m-d');
-$currentMonth = date('Y-m');
+$currentYear = date('Y');
 
+// Fetch data from the shop_inventory table based on the current year
+$query = "SELECT * FROM tbl_brgyid WHERE (form_status ='Approved' OR form_status ='Declined') AND DATE_FORMAT(date, '%Y') = '$currentYear'";
 
-
-// Fetch data from the shop_inventory table based on today's date
-$query = "SELECT * FROM tbl_brgyid WHERE form_status='Approved' AND DATE_FORMAT(date, '%Y-%m') = '$currentMonth'";
 $result = $conn->query($query);
 
 // Generate the report HTML
@@ -27,6 +26,7 @@ $html = '
 #customers td, #customers th {
   border: 1px solid #ddd;
   padding: 8px;
+  font-size: 12px;
 }
 
 
@@ -44,9 +44,10 @@ $html = '
 </style>
 
 
-<h1 style="text-align:center">Yearly Report</h1>
+<h1 style="text-align:center">Yearly Barangay ID Report</h1>
 <h4>Year Generated:  '.date("Y", strtotime($today)).'</h4>
-<h4>Document Type: Barangay ID</h4>
+<h4>Document Type: Residency</h4>
+
 
 ';
 $rowCount = $result->num_rows;
@@ -55,8 +56,11 @@ $rowCount = $result->num_rows;
 $html .= '<table id="customers">';
 $html .= '<tr>
 <th width="20%">Tracking ID</th>
-<th width="40%">Resident Name</th>
-<th width="40%">Pick Up Date</th>
+<th width="20%">Resident Name</th>
+<th width="20%">Date Requested</th>
+<th width="20%">Status</th>
+<th width="20%">Staff</th>
+<th width="20%">Date</th>
 </tr>';
 $totalSales = 0;
 if ($rowCount > 0) {
@@ -65,6 +69,9 @@ if ($rowCount > 0) {
     $html .= '<td>' . $row['track_id'] .  '</td>';
     $html .= '<td>' . $row['lname'] .  ', ' . $row['fname'] .  '</td>';
     $html .= '<td>' . date('F d,Y', strtotime($row['date'])) . '</td>';
+    $html .= '<td>' . $row['form_status'] .  '</td>';
+    $html .= '<td>' . $row['staff'] .  '</td>';    
+    $html .= '<td>' . date('F d,Y', strtotime($row['created_at'])) . '</td>';
     $html .= '</tr>';
   }
     // Display total sales row
@@ -79,7 +86,7 @@ $html .= '</table>';
 $pdf = new Pdf();
 // $dompdf->loadHtml(html_entity_decode($html));
 //landscape orientation
- $file_name = 'Yearly Report -'.$today.'.pdf';
+ $file_name = 'Yearly Report - Barangay ID -'.$today.'.pdf';
  $pdf->loadHtml($html);
  $pdf->setPaper('A4', 'portrait');
  $pdf->render();

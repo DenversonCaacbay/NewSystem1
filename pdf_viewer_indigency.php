@@ -4,9 +4,8 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
-//    $bmis->create_announcement();
-//    $bmis->delete_announcement();
-//    $view = $bmis->view_announcement();
+   $bmis->reject_indigency();
+   $bmis->approved_indigency();
 
     $view = $residentbmis->view_single_indigency();
 
@@ -42,17 +41,24 @@
 </head>
 
     <div class="container-fluid container--viewer p-0">
-        <div class="viewerTop d-flex justify-content-between">
-            <div class="d-flex align-items-center">
-                <a href="admn_certofindigency.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
-                <h3 class="viewer-text">Barangay Indigency PDF Viewer</h3>
-            </div>
-            <div class="d-flex">
-                <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
-                <button class="btn btn-primary me-3" id="markAsDoneButton" disabled>Mark As Done <i class="fas fa-check"></i></button>
-                <button class="btn btn-danger"> Decline <i class="fas fa-times"></i></button>
-            </div>
-            
+
+        <div class="viewerTop sticky-top p-0">
+            <form action="" method="post" class="p-2">
+                <div class="d-flex justify-content-between">
+                    <div class=" d-flex align-items-center">
+                        <a href="admn_certofindigency.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
+                        <h5 class="viewer-text">Barangay Indigency PDF Viewer</h5>
+                    </div>
+                    <div>
+                        <input type="hidden" name="id_indigency" value="<?= $view['id_indigency'];?>">
+                        <input type="hidden" name="email" value="<?= $view['email'];?>">
+                        <input type="hidden" name="staff" value="<?= $userdetails['firstname']?> <?= $userdetails['surname']?> ">
+                        <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
+                        <button class="btn btn-primary me-3" id="markAsDoneButton" type="submit" name="approved_indigency" disabled> Mark As Done </button>
+                        <button class="btn btn-danger" id="declineButton" name="reject_indigency"> Decline <i class="fas fa-times"></i></button> 
+                    </div>  
+                </div>
+            </form>
         </div>
         
         <div class="viewer-content d-flex justify-content-between">
@@ -84,7 +90,7 @@
         const reqId = urlParams.get('id');
         
         // Set the PDF URL with the req_id
-        const pdfUrl = "generatePdf/generate_brgyid.php?pdf=1&id=" + reqId;
+        const pdfUrl = "generatePdf/generate_indigency.php?pdf=1&id=" + reqId;
         
         // Open the PDF in a new tab/window for printing
         const printWindow = window.open(pdfUrl, '_blank');
@@ -108,7 +114,7 @@
         // Directly initiate download
         const link = document.createElement('a');
         link.href = pdfUrl;
-        link.download = 'barangay_id.pdf'; // Set the filename for download
+        link.download = 'barangay_indigency.pdf'; // Set the filename for download
         link.style.display = 'none'; // Hide the link
         document.body.appendChild(link);
         link.click(); // Simulate a click on the link
@@ -119,9 +125,9 @@
         document.getElementById('printButton').disabled = true;
     });
 
-    document.getElementById('markAsDoneButton').addEventListener('click', function() {
-        // Perform actions when "Mark As Done" button is clicked
-        alert('Mark As Done button clicked.');
-    });
+    // document.getElementById('markAsDoneButton').addEventListener('click', function() {
+    //     // Perform actions when "Mark As Done" button is clicked
+    //     alert('Mark As Done button clicked.');
+    // });
 </script>
     

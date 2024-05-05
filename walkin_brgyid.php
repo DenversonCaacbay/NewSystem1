@@ -7,7 +7,7 @@
     $bmis->validate_admin();
     $bmis->reject_rescert();
     $bmis->approved_rescert();
-    $bmis->create_brgyid();
+    $bmis->create_brgyid_walkin();
     // $view = $bmis->view_certofres();
     // $id_resident = $_GET['id_resident'];
     // $resident = $residentbmis->get_single_certofres($id_resident);
@@ -24,7 +24,7 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
-
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     .container--residency{
         height: 500px;
@@ -50,11 +50,11 @@
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h4 class="text-center mb-0">Walk'in Request</h4>
+        <h4 class="text-center mb-0">Walk'in Request Form</h4>
         <a href="admn_brgyid.php" class="btn btn-primary">Back</a>
     </div>
 
@@ -62,29 +62,20 @@
         <div class="card p-3">
             <form method="post" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-4 mt-3">
+                    <div class="col-md-4">
                         <label for="formGroupExampleInput" class="form-label">First Name</label>
                         <input type="text" name="fname" class="form-control" id="formGroupExampleInput" required />
                     </div>
-                    <div class="col-md-4 mt-3">
+                    <div class="col-md-4">
                         <label for="formGroupExampleInput" class="form-label">Middle Name</label>
                         <input type="text" name="mi" class="form-control" id="formGroupExampleInput" placeholder="" required />
                     </div>
-                    <div class="col-md-4 mt-3">
+                    <div class="col-md-4">
                         <label for="formGroupExampleInput" class="form-label">Last Name</label>
                         <input type="text" name="lname" class="form-control" id="formGroupExampleInput" placeholder="" required />
                     </div>
 
-                    <!-- <div class="col-md-6 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Age</label>
-                        <input type="text" name="age" class="form-control" id="formGroupExampleInput" placeholder="">
-                    </div>
                     <div class="col-md-6 mt-3">
-                        <label for="formGroupExampleInput" class="form-label">Nationality</label>
-                        <input type="text" name="nationality" class="form-control" id="formGroupExampleInput" placeholder="">
-                    </div> -->
-
-                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="Date"class="mtop">Date of Birth </label>
                             <input name="bdate" id="myDateInput" onchange="checkBdate('myDateInput')" type="date" class="form-control" required />
@@ -93,7 +84,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 mt-3">
                         <div class="form-group">
                             <label class="mtop">Birth Place </label>
                             <input type="text" class="form-control" name="bplace"  
@@ -131,13 +122,16 @@
                             <option>Certify that you are living in a certain barangay</option>
                             <option value="Other">Other</option>
                         </select>
+                        <div class="form-group" id="otherDiv" style="display: none">
+                            <input type="text" class="form-control mt-3" name="otherInput" id='otherInput' placeholder="Enter Other" style="display: none" />
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
                     </div>
 
-                    <hr>
-
-                    <h6>In case of emergency :</h6>
-
-                    <hr>
+                    <div style="width: 100%; height:3px; background:#309464;margin-top:20px ;border-radius: 5px"></div>
+                    <h6 class="mt-3 fw-bold">In Case of Emergency :</h6>
+                    <div style="width: 170px; height:3px; background:#309464;margin: 0px 10px 10px 10px;border-radius: 5px"></div>
 
                     <div class="row">
 
@@ -165,13 +159,8 @@
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
-
-
                     </div>
-
                     <div class="row">
-
-                        
                         <div class="col-md-12">
                             <div class="form-group">            
                                 <label for="cno">Contact Number:</label>
@@ -180,9 +169,7 @@
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
-
                     </div>
-
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -192,7 +179,6 @@
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
-
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label> Street: </label>
@@ -201,7 +187,6 @@
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
-
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label> Barangay: </label>
@@ -210,7 +195,6 @@
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
-
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label> Municipality: </label>
@@ -219,14 +203,17 @@
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
-
-                    <div class="form-group" id="otherDiv" style="display: none">
-                        <input type="text" class="form-control mt-3" name="otherInput" id='otherInput' placeholder="Enter Other" style="display: none" />
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
+                        <div class="col-md-6 mt-3 d-none">
+                            <label for="formGroupExampleInput" class="form-label">Date: </label>
+                            <input type="date" name="date" class="form-control" id="formGroupExampleInput" value="<?php echo date('Y-m-d'); ?>">
+                        </div>
+                        <div class="col-md-6 mt-3 d-none">
+                            <label for="formGroupExampleInput" class="form-label">Urgent</label>
+                            <input type="text" name="is_urgent" class="form-control" value="Walk In" id="formGroupExampleInput" placeholder="">
+                        </div>
+                    
                     <div class="col-md-12">
-                        <button name="create_brgyid" type="submit" class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
+                        <button name="create_brgyid_walkin" type="submit" class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
                     </div>
                 </div>
             </form>

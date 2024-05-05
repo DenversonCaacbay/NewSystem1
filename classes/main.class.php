@@ -1236,7 +1236,82 @@ class BMISClass {
     
             $stmt->execute([$id_resident, $lname, $fname, $mi,  $age, $nationality, $houseno,  $street, $brgy, $municipal, $date,$date_live, $purpose, $target_file, $track_id]);
     
-            $message2 = "Application Applied, you will receive our text message for further details";
+            // $message2 = "Application Applied, you will receive our text message for further details";
+            $message2 = "Application Applied, Proceed to Printing";
+            echo "<script type='text/javascript'>alert('$message2');</script>";
+            header("refresh: 0");
+        }
+    }
+
+    public function create_certofres_walkin() {
+        if(isset($_POST['create_certofres_walkin'])) {
+            $id_resident = $_POST['id_resident'] ?: NULL;
+            $lname = $_POST['lname'];
+            $fname = $_POST['fname'];
+            $mi = $_POST['mi'];
+            $age = $_POST['age'];
+            $nationality = $_POST['nationality']; 
+            $houseno = $_POST['houseno'];
+            $street = $_POST['street'];
+            $brgy = $_POST['brgy'];
+            $municipal = $_POST['municipal'];
+            $date = $_POST['date'];
+            $date_live = $_POST['date_live'];
+            $is_urgent = $_POST['is_urgent'];
+            $track_id = uniqid();
+            
+            // purpose checker
+            if($_POST['purpose'] == "Other"){
+                $purpose = $_POST['otherInput'];
+            } else {
+                $purpose = $_POST['purpose'];
+            }
+    
+            // Set the target directory
+            $target_dir = "uploads/certofres/";
+    
+            // Check if the file was uploaded
+            if(isset($_FILES['certofres_photo'])) {
+                $uploaded_file = $_FILES['certofres_photo'];
+    
+                // Check if the file is empty or not
+                if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
+                    $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
+    
+                    // Check if the target directory exists, and create it if not
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0755, true);
+                    }
+    
+                    // Generate a unique filename based on the current timestamp
+                    $target_file = $target_dir . time() . '.' . $file_extension;
+    
+                    // Move the uploaded file to the target directory
+                    if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+                        // Image uploaded successfully, proceed with database insertion
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                        return; // Stop execution if file upload fails
+                    }
+                } else {
+                    // No file uploaded, set the target file to NULL or some default value
+                    $target_file = NULL; // Or set to a default image path if you have one
+                }
+            } else {
+                // No file input field found, set the target file to NULL or some default value
+                $target_file = NULL; // Or set to a default image path if you have one
+            }
+    
+            // Insert data into the database, including the $target_file value
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("INSERT INTO tbl_rescert (`id_resident`, `lname`, `fname`, `mi`,
+             `age`,`nationality`, `houseno`, `street`,`brgy`, `municipal`, `date`,`date_live`,`purpose`, `certofres_photo`, `track_id`, `is_urgent`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+            $stmt->execute([$id_resident, $lname, $fname, $mi,  $age, $nationality, $houseno,  $street, $brgy, $municipal, $date,$date_live, $purpose, $target_file, $track_id, $is_urgent]);
+    
+            // $message2 = "Application Applied, you will receive our text message for further details";
+            $message2 = "Application Applied, Proceed to Printing";
             echo "<script type='text/javascript'>alert('$message2');</script>";
             header("refresh: 0");
         }
@@ -1254,10 +1329,9 @@ class BMISClass {
     // }
 
     // New with Pagination
-    public function view_certofres($limit = 5, $offset = 0){
+    public function view_certofres($limit = 5, $offset = 0) {
         $connection = $this->openConn();
-        $stmt = $connection->prepare("
-        SELECT * FROM tbl_rescert WHERE form_status = 'Pending' LIMIT :limit OFFSET :offset");
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
@@ -1270,30 +1344,29 @@ class BMISClass {
         return [$view, $moreRecords];
     }
     
-    // public function view_certofres_done(){
-    //     $connection = $this->openConn();
-    //     $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status ='Approved' OR form_status='Declined'");
-    //     $stmt->execute();
-    //     $view = $stmt->fetchAll();
-    //     return $view;
-    // }
+    public function view_certofres_done(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status ='Approved' OR form_status='Declined' ORDER BY date DESC ");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
 
     // Pending
-    public function view_certofres_done($limit = 5, $offset = 0){
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("
-        SELECT * FROM tbl_rescert WHERE form_status ='Approved' OR form_status='Declined' LIMIT :limit OFFSET :offset");
-        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
-        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-        $stmt->execute();
-        $view = $stmt->fetchAll();
+    // public function view_certofres_done($limit = 5, $offset = 0){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("
+    //     SELECT * FROM tbl_rescert WHERE form_status ='Approved' OR form_status='Declined' LIMIT :limit OFFSET :offset");
+    //     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    //     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
     
-        // Fetch one extra record beyond the limit to check if there are more records
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        $moreRecords = $stmt->rowCount() > 0;
+    //     $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $moreRecords = $stmt->rowCount() > 0;
     
-        return [$view, $moreRecords];
-    }
+    //     return [$view, $moreRecords];
+    // }
  
 
     public function reject_rescert() {
@@ -1335,39 +1408,51 @@ class BMISClass {
     public function approved_rescert() {
         $id_rescert = $_POST['id_rescert'];
         $email = $_POST['email'];
+        $staff = $_POST['staff'];
     
         if (isset($_POST['approved_rescert'])) {
             $connection = $this->openConn();
-            $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Approved' WHERE id_rescert = ?");
-            $stmt->execute([$id_rescert]);
+            $currentTimestamp = date('Y-m-d H:i:s');
+            $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Approved', staff = ?, created_at = ? WHERE id_rescert = ?");
+            $stmt->execute([$staff, $currentTimestamp, $id_rescert]);
     
-            // Send email using PHPMailer
-            try {
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
-                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
-                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
-                $mail->Port = 587; // Change this to the appropriate port
+            // Send email using PHPMailer if email is not null
+            if (!empty($email)) {
+                try {
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                    $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                    $mail->Port = 587; // Change this to the appropriate port
     
-                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
-                $mail->addAddress($email);
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                    $mail->addAddress($email);
     
-                $mail->isHTML(true);
-                $mail->Subject = 'Approval Notification for Residency';
-                $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Approval Notification for Residency';
+                    $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
     
-                $mail->send();
-                // echo 'Email has been sent';
-            } catch (Exception $e) {
-                echo "Mailer Error: {$mail->ErrorInfo}";
+                    $mail->send();
+                    
+                    // Alert using JavaScript
+                    echo "<script>alert('Record is Marked as Done, Print Another Record'); window.location.href = 'admn_certofres.php';</script>";
+                } catch (Exception $e) {
+                    echo "Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                // If email is null, just redirect without sending an email
+                echo "<script>alert('Record is Marked as Done, Print Another Record'); window.location.href = 'admn_certofres.php';</script>";
             }
-    
-            header("Refresh:0");
         }
     }
+    
+    
+    
+    
+    
     
 
      //------------------------------------------ CERT OF INIDIGENCY CRUD -----------------------------------------------
@@ -1443,6 +1528,81 @@ class BMISClass {
             header("refresh: 0");
         }
     }
+
+    // For Walkin
+    public function create_certofindigency_walkin() {
+        if(isset($_POST['create_certofindigency_walkin'])) {
+            $id_resident = $_POST['id_resident'];
+            $lname = $_POST['lname'];
+            $fname = $_POST['fname'];
+            $mi = $_POST['mi'];
+            $nationality = $_POST['nationality']; 
+            $houseno = $_POST['houseno'];
+            $street = $_POST['street'];
+            $brgy = $_POST['brgy'];
+            $municipal = $_POST['municipal'];
+            $track_id = uniqid();
+            $is_urgent = $_POST['is_urgent'];
+
+
+            // purpose checker
+            if($_POST['purpose'] == "Other"){
+                $purpose = $_POST['otherInput'];
+            }
+            else{
+                $purpose = $_POST['purpose'];
+            }
+    
+            $date = $_POST['date'] ?: date("Y-m-d");
+    
+            // Check if a file was uploaded
+            if(isset($_FILES['certofindigency_photo'])) {
+                $uploaded_file = $_FILES['certofindigency_photo'];
+    
+                // Set the target directory
+                $target_dir = "uploads/certofindigency/";
+    
+                // Check if the file is empty or not
+                if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
+                    $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
+    
+                    // Check if the target directory exists, and create it if not
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0755, true);
+                    }
+    
+                    // Generate a unique filename based on the current timestamp
+                    $target_file = $target_dir . time() . '.' . $file_extension;
+    
+                    // Move the uploaded file to the target directory
+                    if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+                        // Your database insertion code goes here
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                        return; // Stop execution if file upload fails
+                    }
+                } else {
+                    // No file uploaded, set the target file to NULL or some default value
+                    $target_file = NULL; // Or set to a default image path if you have one
+                }
+            } else {
+                // No file input field found, set the target file to NULL or some default value
+                $target_file = NULL; // Or set to a default image path if you have one
+            }
+    
+            // Insert data into the database, including the $target_file value
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("INSERT INTO tbl_indigency (`id_resident`, `lname`, `fname`, `mi`,
+             `nationality`, `houseno`, `street`,`brgy`, `municipal`,`purpose`, `date`, `certofindigency_photo`, `track_id`, `is_urgent`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+            $stmt->execute([$id_resident, $lname, $fname, $mi, $nationality, $houseno, $street, $brgy, $municipal, $purpose, $date, $target_file, $track_id, $is_urgent]);
+    
+            $message2 = "Application Applied, Proceed to Printing";
+            echo "<script type='text/javascript'>alert('$message2');</script>";
+            header("refresh: 0");
+        }
+    }
     
 
     
@@ -1466,7 +1626,7 @@ class BMISClass {
     public function view_certofindigency($limit = 5, $offset = 0){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-        SELECT * FROM tbl_indigency WHERE form_status = 'Pending' LIMIT :limit OFFSET :offset");
+        SELECT * FROM tbl_indigency WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
@@ -1579,40 +1739,84 @@ class BMISClass {
         }
     }
 
+    // public function approved_indigency() {
+    //     $id_indigency = $_POST['id_indigency'];
+    //     $email = $_POST['email'];
+    
+    //     if (isset($_POST['approved_indigency'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Approved' WHERE id_indigency = ?");
+    //         $stmt->execute([$id_indigency]);
+    
+    //         // Send email using PHPMailer
+    //         try {
+    //             $mail = new PHPMailer(true);
+    //             $mail->isSMTP();
+    //             $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+    //             $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+    //             $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+    //             $mail->Port = 587; // Change this to the appropriate port
+    
+    //             $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+    //             $mail->addAddress($email);
+    
+    //             $mail->isHTML(true);
+    //             $mail->Subject = 'Approval Notification for Indigency';
+    //             $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+    
+    //             $mail->send();
+    //             // echo 'Email has been sent';
+    //         } catch (Exception $e) {
+    //             echo "Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    
+    //         header("Refresh:0");
+    //     }
+    // }
+
     public function approved_indigency() {
         $id_indigency = $_POST['id_indigency'];
         $email = $_POST['email'];
+        $staff = $_POST['staff'];
     
         if (isset($_POST['approved_indigency'])) {
             $connection = $this->openConn();
-            $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Approved' WHERE id_indigency = ?");
-            $stmt->execute([$id_indigency]);
+            $currentTimestamp = date('Y-m-d H:i:s');
+            $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Approved', staff= ?, created_at=? WHERE id_indigency = ?");
+            $stmt->execute([$staff, $currentTimestamp,  $id_indigency]);
     
-            // Send email using PHPMailer
-            try {
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
-                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
-                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
-                $mail->Port = 587; // Change this to the appropriate port
+            // Send email using PHPMailer if email is not null
+            if (!empty($email)) {
+                try {
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                    $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                    $mail->Port = 587; // Change this to the appropriate port
     
-                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
-                $mail->addAddress($email);
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                    $mail->addAddress($email);
     
-                $mail->isHTML(true);
-                $mail->Subject = 'Approval Notification for Indigency';
-                $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Approval Notification for Barangay Indigency';
+                    $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
     
-                $mail->send();
-                // echo 'Email has been sent';
-            } catch (Exception $e) {
-                echo "Mailer Error: {$mail->ErrorInfo}";
+                    $mail->send();
+                    
+                    // Alert using JavaScript
+                    echo "<script>alert('Record is Marked as Done, Print Another Record'); window.location.href = 'admn_certofindigency.php';</script>";
+                } catch (Exception $e) {
+                    echo "Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                // If email is null, just redirect without sending an email
+                echo "<script>alert('Record is Marked as Done, Print Another Record'); window.location.href = 'admn_certofindigency.php';</script>";
             }
-    
-            header("Refresh:0");
         }
     }
 
@@ -1691,6 +1895,80 @@ class BMISClass {
             header("refresh: 0");
         }
     }
+    // For Walkins
+    public function create_brgyclearance_walkin() {
+        if(isset($_POST['create_brgyclearance_walkin'])) {
+            $id_resident = $_POST['id_resident'];
+            $lname = $_POST['lname'];
+            $fname = $_POST['fname'];
+            $mi = $_POST['mi'];
+            $bdate = $_POST['bdate'];
+            $pickup_date = $_POST['date'] ?: date("Y-m-d");
+            $track_id = uniqid();
+            $is_urgent = $_POST['is_urgent'];
+            
+            // purpose checker
+            if($_POST['purpose'] == "Other"){
+                $purpose = $_POST['otherInput'];
+            }
+            else{
+                $purpose = $_POST['purpose'];
+            }
+            
+            $houseno = $_POST['houseno'];
+            $street = $_POST['street'];
+            $brgy = $_POST['brgy'];
+            $municipal = $_POST['municipal'];
+            $status = $_POST['status'];
+    
+            // Check if a file was uploaded
+            if(isset($_FILES['brgyclearance_photo'])) {
+                $uploaded_file = $_FILES['brgyclearance_photo'];
+    
+                // Set the target directory
+                $target_dir = "uploads/brgyclearance/";
+    
+                // Check if the file is empty or not
+                if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
+                    $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
+    
+                    // Check if the target directory exists, and create it if not
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0755, true);
+                    }
+    
+                    // Generate a unique filename based on the current timestamp
+                    $target_file = $target_dir . time() . '.' . $file_extension;
+    
+                    // Move the uploaded file to the target directory
+                    if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+                        // Your database insertion code goes here
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                        return; // Stop execution if file upload fails
+                    }
+                } else {
+                    // No file uploaded, set the target file to NULL or some default value
+                    $target_file = NULL; // Or set to a default image path if you have one
+                }
+            } else {
+                // No file input field found, set the target file to NULL or some default value
+                $target_file = NULL; // Or set to a default image path if you have one
+            }
+    
+            // Insert data into the database, including the $target_file value
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("INSERT INTO tbl_clearance (`id_resident`, `lname`, `fname`, `mi`,
+            `purpose`, `houseno`, `street`,`brgy`, `municipal`, `status`, `brgyclearance_photo`, `track_id`, `date`, `bdate`, `is_urgent`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+            $stmt->execute([$id_resident, $lname, $fname, $mi, $purpose, $houseno, $street, $brgy, $municipal, $status, $target_file, $track_id, $pickup_date, $bdate, $is_urgent]);
+    
+            $message2 = "Application Applied, Proceed to Printing";
+            echo "<script type='text/javascript'>alert('$message2');</script>";
+            header("refresh: 0");
+        }
+    }
     
     
 
@@ -1731,7 +2009,7 @@ class BMISClass {
     public function view_clearance($limit = 5, $offset = 0){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-        SELECT * FROM tbl_clearance WHERE form_status = 'Pending' LIMIT :limit OFFSET :offset");
+        SELECT * FROM tbl_clearance WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
@@ -1802,40 +2080,83 @@ class BMISClass {
         }
     }
 
+    // public function approved_clearance() {
+    //     $id_clearance = $_POST['id_clearance'];
+    //     $email = $_POST['email'];
+    
+    //     if (isset($_POST['approved_clearance'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Approved' WHERE id_clearance = ?");
+    //         $stmt->execute([$id_clearance]);
+    
+    //         // Send email using PHPMailer
+    //         try {
+    //             $mail = new PHPMailer(true);
+    //             $mail->isSMTP();
+    //             $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+    //             $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+    //             $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+    //             $mail->Port = 587; // Change this to the appropriate port
+    
+    //             $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+    //             $mail->addAddress($email);
+    
+    //             $mail->isHTML(true);
+    //             $mail->Subject = 'Approval Notification for Barangay Clearance';
+    //             $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+    
+    //             $mail->send();
+    //             // echo 'Email has been sent';
+    //         } catch (Exception $e) {
+    //             echo "Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    
+    //         header("Refresh:0");
+    //     }
+    // }
     public function approved_clearance() {
         $id_clearance = $_POST['id_clearance'];
         $email = $_POST['email'];
+        $staff = $_POST['staff'];
     
         if (isset($_POST['approved_clearance'])) {
             $connection = $this->openConn();
-            $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Approved' WHERE id_clearance = ?");
-            $stmt->execute([$id_clearance]);
+            $currentTimestamp = date('Y-m-d H:i:s');
+            $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Approved', staff=?, created_at = ? WHERE id_clearance = ?");
+            $stmt->execute([ $staff, $currentTimestamp, $id_clearance]);
     
-            // Send email using PHPMailer
-            try {
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
-                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
-                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
-                $mail->Port = 587; // Change this to the appropriate port
+            // Send email using PHPMailer if email is not null
+            if (!empty($email)) {
+                try {
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                    $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                    $mail->Port = 587; // Change this to the appropriate port
     
-                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
-                $mail->addAddress($email);
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                    $mail->addAddress($email);
     
-                $mail->isHTML(true);
-                $mail->Subject = 'Approval Notification for Barangay Clearance';
-                $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Approval Notification for Barangay Clearance';
+                    $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
     
-                $mail->send();
-                // echo 'Email has been sent';
-            } catch (Exception $e) {
-                echo "Mailer Error: {$mail->ErrorInfo}";
+                    $mail->send();
+                    
+                    // Alert using JavaScript
+                    echo "<script>alert('Record is Marked as Done, Print Another Record'); window.location.href = 'admn_brgyclearance.php';</script>";
+                } catch (Exception $e) {
+                    echo "Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                // If email is null, just redirect without sending an email
+                echo "<script>alert('Record is Marked as Done, Print Another Record'); window.location.href = 'admn_brgyclearance.php';</script>";
             }
-    
-            header("Refresh:0");
         }
     }
 
@@ -1968,6 +2289,81 @@ class BMISClass {
             header("refresh: 0");
         }
     }
+// For Walkin
+public function create_bspermit_walkin() {
+    if(isset($_POST['create_bspermit_walkin'])) {
+        $id_resident = $_POST['id_resident'];
+        $lname = $_POST['lname'];
+        $fname = $_POST['fname'];
+        $mi = $_POST['mi'];
+        $bsname = $_POST['bsname']; 
+        $houseno = $_POST['houseno'];
+        $street = $_POST['street'];
+        $brgy = $_POST['brgy'];
+        $municipal = $_POST['municipal'];
+        $bsindustry = $_POST['bsindustry'];
+        $aoe = $_POST['aoe'];
+        $pickup_date = $_POST['date'] ?: date("Y-m-d");
+        $track_id = uniqid();
+        $is_urgent = $_POST['is_urgent'];
+
+        // Check if a file was uploaded
+        if(isset($_FILES['bspermit_photo'])) {
+            $uploaded_file = $_FILES['bspermit_photo'];
+
+            // Set the target directory
+            $target_dir = "uploads/bspermit/";
+
+            // Check if the file is empty or not
+            if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
+                $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
+
+                // Check if the target directory exists, and create it if not
+                if (!is_dir($target_dir)) {
+                    mkdir($target_dir, 0755, true);
+                }
+
+                // Generate a unique filename based on the current timestamp
+                $target_file = $target_dir . time() . '.' . $file_extension;
+
+                // Move the uploaded file to the target directory
+                if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+                    // File uploaded successfully
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                    return; // Stop execution if file upload fails
+                }
+            } else {
+                // No file uploaded, set the target file to NULL or some default value
+                $target_file = NULL; // Or set to a default image path if you have one
+            }
+        } else {
+            // No file input field found, set the target file to NULL or some default value
+            $target_file = NULL; // Or set to a default image path if you have one
+        }
+
+        // Insert data into the database, including the $target_file value
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("
+            INSERT INTO tbl_bspermit (
+                `id_resident`, `lname`, `fname`, `mi`, `bsname`, `houseno`, `street`, `brgy`, 
+                `municipal`, `bsindustry`, `aoe`, `bspermit_photo`, `track_id`, `date`, `is_urgent`
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
+
+        // Execute the query with the correct number of parameters
+        $stmt->execute([
+            $id_resident, $lname, $fname, $mi, $bsname, $houseno, $street, $brgy, 
+            $municipal, $bsindustry, $aoe, $target_file, $track_id, $pickup_date, $is_urgent
+        ]);
+
+        // Display success message
+        $message2 = "Application Applied, Proceed to Printing";
+        echo "<script type='text/javascript'>alert('$message2');</script>";
+        header("refresh: 0");
+    }
+}
+
     
     
 
@@ -2009,7 +2405,7 @@ class BMISClass {
     public function view_bspermit($limit = 5, $offset = 0){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-        SELECT * FROM tbl_bspermit WHERE form_status = 'Pending' LIMIT :limit OFFSET :offset");
+        SELECT * FROM tbl_bspermit WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
@@ -2021,6 +2417,8 @@ class BMISClass {
     
         return [$view, $moreRecords];
     }
+
+    
 
     public function view_bspermit_done(){
         $connection = $this->openConn();
@@ -2138,43 +2536,85 @@ class BMISClass {
             header("Refresh:0");
         }
     }
-
     public function approved_bspermit() {
         $id_bspermit = $_POST['id_bspermit'];
         $email = $_POST['email'];
+        $staff = $_POST['staff'];
     
         if (isset($_POST['approved_bspermit'])) {
             $connection = $this->openConn();
-            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Approved' WHERE id_bspermit = ?");
-            $stmt->execute([$id_bspermit]);
+            $currentTimestamp = date('Y-m-d H:i:s');
+            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Approved', staff = ?, create_at=? WHERE id_bspermit = ?");
+            $stmt->execute([$staff, $currentTimestamp, $id_bspermit]);
     
-            // Send email using PHPMailer
-            try {
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
-                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
-                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
-                $mail->Port = 587; // Change this to the appropriate port
+            // Send email using PHPMailer if email is not null
+            if (!empty($email)) {
+                try {
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                    $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                    $mail->Port = 587; // Change this to the appropriate port
     
-                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
-                $mail->addAddress($email);
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                    $mail->addAddress($email);
     
-                $mail->isHTML(true);
-                $mail->Subject = 'Approval Notification for Business Recommendation';
-                $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Approval Notification for Business Recommendation';
+                    $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
     
-                $mail->send();
-                // echo 'Email has been sent';
-            } catch (Exception $e) {
-                echo "Mailer Error: {$mail->ErrorInfo}";
+                    $mail->send();
+                    
+                    // Alert using JavaScript
+                    echo "<script>alert('Record is Marked as Done, Print Another Record'); window.location.href = 'admn_bspermit.php';</script>";
+                } catch (Exception $e) {
+                    echo "Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                // If email is null, just redirect without sending an email
+                echo "<script>alert('Record is Marked as Done, Print Another Record'); window.location.href = 'admn_bspermit.php';</script>";
             }
-    
-            header("Refresh:0");
         }
     }
+    // public function approved_bspermit() {
+    //     $id_bspermit = $_POST['id_bspermit'];
+    //     $email = $_POST['email'];
+    
+    //     if (isset($_POST['approved_bspermit'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Approved' WHERE id_bspermit = ?");
+    //         $stmt->execute([$id_bspermit]);
+    
+    //         // Send email using PHPMailer
+    //         try {
+    //             $mail = new PHPMailer(true);
+    //             $mail->isSMTP();
+    //             $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+    //             $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+    //             $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+    //             $mail->Port = 587; // Change this to the appropriate port
+    
+    //             $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+    //             $mail->addAddress($email);
+    
+    //             $mail->isHTML(true);
+    //             $mail->Subject = 'Approval Notification for Business Recommendation';
+    //             $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+    
+    //             $mail->send();
+    //             // echo 'Email has been sent';
+    //         } catch (Exception $e) {
+    //             echo "Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    
+    //         header("Refresh:0");
+    //     }
+    // }
 
 
 
@@ -2231,6 +2671,62 @@ class BMISClass {
             echo "<script type='text/javascript'>alert('$message2');</script>";
             header("refresh: 0");
         }  
+    }
+
+    // For Walkin
+    public function create_brgyid_walkin() {
+        if(isset($_POST['create_brgyid_walkin'])) {
+            $id_resident = $_POST['id_resident'] ?: NULL;
+            $lname = ucfirst(strtolower($_POST['lname']));
+            $fname = ucfirst(strtolower($_POST['fname']));
+            $mi = ucfirst(strtolower($_POST['mi']));
+            $houseno = $_POST['houseno'];
+            $street = $_POST['street'];
+            $brgy = ucfirst(strtolower($_POST['brgy']));
+            $municipal = ucfirst(strtolower($_POST['municipal']));
+            // $civil_status = $_POST['civil_status']);
+            $bplace = ucfirst(strtolower($_POST['bplace']));
+            $bdate = $_POST['bdate'];
+            $is_urgent = $_POST['is_urgent'];
+            $pickup_date = $_POST['date'] ?: date("Y-m-d");
+            $track_id = uniqid();
+            
+            // Process resident photo
+            if(isset($_FILES['res_photo']) && $_FILES['res_photo']['error'] !== UPLOAD_ERR_NO_FILE) {
+                $res_photo = $_FILES['res_photo'];
+                $file_extension = pathinfo($res_photo['name'], PATHINFO_EXTENSION);
+    
+                $target_dir_res = "uploads/brgyid/";
+                $target_file_res = $target_dir_res . time() . '.' . $file_extension;
+                move_uploaded_file($res_photo['tmp_name'], $target_file_res);
+            } else {
+                // If no file uploaded, set default value for the photo path
+                $target_file_res = NULL; // Or set to a default image path if you have one
+            }
+            
+            $inc_lname = ucfirst(strtolower($_POST['inc_lname']));
+            $inc_fname = ucfirst(strtolower($_POST['inc_fname']));
+            $inc_mi = ucfirst(strtolower($_POST['inc_mi']));;
+            $inc_contact = $_POST['inc_contact'];
+            $inc_houseno = $_POST['inc_houseno'];
+            $inc_street = $_POST['inc_street'];
+            $inc_brgy = $_POST['inc_brgy'];
+            $inc_municipal = $_POST['inc_municipal'];
+    
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("INSERT INTO tbl_brgyid (`id_resident`, `lname`, `fname`, `mi`,
+            `houseno`, `street`, `brgy`, `municipal`, `bplace`, `bdate`, `res_photo`, `inc_lname`,
+            `inc_fname`, `inc_mi`, `inc_contact`, `inc_houseno`, `inc_street`, `inc_brgy`, `track_id`, `date`,`inc_municipal`, `is_urgent`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+            $stmt->execute([$id_resident, $lname, $fname, $mi, $houseno, $street, $brgy, $municipal, 
+                $bplace, $bdate, $target_file_res, $inc_lname, $inc_fname, $inc_mi, $inc_contact, 
+                $inc_houseno, $inc_street, $inc_brgy, $track_id, $pickup_date, $inc_municipal, $is_urgent]);
+    
+            $message2 = "Application Applied, Proceed to Printing";
+            echo "<script type='text/javascript'>alert('$message2');</script>";
+            header("refresh: 0");
+        }  
     }    
     
 
@@ -2269,10 +2765,24 @@ class BMISClass {
     //     $view = $stmt->fetchAll();
     //     return $view;
     // }
-    public function view_brgyid($limit = 5, $offset = 0){
+    // public function view_brgyid($limit = 5, $offset = 0){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
+    //     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    //     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    
+    //     // Fetch one extra record beyond the limit to check if there are more records
+    //     $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $moreRecords = $stmt->rowCount() > 0;
+    
+    //     return [$view, $moreRecords];
+    // }
+
+    public function view_brgyid($limit = 5, $offset = 0) {
         $connection = $this->openConn();
-        $stmt = $connection->prepare("
-        SELECT * FROM tbl_brgyid WHERE form_status = 'Pending' LIMIT :limit OFFSET :offset");
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
@@ -2289,7 +2799,7 @@ class BMISClass {
 
     public function view_brgyid_done(){
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status ='Approved' OR form_status='Declined'");
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status ='Approved' OR form_status='Declined' ORDER BY date DESC");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -2367,40 +2877,83 @@ class BMISClass {
         }
     }
 
+    // public function approved_brgyid() {
+    //     $id_brgyid = $_POST['id_brgyid'];
+    //     $email = $_POST['email'];
+    
+    //     if (isset($_POST['approved_brgyid'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Approved' WHERE id_brgyid = ?");
+    //         $stmt->execute([$id_brgyid]);
+    
+    //         // Send email using PHPMailer
+    //         try {
+    //             $mail = new PHPMailer(true);
+    //             $mail->isSMTP();
+    //             $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+    //             $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+    //             $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+    //             $mail->Port = 587; // Change this to the appropriate port
+    
+    //             $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+    //             $mail->addAddress($email);
+    
+    //             $mail->isHTML(true);
+    //             $mail->Subject = 'Approval Notification for Barangay ID';
+    //             $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+    
+    //             $mail->send();
+    //             // echo 'Email has been sent';
+    //         } catch (Exception $e) {
+    //             echo "Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    
+    //         header("Refresh:0");
+    //     }
+    // }
     public function approved_brgyid() {
         $id_brgyid = $_POST['id_brgyid'];
         $email = $_POST['email'];
+        $staff = $_POST['staff'];
     
         if (isset($_POST['approved_brgyid'])) {
             $connection = $this->openConn();
-            $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Approved' WHERE id_brgyid = ?");
-            $stmt->execute([$id_brgyid]);
+            $currentTimestamp = date('Y-m-d H:i:s');
+            $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Approved', staff = ?, created_at = ? WHERE id_brgyid = ?");
+            $stmt->execute([$staff, $currentTimestamp, $id_brgyid]);
     
-            // Send email using PHPMailer
-            try {
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
-                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
-                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
-                $mail->Port = 587; // Change this to the appropriate port
+            // Send email using PHPMailer if email is not null
+            if (!empty($email)) {
+                try {
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                    $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                    $mail->Port = 587; // Change this to the appropriate port
     
-                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
-                $mail->addAddress($email);
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                    $mail->addAddress($email);
     
-                $mail->isHTML(true);
-                $mail->Subject = 'Approval Notification for Barangay ID';
-                $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Approval Notification for Barangay ID';
+                    $mail->Body    = 'Your request has been Approved and Printed, You can now pick up the Requested Document<br>Thank you.';
     
-                $mail->send();
-                // echo 'Email has been sent';
-            } catch (Exception $e) {
-                echo "Mailer Error: {$mail->ErrorInfo}";
+                    $mail->send();
+                    
+                    // Alert using JavaScript
+                    echo "<script>alert('Record is Marked as Done, Print Another Record'); window.location.href = 'admn_brgyid.php';</script>";
+                } catch (Exception $e) {
+                    echo "Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                // If email is null, just redirect without sending an email
+                echo "<script>alert('Record is Marked as Done, Print Another Record'); window.location.href = 'admn_brgyid.php';</script>";
             }
-    
-            header("Refresh:0");
         }
     }
 

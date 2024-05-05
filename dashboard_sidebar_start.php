@@ -83,20 +83,24 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <?php if($userdetails['position'] == 'Administrator' || $userdetails['position'] == 'Kagawad'): ?>
             <li class="nav-item">
                 <a class="nav-link" href="admn_feedbacks.php">
                     <i class="fas fa-fw fa-comment"></i>
                     <span>Feedbacks</span></a>
             </li>
+            <?php endif; ?>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 User Management
             </div>
+            <?php if($userdetails['position'] == 'Administrator'): ?>
             <li class="nav-item">
                 <a class="nav-link" href="admn_staff_crud.php">
                     <i class="fas fa-user-tie"></i>
                     <span>Barangay Staffs</span></a>
             </li>
+            <?php endif; ?>
             <li class="nav-item">
                 <a class="nav-link" href="admn_resident_crud.php" style="display: flex; align-items: center;">
                     <i class="fas fa-users" style="margin-right: 5px;"></i>
@@ -163,14 +167,13 @@
                     <?php endif; ?></a>
             </li>
             <hr class="sidebar-divider d-none">
+            <?php if($userdetails['position'] == 'Administrator'): ?>
             <li class="nav-item">
                 <a class="nav-link" href="admn_request_archives.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Archives</span></a>
             </li>
-            <!-- <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div> -->
+            <?php endif; ?>
 
         </ul>
         <div id="content-wrapper" class="d-flex flex-column">

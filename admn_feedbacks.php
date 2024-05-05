@@ -19,36 +19,45 @@
     $staffcount = $staffbmis->count_staff();
 ?>
 
-<link rel="stylesheet" href="css/dashboard.css" />
+
 
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
-
+<link rel="stylesheet" href="css/dashboard.css" />
 <!-- Begin Page Content -->
-<div class="container-fluid dashboard--container">
+<div class="container-fluid page--container">
 
 <!-- Page Heading -->
-    <h4> Feedbacks - Ongoing</h4>
+    <h4 class="mt-3">Resident Feedbacks</h4>
     <div class="row">
         <?php if(is_array($view)) {?>
             <?php foreach($view as $view) {?>
                 <div class="col-md-4 mt-3">
-                    <div class="card p-3">
-                        <h4 class="fw-bold"><?= $view['fname'];?> <?= $view['lname'];?></h4>
-                        <h5><b>Comment:</b> <br><?= $view['comment'];?></h5>
-                        <h5><b>Rate:</b> <?= $view['rating'];?></h5>
+                    <div class="card d-flex flex-column h-100 p-3">
+                        <!-- <h4 class="card-title text-primary fw-bold"><?= $view['fname'];?> <?= $view['lname'];?></h4> -->
+                        <h4 class="card-title text-primary fw-bold">Unknown Resident</h4>
+                        <h5 class="card-desc"><b>Comment:</b> <br><?= $view['comment'];?></h5>
+                        <div class="mt-auto">
+                            <h5><b>Rate:</b> 
+                                <?php
+                                $rating = $view['rating'];
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= $rating) {
+                                        echo '<i class="fas fa-star text-primary"></i>';
+                                    } else {
+                                        echo '<i class="far fa-star text-primary"></i>';
+                                    }
+                                }
+                                ?>
+                            </h5>
+                        </div>
                     </div>
                 </div>
             <?php }?>
         <?php } ?>
     </div>
-
-
-<!-- /.container-fluid -->
-
 </div>
-<!-- End of Main Content -->
 
 <!-- charts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

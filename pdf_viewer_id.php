@@ -8,7 +8,8 @@
 //    $bmis->delete_announcement();
 //    $view = $bmis->view_announcement();
    $view = $residentbmis->view_single_brgyid();
-   
+   $bmis->reject_brgyid();
+   $bmis->approved_brgyid();
    $announcementcount = $bmis->count_announcement();
 
    $dt = new DateTime("now", new DateTimeZone('Asia/Manila'));
@@ -35,21 +36,33 @@
         }
     </script>
     <div class="container-fluid container--viewer p-0">
-        <div class="viewerTop d-flex sticky-top justify-content-between">
-            <div class="d-flex align-items-center">
-                <a href="admn_brgyid.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
-                <h3 class="viewer-text">Barangay ID PDF Viewer</h3>
-            </div>
-            <div class="d-flex">
-                <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
-                <button class="btn btn-primary me-3" id="markAsDoneButton" disabled>Mark As Done <i class="fas fa-check"></i></button>
-                <button class="btn btn-danger"> Decline <i class="fas fa-times"></i></button>
-            </div>
-            
+        <div class="viewerTop sticky-top p-0">
+            <form action="" method="post" class="p-2">
+                <div class="d-flex justify-content-between">
+                    <div class=" d-flex align-items-center">
+                        <a href="admn_brgyid.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
+                        <h5 class="viewer-text">Barangay Residency PDF Viewer</h5>
+                    </div>
+                    <div>
+                        <input type="hidden" name="id_brgyid" value="<?= $view['id_brgyid'];?>">
+                        <input type="hidden" name="email" value="<?= $view['email'];?>">
+                        <input type="hidden" name="staff" value="<?= $userdetails['firstname']?> <?= $userdetails['surname']?> ">
+                        <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
+                        <button class="btn btn-primary me-3" id="markAsDoneButton" type="submit" name="approved_brgyid" disabled> Mark As Done </button>
+                        <button class="btn btn-danger" id="declineButton" name="reject_brgyid"> Decline <i class="fas fa-times"></i></button> 
+                    </div>  
+                </div>
+            </form>
         </div>
         
         <div class="viewer-content d-flex justify-content-between">
-        <div class="text-center m-5"><img src="assets/default-thumbnail.jpg" alt="ID IMAGE" class="viewer--img"></div>
+        <div class="text-center m-5">
+            <?php if (isset($view['res_photo']) && !empty($view['res_photo'])) : ?>
+                <img src="<?= $view['res_photo'] ?>" alt="ID IMAGE" class="viewer--img">
+            <?php else : ?>
+                <img src="assets/default-thumbnail.jpg" alt="Default Thumbnail" class="viewer--img">
+            <?php endif; ?>
+        </div>
             <div class="w-100 me-3">
                 
                 <label class="mt-3">Name: </label>
@@ -117,9 +130,9 @@
         document.getElementById('printButton').disabled = true;
     });
 
-    document.getElementById('markAsDoneButton').addEventListener('click', function() {
-        // Perform actions when "Mark As Done" button is clicked
-        alert('Mark As Done button clicked.');
-    });
+    // document.getElementById('markAsDoneButton').addEventListener('click', function() {
+    //     // Perform actions when "Mark As Done" button is clicked
+    //     alert('Mark As Done button clicked.');
+    // });
 </script>
     

@@ -60,7 +60,7 @@
                     <h4 class="card-title">Barangay Residency</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $residency_pending?></h5>
+                            <!-- <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $residency_pending?></h5> -->
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $residency_approved?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $residency_decline?></h5>
                             
@@ -76,7 +76,7 @@
                     <h4 class="card-title">Barangay ID</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $brgyid_pending?></h5>
+                            <!-- <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $brgyid_pending?></h5> -->
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $brgyid_approved?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $brgyid_decline?></h5>
                         </div>
@@ -91,7 +91,7 @@
                     <h4 class="card-title">Business Recommendation</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $bspermit_pending?></h5>
+                            <!-- <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $bspermit_pending?></h5> -->
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $bspermit_approved?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $bspermit_decline?></h5>
                         </div>
@@ -106,7 +106,7 @@
                     <h4 class="card-title">Barangay Clearance</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $clearance_pending?></h5>
+                            <!-- <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $clearance_pending?></h5> -->
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $clearance_approved?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $clearance_decline?></h5>
                         </div>
@@ -121,7 +121,7 @@
                     <h4 class="card-title">Certificate of Indigency</h4>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $indigency_pending?></h5>
+                            <!-- <h5 class="card-subtitle mb-2 text-muted">Pending: <?= $indigency_pending?></h5> -->
                             <h5 class="card-subtitle mb-2 text-muted">Approved: <?= $indigency_approved?></h5>
                             <h5 class="card-subtitle mb-2 text-muted">Decline: <?= $indigency_decline?></h5>
                         </div>

@@ -4,17 +4,17 @@
    require('classes/resident.class.php');
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
-//    $view = $bmis->view_certofres_done();
+   $view = $bmis->view_certofres_done();
 //    $bmis->create_announcement();
 //    $bmis->delete_announcement();
 //    $view = $bmis->view_announcement();
 //    $announcementcount = $bmis->count_announcement();
 
-    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-    $limit = 5;
-    $offset = ($currentPage - 1) * $limit;
+    // $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+    // $limit = 5;
+    // $offset = ($currentPage - 1) * $limit;
 
-    list($view, $moreRecords) = $residentbmis->view_certofres_done($limit, $offset);
+    // list($view, $moreRecords) = $residentbmis->view_certofres_done($limit, $offset);
 
 
 ?>
@@ -69,29 +69,42 @@
         <div class="col-md-12">
             <div class="row">
                  <div class="col-md-7">
-                    <form id="pdfForm" method="post" action="generatepdf/random/services.php" style="display: inline-block; margin-right: 10px;">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group" style="margin-bottom: 5px;">
-                                    <label for="fromDate" style="display: block;">From Date:</label>
-                                    <input type="date" class="form-control" id="fromDate" name="fromDate" required>
-                                </div>
+                 <form id="pdfForm" method="post" action="generatepdf/random/request_residency.php" target="_blank" style="display: inline-block; margin-right: 10px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group" style="margin-bottom: 5px;">
+                                <label for="fromDate" style="display: block;">From Date:</label>
+                                <input type="date" class="form-control" id="fromDate" name="fromDate" required>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group" style="margin-bottom: 5px;">
-                                    <label for="toDate" style="display: block;">To Date:</label>
-                                    <input type="date" class="form-control" id="toDate" name="toDate" required>
-                                </div>
-                            </div>
-                            <!-- <div class="col-md-1 mt-4"><button type="submit" class="btn btn-primary p-2 mt-3" id="generatePDF"><i class="fas fa-search"></i></button></div> -->            
-                            <div class="col-md-2"><a href="#" class="btn btn-primary p-2" style="margin-top:33px" onclick="validateDates()" id="pdfLink"><i class="fas fa-print"></i></a></div>
                         </div>
-                    </form> 
+                        <div class="col-md-4">
+                            <div class="form-group" style="margin-bottom: 5px;">
+                                <label for="toDate" style="display: block;">To Date:</label>
+                                <input type="date" class="form-control" id="toDate" name="toDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2"><button type="button" class="btn btn-primary p-2" style="margin-top:33px" onclick="validateDates()" id="pdfLink"><i class="fas fa-print"></i></button></div>
+                    </div>
+                </form>
+
+                <script>
+                    function validateDates() {
+                        var startDate = document.getElementById('fromDate').value;
+                        var endDate = document.getElementById('toDate').value;
+                        if (startDate === "" || endDate === "") {
+                            alert("Please select both start and end dates.");
+                        } else {
+                            // Perform other actions or submit the form
+                            var form = document.getElementById('pdfForm');
+                            form.submit();
+                        }
+                    }
+                </script>
                 </div>
                 <div class="col-md-5">
                     Select Pdf Generate
                     <select class="form-select mt-2" id="pdfGenerateSelect">
-                        <option value="generatePdf/residency/all.php">All</option>
+                        <option value="">View Options</option>
                         <option value="generatePdf/residency/daily.php">Daily</option>
                         <option value="generatePdf/residency/week.php">Weekly</option>
                         <option value="generatePdf/residency/month.php">Monthly</option>
@@ -101,6 +114,14 @@
             </div>
         </div>
 
+
+<script>
+    // Add event listener to the select element
+    document.getElementById("pdfGenerateSelect").addEventListener("change", function() {
+        // Redirect to the selected option's value
+        window.open(this.value, "_blank");
+    });
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Retrieve the value from localStorage and set it as the selected value
@@ -120,13 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <!-- For Redirecting to PDF's -->
 
-<script>
-    // Add event listener to the select element
-    document.getElementById("pdfGenerateSelect").addEventListener("change", function() {
-        // Redirect to the selected option's value
-        window.open(this.value, "_blank");
-    });
-</script>
+
 
     </div>
 
@@ -134,23 +149,19 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="row"> 
         <div class="col"> 
             <div class="card">
-            <?php 
-                include('tables/residency_done.php');
-            ?></div>
-            <div class="pagination d-flex fixed-bottom mt-3 me-3">
-                    <?php if ($currentPage > 1): ?>
-                        <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
-                    <?php endif; ?>
-
-                    <span class="current-page mt-1 me-3 ms-3">Page <?= $currentPage ?></span>
-
-                    <?php if ($moreRecords): ?>
-                        <a class="btn btn-primary me-2" href="?page=<?= $currentPage + 1 ?>">Next</a>
-                    <?php endif; ?>
-                </div>
-
-            
-            
+                <?php 
+                    include('tables/residency_done.php');
+                ?>
+            </div>
+            <!-- <div class="pagination d-flex fixed-bottom mt-3 me-3">
+                <?php if ($currentPage > 1): ?>
+                    <a class="btn btn-primary" href="?page=<?= $currentPage - 1 ?>">Prev</a>
+                <?php endif; ?>
+                <span class="current-page mt-1 me-3 ms-3">Page <?= $currentPage ?></span>
+                <?php if ($moreRecords): ?>
+                    <a class="btn btn-primary me-2" href="?page=<?= $currentPage + 1 ?>">Next</a>
+                <?php endif; ?>
+            </div> -->
         </div>
     </div>
 

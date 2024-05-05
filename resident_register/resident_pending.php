@@ -7,52 +7,52 @@
 ?>
 	<table class="table table-hover text-center responsive table-bordered" >
 
-		<thead class="alert-info sticky-top">
-			<tr>
-                <th width="20%"> Actions</th>
-                <th width="20%"> Email </th>
-                <th width="20%"> Full Name </th>
-                <th width="5%"> Age </th>
-                <!-- <th width="20%"> Address </th> -->
-                <th width="10%"> Contact # </th>
-                <th width="5%">Verification ID</th>
-                <th width="5%"> View </th>
-			</tr>
-		</thead>
+    <thead class="sticky-top">
+		<tr>
+            <th> Full Name </th>
+            <th> Email </th>
+            <th> Age </th>
+            <th> Contact # </th>
+            <th> Verification ID </th>
+            <th> Actions</th>
+		</tr>
+	</thead>
 
 		<tbody>       
 			<?php
 				
 				$stmnt = $conn->prepare("SELECT * FROM `tbl_resident` WHERE `lname` LIKE '%$keyword%' or  `mi` LIKE '%$keyword%' or  `fname` LIKE '%$keyword%' 
 				or  `age` LIKE '%$keyword%' or  `sex` LIKE '%$keyword%' or  `status` LIKE '%$keyword%' or  `address` LIKE '%$keyword%' or  `contact` LIKE '%$keyword%'
-				or  `bdate` LIKE '%$keyword%' or  `bplace` LIKE '%$keyword%' or  `nationality` LIKE '%$keyword%' or  `family_role` LIKE '%$keyword%' or  `role` LIKE '%$keyword%' or  `email` LIKE '%$keyword%' WHERE verified='Pending'");
+				or  `bdate` LIKE '%$keyword%' or  `bplace` LIKE '%$keyword%' or  `nationality` LIKE '%$keyword%' or  `family_role` LIKE '%$keyword%' or  `role` LIKE '%$keyword%' or  `email` LIKE '%$keyword%' AND verified='Pending'");
 				$stmnt->execute();
 				
 				while($view = $stmnt->fetch()){
 			?>
-                <tr>
-                        <td> <?= $view['email'];?> </td>
+                    <tr>                    
+                        
+                        
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
+                        <td> <?= $view['email'];?> </td>
                         <td> <?= $view['age'];?> </td>
                         <!-- <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 10ch;">
-    <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>
-</td> -->
+                        <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>
+                        </td> -->
+
                         <td> <?= $view['contact'];?> </td>
                         <td>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['valid_id_photo'] ?>', '<?= $view['lname'];?>', '<?= $view['fname'];?> <?= $view['mi'];?>')">
                                 <img src="<?= $view['valid_id_photo'] ?>" class="pending--img" alt="Modal Image">
-                            </a></td>
+                            </a>
+                        </td>
                         <td width="20%">    
                             <form action="" method="post">
-                                <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
                                 <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
                                 <input type="hidden" name="email" value="<?= $view['email'];?>">
-                                <a class="btn btn-table btn-primary" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a>
-                                <button class="btn btn-table btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> Approve </button>
-                                <button class="btn btn-table btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline </button>
+                                <a class="btn btn-primary pending-btn" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a>
+    
                             </form>
                         </td>
-                </tr>
+                    </tr>
 			<?php
 			}
 			?>
@@ -85,10 +85,6 @@
                         <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?> </td>
                         <td> <?= $view['email'];?> </td>
                         <td> <?= $view['age'];?> </td>
-                        <!-- <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 10ch;">
-                        <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>
-                        </td> -->
-
                         <td> <?= $view['contact'];?> </td>
                         <td>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $view['valid_id_photo'] ?>', '<?= $view['lname'];?>', '<?= $view['fname'];?> <?= $view['mi'];?>')">
@@ -97,12 +93,10 @@
                         </td>
                         <td width="20%">    
                             <form action="" method="post">
-                                <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
                                 <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
                                 <input type="hidden" name="email" value="<?= $view['email'];?>">
                                 <a class="btn btn-primary pending-btn" href="admn_view_pending_details.php?id_resident=<?= $view['id_resident'];?>" name=""> View </a>
-                                <!-- <button class="btn btn-table btn-primary" type="submit" name="approve_resident" onclick="return confirm('Are you sure you want to approve this data?')"> <i class="fas fa-check"></i> </button>
-                                <button class="btn btn-table btn-danger" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> <i class="fas fa-times"></i> </button> -->
+                              
                             </form>
                         </td>
                     </tr>

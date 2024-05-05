@@ -15,6 +15,7 @@
             <th> Address </th>
             <th> Business Industry </th>
             <th> Area of Establishment </th>
+            <th> Staff</th>
             <th> Status</th>
         </tr>
     </thead>
@@ -52,6 +53,7 @@
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
                     <td> <?= $view['bsindustry'];?> </td>
                     <td> <?= $view['aoe'];?> </td>
+                    <td> <?= $view['staff'];?> </td>
                     <td> <?= $view['form_status'];?> </td>
                     
                 </tr>
@@ -71,11 +73,14 @@
             <th hidden> Resident ID </th>
             <th> Tracking ID </th>
             <th> Full Name </th>
+            <th> Date Requested</th>
             <th> Business Name </th>
             <th> Address </th>
             <th> Business Industry </th>
             <th> Area of Establishment </th>
+            <th> Staff</th>
             <th> Status</th>
+            <th> Date</th>
         </tr>
     </thead>
 
@@ -86,11 +91,14 @@
                     <td hidden> <?= $view['id_resident'];?> </td> 
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
+                    <td> <?= date('F d, Y', strtotime($view['date'])); ?> </td>
                     <td> <?= $view['bsname'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?></td>
                     <td> <?= $view['bsindustry'];?> </td>
                     <td> <?= $view['aoe'];?> </td>
+                    <td> <?= $view['staff'];?> </td>
                     <td> <?= $view['form_status'];?> </td>
+                    <td> <?= date('F d, Y', strtotime($view['created_at'])); ?> </td>
                     
                 </tr>
             <?php

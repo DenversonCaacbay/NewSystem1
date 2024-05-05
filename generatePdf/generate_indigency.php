@@ -178,7 +178,7 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
         // Instantiate PDF class
         $pdf = new Pdf();
         // Generate PDF
-        $file_name = 'Clearance-' . $result["id_resident"] . '.pdf';
+        $file_name = 'Barangay Indigency-' . $result["lname"] . ', ' . $result["fname"] . ' ' . $result["mi"] . '.pdf';
         $pdf->loadHtml($output);
 
         // Set page margins
@@ -194,7 +194,7 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
         $pdf->stream($file_name, array("Attachment" => false));
     } else {
         // Handle case when no clearance record is found
-        echo "Clearance record not found.";
+        echo "Indigency record not found.";
     }
 }
 ?>

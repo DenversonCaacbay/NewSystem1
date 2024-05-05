@@ -1,7 +1,7 @@
 <?php
     
     error_reporting(E_ALL ^ E_WARNING);
-    ini_set('display_errors',0);
+    ini_set('display_errors',1);
     require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
@@ -11,20 +11,20 @@
     // $id_resident = $_GET['id_resident'];
     // $resident = $residentbmis->get_single_certofres($id_resident);
     // $resident = view_certofres();
-    $bmis->create_brgyclearance();
+    $bmis->create_brgyclearance_walkin();
 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     $limit = 5;
     $offset = ($currentPage - 1) * $limit;
 
-    list($view, $moreRecords) = $bmis->view_certofres($limit, $offset);
+    // list($view, $moreRecords) = $bmis->view_clearance($limit, $offset);
     
 ?>
 
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
-
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     .container--residency{
         height: 500px;
@@ -50,11 +50,11 @@
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
     <div class="d-flex justify-content-between mb-3">
-        <h4 class="text-center mb-0">Walk'in Request</h4>
+        <h4 class="text-center mb-0">Walk'in Request Form</h4>
         <a href="admn_brgyclearance.php" class="btn btn-primary">Back</a>
     </div>
 
@@ -192,14 +192,17 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group" id="otherDiv" style="display: none">
+                    <div class="col-md-6 mt-3 d-none">
+                        <label for="formGroupExampleInput" class="form-label">Urgent</label>
+                        <input type="text" name="is_urgent" class="form-control" value="Walk In" id="formGroupExampleInput" placeholder="">
+                    </div>
+                    <!-- <div class="form-group" id="otherDiv" style="display: none">
                         <input type="text" class="form-control mt-3" name="otherInput" id='otherInput' placeholder="Enter Other" style="display: none" />
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
+                    </div> -->
                     <div class="col-md-12">
-                        <button name="create_brgyclearance" type="submit" class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
+                        <button name="create_brgyclearance_walkin" type="submit" class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
                     </div>
                 </div>
             </form>

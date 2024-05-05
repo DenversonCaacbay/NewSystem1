@@ -14,7 +14,7 @@
     list($view, $moreRecords) = $bmis->view_brgyid($limit, $offset);
 
     $id_resident = $_GET['id_resident'];
-    $resident = $residentbmis->get_single_certofres($id_resident);
+    // $resident = $residentbmis->get_single_certofres($id_resident);
    
 ?>
 

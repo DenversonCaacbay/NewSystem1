@@ -218,7 +218,7 @@ if (isset($_GET["pdf"]) && isset($_GET["id"])) {
         // Instantiate PDF class
         $pdf = new Pdf();
         // Generate PDF
-        $file_name = 'Clearance-' . $result["id_resident"] . '.pdf';
+        $file_name = 'Business Recommendation-' . $result["lname"] . ', ' . $result["fname"] . ' ' . $result["mi"] . '.pdf';
         $pdf->loadHtml($output);
 
         // Set page margins

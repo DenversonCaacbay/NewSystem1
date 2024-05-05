@@ -1051,17 +1051,6 @@ use PHPMailer\PHPMailer\Exception;
         $stmt->execute();
         $rescert_data = $stmt->fetchAll();
 
-         // Combine all fetched data into one array
-        //  $all_data = array_merge($brgyid_data, $bspermit_data, $clearance_data, $indigency_data, $rescert_data);
-
-        //  // Sort the combined array by 'created_at' timestamp in descending order
-        //  usort($all_data, function($a, $b) {
-        //      return strtotime($b['created_at']) - strtotime($a['created_at']);
-        //  });
- 
-        //  return $all_data;
-    
-        // Combine the fetched data into one variable
         $requests_data = array(
             'brgyid' => $brgyid_data,
             'bspermit' => $bspermit_data,
@@ -1224,57 +1213,214 @@ use PHPMailer\PHPMailer\Exception;
             return $requests_data;
         }
 
-
+    // Approved
+    public function view_request_dashboard(){
+        $connection = $this->openConn();
+    
+        // tbl_brgyid
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status='Approved' OR form_status='Declined'");
+        $stmt->execute();
+        $brgyid_data = $stmt->fetchAll();
+    
+        // tbl_bspermit
+        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status='Approved' OR form_status='Declined'");
+        $stmt->execute();
+        $bspermit_data = $stmt->fetchAll();
+    
+        // tbl_clearance
+        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE  form_status='Approved' OR form_status='Declined'");
+        $stmt->execute();
+        $clearance_data = $stmt->fetchAll();
+    
+        // tbl_indigency
+        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status='Approved' OR form_status='Declined'");
+        $stmt->execute();
+        $indigency_data = $stmt->fetchAll();
+    
+        // tbl_rescert
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert  WHERE form_status='Approved' OR form_status='Declined'");
+        $stmt->execute();
+        $rescert_data = $stmt->fetchAll();
+    
+        // Combine the fetched data into one variable
+        $requests_data = array(
+            'brgyid' => $brgyid_data,
+            'bspermit' => $bspermit_data,
+            'clearance' => $clearance_data,
+            'indigency' => $indigency_data,
+            'rescert' => $rescert_data,
+        );
+    
+        return $requests_data;
+    }
+    
     // 
+    // public function view_single_residency(){
+    //     $id = $_GET['id'];
+        
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_rescert = ?");
+    //     $stmt->execute([$id]);
+    //     $view = $stmt->fetch();
+    
+    //     return $view;
+    // }
+        
+
+    // public function view_single_brgyid(){
+    //     $id = $_GET['id'];
+        
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_brgyid = ?");
+    //     $stmt->execute([$id]);
+    //     $view = $stmt->fetch();
+    
+    //     return $view;
+    // }
+
+    // public function view_single_bspermit(){
+    //     $id = $_GET['id'];
+        
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_bspermit = ?");
+    //     $stmt->execute([$id]);
+    //     $view = $stmt->fetch();
+    
+    //     return $view;
+    // }
+    // public function view_single_clearance(){
+    //     $id = $_GET['id'];
+        
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_clearance  = ?");
+    //     $stmt->execute([$id]);
+    //     $view = $stmt->fetch();
+    
+    //     return $view;
+    // }
+
+    // public function view_single_indigency(){
+    //     $id = $_GET['id'];
+        
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_indigency  = ?");
+    //     $stmt->execute([$id]);
+    //     $view = $stmt->fetch();
+    
+    //     return $view;
+    // }
+
     public function view_single_residency(){
         $id = $_GET['id'];
         
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_rescert = ?");
+        $stmt = $connection->prepare("
+            SELECT tbl_rescert.*, 
+                   COALESCE(tbl_resident.lname, tbl_rescert.lname) AS lname, 
+                   COALESCE(tbl_resident.fname, tbl_rescert.fname) AS fname, 
+                   COALESCE(tbl_resident.houseno, tbl_rescert.houseno) AS houseno, 
+                   COALESCE(tbl_resident.street, tbl_rescert.street) AS street, 
+                   COALESCE(tbl_resident.brgy, tbl_rescert.brgy) AS brgy, 
+                   COALESCE(tbl_resident.municipal, tbl_rescert.municipal) AS municipal,
+                   tbl_resident.email AS email
+            FROM tbl_rescert 
+            LEFT JOIN tbl_resident ON tbl_rescert.id_resident = tbl_resident.id_resident
+            WHERE tbl_rescert.id_rescert = ?");
         $stmt->execute([$id]);
         $view = $stmt->fetch();
     
         return $view;
     }
+    
+    public function view_single_bspermit(){
+        $id = $_GET['id'];
+        
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("
+            SELECT tbl_bspermit.*, 
+                   COALESCE(tbl_resident.lname, tbl_bspermit.lname) AS lname, 
+                   COALESCE(tbl_resident.fname, tbl_bspermit.fname) AS fname, 
+                   COALESCE(tbl_resident.houseno, tbl_bspermit.houseno) AS houseno, 
+                   COALESCE(tbl_resident.street, tbl_bspermit.street) AS street, 
+                   COALESCE(tbl_resident.brgy, tbl_bspermit.brgy) AS brgy, 
+                   COALESCE(tbl_resident.municipal, tbl_bspermit.municipal) AS municipal,
+                   tbl_resident.email AS email
+            FROM tbl_bspermit 
+            LEFT JOIN tbl_resident ON tbl_bspermit.id_resident = tbl_resident.id_resident
+            WHERE tbl_bspermit.id_bspermit = ?");
+        $stmt->execute([$id]);
+        $view = $stmt->fetch();
+    
+        return $view;
+    }
+
+    
+
+
 
     public function view_single_brgyid(){
         $id = $_GET['id'];
         
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_brgyid = ?");
+        $stmt = $connection->prepare("
+            SELECT tbl_brgyid.*, 
+                   COALESCE(tbl_resident.lname, tbl_brgyid.lname) AS lname, 
+                   COALESCE(tbl_resident.fname, tbl_brgyid.fname) AS fname, 
+                   COALESCE(tbl_resident.houseno, tbl_brgyid.houseno) AS houseno, 
+                   COALESCE(tbl_resident.street, tbl_brgyid.street) AS street, 
+                   COALESCE(tbl_resident.brgy, tbl_brgyid.brgy) AS brgy, 
+                   COALESCE(tbl_resident.municipal, tbl_brgyid.municipal) AS municipal,
+                   tbl_resident.email AS email
+            FROM tbl_brgyid 
+            LEFT JOIN tbl_resident ON tbl_brgyid.id_resident = tbl_resident.id_resident
+            WHERE tbl_brgyid.id_brgyid = ?");
         $stmt->execute([$id]);
         $view = $stmt->fetch();
     
         return $view;
     }
 
-    public function view_single_bspermit(){
-        $id = $_GET['id'];
-        
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_bspermit = ?");
-        $stmt->execute([$id]);
-        $view = $stmt->fetch();
-    
-        return $view;
-    }
-
-    public function view_single_clearance(){
-        $id = $_GET['id'];
-        
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_clearance  = ?");
-        $stmt->execute([$id]);
-        $view = $stmt->fetch();
-    
-        return $view;
-    }
 
     public function view_single_indigency(){
         $id = $_GET['id'];
         
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_indigency  = ?");
+        $stmt = $connection->prepare("
+            SELECT tbl_indigency.*, 
+                   COALESCE(tbl_resident.lname, tbl_indigency.lname) AS lname, 
+                   COALESCE(tbl_resident.fname, tbl_indigency.fname) AS fname, 
+                   COALESCE(tbl_resident.houseno, tbl_indigency.houseno) AS houseno, 
+                   COALESCE(tbl_resident.street, tbl_indigency.street) AS street, 
+                   COALESCE(tbl_resident.brgy, tbl_indigency.brgy) AS brgy, 
+                   COALESCE(tbl_resident.municipal, tbl_indigency.municipal) AS municipal,
+                   tbl_resident.email AS email
+            FROM tbl_indigency 
+            LEFT JOIN tbl_resident ON tbl_indigency.id_resident = tbl_resident.id_resident
+            WHERE tbl_indigency.id_indigency = ?");
+        $stmt->execute([$id]);
+        $view = $stmt->fetch();
+    
+        return $view;
+    }
+
+
+
+    public function view_single_clearance(){
+        $id = $_GET['id'];
+        
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("
+            SELECT tbl_clearance.*, 
+                   COALESCE(tbl_resident.lname, tbl_clearance.lname) AS lname, 
+                   COALESCE(tbl_resident.fname, tbl_clearance.fname) AS fname, 
+                   COALESCE(tbl_resident.houseno, tbl_clearance.houseno) AS houseno, 
+                   COALESCE(tbl_resident.street, tbl_clearance.street) AS street, 
+                   COALESCE(tbl_resident.brgy, tbl_clearance.brgy) AS brgy, 
+                   COALESCE(tbl_resident.municipal, tbl_clearance.municipal) AS municipal,
+                   tbl_resident.email AS email
+            FROM tbl_clearance 
+            LEFT JOIN tbl_resident ON tbl_clearance.id_resident = tbl_resident.id_resident
+            WHERE tbl_clearance.id_clearance = ?");
         $stmt->execute([$id]);
         $view = $stmt->fetch();
     

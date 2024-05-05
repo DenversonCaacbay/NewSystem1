@@ -60,10 +60,11 @@
             <th hidden> Age </th>
             <th hidden> Nationality </th>
             <th hidden> Address </th>
-            <th> Date </th>
+            <th> Date Requested </th>
             <th> Purpose </th>
             <th> Staff </th>
             <th> Status</th>
+            <th> Date</th>
     	</tr>
     </thead>
 
@@ -76,10 +77,13 @@
                     <td hidden> <?= $view['age'];?> </td>
                     <td hidden> <?= $view['nationality'];?> </td>
                     <td hidden> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>,<?= $view['municipal'];?> </td>                        
-                    <td> <?= $view['date'];?> </td>
+                    <td> <?= date('F d, Y', strtotime($view['date'])); ?> </td>
+
                     <td> <?= $view['purpose'];?> </td>
-                    <td> Turqueza, Charlene </td>
+                    <td> <?= $view['staff'];?></td>
                     <td> <?= $view['form_status'];?> </td>
+                    <td> <?= date('F d, Y', strtotime($view['created_at'])); ?> </td>
+
                 </tr>
             <?php
                 }

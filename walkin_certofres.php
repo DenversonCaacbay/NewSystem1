@@ -7,7 +7,7 @@
     $bmis->validate_admin();
     $bmis->reject_rescert();
     $bmis->approved_rescert();
-    $bmis->create_certofres();
+    $bmis->create_certofres_walkin();
     // $view = $bmis->view_certofres();
     // $id_resident = $_GET['id_resident'];
     // $resident = $residentbmis->get_single_certofres($id_resident);
@@ -24,7 +24,7 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
-
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     .container--residency{
         height: 500px;
@@ -50,11 +50,11 @@
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
-    <div class="d-flex justify-content-between mb-3">
-        <h4 class="text-center mb-0">Walk'in Request</h4>
+    <div class="d-flex justify-content-between mb-3 align-items-center">
+        <h4 class="text-center mb-0">Walk'in Request Form</h4>
         <a href="admn_certofres.php" class="btn btn-primary">Back</a>
     </div>
 
@@ -112,14 +112,27 @@
                             <option value="Other">Other</option>
                         </select>
                     </div>
-
                     <div class="form-group" id="otherDiv" style="display: none">
                         <input type="text" class="form-control mt-3" name="otherInput" id='otherInput' placeholder="Enter Other" style="display: none" />
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
+                    <div class="col-md-6 mt-3 d-none">
+                        <label for="formGroupExampleInput" class="form-label">Date: </label>
+                        <input type="date" name="date" class="form-control" id="formGroupExampleInput" value="<?php echo date('Y-m-d'); ?>">
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <label for="formGroupExampleInput" class="form-label">Date Live: </label>
+                        <input type="date" name="date_live" class="form-control" id="formGroupExampleInput" placeholder="">
+                    </div>
+                    <div class="col-md-6 mt-3 d-none">
+                        <label for="formGroupExampleInput" class="form-label">Urgent</label>
+                        <input type="text" name="is_urgent" class="form-control" value="Walk In" id="formGroupExampleInput" placeholder="">
+                    </div>
+
+                    
                     <div class="col-md-12">
-                        <button name ="create_certofres" type="submit" class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
+                        <button name ="create_certofres_walkin" type="submit" class="btn btn-primary mt-3 w-100 p-2">Create Request</button>
                     </div>
                 </div>
             </form>

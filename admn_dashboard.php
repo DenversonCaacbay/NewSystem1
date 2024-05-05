@@ -17,19 +17,25 @@
     $rescountvoter = $residentbmis->count_voters();
     $rescountsenior = $residentbmis->count_resident_senior();
     $staffcount = $staffbmis->count_staff();
+
+
+    // Assuming $requests_data is available
+    // $requests_data = $userdetails;
+    $requests = $residentbmis->view_request_dashboard();
+
 ?>
 
-<link rel="stylesheet" href="css/dashboard.css" />
+
 
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
-
+<link rel="stylesheet" href="css/dashboard.css" />
 <!-- Begin Page Content -->
 <div class="container-fluid dashboard--container">
 
 <!-- Page Heading -->
-    <h4> Dashboard</h4>
+    <h4 class="mt-3"> Dashboard</h4>
     <div class="row"> 
         <div class="col-md-4">
             <div class="card border-left-primary shadow">
@@ -39,12 +45,13 @@
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
                                 All Pending Request</div>
                                 <div class="h5 mb-0 font-weight-bold text-dark"><?= $pending_request?></div>
-                                <br>
-                                <a href="admn_request_archives.php"> View Records </a>
+                                <!-- <a href="admn_request_archives.php"> View Records </a> -->
                         </div>
                         <div class="col-auto">
                             <span style="color: #309464;"> 
-                                <i class="fas fa-user-friends fa-2x text-color "></i>
+                                <!-- <i class="fas fa-user-friends fa-2x text-color "></i> -->
+                                <!-- <i class="fas fa-file-lines fa-2x text-color"></i> -->
+                                <i class="fas fa-file-import fa-2x text-color"></i>
                             </span>
                         </div>
                     </div>
@@ -59,12 +66,32 @@
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
                                 Total Release Request</div>
                                 <div class="h5 mb-0 font-weight-bold text-dark"><?= $approved_request?></div>
-                                <br>
-                                <a href="admn_request_archives.php"> View Records </a>
+                                <!-- <a href="admn_request_archives.php"> View Records </a> -->
                         </div>
                         <div class="col-auto">
                             <span style="color: #309464;"> 
-                                <i class="fas fa-user-friends fa-2x text-color "></i>
+                                <!-- <i class="fas fa-user-friends fa-2x text-color "></i> -->
+                                <i class="fas fa-file-alt  fa-2x text-color"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-left-primary shadow">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
+                                Total Declined Request</div>
+                                <div class="h5 mb-0 font-weight-bold text-dark"><?= $approved_request?></div>
+                                <!-- <a href="admn_request_archives.php"> View Records </a> -->
+                        </div>
+                        <div class="col-auto">
+                            <span style="color: #309464;"> 
+                                <!-- <i class="fas fa-user-friends fa-2x text-color "></i> -->
+                                <i class="fas fa-file-excel fa-2x text-color "></i>
                             </span>
                         </div>
                     </div>
@@ -73,7 +100,7 @@
         </div>
         
         <div class="col-md-4">
-            <div class="card border-left-primary shadow">
+            <div class="card border-left-primary shadow card-upper-space">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -195,8 +222,112 @@
     <br>
     <hr>
     <br>
+    <h4 class="text-center"> Report 2.0 </h4>
+    <div class="row mt-3">
+    <div class="col-md-12">
+        <label for="requestType">Select Request Type:</label>
+        <select class="form-control" id="requestType">
+            <option value="all">All Requests</option>
+            <option value="brgyid">Barangay ID</option>
+            <option value="bspermit">Business Recommendation</option>
+            <option value="clearance">Barangay Clearance</option>
+            <option value="indigency">Indigency</option>
+            <option value="rescert">Residency</option>
+        </select>
+    </div>
+</div>
 
-    <h4 class="text-center"> Report </h4>
+<div class="row mt-3">
+    <table class="table" id="requestTable">
+        <thead class="sticky-top">
+            <tr>
+                <th>Date Requested</th>
+                <th>Full Name</th>
+                <th>Request Type</th>
+                <th>Details</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            // Check if requests are available and sort them by date in descending order
+            if(is_array($requests)) {
+                // Combine all request data into one array
+                $all_requests = [];
+                foreach($requests as $type => $request_data) {
+                    foreach ($request_data as $request) {
+                        $request['type'] = $type;
+                        $all_requests[] = $request;
+                    }
+                }
+
+                // Sort all requests by date in descending order
+                usort($all_requests, function($a, $b) {
+                    return strtotime($b['date']) - strtotime($a['date']);
+                });
+
+                // Iterate over sorted requests and display them in a table
+                foreach($all_requests as $request) {?>
+                    <tr data-type="<?= $request['type']; ?>">
+                        <td><?= ucfirst(date("F d, Y", strtotime($request['date']))); ?></td>
+                        <td><?= $request['lname']; ?>, <?= $request['fname']; ?></td>
+                        <!-- <td><?= ucfirst($request['type']); ?></td> -->
+                        <td>
+                            <?php 
+                            // Display the full request type name
+                            switch($request['type']) {
+                                case 'brgyid':
+                                    echo "Barangay ID";
+                                    break;
+                                case 'bspermit':
+                                    echo "Business Recommendation";
+                                    break;
+                                case 'clearance':
+                                    echo "Barangay Clearance";
+                                    break;
+                                case 'indigency':
+                                    echo "Certificate of Indigency";
+                                    break;
+                                case 'rescert':
+                                    echo "Residency Certificate";
+                                    break;
+                                default:
+                                    echo "Unknown";
+                            }
+                            ?>
+                        </td>
+                        <td>
+                            <?php 
+                            // Display request details based on request type
+                            switch($request['type']) {
+                                case 'brgyid':
+                                    echo "Street: " . $request['street'] . $request['brgy'];
+                                    break;
+                                case 'bspermit':
+                                    echo "Business Name: " . $request['bsname'];
+                                    break;
+                                case 'clearance':
+                                case 'indigency':
+                                case 'rescert':
+                                    echo "Purpose: " . $request['purpose'];
+                                    break;
+                                default:
+                                    echo "Unknown";
+                            }
+                            ?>
+                        </td>
+                        <td><?= $request['form_status'];?></td>
+                    </tr>
+                <?php } ?>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+
+    <hr>
+    <br>
+
+    <!-- <h4 class="text-center"> Report </h4>
     <div class="row">
         <div class="col text-center">
         <form method="POST">
@@ -226,7 +357,7 @@
             </div>
         </div>
         
-        
+         -->
     <!--<div class="col-md-4">-->
     <!--    <h4> Barangay Staff Data </h4> -->
     <!--    <br>-->
@@ -251,13 +382,13 @@
 
     </div>
     
-    <div class="row">
+    <!-- <div class="row">
         <div class="col">
             <div>
               <canvas style="height:100% !important;" id="myChart3"></canvas>
             </div>
         </div>
-    </div><br>
+    </div><br> -->
 
 <!-- /.container-fluid -->
 
@@ -472,7 +603,22 @@ var myLineChart = new Chart(ctx2, {
         });
     });
 </script>
+<script>
+    // Filter table data based on selected request type
+    document.getElementById('requestType').addEventListener('change', function() {
+        var requestType = this.value;
+        var rows = document.querySelectorAll('#requestTable tbody tr');
 
+        rows.forEach(function(row) {
+            var type = row.getAttribute('data-type');
+            if (requestType === 'all' || requestType === type) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous"></script>

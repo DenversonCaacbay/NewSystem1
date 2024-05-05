@@ -15,6 +15,7 @@
             <th> Purpose </th>
             <th> Address </th>
             <th> Civil Status </th>
+            <th> Staff </th>
             <th> Status </th>
            
         </tr>
@@ -38,6 +39,7 @@
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>,<?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
 
                     <td> <?= $view['status'];?> </td>
+                    <td> <?= $view['staff'];?> </td>
                     <td> <?= $view['form_status'];?> </td>
                     
 
@@ -62,8 +64,11 @@
             <th> Full Name </th>
             <th> Purpose </th>
             <th> Address </th>
+            <th>Date Requested</th>
             <th> Civil Status </th>
+            <th> Staff </th>
             <th> Status </th>
+            <th>Date</th>
            
         </tr>
     </thead>
@@ -77,9 +82,11 @@
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['purpose'];?> </td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>,<?= $view['brgy'];?>,<?= $view['municipal'];?> </td>
-
+                    <td> <?= date('F d, Y', strtotime($view['date'])); ?> </td>
                     <td> <?= $view['status'];?> </td>
+                    <td> <?= $view['staff'];?> </td>
                     <td> <?= $view['form_status'];?> </td>
+                    <td> <?= date('F d, Y', strtotime($view['created_at'])); ?> </td>
                     
 
                 </tr>
