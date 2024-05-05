@@ -424,6 +424,96 @@ use PHPMailer\PHPMailer\Exception;
             }
         }
 
+        public function decline_resident_banned() {
+            $id_resident = $_POST['id_resident'];
+            $email = $_POST['email'];
+            $reason = $_POST['reason'];
+        
+            if (isset($_POST['decline_resident'])) {
+                $connection = $this->openConn();
+                $stmt = $connection->prepare("UPDATE tbl_resident SET verified = 'Banned' WHERE id_resident = ?");
+                $stmt->execute([$id_resident]);
+        
+                // Send email using PHPMailer
+                $mail = new PHPMailer(true);
+        
+                try {
+                    $reason = $_POST['reason'];
+                    // Server settings
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';  // Replace with your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com';  // Replace with your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj';  // Replace with your SMTP password
+                    $mail->SMTPSecure = 'tls';  // Choose SSL or TLS
+                    $mail->Port = 587;  // Adjust the port if necessary
+        
+                    // Recipients
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita');  // Replace with your email and name
+                    $mail->addAddress($email);  // Email address of the resident
+        
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Account Banned';
+                    $mail->Body = "{$reason}. or you may contact olongapobarangaysantarita@gmail.com for further assistance.";
+        
+                    $mail->send();
+                    
+                    $message2 = "Resident Banned and email sent";
+                } catch (Exception $e) {
+                    $message2 = "Resident Declined, but email could not be sent. Error: {$mail->ErrorInfo}";
+                }
+        
+                echo "<script type='text/javascript'>alert('$message2');</script>";
+                header("Refresh:0");
+            }
+        }
+
+        public function lift_resident_banned() {
+            $id_resident = $_POST['id_resident'];
+            $email = $_POST['email'];
+            $reason = $_POST['reason'];
+        
+            if (isset($_POST['decline_resident'])) {
+                $connection = $this->openConn();
+                $stmt = $connection->prepare("UPDATE tbl_resident SET verified = 'Yes' WHERE id_resident = ?");
+                $stmt->execute([$id_resident]);
+        
+                // Send email using PHPMailer
+                $mail = new PHPMailer(true);
+        
+                try {
+                    $reason = $_POST['reason'];
+                    // Server settings
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';  // Replace with your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com';  // Replace with your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj';  // Replace with your SMTP password
+                    $mail->SMTPSecure = 'tls';  // Choose SSL or TLS
+                    $mail->Port = 587;  // Adjust the port if necessary
+        
+                    // Recipients
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita');  // Replace with your email and name
+                    $mail->addAddress($email);  // Email address of the resident
+        
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Account Banned Lifted';
+                    $mail->Body = "{$reason}.";
+        
+                    $mail->send();
+                    
+                    $message2 = "Resident Banned and email sent";
+                } catch (Exception $e) {
+                    $message2 = "Resident Declined, but email could not be sent. Error: {$mail->ErrorInfo}";
+                }
+        
+                echo "<script type='text/javascript'>alert('$message2');</script>";
+                header("Refresh:0");
+            }
+        }
+
         public function delete_resident(){
             $id_resident = $_POST['id_resident'];
 

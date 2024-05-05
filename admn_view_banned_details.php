@@ -6,7 +6,7 @@
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
    $view = $residentbmis->view_single_resident();
-   
+   $residentbmis->lift_resident_banned();
 ?>
 
 <?php 
@@ -20,7 +20,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="text-center mb-0">Viewing Resident Details</h4>
             <div>
-                <button class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal">Banned Details</button>
+                <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal">Lift Ban</button>
                 <a class="btn btn-primary" href="admn_resident_banned.php">Back</a>
             </div>
             
@@ -107,8 +107,32 @@
 <!-- Modal for Registering Residents -->
     </div>
 
+<!--Lift Ban Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">Reason to Decline</h1> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" method="post">
+      <div class="modal-body">
+        <label>Are you sure you want to lift his/her ban? </label>
+        <textarea class="form-control" name="reason" value="Your Account is now Lifted on Banned, Thank you" hidden></textarea>
+      </div>
+      <div class="modal-footer">
+            <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
+            <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
+            <input type="hidden" name="email" value="<?= $view['email'];?>">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" name="decline_resident">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <div class="modal-header">
@@ -131,7 +155,7 @@
             </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     

@@ -6,7 +6,7 @@
    $userdetails = $bmis->get_userdata();
    $bmis->validate_admin();
    $view = $residentbmis->view_single_resident();
-   
+   $residentbmis->decline_resident_banned();
 ?>
 
 <?php 
@@ -120,12 +120,39 @@
                 </div>
             </div>
 	    </div>
+        <div class="d-flex justify-content-end mt-3">
+            <!-- <button class="btn btn-danger me-3" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline Account </button> -->
+            <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#declineModal"> Banned This Resident </button>
+        </div>
         </div>
             
 <!-- Modal for Registering Residents -->
     </div>
 
-
+<!--Banned Modal -->
+<div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">Reason to Decline</h1> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" method="post">
+      <div class="modal-body">
+        <label>Enter Reason to Ban this Resident: </label>
+        <textarea class="form-control" name="reason"></textarea>
+      </div>
+      <div class="modal-footer">
+            <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
+            <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
+            <input type="text" name="email" value="<?= $view['email'];?>">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" name="decline_resident" onclick="return confirm('Are you sure you want to Banned this resident?')">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
     
     <!-- /.container-fluid -->
 
