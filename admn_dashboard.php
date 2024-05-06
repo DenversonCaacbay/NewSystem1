@@ -221,22 +221,88 @@
 
     <br>
     <hr>
-    <br>
-    <h4 class="text-center"> Report 2.0 </h4>
-    <div class="row mt-3">
-    <div class="col-md-12">
-        <label for="requestType">Select Request Type:</label>
-        <select class="form-control" id="requestType">
-            <option value="all">All Requests</option>
-            <option value="brgyid">Barangay ID</option>
-            <option value="bspermit">Business Recommendation</option>
-            <option value="clearance">Barangay Clearance</option>
-            <option value="indigency">Indigency</option>
-            <option value="rescert">Residency</option>
-        </select>
-    </div>
-</div>
+    
 
+
+    <h4 class="text-center"> Graph Report </h4>
+    <div class="row">
+        <div class="col text-center">
+        <form method="POST">
+            <select name="selected_category" class="form-select" id="categorySelect">
+                <option selected  <?php echo ($_POST['selected_category'] ?? '') == 'all' ? 'selected' : ''; ?> value="all">All</option>
+                <option <?php echo ($_POST['selected_category'] ?? '') == 'brgyid' ? 'selected' : ''; ?> value="brgyid">Barangay ID</option>
+                <option <?php echo ($_POST['selected_category'] ?? '') == 'bspermit' ? 'selected' : ''; ?> value="bspermit">Business Recommendation</option>
+                <option <?php echo ($_POST['selected_category'] ?? '') == 'clearance' ? 'selected' : ''; ?> value="clearance">Barangay Clearance</option>
+                <option <?php echo ($_POST['selected_category'] ?? '') == 'indigency' ? 'selected' : ''; ?> value="indigency">Certificate of Indigency</option>
+                <option <?php echo ($_POST['selected_category'] ?? '') == 'rescert' ? 'selected' : ''; ?> value="rescert">Certificate of Residency</option>
+            </select>
+            <input type="submit" class="btn btn-success" name="get_category" style="display: none;">
+            </form>
+        </div>
+    </div>
+    
+    <div class="row"> 
+        <div class="col">
+            <div>
+              <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div>
+              <canvas id="lineChart2"></canvas>
+            </div>
+        </div>
+        
+        
+    <!--<div class="col-md-4">-->
+    <!--    <h4> Barangay Staff Data </h4> -->
+    <!--    <br>-->
+    <!--    <div class="card border-left-info shadow">-->
+    <!--            <div class="card-body">-->
+    <!--                <div class="row no-gutters align-items-center">-->
+    <!--                    <div class="col mr-2">-->
+    <!--                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">-->
+    <!--                            Total Barangay Staffs</div>-->
+    <!--                            <div class="h5 mb-0 font-weight-bold text-dark"><?= $staffcount?></div>-->
+    <!--                            <br>-->
+    <!--                            <a href="admn_table_totalstaff.php"> View Records </a>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-auto">-->
+    <!--                        <i class="fas fa-user-friends fa-2x text-dark"></i>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    
+
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <div>
+              <canvas style="height:100% !important;" id="myChart3"></canvas>
+            </div>
+        </div>
+    </div><br>
+
+<!-- /.container-fluid -->
+<br>
+    <h4 class="text-center"> Report By Requests</h4>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <label for="requestType">Select Request Type:</label>
+            <select class="form-control" id="requestType">
+                <option value="all">All Requests</option>
+                <option value="brgyid">Barangay ID</option>
+                <option value="bspermit">Business Recommendation</option>
+                <option value="clearance">Barangay Clearance</option>
+                <option value="indigency">Indigency</option>
+                <option value="rescert">Residency</option>
+            </select>
+        </div>
+    </div>
 <div class="row mt-3">
     <table class="table" id="requestTable">
         <thead class="sticky-top">
@@ -327,70 +393,6 @@
     <hr>
     <br>
 
-    <!-- <h4 class="text-center"> Report </h4>
-    <div class="row">
-        <div class="col text-center">
-        <form method="POST">
-            <select name="selected_category" class="form-select" id="categorySelect">
-                <option selected  <?php echo ($_POST['selected_category'] ?? '') == 'all' ? 'selected' : ''; ?> value="all">All</option>
-                <option <?php echo ($_POST['selected_category'] ?? '') == 'brgyid' ? 'selected' : ''; ?> value="brgyid">Barangay ID</option>
-                <option <?php echo ($_POST['selected_category'] ?? '') == 'bspermit' ? 'selected' : ''; ?> value="bspermit">Business Recommendation</option>
-                <option <?php echo ($_POST['selected_category'] ?? '') == 'clearance' ? 'selected' : ''; ?> value="clearance">Barangay Clearance</option>
-                <option <?php echo ($_POST['selected_category'] ?? '') == 'indigency' ? 'selected' : ''; ?> value="indigency">Certificate of Indigency</option>
-                <option <?php echo ($_POST['selected_category'] ?? '') == 'rescert' ? 'selected' : ''; ?> value="rescert">Certificate of Residency</option>
-            </select>
-            <input type="submit" class="btn btn-success" name="get_category" style="display: none;">
-            </form>
-        </div>
-    </div>
-    
-    <div class="row"> 
-        <div class="col">
-            <div>
-              <canvas id="lineChart"></canvas>
-            </div>
-        </div>
-        
-        <div class="col">
-            <div>
-              <canvas id="lineChart2"></canvas>
-            </div>
-        </div>
-        
-         -->
-    <!--<div class="col-md-4">-->
-    <!--    <h4> Barangay Staff Data </h4> -->
-    <!--    <br>-->
-    <!--    <div class="card border-left-info shadow">-->
-    <!--            <div class="card-body">-->
-    <!--                <div class="row no-gutters align-items-center">-->
-    <!--                    <div class="col mr-2">-->
-    <!--                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">-->
-    <!--                            Total Barangay Staffs</div>-->
-    <!--                            <div class="h5 mb-0 font-weight-bold text-dark"><?= $staffcount?></div>-->
-    <!--                            <br>-->
-    <!--                            <a href="admn_table_totalstaff.php"> View Records </a>-->
-    <!--                    </div>-->
-    <!--                    <div class="col-auto">-->
-    <!--                        <i class="fas fa-user-friends fa-2x text-dark"></i>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    
-
-    </div>
-    
-    <!-- <div class="row">
-        <div class="col">
-            <div>
-              <canvas style="height:100% !important;" id="myChart3"></canvas>
-            </div>
-        </div>
-    </div><br> -->
-
-<!-- /.container-fluid -->
 
 </div>
 <!-- End of Main Content -->
