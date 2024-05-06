@@ -71,13 +71,13 @@
                  <div class="col-md-7">
                  <form id="pdfForm" method="post" action="generatepdf/random/request_residency.php" target="_blank" style="display: inline-block; margin-right: 10px;">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <div class="form-group" style="margin-bottom: 5px;">
                                 <label for="fromDate" style="display: block;">From Date:</label>
                                 <input type="date" class="form-control" id="fromDate" name="fromDate" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <div class="form-group" style="margin-bottom: 5px;">
                                 <label for="toDate" style="display: block;">To Date:</label>
                                 <input type="date" class="form-control" id="toDate" name="toDate" required>

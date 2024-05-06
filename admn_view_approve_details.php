@@ -122,7 +122,7 @@
 	    </div>
         <div class="d-flex justify-content-end mt-3">
             <!-- <button class="btn btn-danger me-3" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline Account </button> -->
-            <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#declineModal"> Banned This Resident </button>
+            <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#declineModal"> Ban This Resident </button>
         </div>
         </div>
             

@@ -22,7 +22,7 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
-
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     .input-icons i {
         position: absolute;
@@ -45,7 +45,7 @@
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
 
@@ -54,12 +54,10 @@
             <h1><a href="#" class="btn btn-primary">Back</a> TOTAL REGISTERED BARANGAY RESIDENTS</h1>
         </div>
     </div> -->
-    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8"> <h1 class="mb-0">Registered Barangay Residents Table</h1></div>
+            <div class="col-md-8"> <h4 class="mb-0">Registered Barangay Residents Table</h4></div>
             <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_dashboard.php"> Back </a></div>
         </div>
-    </div>
 
     <hr>
     <div class="row"> 
@@ -72,8 +70,6 @@
                     <button class="btn btn-success" name="search_totalres" style="width: 90px; font-size: 18px; border-radius:30px; margin-left:41.5%;">Search</button>
                     <a href="admn_table_totalres.php" class="btn btn-info" style="width: 90px; font-size: 18px; border-radius:30px;">Reload</a>
             </form>
-
-            <br>
 
             <?php 
                 include('admn_table_totalres_search.php');

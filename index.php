@@ -299,7 +299,7 @@
                                             <img id="blah" src="assets/default-thumbnail.jpg" class="text-center img-fluid">
                                         <?php else: ?>
                                             <div class="text-center">
-                                                <img class="img-fluid" src="<?= $announcement['announcement_image'] ?>">
+                                                <img class="" style="width:100%; height: 300px;" src="<?= $announcement['announcement_image'] ?>">
                                             </div>
 
                                         <?php endif; ?>
@@ -442,6 +442,8 @@
                 <div class="col-md-4">
                     <h3>Contact:</h3>
                     <p>Barangay Hotline: 091111111</p>
+                    <h3>Email:</h3>
+                    <p>olongapobarangaysantarita@gmail.com</p>
                 </div>
                 <div class="col-md-4">
                     <h3>Developers:</h3>

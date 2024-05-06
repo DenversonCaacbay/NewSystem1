@@ -12,7 +12,7 @@
 <?php 
     include('dashboard_sidebar_start.php');
 ?>
-
+<link rel="stylesheet" href="css/table.css"/>
 <style>
     .input-icons i {
         position: absolute;
@@ -35,19 +35,16 @@
 
 <!-- Begin Page Content -->
 
-<div class="container-fluid">
+<div class="container-fluid page--container">
 
     <!-- Page Heading -->
 
-    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8"> <h1 class="mb-0">Registered Barangay Voters Table</h1></div>
+            <div class="col-md-8"> <h4 class="mb-0">Registered Barangay Voters Table</h4></div>
             <div class="col-md-4"><a class="btn btn-primary" style="float:right"  href="admn_dashboard.php"> Back </a></div>
         </div>
-    </div>
 
-    <hr>
-    <br><br>   
+    <hr>  
 
     <div class="row"> 
         <div class="col-md-12">
@@ -59,11 +56,9 @@
                 <button class="btn btn-success" style="width: 90px; font-size: 18px; border-radius:30px; margin-left:41.5%;" name="search_totalvoters">Search</button>
                 <a href="admn_table_voters.php" style="width: 90px; font-size: 18px; border-radius:30px;" class="btn btn-info">Reload</a>
             </form>
-            <br>
         </div>
     </div>
     
-    <br>
 
     <div class="row">
         <div class="col-md-12"> 
