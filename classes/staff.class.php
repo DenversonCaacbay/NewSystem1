@@ -542,6 +542,20 @@
         return $quarterlyData;
     }
 
+    public function update_status_staff(){
+        $id_admin = $_POST['id_admin'];
+        $admin_status = $_POST['admin_status'] == "active" ? "deactivate" : "active";
+
+        if (isset($_POST['update_status_staff'])) {
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("UPDATE tbl_admin SET  `status` = ? WHERE id_admin = ?");
+            $stmt->execute([$admin_status,$id_admin]);
+                
+            echo "<script type='text/javascript'>alert('Admin Status Updated');</script>";
+            header("Refresh:0");
+        }
+    }
+
 
 
     }

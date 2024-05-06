@@ -8,6 +8,7 @@
 
     $pending_request = $residentbmis->count_pending_request();
     $approved_request = $residentbmis->count_approved_request();
+    $approved_request = $residentbmis->count_walkin_request();
 
     $rescount = $residentbmis->count_resident();
     $rescountm = $residentbmis->count_male_resident();
@@ -84,7 +85,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
-                                Total Declined Request</div>
+                                Total Walk'in Request</div>
                                 <div class="h5 mb-0 font-weight-bold text-dark"><?= $approved_request?></div>
                                 <!-- <a href="admn_request_archives.php"> View Records </a> -->
                         </div>

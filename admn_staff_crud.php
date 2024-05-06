@@ -10,6 +10,7 @@
     $upstaff = $staffbmis->update_staff();
     $staffbmis->delete_staff();
     $staffcount = $staffbmis->count_staff();
+    $staffbmis->update_status_staff();
      
 ?>
 
@@ -151,13 +152,16 @@
                                     <td><?= $viewItem['status'];?></td>
                                     <td>    
                                         <form action="" method="post">
-                                            <a href="update_staff_form.php?id_user=<?= $viewItem['id_admin'];?>" class="btn btn-primary">Update</a>
-                                            <input type="hidden" name="id_user" value="<?= $viewItem['id_admin'];?>">
-                                            <?php if ($viewItem['status'] == 'active') {?>
-                                                <button class="btn btn-danger" type="submit" name="deactivate_staff" onclick="return confirm('Are you sure you want to Deactivate this Account?')">Deactivate</button>
-                                            <?php } elseif ($viewItem['status'] == 'deactivate') {?>
-                                                <button class="btn btn-primary" type="submit" name="activate_staff" onclick="return confirm('Are you sure you want to Activate this Account?')">Activate</button>
-                                            <?php } ?>
+                                            <a href="update_staff_form.php?id_admin=<?= $viewItem['id_admin'];?>" class="btn btn-primary">Update</a>
+                                            <input type="hidden" name="id_admin" value="<?= $viewItem['id_admin'];?>">
+                                            <input type="hidden" name="admin_status" value="<?= $viewItem['status'];?>">
+                                            <?php 
+                                                if ($viewItem['status'] == 'active') {
+                                                    echo '<button class="btn btn-danger" type="submit" name="update_status_staff" onclick="return confirm(\'Are you sure you want to Deactivate this Account?\')">Deactivate</button>';
+                                                } else {
+                                                    echo '<button class="btn btn-primary" type="submit" name="update_status_staff" onclick="return confirm(\'Are you sure you want to Activate this Account?\')">Activate</button>';
+                                                }
+                                            ?>
                                         </form>
                                     </td>
                                 </tr>
