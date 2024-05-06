@@ -49,13 +49,13 @@
                         <a href="admn_brgyclearance.php" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>Back</a>
                         <h5 class="viewer-text">Barangay Clearance PDF Viewer</h5>
                     </div>
-                    <div>
+                    <div> 
                         <input type="hidden" name="id_clearance" value="<?= $view['id_clearance'];?>">
                         <input type="hidden" name="email" value="<?= $view['email'];?>">
                         <input type="hidden" name="staff" value="<?= $userdetails['firstname']?> <?= $userdetails['surname']?> ">
                         <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
                         <button class="btn btn-primary me-3" id="markAsDoneButton" type="submit" name="approved_clearance" disabled> Mark As Done </button>
-                        <button class="btn btn-danger" id="declineButton" name="reject_clearance"> Decline <i class="fas fa-times"></i></button> 
+                        <a class="btn btn-danger" id="declineButton" data-bs-toggle="modal" data-bs-target="#declineModal"> Decline <i class="fas fa-times"></i></a>  
                     </div>  
                 </div>
             </form>
@@ -82,7 +82,30 @@
                 <div class="pdfContainerUI" id="pdfContainer"></div>
             </div>
         </div>
-        
+         <!--Decline Modal -->
+         <div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">Reason to Decline</h1> -->
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="" method="post">
+                                <div class="modal-body">
+                                    <label>Enter Reason to Decline his/her Request: </label>
+                                    <textarea class="form-control w-100 mt-3" name="reason"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="id_clearance" value="<?= $view['id_clearance'];?>">
+                                    <input type="hidden" name="email" value="<?= $view['email'];?>">
+                                    <input type="hidden" name="staff" value="<?= $userdetails['firstname']?> <?= $userdetails['surname']?> ">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success" name="reject_clearance">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
     </div>
 
     <script>

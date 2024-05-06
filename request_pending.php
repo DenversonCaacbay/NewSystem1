@@ -178,9 +178,9 @@ h4{
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
          
-        <a class="navbar-brand d-none d-lg-block" href="resident_homepage.php">Barangay Santa Rita Information & E-Services</a>
+        <a class="navbar-brand d-none d-lg-block" href="index.php">Barangay Santa Rita Information & E-Services</a>
 
-        <a class="navbar-brand d-lg-none" href="resident_homepage.php">BSRI&E-S</a>
+        <a class="navbar-brand d-lg-none" href="index.php">BSRI&E-S</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -224,7 +224,7 @@ h4{
     <div class="tabs--div d-flex justify-content-between">
         <a href="request_pending.php" class="btn request--btn active">PENDING</a>
         <a href="request_approved.php" class="btn request--btn">APPROVED</a>
-        <a href="request_done.php" class="btn request--btn">DONE</a>
+        <!-- <a href="request_done.php" class="btn request--btn">DONE</a>a -->
         <a href="request_declined.php" class="btn request--btn">DECLINED</a>
     </div>
     

@@ -27,7 +27,7 @@
             // Get the req_id from the URL query parameters
             const urlParams = new URLSearchParams(window.location.search);
             const reqId = urlParams.get('id');
-            
+             
             // Set the PDF URL with the req_id
             const pdfUrl = "generatePdf/generate_brgyid.php?pdf=1&id=" + reqId;
             
@@ -49,7 +49,7 @@
                         <input type="hidden" name="staff" value="<?= $userdetails['firstname']?> <?= $userdetails['surname']?> ">
                         <button class="btn btn-primary me-3" id="printButton">Print <i class="fas fa-print ms-1"></i></button>
                         <button class="btn btn-primary me-3" id="markAsDoneButton" type="submit" name="approved_brgyid" disabled> Mark As Done </button>
-                        <button class="btn btn-danger" id="declineButton" name="reject_brgyid"> Decline <i class="fas fa-times"></i></button> 
+                        <a class="btn btn-danger" id="declineButton" data-bs-toggle="modal" data-bs-target="#declineModal"> Decline <i class="fas fa-times"></i></a>  
                     </div>  
                 </div>
             </form>
@@ -85,7 +85,30 @@
                 <button class="btn btn-primary mt-3" id="markAsDoneButton" disabled>Mark As Done</button> -->
             </div>
         </div>
-        
+         <!--Decline Modal -->
+         <div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">Reason to Decline</h1> -->
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="" method="post">
+                                <div class="modal-body">
+                                    <label>Enter Reason to Decline his/her Request: </label>
+                                    <textarea class="form-control w-100 mt-3" name="reason"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="id_brgyid" value="<?= $view['id_brgyid'];?>">
+                                    <input type="hidden" name="email" value="<?= $view['email'];?>">
+                                    <input type="hidden" name="staff" value="<?= $userdetails['firstname']?> <?= $userdetails['surname']?> ">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success" name="reject_brgyid">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
     </div>
 
     <script>

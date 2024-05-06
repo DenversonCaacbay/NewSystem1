@@ -1369,39 +1369,83 @@ class BMISClass {
     // }
  
 
+    // public function reject_rescert() {
+    //     $id_rescert = $_POST['id_rescert'];
+    //     $email = $_POST['email'];
+    
+    //     if (isset($_POST['reject_rescert'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Declined' WHERE id_rescert = ?");
+    //         $stmt->execute([$id_rescert]);
+
+    //         try {
+    //             $mail = new PHPMailer(true);
+    //             $mail->isSMTP();
+    //             $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+    //             $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+    //             $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+    //             $mail->Port = 587; // Change this to the appropriate port
+    
+    //             $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+    //             $mail->addAddress($email);
+    
+    //             $mail->isHTML(true);
+    //             $mail->Subject = 'Declined Request for Residency';
+    //             $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+    
+    //             $mail->send();
+    //             // echo 'Email has been sent';
+    //         } catch (Exception $e) {
+    //             echo "Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    
+    //         header("Refresh:0");
+    //     }
+    // }
     public function reject_rescert() {
         $id_rescert = $_POST['id_rescert'];
         $email = $_POST['email'];
+        $reason = $_POST['reason'];
+        $staff = $_POST['staff'];
     
         if (isset($_POST['reject_rescert'])) {
             $connection = $this->openConn();
-            $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Declined' WHERE id_rescert = ?");
-            $stmt->execute([$id_rescert]);
-
-            try {
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
-                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
-                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
-                $mail->Port = 587; // Change this to the appropriate port
+            $currentTimestamp = date('Y-m-d H:i:s');
+            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined', staff = ?, create_at=? WHERE id_rescert = ?");
+            $stmt->execute([$staff, $currentTimestamp, $id_rescert]);
     
-                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
-                $mail->addAddress($email);
+            // Send email using PHPMailer if email is not null
+            if (!empty($email)) {
+                try {
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                    $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                    $mail->Port = 587; // Change this to the appropriate port
     
-                $mail->isHTML(true);
-                $mail->Subject = 'Declined Request for Residency';
-                $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                    $mail->addAddress($email);
     
-                $mail->send();
-                // echo 'Email has been sent';
-            } catch (Exception $e) {
-                echo "Mailer Error: {$mail->ErrorInfo}";
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Request Declined';
+                    $mail->Body    = "{$reason}.<br><br> For further assistance contact us by email: olongapobarangaysantarita@gmail.com .<br><br>Thank you.";
+    
+                    $mail->send();
+                    
+                    // Alert using JavaScript
+                    echo "<script>alert('Record is Declined, Print Another Record'); window.location.href = 'admn_certofres.php';</script>";
+                } catch (Exception $e) {
+                    echo "Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                // If email is null, just redirect without sending an email
+                echo "<script>alert('Record is Declined, Print Another Record'); window.location.href = 'admn_certofres.php';</script>";
             }
-    
-            header("Refresh:0");
         }
     }
 
@@ -1703,39 +1747,83 @@ class BMISClass {
     //     }
     // }
 
+    // public function reject_indigency() {
+    //     $id_indigency = $_POST['id_indigency'];
+    //     $email = $_POST['email'];
+    
+    //     if (isset($_POST['reject_indigency'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Declined' WHERE id_indigency = ?");
+    //         $stmt->execute([$id_indigency]);
+
+    //         try {
+    //             $mail = new PHPMailer(true);
+    //             $mail->isSMTP();
+    //             $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+    //             $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+    //             $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+    //             $mail->Port = 587; // Change this to the appropriate port
+    
+    //             $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+    //             $mail->addAddress($email);
+    
+    //             $mail->isHTML(true);
+    //             $mail->Subject = 'Declined Request for Indigency';
+    //             $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+    
+    //             $mail->send();
+    //             // echo 'Email has been sent';
+    //         } catch (Exception $e) {
+    //             echo "Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    
+    //         header("Refresh:0");
+    //     }
+    // }
     public function reject_indigency() {
         $id_indigency = $_POST['id_indigency'];
         $email = $_POST['email'];
+        $reason = $_POST['reason'];
+        $staff = $_POST['staff'];
     
         if (isset($_POST['reject_indigency'])) {
             $connection = $this->openConn();
-            $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Declined' WHERE id_indigency = ?");
-            $stmt->execute([$id_indigency]);
-
-            try {
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
-                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
-                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
-                $mail->Port = 587; // Change this to the appropriate port
+            $currentTimestamp = date('Y-m-d H:i:s');
+            $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Declined', staff = ?, create_at=? WHERE id_indigency = ?");
+            $stmt->execute([$staff, $currentTimestamp, $id_indigency]);
     
-                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
-                $mail->addAddress($email);
+            // Send email using PHPMailer if email is not null
+            if (!empty($email)) {
+                try {
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                    $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                    $mail->Port = 587; // Change this to the appropriate port
     
-                $mail->isHTML(true);
-                $mail->Subject = 'Declined Request for Indigency';
-                $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                    $mail->addAddress($email);
     
-                $mail->send();
-                // echo 'Email has been sent';
-            } catch (Exception $e) {
-                echo "Mailer Error: {$mail->ErrorInfo}";
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Request Declined';
+                    $mail->Body    = "{$reason}.<br><br> For further assistance contact us by email: olongapobarangaysantarita@gmail.com .<br><br>Thank you.";
+    
+                    $mail->send();
+                    
+                    // Alert using JavaScript
+                    echo "<script>alert('Record is Declined, Print Another Record'); window.location.href = 'admn_certofindigency.php';</script>";
+                } catch (Exception $e) {
+                    echo "Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                // If email is null, just redirect without sending an email
+                echo "<script>alert('Record is Declined, Print Another Record'); window.location.href = 'admn_certofindigency.php';</script>";
             }
-    
-            header("Refresh:0");
         }
     }
 
@@ -2044,39 +2132,84 @@ class BMISClass {
         }
     }
 
+    // public function reject_clearance() {
+    //     $id_clearance = $_POST['id_clearance'];
+    //     $email = $_POST['email'];
+    
+    //     if (isset($_POST['reject_clearance'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Declined' WHERE id_clearance = ?");
+    //         $stmt->execute([$id_clearance]);
+
+    //         try {
+    //             $mail = new PHPMailer(true);
+    //             $mail->isSMTP();
+    //             $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+    //             $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+    //             $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+    //             $mail->Port = 587; // Change this to the appropriate port
+    
+    //             $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+    //             $mail->addAddress($email);
+    
+    //             $mail->isHTML(true);
+    //             $mail->Subject = 'Declined Request for Barangay Clearance';
+    //             $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+    
+    //             $mail->send();
+    //             // echo 'Email has been sent';
+    //         } catch (Exception $e) {
+    //             echo "Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    
+    //         header("Refresh:0");
+    //     }
+    // }
+
     public function reject_clearance() {
         $id_clearance = $_POST['id_clearance'];
         $email = $_POST['email'];
+        $reason = $_POST['reason'];
+        $staff = $_POST['staff'];
     
         if (isset($_POST['reject_clearance'])) {
             $connection = $this->openConn();
-            $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Declined' WHERE id_clearance = ?");
-            $stmt->execute([$id_clearance]);
-
-            try {
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
-                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
-                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
-                $mail->Port = 587; // Change this to the appropriate port
+            $currentTimestamp = date('Y-m-d H:i:s');
+            $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Declined', staff = ?, create_at=? WHERE id_clearance = ?");
+            $stmt->execute([$staff, $currentTimestamp, $id_clearance]);
     
-                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
-                $mail->addAddress($email);
+            // Send email using PHPMailer if email is not null
+            if (!empty($email)) {
+                try {
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                    $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                    $mail->Port = 587; // Change this to the appropriate port
     
-                $mail->isHTML(true);
-                $mail->Subject = 'Declined Request for Barangay Clearance';
-                $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                    $mail->addAddress($email);
     
-                $mail->send();
-                // echo 'Email has been sent';
-            } catch (Exception $e) {
-                echo "Mailer Error: {$mail->ErrorInfo}";
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Request Declined';
+                    $mail->Body    = "{$reason}.<br><br> For further assistance contact us by email: olongapobarangaysantarita@gmail.com .<br><br>Thank you.";
+    
+                    $mail->send();
+                    
+                    // Alert using JavaScript
+                    echo "<script>alert('Record is Declined, Print Another Record'); window.location.href = 'admn_brgyclearance.php';</script>";
+                } catch (Exception $e) {
+                    echo "Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                // If email is null, just redirect without sending an email
+                echo "<script>alert('Record is Declined, Print Another Record'); window.location.href = 'admn_brgyclearance.php';</script>";
             }
-    
-            header("Refresh:0");
         }
     }
 
@@ -2501,41 +2634,87 @@ public function create_bspermit_walkin() {
     //         header("Refresh:0");
     //     }
     // }
+    // public function reject_bspermit() {
+    //     $id_bspermit = $_POST['id_bspermit'];
+    //     $email = $_POST['email'];
+    
+    //     if (isset($_POST['reject_bspermit'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined' WHERE id_bspermit = ?");
+    //         $stmt->execute([$id_bspermit]);
+
+    //         try {
+    //             $mail = new PHPMailer(true);
+    //             $mail->isSMTP();
+    //             $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+    //             $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+    //             $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+    //             $mail->Port = 587; // Change this to the appropriate port
+    
+    //             $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+    //             $mail->addAddress($email);
+    
+    //             $mail->isHTML(true);
+    //             $mail->Subject = 'Declined Request for Business Recommendation';
+    //             $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+    
+    //             $mail->send();
+    //             // echo 'Email has been sent';
+    //         } catch (Exception $e) {
+    //             echo "Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    
+    //         header("Refresh:0");
+    //     }
+    // }
+
     public function reject_bspermit() {
         $id_bspermit = $_POST['id_bspermit'];
         $email = $_POST['email'];
+        $reason = $_POST['reason'];
+        $staff = $_POST['staff'];
     
         if (isset($_POST['reject_bspermit'])) {
             $connection = $this->openConn();
-            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined' WHERE id_bspermit = ?");
-            $stmt->execute([$id_bspermit]);
-
-            try {
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
-                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
-                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
-                $mail->Port = 587; // Change this to the appropriate port
+            $currentTimestamp = date('Y-m-d H:i:s');
+            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined', staff = ?, create_at=? WHERE id_bspermit = ?");
+            $stmt->execute([$staff, $currentTimestamp, $id_bspermit]);
     
-                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
-                $mail->addAddress($email);
+            // Send email using PHPMailer if email is not null
+            if (!empty($email)) {
+                try {
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                    $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                    $mail->Port = 587; // Change this to the appropriate port
     
-                $mail->isHTML(true);
-                $mail->Subject = 'Declined Request for Business Recommendation';
-                $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                    $mail->addAddress($email);
     
-                $mail->send();
-                // echo 'Email has been sent';
-            } catch (Exception $e) {
-                echo "Mailer Error: {$mail->ErrorInfo}";
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Request Declined';
+                    $mail->Body    = "{$reason}.<br><br> For further assistance contact us by email: olongapobarangaysantarita@gmail.com .<br><br>Thank you.";
+    
+                    $mail->send();
+                    
+                    // Alert using JavaScript
+                    echo "<script>alert('Record is Declined, Print Another Record'); window.location.href = 'admn_bspermit.php';</script>";
+                } catch (Exception $e) {
+                    echo "Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                // If email is null, just redirect without sending an email
+                echo "<script>alert('Record is Declined, Print Another Record'); window.location.href = 'admn_bspermit.php';</script>";
             }
-    
-            header("Refresh:0");
         }
     }
+
     public function approved_bspermit() {
         $id_bspermit = $_POST['id_bspermit'];
         $email = $_POST['email'];
@@ -2841,39 +3020,84 @@ public function create_bspermit_walkin() {
     //         header("Refresh:0");
     //     }
     // }
+    // public function reject_brgyid() {
+    //     $id_brgyid = $_POST['id_brgyid'];
+    //     $email = $_POST['email'];
+    
+    //     if (isset($_POST['reject_brgyid'])) {
+    //         $connection = $this->openConn();
+    //         $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Declined' WHERE id_brgyid = ?");
+    //         $stmt->execute([$id_brgyid]);
+
+    //         try {
+    //             $mail = new PHPMailer(true);
+    //             $mail->isSMTP();
+    //             $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+    //             $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+    //             $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+    //             $mail->Port = 587; // Change this to the appropriate port
+    
+    //             $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+    //             $mail->addAddress($email);
+    
+    //             $mail->isHTML(true);
+    //             $mail->Subject = 'Declined Request for Barangay ID';
+    //             $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+    
+    //             $mail->send();
+    //             // echo 'Email has been sent';
+    //         } catch (Exception $e) {
+    //             echo "Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    
+    //         header("Refresh:0");
+    //     }
+    // }
+
     public function reject_brgyid() {
         $id_brgyid = $_POST['id_brgyid'];
         $email = $_POST['email'];
+        $reason = $_POST['reason'];
+        $staff = $_POST['staff'];
     
         if (isset($_POST['reject_brgyid'])) {
             $connection = $this->openConn();
-            $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Declined' WHERE id_brgyid = ?");
-            $stmt->execute([$id_brgyid]);
-
-            try {
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
-                $mail->SMTPAuth = true;
-                $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
-                $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
-                $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
-                $mail->Port = 587; // Change this to the appropriate port
+            $currentTimestamp = date('Y-m-d H:i:s');
+            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined', staff = ?, create_at=? WHERE id_brgyid = ?");
+            $stmt->execute([$staff, $currentTimestamp, $id_brgyid]);
     
-                $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
-                $mail->addAddress($email);
+            // Send email using PHPMailer if email is not null
+            if (!empty($email)) {
+                try {
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                    $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                    $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                    $mail->Port = 587; // Change this to the appropriate port
     
-                $mail->isHTML(true);
-                $mail->Subject = 'Declined Request for Barangay ID';
-                $mail->Body    = 'Your request has been Declined, Incorrect Detail.';
+                    $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                    $mail->addAddress($email);
     
-                $mail->send();
-                // echo 'Email has been sent';
-            } catch (Exception $e) {
-                echo "Mailer Error: {$mail->ErrorInfo}";
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Request Declined';
+                    $mail->Body    = "{$reason}.<br><br> For further assistance contact us by email: olongapobarangaysantarita@gmail.com .<br><br>Thank you.";
+    
+                    $mail->send();
+                    
+                    // Alert using JavaScript
+                    echo "<script>alert('Record is Declined, Print Another Record'); window.location.href = 'admn_brgyid.php';</script>";
+                } catch (Exception $e) {
+                    echo "Mailer Error: {$mail->ErrorInfo}";
+                }
+            } else {
+                // If email is null, just redirect without sending an email
+                echo "<script>alert('Record is Declined, Print Another Record'); window.location.href = 'admn_brgyid.php';</script>";
             }
-    
-            header("Refresh:0");
         }
     }
 
