@@ -1312,7 +1312,7 @@ class BMISClass {
     
             // $message2 = "Application Applied, you will receive our text message for further details";
             $message2 = "Application Applied, Proceed to Printing";
-            echo "<script type='text/javascript'>alert('$message2');</script>";
+            echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_certofres.php';</script>";
             header("refresh: 0");
         }
     }
@@ -1599,7 +1599,7 @@ class BMISClass {
             $stmt->execute([$id_resident, $lname, $fname, $mi, $nationality, $houseno, $street, $brgy, $municipal, $purpose, $date, $target_file, $track_id, $is_urgent]);
     
             $message2 = "Application Applied, Proceed to Printing";
-            echo "<script type='text/javascript'>alert('$message2');</script>";
+            echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_certofindigency.php';</script>";
             header("refresh: 0");
         }
     }
@@ -1965,7 +1965,7 @@ class BMISClass {
             $stmt->execute([$id_resident, $lname, $fname, $mi, $purpose, $houseno, $street, $brgy, $municipal, $status, $target_file, $track_id, $pickup_date, $bdate, $is_urgent]);
     
             $message2 = "Application Applied, Proceed to Printing";
-            echo "<script type='text/javascript'>alert('$message2');</script>";
+            echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_brgyclearance.php';</script>";
             header("refresh: 0");
         }
     }
@@ -2359,7 +2359,7 @@ public function create_bspermit_walkin() {
 
         // Display success message
         $message2 = "Application Applied, Proceed to Printing";
-        echo "<script type='text/javascript'>alert('$message2');</script>";
+        echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_bspermit.php';</script>";
         header("refresh: 0");
     }
 }
@@ -2724,7 +2724,7 @@ public function create_bspermit_walkin() {
                 $inc_houseno, $inc_street, $inc_brgy, $track_id, $pickup_date, $inc_municipal, $is_urgent]);
     
             $message2 = "Application Applied, Proceed to Printing";
-            echo "<script type='text/javascript'>alert('$message2');</script>";
+            echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_brgyid.php';</script>";
             header("refresh: 0");
         }  
     }    

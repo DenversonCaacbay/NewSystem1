@@ -373,7 +373,7 @@ use PHPMailer\PHPMailer\Exception;
                     $message2 = "Resident approved, but email could not be sent. Error: {$mail->ErrorInfo}";
                 }
         
-                echo "<script type='text/javascript'>alert('$message2');</script>";
+                echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_resident_crud.php';</script>";
                 header("Refresh:1");
             }
         }
@@ -419,7 +419,7 @@ use PHPMailer\PHPMailer\Exception;
                     $message2 = "Resident Declined, but email could not be sent. Error: {$mail->ErrorInfo}";
                 }
         
-                echo "<script type='text/javascript'>alert('$message2');</script>";
+                echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_resident_crud.php';</script>";
                 header("Refresh:0");
             }
         }
@@ -464,7 +464,7 @@ use PHPMailer\PHPMailer\Exception;
                     $message2 = "Resident Declined, but email could not be sent. Error: {$mail->ErrorInfo}";
                 }
         
-                echo "<script type='text/javascript'>alert('$message2');</script>";
+                echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_resident_approved.php';</script>";
                 header("Refresh:0");
             }
         }
@@ -508,8 +508,7 @@ use PHPMailer\PHPMailer\Exception;
                 } catch (Exception $e) {
                     $message2 = "Resident Declined, but email could not be sent. Error: {$mail->ErrorInfo}";
                 }
-        
-                echo "<script type='text/javascript'>alert('$message2');</script>";
+                echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_resident_banned.php';</script>";
                 header("Refresh:0");
             }
         }

@@ -118,7 +118,7 @@
       <form action="" method="post">
       <div class="modal-body">
         <label>Are you sure you want to lift his/her ban? </label>
-        <textarea class="form-control" name="reason" value="Your Account is now Lifted on Banned, Thank you" hidden></textarea>
+        <input class="form-control" name="reason" value="Your Account is now Lifted on Banned, Thank you" hidden/>
       </div>
       <div class="modal-footer">
             <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->

@@ -145,7 +145,7 @@
       <div class="modal-footer">
             <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
             <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
-            <input type="text" name="email" value="<?= $view['email'];?>">
+            <input type="hidden" name="email" value="<?= $view['email'];?>">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" name="decline_resident" onclick="return confirm('Are you sure you want to Banned this resident?')">Submit</button>
       </div>
