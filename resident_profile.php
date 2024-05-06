@@ -348,7 +348,7 @@ margin-left: .1%;
                         <!--</div>-->
 
 
-                        <div class="row" style="margin-bottom: 5px; bg-danger"> 
+                        <div class="row" style="margin-bottom: 5px;"> 
                             <div>
                                 <div class="form-inline">
                                     <input class="form-control" name="lname" type="hidden" value="<?= $resident['lname'];?>"/>

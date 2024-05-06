@@ -171,7 +171,11 @@
         background-color: #208454;
         color: white;
     }
-    @media (max-width: 767px) {
+    .announcement-image{
+        width:100%; 
+        height: 300px;
+    }
+    @media (max-width: 768px) {
     .alert {
         margin-top: 20%;
         height: auto; /* Set height to auto for mobile view */
@@ -196,6 +200,10 @@
 
     .header h3{
         font-size: 15px;
+    }
+    .announcement-image{
+        width:100%; 
+        height: 150px;
     }
 
 }
@@ -299,7 +307,7 @@
                                             <img id="blah" src="assets/default-thumbnail.jpg" class="text-center img-fluid">
                                         <?php else: ?>
                                             <div class="text-center">
-                                                <img class="" style="width:100%; height: 300px;" src="<?= $announcement['announcement_image'] ?>">
+                                                <img class="announcement-image" src="<?= $announcement['announcement_image'] ?>">
                                             </div>
 
                                         <?php endif; ?>
