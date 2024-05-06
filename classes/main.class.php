@@ -87,22 +87,26 @@ class BMISClass {
                 // check if existing and password matches
                 // password_verify check if password inputted(hashed) matches password from db
                 if ($user AND password_verify($password, $user['password'])) {
-                    //statement na mag ch check kung admin yung role
-                    if($user['role'] == 'administrator') {
-                        $this->set_userdata($user);
-                        header('Location: admn_dashboard.php');
-                        return (0);
+                    // Check if the user's status is active
+                    if ($user['status'] == 'active') {
+                        // Check if the role is administrator
+                        if($user['role'] == 'administrator') {
+                            $this->set_userdata($user);
+                            header('Location: admn_dashboard.php');
+                            return (0);
+                        }
+                        // Check if the role is Staff
+                        if($user['role'] == 'Staff') {
+                            $this->set_userdata($user);
+                            header('Location: staff_dashboard.php');
+                            return(0);
+                        }
+                    } else if ($user['status'] == 'deactivated') {
+                        // If the status is deactivated, alert the user and do not proceed with login
+                        echo "<script>alert('Your account has been deactivated by Admin');</script>";
                     }
-                    //kapag hindi admin ang role ng nag enter next na i c capture user login
-                    if($user['role'] == 'Staff') {
-                        //statement na mag ch check kung user yung role
-                        $this->set_userdata($user);
-                        header('Location: staff_dashboard.php');
-                        return(0);
-                    }
-
                 }
-
+                
                 // if all else fail, give error
                 echo "<script type='text/javascript'>alert('Invalid Email or Password');</script>";
             }
@@ -171,7 +175,8 @@ class BMISClass {
             "houseno" => $array['houseno'],
             "street" => $array['street'],
             "brgy" => $array['brgy'],
-            "municipal" => $array['municipal']
+            "municipal" => $array['municipal'],
+            "verified" => $array['verified']
         );
         return $_SESSION['userdata'];
     }

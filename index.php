@@ -260,7 +260,7 @@
                 <!-- <a href="resident_registration.php" class="btn btn-primary ml-2"></a> -->
             <?php else : ?>
                 <button title="Your Account" class="btn btn-primary dropdown-toggle ml-2" type="button" data-toggle="dropdown">
-                 <?= $userdetails['surname']; ?>, <?= $userdetails['firstname']; ?>
+                <?= $userdetails['surname']; ?>, <?= $userdetails['firstname']; ?>
                     <span class="caret" style="margin-left: 2px;"></span>
                 </button>
                 <ul class="dropdown-menu" style="">
@@ -489,7 +489,44 @@
                 </div>
             </form>
         </div>
+<!-- Modal for Banned Account -->
+<div class="modal fade" id="bannedModal" tabindex="-1" role="dialog" aria-labelledby="bannedModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bannedModalLabel">Account Banned</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Your account has been banned. Please check your email for more information.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
         <!-- Footer -->
 <script>
     $(document).ready(function(){
@@ -551,9 +588,18 @@
             event.preventDefault();
             // Show an alert
             alert('Please login first.');
+        } else {
+            // Check if the user is banned
+            if (userdata.verified === 'Banned') {
+                // Show a modal informing the user that their account is banned
+                $('#bannedModal').modal('show');
+                // Prevent the link from navigating
+                event.preventDefault();
+            }
         }
     }
 </script>
+
 <script>
 // Function to create checkboxes
 function createCheckboxes() {
