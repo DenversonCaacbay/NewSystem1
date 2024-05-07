@@ -623,23 +623,23 @@ use PHPMailer\PHPMailer\Exception;
     public function count_walkin_request() {
         $connection = $this->openConn();
     
-        $stmt1 = $connection->prepare("SELECT COUNT(*) from tbl_brgyid WHERE id_resident IS NULL");
+        $stmt1 = $connection->prepare("SELECT COUNT(*) from tbl_brgyid WHERE form_status = 'Approved' AND id_resident IS NULL");
         $stmt1->execute();
         $approved_brgyid = $stmt1->fetchColumn();
     
-        $stmt2 = $connection->prepare("SELECT COUNT(*) from tbl_clearance WHERE id_resident IS NULL");
+        $stmt2 = $connection->prepare("SELECT COUNT(*) from tbl_clearance WHERE form_status = 'Approved' AND id_resident IS NULL");
         $stmt2->execute();
         $approved_clearance = $stmt2->fetchColumn();
     
-        $stmt3 = $connection->prepare("SELECT COUNT(*) from tbl_indigency WHERE id_resident IS NULL");
+        $stmt3 = $connection->prepare("SELECT COUNT(*) from tbl_indigency WHERE form_status = 'Approved' AND id_resident IS NULL");
         $stmt3->execute();
         $approved_indigency = $stmt3->fetchColumn();
     
-        $stmt4 = $connection->prepare("SELECT COUNT(*) from tbl_rescert WHERE id_resident IS NULL");
+        $stmt4 = $connection->prepare("SELECT COUNT(*) from tbl_rescert WHERE form_status = 'Approved' AND id_resident IS NULL");
         $stmt4->execute();
         $approved_rescert = $stmt4->fetchColumn();
     
-        $stmt5 = $connection->prepare("SELECT COUNT(*) from tbl_bspermit WHERE id_resident IS NULL");
+        $stmt5 = $connection->prepare("SELECT COUNT(*) from tbl_bspermit WHERE form_status = 'Approved' AND id_resident IS NULL");
         $stmt5->execute();
         $approved_bspermit = $stmt5->fetchColumn();
     
