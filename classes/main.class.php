@@ -1423,11 +1423,10 @@ class BMISClass {
         $email = $_POST['email'];
         $reason = $_POST['reason'];
         $staff = $_POST['staff'];
-    
         if (isset($_POST['reject_rescert'])) {
             $connection = $this->openConn();
             $currentTimestamp = date('Y-m-d H:i:s');
-            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined', staff = ?, create_at=? WHERE id_rescert = ?");
+            $stmt = $connection->prepare("UPDATE tbl_rescert SET form_status = 'Declined', staff = ?, created_at = ?  WHERE id_rescert = ?");
             $stmt->execute([$staff, $currentTimestamp, $id_rescert]);
     
             // Send email using PHPMailer if email is not null
@@ -1834,7 +1833,7 @@ class BMISClass {
         if (isset($_POST['reject_indigency'])) {
             $connection = $this->openConn();
             $currentTimestamp = date('Y-m-d H:i:s');
-            $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Declined', staff = ?, create_at=? WHERE id_indigency = ?");
+            $stmt = $connection->prepare("UPDATE tbl_indigency SET form_status = 'Declined', staff = ?, created_at=? WHERE id_indigency = ?");
             $stmt->execute([$staff, $currentTimestamp, $id_indigency]);
     
             // Send email using PHPMailer if email is not null
@@ -2220,7 +2219,7 @@ class BMISClass {
         if (isset($_POST['reject_clearance'])) {
             $connection = $this->openConn();
             $currentTimestamp = date('Y-m-d H:i:s');
-            $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Declined', staff = ?, create_at=? WHERE id_clearance = ?");
+            $stmt = $connection->prepare("UPDATE tbl_clearance SET form_status = 'Declined', staff = ?, created_at=? WHERE id_clearance = ?");
             $stmt->execute([$staff, $currentTimestamp, $id_clearance]);
     
             // Send email using PHPMailer if email is not null
@@ -2735,7 +2734,7 @@ class BMISClass {
         if (isset($_POST['reject_bspermit'])) {
             $connection = $this->openConn();
             $currentTimestamp = date('Y-m-d H:i:s');
-            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined', staff = ?, create_at=? WHERE id_bspermit = ?");
+            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined', staff = ?, created_at=? WHERE id_bspermit = ?");
             $stmt->execute([$staff, $currentTimestamp, $id_bspermit]);
     
             // Send email using PHPMailer if email is not null
@@ -3138,7 +3137,7 @@ class BMISClass {
         if (isset($_POST['reject_brgyid'])) {
             $connection = $this->openConn();
             $currentTimestamp = date('Y-m-d H:i:s');
-            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Declined', staff = ?, create_at=? WHERE id_brgyid = ?");
+            $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Declined', staff = ?, created_at=? WHERE id_brgyid = ?");
             $stmt->execute([$staff, $currentTimestamp, $id_brgyid]);
     
             // Send email using PHPMailer if email is not null
