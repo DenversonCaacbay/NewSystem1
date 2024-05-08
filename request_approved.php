@@ -132,7 +132,9 @@ h4{
 .request--container{
     margin-top:5%;
 }
-
+#request_type{
+    width: 30%;
+}
 @media (max-width: 767px) {
 .request--container{
     margin-top:20%;
@@ -169,6 +171,9 @@ h4{
 
 .header h3{
     font-size: 15px;
+}
+#request_type{
+    width:60%;
 }
 
 }
@@ -229,6 +234,27 @@ h4{
     </div>
     
     <div class="row mt-3">
+    <div class="col-md-12">
+        <form action="" method="get">
+            <div class="form-group text-center">
+                <label for="request_type">Filter by Request Type:</label>
+                <div class="d-flex align-items-center justify-content-center">
+                    <select class="form-select me-3" id="request_type" name="request_type">
+                        <option value="">All</option>
+                        <option value="barangay_id" <?php echo ($_GET['request_type'] ?? '') === 'barangay_id' ? 'selected' : ''; ?>>Barangay ID</option>
+                        <option value="business_recommendation" <?php echo ($_GET['request_type'] ?? '') === 'business_recommendation' ? 'selected' : ''; ?>>Business Recommendation</option>
+                        <option value="barangay_clearance" <?php echo ($_GET['request_type'] ?? '') === 'barangay_clearance' ? 'selected' : ''; ?>>Barangay Clearance</option>
+                        <option value="indigency" <?php echo ($_GET['request_type'] ?? '') === 'indigency' ? 'selected' : ''; ?>>Indigency</option>
+                        <option value="residency" <?php echo ($_GET['request_type'] ?? '') === 'residency' ? 'selected' : ''; ?>>Residency</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Apply Filter</button>
+                </div>
+                
+            </div>
+           
+        </form>
+    </div>
+
     <?php 
     // Check if requests are available and sort them by date in descending order
     if(is_array($requests_approved)) {
@@ -238,12 +264,47 @@ h4{
             $all_requests = array_merge($all_requests, $request_data);
         }
 
+        // Apply filter by request type if selected
+        if(isset($_GET['request_type']) && !empty($_GET['request_type'])) {
+            $filtered_requests = [];
+            foreach ($all_requests as $request) {
+                switch ($_GET['request_type']) {
+                    case 'barangay_id':
+                        if ($request['id_brgyid']) {
+                            $filtered_requests[] = $request;
+                        }
+                        break;
+                    case 'business_recommendation':
+                        if ($request['id_bspermit']) {
+                            $filtered_requests[] = $request;
+                        }
+                        break;
+                    case 'barangay_clearance':
+                        if ($request['id_clearance']) {
+                            $filtered_requests[] = $request;
+                        }
+                        break;
+                    case 'indigency':
+                        if ($request['id_indigency']) {
+                            $filtered_requests[] = $request;
+                        }
+                        break;
+                    case 'residency':
+                        if ($request['id_rescert']) {
+                            $filtered_requests[] = $request;
+                        }
+                        break;
+                }
+            }
+            $all_requests = $filtered_requests;
+        }
+
         // Sort all requests by date in descending order
         usort($all_requests, function($a, $b) {
             return strtotime($b['date']) - strtotime($a['date']);
         });
 
-        // Iterate over sorted requests and display them
+        // Iterate over sorted and filtered requests and display them
         foreach($all_requests as $request) {?>
             <div class="col-md-4">
                 <div class="card mt-3 mb-3">
@@ -277,6 +338,7 @@ h4{
         <?php } ?>
     <?php } ?>
 </div>
+
 
 <!-- History Modal -->
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

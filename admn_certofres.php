@@ -57,7 +57,11 @@
 
     <div class="d-flex justify-content-between mb-3">
         <h4 class="mb-0">Pending Residency Requests</h4>
-        <a href="walkin_certofres.php" class="btn btn-primary"><i class="fas fa-walking me-2"></i>For Walk'in </a>
+        <div class="d-flex align-items-center">
+            <a href="./archive_residency.php" class="me-3">View Archive</a>
+            <a href="walkin_certofres.php" class="btn btn-primary"><i class="fas fa-walking me-2"></i>For Walk'in </a>
+        </div>
+        
     </div>
 
     <div class="row">

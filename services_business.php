@@ -393,6 +393,14 @@ margin-left: .1%;
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please Fill out this field</div>
                                         </div>
+                                        <p class="mt-3">
+                                            <b>For non-urgent requests:</b>
+                                            "Please note: Non-urgent requests will be processed within 3-5 working days."
+                                        </p>
+                                        <p>
+                                            <b>For urgent requests:</b>
+                                            "Please note: Urgent requests will be processed within 1-2 working days."
+                                        </p>
                                     </div>
 
                                 </div>

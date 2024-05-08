@@ -1345,7 +1345,7 @@ class BMISClass {
     // New with Pagination
     public function view_certofres($limit = 5, $offset = 0) {
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status = 'Pending' ORDER BY date ASC LIMIT :limit OFFSET :offset");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
@@ -1357,6 +1357,26 @@ class BMISClass {
     
         return [$view, $moreRecords];
     }
+    // public function view_certofres($limit = 5, $offset = 0) {
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("
+    //         (SELECT * FROM tbl_rescert WHERE form_status = 'Pending' AND is_urgent IS NOT NULL ORDER BY date ASC)
+    //         UNION
+    //         (SELECT * FROM tbl_rescert WHERE form_status = 'Pending' AND is_urgent = 'Walk In' ORDER BY date ASC)
+    //         LIMIT :limit OFFSET :offset
+    //     ");
+    //     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    //     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+        
+    //     // Fetch one extra record beyond the limit to check if there are more records
+    //     $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $moreRecords = $stmt->rowCount() > 0;
+        
+    //     return [$view, $moreRecords];
+    // }
+    
     
     public function view_certofres_done(){
         $connection = $this->openConn();

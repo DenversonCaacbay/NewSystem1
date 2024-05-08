@@ -131,14 +131,15 @@
     background-color: #208454;
     color: white;
     border: none;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
+    font-size: 20px;
     cursor: pointer;
     transition: 0.3s;
     /* Adjustments for vertical position */
-    padding: 20px 10px;
+    padding: 40px 20px;
     writing-mode: vertical-rl; /* Set vertical writing mode */
     transform: rotate(-180deg); /* Rotate the text */
-    letter-spacing: 2px;
+    letter-spacing: 4px;
 }
 
     

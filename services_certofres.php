@@ -385,6 +385,16 @@
                                                 </label>
                                             </div>
                                         </div>
+                                        <p class="mt-3">
+                                            <b>For non-urgent requests:</b>
+                                            "Please note: Non-urgent requests will be processed within 3-5 working days."
+                                        </p>
+                                        <p>
+                                            <b>For urgent requests:</b>
+                                            "Please note: Urgent requests will be processed within 1-2 working days."
+                                        </p>
+                                        
+                                        
                                         <div class="form-group" id="urgentRequest" style="display: none;">
                                             <label class="mtop">Urgent Request: <code>Note: 50 pesos payment upon getting request</code></label>
                                             <textarea class="form-control"></textarea>
