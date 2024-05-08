@@ -65,7 +65,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-color text-uppercase mb-1">
-                                Total Release Request</div>
+                                Total Released Request</div>
                                 <div class="h5 mb-0 font-weight-bold text-dark"><?= $approved_request?></div>
                                 <!-- <a href="admn_request_archives.php"> View Records </a> -->
                         </div>

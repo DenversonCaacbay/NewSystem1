@@ -173,6 +173,11 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Archives</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="admn_request_logs.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Logs of Activity</span></a>
+            </li>
             <?php endif; ?>
 
         </ul>

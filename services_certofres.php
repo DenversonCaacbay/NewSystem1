@@ -201,7 +201,7 @@
         <div id="down1"></div>
         <div class="container mt-5">
 
-            <h1 class="text-center">Registration</h1>
+            <h1 class="text-center">Request Form</h1>
             <hr style="background-color:black;">
 
                 <div class="col">   
@@ -394,6 +394,7 @@
                                     </div>
                                             <input type="hidden" class="form-control" name="date_live" value="<?= $userdetails['date_live']?>" placeholder="Enter Other" />
                                 </div>
+                                <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" hidden>
 
                                 <hr>
 

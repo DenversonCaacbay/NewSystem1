@@ -1428,6 +1428,129 @@ use PHPMailer\PHPMailer\Exception;
     //     return $view;
     // }
 
+
+     // For Logs In-Process / Pending Requests
+     public function view_logs_in_process(){
+        $connection = $this->openConn();
+    
+        // tbl_brgyid
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status='Pending'");
+        $stmt->execute();
+        $brgyid_data = $stmt->fetchAll();
+    
+        // tbl_bspermit
+        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status='Pending'");
+        $stmt->execute();
+        $bspermit_data = $stmt->fetchAll();
+    
+        // tbl_clearance
+        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE  form_status='Pending'");
+        $stmt->execute();
+        $clearance_data = $stmt->fetchAll();
+    
+        // tbl_indigency
+        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status='Pending'");
+        $stmt->execute();
+        $indigency_data = $stmt->fetchAll();
+    
+        // tbl_rescert
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert  WHERE form_status='Pending'");
+        $stmt->execute();
+        $rescert_data = $stmt->fetchAll();
+    
+        // Combine the fetched data into one variable
+        $requests_data = array(
+            'brgyid' => $brgyid_data,
+            'bspermit' => $bspermit_data,
+            'clearance' => $clearance_data,
+            'indigency' => $indigency_data,
+            'rescert' => $rescert_data,
+        );
+    
+        return $requests_data;
+    }
+
+        // For Logs Processed
+        public function view_logs_processed(){
+            $connection = $this->openConn();
+        
+            // tbl_brgyid
+            $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status='Approved'");
+            $stmt->execute();
+            $brgyid_data = $stmt->fetchAll();
+        
+            // tbl_bspermit
+            $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status='Approved'");
+            $stmt->execute();
+            $bspermit_data = $stmt->fetchAll();
+        
+            // tbl_clearance
+            $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE  form_status='Approved'");
+            $stmt->execute();
+            $clearance_data = $stmt->fetchAll();
+        
+            // tbl_indigency
+            $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status='Approved'");
+            $stmt->execute();
+            $indigency_data = $stmt->fetchAll();
+        
+            // tbl_rescert
+            $stmt = $connection->prepare("SELECT * FROM tbl_rescert  WHERE form_status='Approved'");
+            $stmt->execute();
+            $rescert_data = $stmt->fetchAll();
+        
+            // Combine the fetched data into one variable
+            $requests_data = array(
+                'brgyid' => $brgyid_data,
+                'bspermit' => $bspermit_data,
+                'clearance' => $clearance_data,
+                'indigency' => $indigency_data,
+                'rescert' => $rescert_data,
+            );
+        
+            return $requests_data;
+        }
+    // For Logs Walkin
+     public function view_logs_walkin(){
+        $connection = $this->openConn();
+    
+        // tbl_brgyid
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status='Approved' AND is_urgent='Walk In'");
+        $stmt->execute();
+        $brgyid_data = $stmt->fetchAll();
+    
+        // tbl_bspermit
+        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status='Approved' AND is_urgent='Walk In'");
+        $stmt->execute();
+        $bspermit_data = $stmt->fetchAll();
+    
+        // tbl_clearance
+        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE  form_status='Approved' AND is_urgent='Walk In'");
+        $stmt->execute();
+        $clearance_data = $stmt->fetchAll();
+    
+        // tbl_indigency
+        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status='Approved' AND is_urgent='Walk In'");
+        $stmt->execute();
+        $indigency_data = $stmt->fetchAll();
+    
+        // tbl_rescert
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert  WHERE form_status='Approved' AND is_urgent='Walk In'");
+        $stmt->execute();
+        $rescert_data = $stmt->fetchAll();
+    
+        // Combine the fetched data into one variable
+        $requests_data = array(
+            'brgyid' => $brgyid_data,
+            'bspermit' => $bspermit_data,
+            'clearance' => $clearance_data,
+            'indigency' => $indigency_data,
+            'rescert' => $rescert_data,
+        );
+    
+        return $requests_data;
+    }
+
     public function view_single_residency(){
         $id = $_GET['id'];
         

@@ -62,7 +62,13 @@
         </div>
         
         <div class="viewer-content d-flex justify-content-between">
-        <div class="text-center m-5"><img src="assets/default-thumbnail.jpg" alt="ID IMAGE" class="viewer--img"></div>
+        <div class="text-center m-5">
+            <?php if (isset($view['certofindigency_photo']) && !empty($view['certofindigency_photo'])) : ?>
+                <img src="<?= $view['certofindigency_photo'] ?>" alt="Barangay Clearance IMAGE" class="viewer--img">
+            <?php else : ?>
+                <img src="assets/default-thumbnail.jpg" alt="Default Thumbnail" class="viewer--img">
+            <?php endif; ?>
+        </div>
             <div class="w-100 me-3">
                
                 

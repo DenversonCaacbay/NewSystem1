@@ -159,11 +159,7 @@ margin-left: .1%;
                         <span class="d-inline d-sm-none">Procedure</span>
                     </a>
                 </li>
-                
-               
             </ul>
-
- 
 
             <div class="dropdown ml-auto">
                 <?php if (empty($userdetails)) : ?>

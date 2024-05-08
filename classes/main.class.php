@@ -1178,6 +1178,22 @@ class BMISClass {
     public function create_certofres() {
         if(isset($_POST['create_certofres'])) {
             $id_resident = $_POST['id_resident'] ?: NULL;
+            $purpose = $_POST['purpose'];
+    
+            // Check if the resident has a pending request with the same purpose
+            $connection = $this->openConn();
+            $stmt_check = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_resident = ? AND purpose = ? AND form_status = 'Pending'");
+            $stmt_check->execute([$id_resident, $purpose]);
+            $existing_request = $stmt_check->fetch();
+    
+            if($existing_request) {
+                // If there's an existing pending request with the same purpose, display a message and stop further execution
+                $message = "You already have a pending request for a certificate of residence with the same purpose. Please wait for it to be processed.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                return;
+            }
+    
+            // If there's no pending request with the same purpose, proceed with inserting the new request
             $lname = $_POST['lname'];
             $fname = $_POST['fname'];
             $mi = $_POST['mi'];
@@ -1187,16 +1203,9 @@ class BMISClass {
             $street = $_POST['street'];
             $brgy = $_POST['brgy'];
             $municipal = $_POST['municipal'];
-            $date = $_POST['date'] ?: NULL;
+            $date = $_POST['date'];
             $date_live = $_POST['date_live'] ?: NULL;
             $track_id = uniqid();
-            
-            // purpose checker
-            if($_POST['purpose'] == "Other"){
-                $purpose = $_POST['otherInput'];
-            } else {
-                $purpose = $_POST['purpose'];
-            }
     
             // Set the target directory
             $target_dir = "uploads/certofres/";
@@ -1234,19 +1243,19 @@ class BMISClass {
             }
     
             // Insert data into the database, including the $target_file value
-            $connection = $this->openConn();
             $stmt = $connection->prepare("INSERT INTO tbl_rescert (`id_resident`, `lname`, `fname`, `mi`,
              `age`,`nationality`, `houseno`, `street`,`brgy`, `municipal`, `date`,`date_live`,`purpose`, `certofres_photo`, `track_id`)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
             $stmt->execute([$id_resident, $lname, $fname, $mi,  $age, $nationality, $houseno,  $street, $brgy, $municipal, $date,$date_live, $purpose, $target_file, $track_id]);
     
-            // $message2 = "Application Applied, you will receive our text message for further details";
-            $message2 = "Application Applied, Proceed to Printing";
+            // Display success message
+            $message2 = "Application Applied, you will receive an email for further details, Thank you";
             echo "<script type='text/javascript'>alert('$message2');</script>";
             header("refresh: 0");
         }
     }
+    
 
     public function create_certofres_walkin() {
         if(isset($_POST['create_certofres_walkin'])) {
@@ -1499,7 +1508,20 @@ class BMISClass {
     }
     
     
+    // public function view_logs($limit = 5, $offset = 0) {
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
+    //     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    //     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
     
+    //     // Fetch one extra record beyond the limit to check if there are more records
+    //     $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $moreRecords = $stmt->rowCount() > 0;
+    
+    //     return [$view, $moreRecords];
+    // }
     
     
     
@@ -1509,6 +1531,22 @@ class BMISClass {
      public function create_certofindigency() {
         if(isset($_POST['create_certofindigency'])) {
             $id_resident = $_POST['id_resident'];
+            $purpose = $_POST['purpose'];
+            
+            // Check if the resident has a pending request with the same purpose
+            $connection = $this->openConn();
+            $stmt_check = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_resident = ? AND purpose = ? AND form_status = 'Pending'");
+            $stmt_check->execute([$id_resident, $purpose]);
+            $existing_request = $stmt_check->fetch();
+    
+            if($existing_request) {
+                // If there's an existing pending request with the same purpose, display a message and stop further execution
+                $message = "You already have a pending request for a certificate of indigency with the same purpose. Please wait for it to be processed.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                return;
+            }
+    
+            // If there's no pending request with the same purpose, proceed with inserting the new request
             $lname = $_POST['lname'];
             $fname = $_POST['fname'];
             $mi = $_POST['mi'];
@@ -1519,11 +1557,10 @@ class BMISClass {
             $municipal = $_POST['municipal'];
             $track_id = uniqid();
             
-            // purpose checker
-            if($_POST['purpose'] == "Other"){
+            // Process purpose input
+            if($_POST['purpose'] == "Other") {
                 $purpose = $_POST['otherInput'];
-            }
-            else{
+            } else {
                 $purpose = $_POST['purpose'];
             }
     
@@ -1565,18 +1602,19 @@ class BMISClass {
             }
     
             // Insert data into the database, including the $target_file value
-            $connection = $this->openConn();
             $stmt = $connection->prepare("INSERT INTO tbl_indigency (`id_resident`, `lname`, `fname`, `mi`,
-             `nationality`, `houseno`, `street`,`brgy`, `municipal`,`purpose`, `date`, `certofindigency_photo`, `track_id`)
+             `nationality`, `houseno`, `street`,`brgy`, `municipal`, `purpose`, `date`, `certofindigency_photo`, `track_id`)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
             $stmt->execute([$id_resident, $lname, $fname, $mi, $nationality, $houseno, $street, $brgy, $municipal, $purpose, $date, $target_file, $track_id]);
     
+            // Display success message
             $message2 = "Application Applied, you will receive our text message for further details";
             echo "<script type='text/javascript'>alert('$message2');</script>";
             header("refresh: 0");
         }
     }
+    
 
     // For Walkin
     public function create_certofindigency_walkin() {
@@ -2366,6 +2404,21 @@ class BMISClass {
     public function create_bspermit() {
         if(isset($_POST['create_bspermit'])) {
             $id_resident = $_POST['id_resident'];
+    
+            // Check if the resident has a pending request
+            $connection = $this->openConn();
+            $stmt_check = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_resident = ? AND form_status = 'Pending'");
+            $stmt_check->execute([$id_resident]);
+            $existing_request = $stmt_check->fetch();
+    
+            if($existing_request) {
+                // If there's an existing pending request, display a message and stop further execution
+                $message = "You already have a pending request. Please wait for it to be processed.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                return;
+            }
+    
+            // If there's no pending request, proceed with inserting the new request
             $lname = $_POST['lname'];
             $fname = $_POST['fname'];
             $mi = $_POST['mi'];
@@ -2378,26 +2431,26 @@ class BMISClass {
             $aoe = $_POST['aoe'];
             $pickup_date = $_POST['date'] ?: date("Y-m-d");
             $track_id = uniqid();
-    
+        
             // Check if a file was uploaded
             if(isset($_FILES['bspermit_photo'])) {
                 $uploaded_file = $_FILES['bspermit_photo'];
-    
+        
                 // Set the target directory
                 $target_dir = "uploads/bspermit/";
-    
+        
                 // Check if the file is empty or not
                 if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
                     $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
-    
+        
                     // Check if the target directory exists, and create it if not
                     if (!is_dir($target_dir)) {
                         mkdir($target_dir, 0755, true);
                     }
-    
+        
                     // Generate a unique filename based on the current timestamp
                     $target_file = $target_dir . time() . '.' . $file_extension;
-    
+        
                     // Move the uploaded file to the target directory
                     if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
                         // Your database insertion code goes here
@@ -2413,94 +2466,92 @@ class BMISClass {
                 // No file input field found, set the target file to NULL or some default value
                 $target_file = NULL; // Or set to a default image path if you have one
             }
-    
+        
             // Insert data into the database, including the $target_file value
-            $connection = $this->openConn();
             $stmt = $connection->prepare("INSERT INTO tbl_bspermit (`id_resident`, `lname`, `fname`, `mi`,
              `bsname`, `houseno`, `street`,`brgy`, `municipal`, `bsindustry`, `aoe`, `bspermit_photo`, `track_id`, `date`)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    
+        
             $stmt->execute([$id_resident, $lname, $fname, $mi, $bsname, $houseno, $street, $brgy, $municipal, $bsindustry, $aoe, $target_file, $track_id, $pickup_date]);
-    
-            $message2 = "Application Applied, you will receive our text message for further details";
+        
+            $message2 = "Application Applied, you will receive an email for further details, Thank you";
             echo "<script type='text/javascript'>alert('$message2');</script>";
             header("refresh: 0");
         }
     }
-// For Walkin
-public function create_bspermit_walkin() {
-    if(isset($_POST['create_bspermit_walkin'])) {
-        $id_resident = $_POST['id_resident'];
-        $lname = $_POST['lname'];
-        $fname = $_POST['fname'];
-        $mi = $_POST['mi'];
-        $bsname = $_POST['bsname']; 
-        $houseno = $_POST['houseno'];
-        $street = $_POST['street'];
-        $brgy = $_POST['brgy'];
-        $municipal = $_POST['municipal'];
-        $bsindustry = $_POST['bsindustry'];
-        $aoe = $_POST['aoe'];
-        $pickup_date = $_POST['date'] ?: date("Y-m-d");
-        $track_id = uniqid();
-        $is_urgent = $_POST['is_urgent'];
+    // For Walkin
+    public function create_bspermit_walkin() {
+        if(isset($_POST['create_bspermit_walkin'])) {
+            $id_resident = $_POST['id_resident'];
+            $lname = $_POST['lname'];
+            $fname = $_POST['fname'];
+            $mi = $_POST['mi'];
+            $bsname = $_POST['bsname']; 
+            $houseno = $_POST['houseno'];
+            $street = $_POST['street'];
+            $brgy = $_POST['brgy'];
+            $municipal = $_POST['municipal'];
+            $bsindustry = $_POST['bsindustry'];
+            $aoe = $_POST['aoe'];
+            $pickup_date = $_POST['date'] ?: date("Y-m-d");
+            $track_id = uniqid();
+            $is_urgent = $_POST['is_urgent'];
 
-        // Check if a file was uploaded
-        if(isset($_FILES['bspermit_photo'])) {
-            $uploaded_file = $_FILES['bspermit_photo'];
+            // Check if a file was uploaded
+            if(isset($_FILES['bspermit_photo'])) {
+                $uploaded_file = $_FILES['bspermit_photo'];
 
-            // Set the target directory
-            $target_dir = "uploads/bspermit/";
+                // Set the target directory
+                $target_dir = "uploads/bspermit/";
 
-            // Check if the file is empty or not
-            if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
-                $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
+                // Check if the file is empty or not
+                if($uploaded_file['error'] != UPLOAD_ERR_NO_FILE) {
+                    $file_extension = pathinfo($uploaded_file['name'], PATHINFO_EXTENSION);
 
-                // Check if the target directory exists, and create it if not
-                if (!is_dir($target_dir)) {
-                    mkdir($target_dir, 0755, true);
-                }
+                    // Check if the target directory exists, and create it if not
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0755, true);
+                    }
 
-                // Generate a unique filename based on the current timestamp
-                $target_file = $target_dir . time() . '.' . $file_extension;
+                    // Generate a unique filename based on the current timestamp
+                    $target_file = $target_dir . time() . '.' . $file_extension;
 
-                // Move the uploaded file to the target directory
-                if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
-                    // File uploaded successfully
+                    // Move the uploaded file to the target directory
+                    if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+                        // File uploaded successfully
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                        return; // Stop execution if file upload fails
+                    }
                 } else {
-                    echo "Sorry, there was an error uploading your file.";
-                    return; // Stop execution if file upload fails
+                    // No file uploaded, set the target file to NULL or some default value
+                    $target_file = NULL; // Or set to a default image path if you have one
                 }
             } else {
-                // No file uploaded, set the target file to NULL or some default value
-                $target_file = NULL; // Or set to a default image path if you have one
+                $target_file = NULL;
             }
-        } else {
-            // No file input field found, set the target file to NULL or some default value
-            $target_file = NULL; // Or set to a default image path if you have one
+
+            // Insert data into the database, including the $target_file value
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("
+                INSERT INTO tbl_bspermit (
+                    `id_resident`, `lname`, `fname`, `mi`, `bsname`, `houseno`, `street`, `brgy`, 
+                    `municipal`, `bsindustry`, `aoe`, `bspermit_photo`, `track_id`, `date`, `is_urgent`
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            );
+
+            // Execute the query with the correct number of parameters
+            $stmt->execute([
+                $id_resident, $lname, $fname, $mi, $bsname, $houseno, $street, $brgy, 
+                $municipal, $bsindustry, $aoe, $target_file, $track_id, $pickup_date, $is_urgent
+            ]);
+
+            // Display success message
+            $message2 = "Application Applied, Proceed to Printing";
+            echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_bspermit.php';</script>";
+            header("refresh: 0");
         }
-
-        // Insert data into the database, including the $target_file value
-        $connection = $this->openConn();
-        $stmt = $connection->prepare("
-            INSERT INTO tbl_bspermit (
-                `id_resident`, `lname`, `fname`, `mi`, `bsname`, `houseno`, `street`, `brgy`, 
-                `municipal`, `bsindustry`, `aoe`, `bspermit_photo`, `track_id`, `date`, `is_urgent`
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        );
-
-        // Execute the query with the correct number of parameters
-        $stmt->execute([
-            $id_resident, $lname, $fname, $mi, $bsname, $houseno, $street, $brgy, 
-            $municipal, $bsindustry, $aoe, $target_file, $track_id, $pickup_date, $is_urgent
-        ]);
-
-        // Display success message
-        $message2 = "Application Applied, Proceed to Printing";
-        echo "<script type='text/javascript'>alert('$message2'); window.location.href = 'admn_bspermit.php';</script>";
-        header("refresh: 0");
     }
-}
 
     
     
@@ -2806,6 +2857,21 @@ public function create_bspermit_walkin() {
     public function create_brgyid() {
         if(isset($_POST['create_brgyid'])) {
             $id_resident = $_POST['id_resident'] ?: NULL;
+    
+            // Check if the resident has a pending request
+            $connection = $this->openConn();
+            $stmt_check = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = ? AND form_status = 'Pending'");
+            $stmt_check->execute([$id_resident]);
+            $existing_request = $stmt_check->fetch();
+    
+            if($existing_request) {
+                // If there's an existing pending request, display a message and stop further execution
+                $message = "You already have a pending request. Please wait for it to be processed.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                return;
+            }
+    
+            // If there's no pending request, proceed with inserting the new request
             $lname = ucfirst(strtolower($_POST['lname']));
             $fname = ucfirst(strtolower($_POST['fname']));
             $mi = ucfirst(strtolower($_POST['mi']));
@@ -2813,12 +2879,11 @@ public function create_bspermit_walkin() {
             $street = $_POST['street'];
             $brgy = ucfirst(strtolower($_POST['brgy']));
             $municipal = ucfirst(strtolower($_POST['municipal']));
-            // $civil_status = $_POST['civil_status']);
             $bplace = ucfirst(strtolower($_POST['bplace']));
             $bdate = $_POST['bdate'];
             $pickup_date = $_POST['date'] ?: date("Y-m-d");
             $track_id = uniqid();
-            
+    
             // Process resident photo
             if(isset($_FILES['res_photo']) && $_FILES['res_photo']['error'] !== UPLOAD_ERR_NO_FILE) {
                 $res_photo = $_FILES['res_photo'];
@@ -2831,31 +2896,34 @@ public function create_bspermit_walkin() {
                 // If no file uploaded, set default value for the photo path
                 $target_file_res = NULL; // Or set to a default image path if you have one
             }
-            
+    
+            // Fetch other form data
             $inc_lname = ucfirst(strtolower($_POST['inc_lname']));
             $inc_fname = ucfirst(strtolower($_POST['inc_fname']));
-            $inc_mi = ucfirst(strtolower($_POST['inc_mi']));;
+            $inc_mi = ucfirst(strtolower($_POST['inc_mi']));
             $inc_contact = $_POST['inc_contact'];
             $inc_houseno = $_POST['inc_houseno'];
             $inc_street = $_POST['inc_street'];
             $inc_brgy = $_POST['inc_brgy'];
             $inc_municipal = $_POST['inc_municipal'];
     
-            $connection = $this->openConn();
+            // Insert data into the database
             $stmt = $connection->prepare("INSERT INTO tbl_brgyid (`id_resident`, `lname`, `fname`, `mi`,
-            `houseno`, `street`, `brgy`, `municipal`, `bplace`, `bdate`, `res_photo`, `inc_lname`,
-            `inc_fname`, `inc_mi`, `inc_contact`, `inc_houseno`, `inc_street`, `inc_brgy`, `track_id`, `date`,`inc_municipal`)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                `houseno`, `street`, `brgy`, `municipal`, `bplace`, `bdate`, `res_photo`, `inc_lname`,
+                `inc_fname`, `inc_mi`, `inc_contact`, `inc_houseno`, `inc_street`, `inc_brgy`, `track_id`, `date`,`inc_municipal`)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
-            $stmt->execute([$id_resident, $lname, $fname, $mi, $houseno, $street, $brgy, $municipal, 
-                $bplace, $bdate, $target_file_res, $inc_lname, $inc_fname, $inc_mi, $inc_contact, 
+            $stmt->execute([$id_resident, $lname, $fname, $mi, $houseno, $street, $brgy, $municipal,
+                $bplace, $bdate, $target_file_res, $inc_lname, $inc_fname, $inc_mi, $inc_contact,
                 $inc_houseno, $inc_street, $inc_brgy, $track_id, $pickup_date, $inc_municipal]);
     
-            $message2 = "Application Applied, you will receive our text message for further details";
+            // Display success message
+            $message2 = "Application Applied, you will receive an email for further details";
             echo "<script type='text/javascript'>alert('$message2');</script>";
             header("refresh: 0");
         }  
     }
+    
 
     // For Walkin
     public function create_brgyid_walkin() {
