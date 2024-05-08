@@ -132,8 +132,9 @@
 
         <div class="container" style="margin-top: 1em;">
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-12 d-flex justify-content-between">
                     <h3 class="text-center">Registration Form</h3>
+                    <button class="btn btn-primary"  onclick="downloadPDF()">Purok and Street List <i class="fas fa-download ms-1"></i></button>
                 </div>
             </div>
 
@@ -496,6 +497,27 @@
                     input.attr("type", "password");
                 }
             });
+        </script>
+
+        <script>
+            function downloadPDF() {
+    // Path to your PDF file
+    const pdfPath = 'assets/purok_and_street.pdf';
+
+    // Use fetch to load the PDF file
+    fetch(pdfPath)
+        .then(response => response.blob())
+        .then(blob => {
+            // Create a link element
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'purok_and_street.pdf';
+            link.click();
+        })
+        .catch(error => {
+            console.error('Error fetching the PDF file:', error);
+        });
+}
         </script>
         
 
