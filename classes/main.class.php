@@ -1378,9 +1378,23 @@ class BMISClass {
     // }
     
     
-    public function view_certofres_done(){
+    public function view_certofres_done_all(){
         $connection = $this->openConn();
         $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status ='Approved' OR form_status='Declined' ORDER BY date DESC ");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_certofres_done_Approved(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status ='Approved' ORDER BY date DESC ");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_certofres_done_declined(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status='Declined' ORDER BY date DESC ");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -1745,9 +1759,23 @@ class BMISClass {
         return [$view, $moreRecords];
     }
 
-    public function view_certofindigency_done(){
+    public function view_certofindigency_done_all(){
         $connection = $this->openConn();
         $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status ='Approved' OR form_status='Declined'");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_certofindigency_done_approved(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status ='Approved'");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_certofindigency_done_declined(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status='Declined'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -2172,9 +2200,23 @@ class BMISClass {
         return [$view, $moreRecords];
     }
 
-    public function view_clearance_done(){
+    public function view_clearance_done_all(){
         $connection = $this->openConn();
         $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE form_status ='Approved' OR form_status='Declined'");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_clearance_done_approved(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE form_status ='Approved'");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_clearance_done_declined(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE form_status='Declined'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -2628,9 +2670,23 @@ class BMISClass {
 
     
 
-    public function view_bspermit_done(){
+    public function view_bspermit_done_all(){
         $connection = $this->openConn();
         $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status ='Approved' OR form_status='Declined'");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_bspermit_done_approved(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status ='Approved'");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_bspermit_done_declined(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status='Declined'");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
@@ -3068,9 +3124,23 @@ class BMISClass {
     
     
 
-    public function view_brgyid_done(){
+    public function view_brgyid_done_all(){
         $connection = $this->openConn();
         $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status ='Approved' OR form_status='Declined' ORDER BY date DESC");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_brgyid_done_approved(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status ='Approved' ORDER BY date DESC");
+        $stmt->execute();
+        $view = $stmt->fetchAll();
+        return $view;
+    }
+    public function view_brgyid_done_declined(){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status='Declined' ORDER BY date DESC");
         $stmt->execute();
         $view = $stmt->fetchAll();
         return $view;
