@@ -1145,27 +1145,27 @@ use PHPMailer\PHPMailer\Exception;
         $connection = $this->openConn();
 
         // tbl_brgyid
-        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = {$id_user} AND form_status='Pending'");
+        $stmt = $connection->prepare("SELECT *, 'brgyid' AS table_type, id_brgyid AS id FROM tbl_brgyid WHERE id_resident = {$id_user} AND form_status='Pending'");
         $stmt->execute();
         $brgyid_data = $stmt->fetchAll();
 
         // tbl_bspermit
-        $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE id_resident = {$id_user} AND form_status='Pending'");
+        $stmt = $connection->prepare("SELECT *, 'bspermit' AS table_type, id_bspermit AS id FROM tbl_bspermit WHERE id_resident = {$id_user} AND form_status='Pending'");
         $stmt->execute();
         $bspermit_data = $stmt->fetchAll();
 
         // tbl_clearance
-        $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE id_resident = {$id_user} AND form_status='Pending'");
+        $stmt = $connection->prepare("SELECT *, 'clearance' AS table_type, id_clearance AS id FROM tbl_clearance WHERE id_resident = {$id_user} AND form_status='Pending'");
         $stmt->execute();
         $clearance_data = $stmt->fetchAll();
 
         // tbl_indigency
-        $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE id_resident = {$id_user} AND form_status='Pending'");
+        $stmt = $connection->prepare("SELECT *, 'indigency' AS table_type, id_indigency AS id FROM tbl_indigency WHERE id_resident = {$id_user} AND form_status='Pending'");
         $stmt->execute();
         $indigency_data = $stmt->fetchAll();
 
         // tbl_rescert
-        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE id_resident = {$id_user} AND form_status='Pending'");
+        $stmt = $connection->prepare("SELECT *, 'rescert' AS table_type, id_rescert AS id FROM tbl_rescert WHERE id_resident = {$id_user} AND form_status='Pending'");
         $stmt->execute();
         $rescert_data = $stmt->fetchAll();
 
@@ -1178,6 +1178,47 @@ use PHPMailer\PHPMailer\Exception;
         );
     
         return $requests_data;
+    }
+
+    // cancel aka delete request
+    public function cancel_request(){
+        // valid tables
+        $valid_tables = [
+            "brgyid",
+            "bspermit",
+            "indigency",
+            "rescert",
+            "clearance"
+        ];
+
+        if(isset($_POST['cancel_request'])) {
+            $id = $_POST['id_form'] ?: 0;
+            $table = $_POST['table_type'] ?: "";
+
+            // Check if $table is valid
+            if (!in_array($table, $valid_tables)) {
+                return "Invalid request!";
+            }
+
+            // Validate $id
+            if (!is_numeric($id) || $id <= 0) {
+                return "Invalid request! ID must be a positive integer.";
+            }
+
+            // execute
+            $connection = $this->openConn();
+            $stmt = $connection->prepare("DELETE FROM tbl_{$table} WHERE id_{$table} = ?");
+        
+            if($stmt->execute([$id])){
+                // Display success message
+                echo "<script type='text/javascript'>alert('Request cancelled successfully!');</script>";
+                header("refresh: 0");
+            }
+            else{
+                return "There's an error in the request.";
+            }
+        }
+    
     }
 
     // Approved

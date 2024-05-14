@@ -4,6 +4,8 @@
     $userdetails = $bmis->get_userdata();
     $requests = $residentbmis->view_request($userdetails['id_resident']);
 
+    $residentbmis->cancel_request();
+
     $dt = new DateTime("now", new DateTimeZone('Asia/Manila'));
     $tm = new DateTime("now", new DateTimeZone('Asia/Manila'));
     $cdate = $dt->format('Y/m/d');
@@ -246,34 +248,39 @@ h4{
         // Iterate over sorted requests and display them
         foreach($all_requests as $request) {?>
             <div class="col-md-4">
-                <div class="card mt-3 mb-3">
-                    <div class="card-header bg-primary text-light d-flex justify-content-between">
-                        Date Requested: <?= ucfirst(date("F d, Y", strtotime($request['date']))); ?>
-                        <button class="btn btn-danger"><i class="fas fa-trash text-white"></i></button>
+                <form method="POST">
+                    <div class="card mt-3 mb-3">
+                        <div class="card-header bg-primary text-light d-flex justify-content-between">
+                            Date Requested: <?= ucfirst(date("F d, Y", strtotime($request['date']))); ?>
+                            <button class="btn btn-danger" name="cancel_request" onclick="return confirm('Are you sure you want to cancel the request?')"><i class="fas fa-trash text-white"></i></button>
+                        </div>
+                        <div class="card-body">
+                            <?php 
+                            // Display common request fields
+                            if($request['id_brgyid']) { ?>
+                                <h3 class="card-h1">Barangay ID</h3>
+                                <h5>Street: <?= $request['street'];?><?= $request['brgy'];?></h5>
+                                <?php } elseif($request['id_bspermit']) { ?>
+                                <h3 class="card-h1">Business Recommendation</h3>
+                                <h5>Business Name: <?= $request['bsname'];?></h5>
+                            <?php } elseif($request['id_clearance']) { ?>
+                                <h3 class="card-h1">Barangay Clearance</h3>
+                                <h5>Purpose: <?= $request['purpose'];?></h5>
+                            <?php } elseif($request['id_indigency']) { ?>
+                                <h3 class="card-h1">Indigency</h3>
+                                <h5>Purpose: <?= $request['purpose'];?></h5>
+                            <?php } elseif($request['id_rescert']) { ?>
+                                <h3 class="card-h1">Residency</h3>
+                                <h5>Purpose: <?= $request['purpose'];?></h5>
+                            <?php } ?>
+                            <h5>Status: <span class="pill-pending"><?= $request['form_status'];?></span></h5>
+                            <!-- Add more fields as needed -->
+                            <input type="hidden" name="id_form" value="<?= $request['id'] ?>" />
+                            <input type="hidden" name="table_type" value="<?= $request['table_type'] ?>" />
+                            <!-- <button type="submit" class="btn btn-danger" name="cancel_request" onclick="return confirm('Are you sure you want to cancel the request?')">Cancel Request</button> -->
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <?php 
-                        // Display common request fields
-                        if($request['id_brgyid']) { ?>
-                            <h3 class="card-h1">Barangay ID</h3>
-                            <h5>Street: <?= $request['street'];?><?= $request['brgy'];?></h5>
-                        <?php } elseif($request['id_bspermit']) { ?>
-                            <h3 class="card-h1">Business Recommendation</h3>
-                            <h5>Business Name: <?= $request['bsname'];?></h5>
-                        <?php } elseif($request['id_clearance']) { ?>
-                            <h3 class="card-h1">Barangay Clearance</h3>
-                            <h5>Purpose: <?= $request['purpose'];?></h5>
-                        <?php } elseif($request['id_indigency']) { ?>
-                            <h3 class="card-h1">Indigency</h3>
-                            <h5>Purpose: <?= $request['purpose'];?></h5>
-                        <?php } elseif($request['id_rescert']) { ?>
-                            <h3 class="card-h1">Residency</h3>
-                            <h5>Purpose: <?= $request['purpose'];?></h5>
-                        <?php } ?>
-                        <h5>Status: <span class="pill-pending"><?= $request['form_status'];?></span></h5>
-                        <!-- Add more fields as needed -->
-                    </div>
-                </div>
+                </form>
             </div>
         <?php } ?>
     <?php } ?>
