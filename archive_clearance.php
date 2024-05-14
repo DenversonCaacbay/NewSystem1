@@ -37,7 +37,7 @@
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 10px 16px;
   transition: 0.3s;
   font-size: 14px;
   color: #fff;
@@ -53,7 +53,7 @@
 .tab button.active {
   background-color: #fff;
   color: #309464;
-  border: #309463 1px solid;
+  border: #309463 2px solid;
 }
 
 /* Style the tab content */
@@ -88,13 +88,13 @@
                     <div class="col-md-7">
                     <form id="pdfForm" method="post" action="generatepdf/random/request_clearance.php" target="_blank" style="display: inline-block; margin-right: 10px;">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group" style="margin-bottom: 5px;">
                                     <label for="fromDate" style="display: block;">From Date:</label>
                                     <input type="date" class="form-control" id="fromDate" name="fromDate" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group" style="margin-bottom: 5px;">
                                     <label for="toDate" style="display: block;">To Date:</label>
                                     <input type="date" class="form-control" id="toDate" name="toDate" required>
@@ -147,33 +147,33 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-7">
-                    <form id="pdfForm" method="post" action="generatepdf/random/request_clearance.php" target="_blank" style="display: inline-block; margin-right: 10px;">
+                    <form id="pdfFormApproved" method="post" action="generatepdf/random/request_clearance.php" target="_blank" style="display: inline-block; margin-right: 10px;">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group" style="margin-bottom: 5px;">
                                     <label for="fromDate" style="display: block;">From Date:</label>
-                                    <input type="date" class="form-control" id="fromDate" name="fromDate" required>
+                                    <input type="date" class="form-control" id="fromDate1" name="fromDate" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group" style="margin-bottom: 5px;">
                                     <label for="toDate" style="display: block;">To Date:</label>
-                                    <input type="date" class="form-control" id="toDate" name="toDate" required>
+                                    <input type="date" class="form-control" id="toDate1" name="toDate" required>
                                 </div>
                             </div>
-                            <div class="col-md-2"><button type="button" class="btn btn-primary p-2" style="margin-top:33px" onclick="validateDates()" id="pdfLink"><i class="fas fa-print"></i></button></div>
+                            <div class="col-md-2"><button type="button" class="btn btn-primary p-2" style="margin-top:33px" onclick="validateDatesApproved()" id="pdfLink"><i class="fas fa-print"></i></button></div>
                         </div>
                     </form>
 
                     <script>
-                        function validateDates() {
-                            var startDate = document.getElementById('fromDate').value;
-                            var endDate = document.getElementById('toDate').value;
+                        function validateDatesApproved() {
+                            var startDate = document.getElementById('fromDate1').value;
+                            var endDate = document.getElementById('toDate1').value;
                             if (startDate === "" || endDate === "") {
                                 alert("Please select both start and end dates.");
                             } else {
                                 // Perform other actions or submit the form
-                                var form = document.getElementById('pdfForm');
+                                var form = document.getElementById('pdfFormApproved');
                                 form.submit();
                             }
                         }
@@ -181,12 +181,12 @@
                     </div>
                     <div class="col-md-5">
                         Select Pdf Generate
-                        <select class="form-select mt-2" id="pdfGenerateSelect">
+                        <select class="form-select mt-2" id="pdfGenerateSelect1">
                             <option value="">View Options</option>
-                            <option value="generatePdf/clearance/daily.php">Daily</option>
-                            <option value="generatePdf/clearance/week.php">Weekly</option>
-                            <option value="generatePdf/clearance/month.php">Monthly</option>
-                            <option value="generatePdf/clearance/year.php">Yearly</option>
+                            <option value="generatePdf/clearance/daily_approved.php">Daily</option>
+                            <option value="generatePdf/clearance/week_approved.php">Weekly</option>
+                            <option value="generatePdf/clearance/month_approved.php">Monthly</option>
+                            <option value="generatePdf/clearance/year_approved.php">Yearly</option>
                         </select>
                     </div>  
                 </div>
@@ -209,33 +209,33 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-7">
-                    <form id="pdfForm" method="post" action="generatepdf/random/request_clearance.php" target="_blank" style="display: inline-block; margin-right: 10px;">
+                    <form id="pdfFormDeclined" method="post" action="generatepdf/random/request_clearance.php" target="_blank" style="display: inline-block; margin-right: 10px;">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group" style="margin-bottom: 5px;">
                                     <label for="fromDate" style="display: block;">From Date:</label>
-                                    <input type="date" class="form-control" id="fromDate" name="fromDate" required>
+                                    <input type="date" class="form-control" id="fromDate2" name="fromDate" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group" style="margin-bottom: 5px;">
                                     <label for="toDate" style="display: block;">To Date:</label>
-                                    <input type="date" class="form-control" id="toDate" name="toDate" required>
+                                    <input type="date" class="form-control" id="toDate2" name="toDate" required>
                                 </div>
                             </div>
-                            <div class="col-md-2"><button type="button" class="btn btn-primary p-2" style="margin-top:33px" onclick="validateDates()" id="pdfLink"><i class="fas fa-print"></i></button></div>
+                            <div class="col-md-2"><button type="button" class="btn btn-primary p-2" style="margin-top:33px" onclick="validateDatesDeclined()" id="pdfLink"><i class="fas fa-print"></i></button></div>
                         </div>
                     </form>
 
                     <script>
-                        function validateDates() {
-                            var startDate = document.getElementById('fromDate').value;
-                            var endDate = document.getElementById('toDate').value;
+                        function validateDatesDeclined() {
+                            var startDate = document.getElementById('fromDate2').value;
+                            var endDate = document.getElementById('toDate2').value;
                             if (startDate === "" || endDate === "") {
                                 alert("Please select both start and end dates.");
                             } else {
                                 // Perform other actions or submit the form
-                                var form = document.getElementById('pdfForm');
+                                var form = document.getElementById('pdfFormDeclined');
                                 form.submit();
                             }
                         }
@@ -243,12 +243,12 @@
                     </div>
                     <div class="col-md-5">
                         Select Pdf Generate
-                        <select class="form-select mt-2" id="pdfGenerateSelect">
+                        <select class="form-select mt-2" id="pdfGenerateSelect2">
                             <option value="">View Options</option>
-                            <option value="generatePdf/clearance/daily.php">Daily</option>
-                            <option value="generatePdf/clearance/week.php">Weekly</option>
-                            <option value="generatePdf/clearance/month.php">Monthly</option>
-                            <option value="generatePdf/clearance/year.php">Yearly</option>
+                            <option value="generatePdf/clearance/daily_declined.php">Daily</option>
+                            <option value="generatePdf/clearance/week_declined.php">Weekly</option>
+                            <option value="generatePdf/clearance/month_declined.php">Monthly</option>
+                            <option value="generatePdf/clearance/year_declined.php">Yearly</option>
                         </select>
                     </div>  
                 </div>
@@ -300,6 +300,20 @@ document.addEventListener('DOMContentLoaded', function () {
 <script>
     // Add event listener to the select element
     document.getElementById("pdfGenerateSelect").addEventListener("change", function() {
+        // Redirect to the selected option's value
+        window.open(this.value, "_blank");
+    });
+</script>
+<script>
+    // Add event listener to the select element
+    document.getElementById("pdfGenerateSelect1").addEventListener("change", function() {
+        // Redirect to the selected option's value
+        window.open(this.value, "_blank");
+    });
+</script>
+<script>
+    // Add event listener to the select element
+    document.getElementById("pdfGenerateSelect2").addEventListener("change", function() {
         // Redirect to the selected option's value
         window.open(this.value, "_blank");
     });

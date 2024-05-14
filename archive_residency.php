@@ -64,7 +64,7 @@
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 10px 16px;
   transition: 0.3s;
   font-size: 14px;
   color: #fff;
@@ -80,7 +80,7 @@
 .tab button.active {
   background-color: #fff;
   color: #309464;
-  border: #309463 1px solid;
+  border: #309463 2px solid;
 }
 
 /* Style the tab content */

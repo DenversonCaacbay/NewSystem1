@@ -101,7 +101,7 @@ if ($result->num_rows > 0) {
 
     $dompdf = new Dompdf();
     // $file_name = 'Barangay ID Request Report-From-' . date('F d, Y', strtotime($fromDate)) . 'To-' . date('F d, Y', strtotime($toDate)) .'.pdf';
-    $file_name = 'Barangay_ID_Request_Report_From_' . date('F_d_Y', strtotime($fromDate)) . '_To_' . date('F_d_Y', strtotime($toDate)) .'.pdf';
+    $file_name = 'Indigency_Request_Report-All_From_' . date('F_d_Y', strtotime($fromDate)) . '_To_' . date('F_d_Y', strtotime($toDate)) .'.pdf';
 
 
     $dompdf->loadHtml($html);

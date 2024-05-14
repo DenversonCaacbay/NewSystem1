@@ -1,5 +1,5 @@
 <?php
-require_once '../../dompdf/autoload.inc.php';
+require_once '../../../dompdf/autoload.inc.php';
 
 use Dompdf\Dompdf;
 
@@ -100,7 +100,7 @@ if ($result->num_rows > 0) {
     </html>';
     $dompdf = new Dompdf();
     // $file_name = 'Barangay ID Request Report-From-' . date('F d, Y', strtotime($fromDate)) . 'To-' . date('F d, Y', strtotime($toDate)) .'.pdf';
-    $file_name = 'Barangay_ID_Request_Report_From_' . date('F_d_Y', strtotime($fromDate)) . '_To_' . date('F_d_Y', strtotime($toDate)) .'.pdf';
+    $file_name = 'Business_Recommendation_Request_Report-Declined_From_' . date('F_d_Y', strtotime($fromDate)) . '_To_' . date('F_d_Y', strtotime($toDate)) .'.pdf';
 
 
     $dompdf->loadHtml($html);
