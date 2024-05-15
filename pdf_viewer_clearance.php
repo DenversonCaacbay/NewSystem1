@@ -15,7 +15,7 @@
    $tm = new DateTime("now", new DateTimeZone('Asia/Manila'));
    $cdate = $dt->format('Y/m/d');   
    $ctime = $tm->format('H');
-
+ 
 ?>
 
 <head>
@@ -82,8 +82,8 @@
 
                 <label class="mt-3">Address</label>
                 <textarea class="form-control" readonly><?= $view['houseno']." ".$view['street']." ".$view['brgy']." ".$view['municipal'] ?></textarea>                
-                <label class="mt-3">Urgent:</label>
-                <textarea class="form-control" name="urgent" id="" cols="30" rows="5"readonly><?= $view['is_urgent'] ?></textarea>
+                <label class="mt-3" hidden>Urgent:</label>
+                <textarea class="form-control" name="urgent" id="" cols="30" rows="5" hidden readonly><?= $view['is_urgent'] ?></textarea>
             </div>
             <div class="mt-3">
                 <div class="pdfContainerUI" id="pdfContainer"></div>

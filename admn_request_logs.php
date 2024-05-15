@@ -5,13 +5,6 @@
     require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
-    // $bmis->reject_rescert();
-    // $bmis->approved_rescert();
-    // $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-    // $limit = 5;
-    // $offset = ($currentPage - 1) * $limit;
-
-    // list($view, $moreRecords) = $bmis->view_logs($limit, $offset);
     $requests = $residentbmis->view_logs_in_process();
 ?>
 
@@ -44,11 +37,11 @@
     }
     .nav-tray a{
         padding: 5px;
-        /* color: #309464 !important; */
+        color: #309464;
     }
     .nav-tray a:hover{
         background: #309464;
-        color: #fff !important;
+        color: #fff;
         text-decoration: none;
         border-radius: 5px;
     }
@@ -71,6 +64,7 @@
             <div class="nav-tray d-flex align-items-center">
                 <a href="admn_request_logs.php" class="active ms-3">In-Process</a> <span class="ms-3">|</span>
                 <a href="admn_request_logs_processed.php" class="ms-3">Processed</a> <span class="ms-3">|</span>
+                <a href="admn_request_logs_processed_declined.php" class=" ms-3">Declined</a> <span class="ms-3">|</span>
                 <a href="admn_request_logs_walkin.php" class="ms-3">Walk-in</a>
             </div>
         </div>
@@ -93,86 +87,91 @@
     <table class="table" id="requestTable">
         <thead class="sticky-top">
             <tr>
-                <th>Date Requested</th>
-                <th>Full Name</th>
+                
+                <th>Full Name | Staff</th>
                 <th>Request Type</th>
                 <th>Details</th>
+                <th>Date</th>
                 <th>Status</th>
+                
             </tr>
         </thead>
         <tbody>
-            <?php 
-            // Check if requests are available and sort them by date in descending order
-            if(is_array($requests)) {
-                // Combine all request data into one array
-                $all_requests = [];
-                foreach($requests as $type => $request_data) {
-                    foreach ($request_data as $request) {
-                        $request['type'] = $type;
-                        $all_requests[] = $request;
+    <?php 
+    // Check if requests are available and sort them by date in descending order
+    if(is_array($requests)) {
+        // Combine all request data into one array
+        $all_requests = [];
+        foreach($requests as $type => $request_data) {
+            foreach ($request_data as $request) {
+                $request['type'] = $type;
+                $all_requests[] = $request;
+            }
+        }
+
+        // Sort all requests by date in descending order
+        usort($all_requests, function($a, $b) {
+            return strtotime($b['created_at']) - strtotime($a['created_at']);
+        });
+
+        // Iterate over sorted requests and display them in a table
+        foreach($all_requests as $request) {?>
+            <tr data-type="<?= $request['type']; ?>">
+                
+                <td><?= $request['lname']; ?>, <?= $request['fname']; ?></td>
+                <!-- <td><?= ucfirst($request['type']); ?></td> -->
+                <td>
+                    <?php 
+                    // Display the full request type name
+                    switch($request['type']) {
+                        case 'brgyid':
+                            echo "Barangay ID";
+                            break;
+                        case 'bspermit':
+                            echo "Business Recommendation";
+                            break;
+                        case 'clearance':
+                            echo "Barangay Clearance";
+                            break;
+                        case 'indigency':
+                            echo "Certificate of Indigency";
+                            break;
+                        case 'rescert':
+                            echo "Residency Certificate";
+                            break;
+                        default:
+                            echo "Unknown";
                     }
-                }
+                    ?>
+                </td>
+                <td>
+                    <?php 
+                    // Display request details based on request type
+                    switch($request['type']) {
+                        case 'brgyid':
+                            echo "Street: " . $request['street'] . $request['brgy'];
+                            break;
+                        case 'bspermit':
+                            echo "Business Name: " . $request['bsname'];
+                            break;
+                        case 'clearance':
+                        case 'indigency':
+                        case 'rescert':
+                            echo "Purpose: " . $request['purpose'];
+                            break;
+                        default:
+                            echo "Unknown";
+                    }
+                    ?>
+                </td>
+                
+                <td><?= ucfirst(date("F d, Y", strtotime($request['created_at']))); ?></td>
+                <td><?= $request['form_status'];?></td>
+            </tr>
+        <?php } ?>
+    <?php } ?>
+</tbody>
 
-                // Sort all requests by date in descending order
-                usort($all_requests, function($a, $b) {
-                    return strtotime($b['date']) - strtotime($a['date']);
-                });
-
-                // Iterate over sorted requests and display them in a table
-                foreach($all_requests as $request) {?>
-                    <tr data-type="<?= $request['type']; ?>">
-                        <td><?= ucfirst(date("F d, Y", strtotime($request['date']))); ?></td>
-                        <td><?= $request['lname']; ?>, <?= $request['fname']; ?></td>
-                        <!-- <td><?= ucfirst($request['type']); ?></td> -->
-                        <td>
-                            <?php 
-                            // Display the full request type name
-                            switch($request['type']) {
-                                case 'brgyid':
-                                    echo "Barangay ID";
-                                    break;
-                                case 'bspermit':
-                                    echo "Business Recommendation";
-                                    break;
-                                case 'clearance':
-                                    echo "Barangay Clearance";
-                                    break;
-                                case 'indigency':
-                                    echo "Certificate of Indigency";
-                                    break;
-                                case 'rescert':
-                                    echo "Residency Certificate";
-                                    break;
-                                default:
-                                    echo "Unknown";
-                            }
-                            ?>
-                        </td>
-                        <td>
-                            <?php 
-                            // Display request details based on request type
-                            switch($request['type']) {
-                                case 'brgyid':
-                                    echo "Street: " . $request['street'] . $request['brgy'];
-                                    break;
-                                case 'bspermit':
-                                    echo "Business Name: " . $request['bsname'];
-                                    break;
-                                case 'clearance':
-                                case 'indigency':
-                                case 'rescert':
-                                    echo "Purpose: " . $request['purpose'];
-                                    break;
-                                default:
-                                    echo "Unknown";
-                            }
-                            ?>
-                        </td>
-                        <td><?= $request['form_status'];?></td>
-                    </tr>
-                <?php } ?>
-            <?php } ?>
-        </tbody>
     </table>
 </div>
     

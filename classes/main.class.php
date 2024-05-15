@@ -1500,6 +1500,9 @@ class BMISClass {
         $id_rescert = $_POST['id_rescert'];
         $email = $_POST['email'];
         $staff = $_POST['staff'];
+
+
+
     
         if (isset($_POST['approved_rescert'])) {
             $connection = $this->openConn();
@@ -2854,7 +2857,7 @@ class BMISClass {
         if (isset($_POST['approved_bspermit'])) {
             $connection = $this->openConn();
             $currentTimestamp = date('Y-m-d H:i:s');
-            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Approved', staff = ?, create_at=? WHERE id_bspermit = ?");
+            $stmt = $connection->prepare("UPDATE tbl_bspermit SET form_status = 'Approved', staff = ?, created_at=? WHERE id_bspermit = ?");
             $stmt->execute([$staff, $currentTimestamp, $id_bspermit]);
     
             // Send email using PHPMailer if email is not null

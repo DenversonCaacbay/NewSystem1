@@ -34,10 +34,9 @@
         <?php if(is_array($view)) {?>
             <?php foreach($view as $view) {?>
                 <div class="col-md-4 mt-3">
-                    <div class="card d-flex flex-column h-100 p-3">
-                        <!-- <h4 class="card-title text-primary fw-bold"><?= $view['fname'];?> <?= $view['lname'];?></h4> -->
+                    <div class="card d-flex flex-column h-100 p-3" onclick="showModal('<?= $view['fname'];?> <?= $view['lname'];?>', '<?= $view['comment'];?>', <?= $view['rating'];?>)">
                         <h4 class="card-title text-primary fw-bold">Unknown Resident</h4>
-                        <h5 class="card-desc"><b>Comment:</b> <br><?= $view['comment'];?></h5>
+                        <h6 class="card-desc"><b>Comment:</b> <br><?= strlen($view['comment']) > 30 ? substr($view['comment'], 0, 30) . '...' : $view['comment'];?></h6>
                         <div class="mt-auto">
                             <h5><b>Rate:</b> 
                                 <?php
@@ -58,6 +57,50 @@
         <?php } ?>
     </div>
 </div>
+
+<!-- Modal HTML (Assuming Bootstrap Modal) -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Resident Feedback</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4 id="modalName"></h4>
+                <h5><b>Comment:</b></h5>
+                <p id="modalComment"></p>
+                <h5><b>Rate:</b></h5>
+                <p id="modalRating"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript function to show modal -->
+<script>
+    function showModal(name, comment, rating) {
+        // Code to display modal with full information
+        // You can use JavaScript libraries like Bootstrap modal or create your own modal
+        // Here is a simple example using Bootstrap modal:
+        $('#exampleModal').modal('show'); // Assuming you have a modal with id "exampleModal"
+        
+        // Set modal content
+        document.getElementById('modalName').innerText = name;
+        document.getElementById('modalComment').innerText = comment;
+        document.getElementById('modalRating').innerHTML = '';
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                document.getElementById('modalRating').innerHTML += '<i class="fas fa-star text-primary"></i>';
+            } else {
+                document.getElementById('modalRating').innerHTML += '<i class="far fa-star text-primary"></i>';
+            }
+        }
+    }
+</script>
 
 <!-- charts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

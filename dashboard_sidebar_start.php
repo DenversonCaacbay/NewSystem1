@@ -94,7 +94,8 @@
             <div class="sidebar-heading">
                 User Management
             </div>
-            <?php if($userdetails['position'] == 'Administrator'): ?>
+            <?php if($userdetails['position'] == 'Administrator' || $userdetails['position'] == 'Super Administrator'): ?>
+
             <li class="nav-item">
                 <a class="nav-link" href="admn_staff_crud.php">
                     <i class="fas fa-user-tie"></i>
@@ -167,7 +168,7 @@
                     <?php endif; ?></a>
             </li>
             <hr class="sidebar-divider d-none">
-            <?php if($userdetails['position'] == 'Administrator'): ?>
+            <?php if($userdetails['position'] == 'Administrator' || $userdetails['position'] == 'Super Administrator'): ?>
             <li class="nav-item">
                 <a class="nav-link" href="admn_request_archives.php">
                     <i class="fas fa-fw fa-table"></i>

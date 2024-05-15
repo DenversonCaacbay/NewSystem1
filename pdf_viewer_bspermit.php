@@ -9,7 +9,7 @@
 //    $view = $bmis->view_announcement();
     $bmis->reject_bspermit();
     $bmis->approved_bspermit();
-
+ 
     $view = $residentbmis->view_single_bspermit();
 
    $announcementcount = $bmis->count_announcement();
@@ -80,8 +80,8 @@ s                <label class="mt-3">Business Industry</label>
                 <input type="text" class="form-control" value="<?= $view['bsindustry'] ?>" readonly/>
                 <label class="mt-3">Area of Establishment</label>
                 <input type="text" class="form-control" value="<?= $view['aoe'] ?>" readonly/>
-                <label class="mt-3">Urgent:</label>
-                <textarea class="form-control" name="urgent" id="" cols="30" rows="5"readonly><?= $view['is_urgent'] ?></textarea>
+                <label class="mt-3" hidden>Urgent:</label>
+                <textarea class="form-control" name="urgent" id="" cols="30" rows="5" hidden readonly><?= $view['is_urgent'] ?></textarea>
             </div>
             <div class="mt-3">
                 <div class="pdfContainerUI" id="pdfContainer"></div>

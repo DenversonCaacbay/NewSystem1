@@ -310,6 +310,7 @@ h4{
                 <div class="card mt-3 mb-3">
                     <div class="card-header bg-primary text-light d-flex justify-content-between">
                         Date Requested: <?= ucfirst(date("F d, Y", strtotime($request['date']))); ?>
+                        <button class="btn btn-warning">Affidavit Loss</button>
                     </div>
                     <div class="card-body">
                         <?php 

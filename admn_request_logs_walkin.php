@@ -5,13 +5,6 @@
     require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
-    // $bmis->reject_rescert();
-    // $bmis->approved_rescert();
-    // $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-    // $limit = 5;
-    // $offset = ($currentPage - 1) * $limit;
-
-    // list($view, $moreRecords) = $bmis->view_logs($limit, $offset);
     $requests = $residentbmis->view_logs_walkin();
 ?>
 
@@ -44,6 +37,7 @@
     }
     .nav-tray a{
         padding: 5px;
+        color: #309464;
     }
     .nav-tray a:hover{
         background: #309464;
@@ -53,7 +47,7 @@
     }
     .active{
         background: #309464;
-        color: #fff;
+        color: #fff !important;
         border-radius: 5px;
     }
 </style>
@@ -70,6 +64,7 @@
             <div class="nav-tray d-flex align-items-center">
                 <a href="admn_request_logs.php" class="ms-3">In-Process</a> <span class="ms-3">|</span>
                 <a href="admn_request_logs_processed.php" class="ms-3">Processed</a> <span class="ms-3">|</span>
+                <a href="admn_request_logs_processed_declined.php" class="ms-3">Declined</a> <span class="ms-3">|</span>
                 <a href="admn_request_logs_walkin.php" class="active ms-3">Walk-in</a>
             </div>
         </div>
@@ -92,10 +87,11 @@
     <table class="table" id="requestTable">
         <thead class="sticky-top">
             <tr>
-                <th>Date Requested</th>
+                
                 <th>Full Name</th>
                 <th>Request Type</th>
                 <th>Details</th>
+                <th>Date</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -120,7 +116,7 @@
                 // Iterate over sorted requests and display them in a table
                 foreach($all_requests as $request) {?>
                     <tr data-type="<?= $request['type']; ?>">
-                        <td><?= ucfirst(date("F d, Y", strtotime($request['date']))); ?></td>
+                       
                         <td><?= $request['lname']; ?>, <?= $request['fname']; ?></td>
                         <!-- <td><?= ucfirst($request['type']); ?></td> -->
                         <td>
@@ -167,6 +163,7 @@
                             }
                             ?>
                         </td>
+                        <td><?= ucfirst(date("F d, Y", strtotime($request['created_at']))); ?></td>
                         <td><?= $request['form_status'];?></td>
                     </tr>
                 <?php } ?>

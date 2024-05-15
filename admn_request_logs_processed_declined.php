@@ -5,7 +5,7 @@
     require('classes/resident.class.php');
     $userdetails = $bmis->get_userdata();
     $bmis->validate_admin();
-    $requests = $residentbmis->view_logs_processed();
+    $requests = $residentbmis->view_logs_processed_declined();
 ?>
 
 <?php 
@@ -63,8 +63,8 @@
         <div>
             <div class="nav-tray d-flex align-items-center">
                 <a href="admn_request_logs.php" class="ms-3">In-Process</a> <span class="ms-3">|</span>
-                <a href="admn_request_logs_processed.php" class="active ms-3">Processed</a> <span class="ms-3">|</span>
-                <a href="admn_request_logs_processed_declined.php" class=" ms-3">Declined</a> <span class="ms-3">|</span>
+                <a href="admn_request_logs_processed.php" class=" ms-3">Processed</a> <span class="ms-3">|</span>
+                <a href="admn_request_logs_processed_declined.php" class="active ms-3">Declined</a> <span class="ms-3">|</span>
                 <a href="admn_request_logs_walkin.php" class="ms-3">Walk-in</a>
             </div>
         </div>
