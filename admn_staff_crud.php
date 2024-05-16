@@ -1,5 +1,5 @@
 <?php
-    ini_set('display_errors',0);
+    ini_set('display_errors',1);
     error_reporting(E_ALL ^ E_WARNING);
     require('classes/staff.class.php');
     require('classes/resident.class.php');
@@ -114,6 +114,7 @@
 
 
                                 <input type="hidden" class="form-control" name="role" value="administrator">
+                                <input type="hidden" class="form-control" name="status" value="active">
 
                                 <button class="btn btn-primary w-100 mt-3 p-2" type="submit" name="add_staff" id="submit-button" style="border-radius:10px;" disabled> Submit </button>  
                             </form>    

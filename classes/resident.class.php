@@ -135,11 +135,42 @@ use PHPMailer\PHPMailer\Exception;
             }
         }
 
+        // public function email_checker() {
+        //     $connection = $this->openConn();
+        //     $fname = isset($_POST['fname']) ? $_POST['fname'] : null; // Check if email is set
+        //     $lname = isset($_POST['lname']) ? $_POST['lname'] : null; // Check if email is set
+        //     $email = isset($_POST['email']) ? $_POST['email'] : null; // Check if email is set
+            
+        //     if ($email) {
+        //         // Check if the email already exists
+        //         $stmt = $connection->prepare("SELECT * FROM tbl_resident WHERE email = :email");
+        //         $stmt->bindParam(':email', $email);
+        //         $stmt->execute();
+        //         $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        //         if ($result) {
+        //             // Email already exists, show alert
+        //             echo "<script>alert('Email is already in use.');</script>";
+        //         } else {
+        //             // Email doesn't exist, redirect to registration page with email as parameter
+        //             header("Location: resident_registration.php?email=" . urlencode($email));
+        //             exit();
+        //         }
+        //     } else {
+        //         // Handle case where email is not set
+        //         // header("Location: your_form_page.php?error=email_not_provided");
+        //         // exit();
+        //     }
+        // }
+
         public function email_checker() {
             $connection = $this->openConn();
-            $email = isset($_POST['email']) ? $_POST['email'] : null; // Check if email is set
-            
-            if ($email) {
+            $fname = isset($_POST['fname']) ? trim($_POST['fname']) : null;
+            $lname = isset($_POST['lname']) ? trim($_POST['lname']) : null;
+            $email = isset($_POST['email']) ? trim($_POST['email']) : null;
+        
+            // Check if all required fields are provided
+            if ($fname && $lname && $email) {
                 // Check if the email already exists
                 $stmt = $connection->prepare("SELECT * FROM tbl_resident WHERE email = :email");
                 $stmt->bindParam(':email', $email);
@@ -150,16 +181,28 @@ use PHPMailer\PHPMailer\Exception;
                     // Email already exists, show alert
                     echo "<script>alert('Email is already in use.');</script>";
                 } else {
-                    // Email doesn't exist, redirect to registration page with email as parameter
-                    header("Location: resident_registration.php?email=" . urlencode($email));
-                    exit();
+                    // Check if the first name and last name combination already exists
+                    $stmt = $connection->prepare("SELECT * FROM tbl_resident WHERE fname = :fname AND lname = :lname");
+                    $stmt->bindParam(':fname', $fname);
+                    $stmt->bindParam(':lname', $lname);
+                    $stmt->execute();
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+                    if ($result) {
+                        // First name and last name combination already exists, show alert
+                        echo "<script>alert('This name is already registered.');</script>";
+                    } else {
+                        // First name, last name, and email are all unique, redirect to registration page
+                        header("Location: resident_registration.php?email=" . urlencode($email) . "&fname=" . urlencode($fname) . "&lname=" . urlencode($lname));
+                        exit();
+                    }
                 }
             } else {
-                // Handle case where email is not set
-                // header("Location: your_form_page.php?error=email_not_provided");
+                
                 // exit();
             }
         }
+        
         
         
         public function view_resident($limit = 5, $offset = 0){
@@ -1220,6 +1263,43 @@ use PHPMailer\PHPMailer\Exception;
         }
     
     }
+    public function file_request() {
+        // Check if the form is submitted
+        if (isset($_POST['file_request'])) {
+            // Check if id_brgyid is set
+            if (isset($_POST['id_brgyid'])) {
+                // Sanitize and assign id_brgyid
+                $id_brgyid = $_POST['id_brgyid'];
+                
+                // Prepare the SQL query
+                $connection = $this->openConn();
+                $stmt = $connection->prepare("UPDATE tbl_brgyid SET form_status = 'Pending', is_urgent = 'File for Affidavit of Loss', date = :current_date WHERE  id_brgyid = :id");
+        
+                // Execute the query with current date and id
+                $current_date = date('Y-m-d H:i:s');
+                if ($stmt->execute([':current_date' => $current_date, ':id' => $id_brgyid])) {
+                    // Display alert
+                    echo "<script>alert('Successfully filed Affidavit of Loss. Please wait for it to be Approved.');</script>";
+                    // Redirect to request_pending.php after the alert
+                    echo "<script>window.location.href = 'request_pending.php';</script>";
+                    exit(); // Ensure no further code execution after redirection
+                } else {
+                    $message = "There's an error in the request.";
+                }
+            } else {
+                $message = "id_brgyid is not set.";
+            }
+        } else {
+            $message = "Form not submitted.";
+        }
+        
+        // Display the message
+        echo $message;
+    }
+    
+    
+    
+    
 
     // Approved
     public function view_request_approved($id_user){
@@ -1537,6 +1617,46 @@ use PHPMailer\PHPMailer\Exception;
         
             // tbl_rescert
             $stmt = $connection->prepare("SELECT * FROM tbl_rescert  WHERE form_status='Approved'");
+            $stmt->execute();
+            $rescert_data = $stmt->fetchAll();
+        
+            // Combine the fetched data into one variable
+            $requests_data = array(
+                'brgyid' => $brgyid_data,
+                'bspermit' => $bspermit_data,
+                'clearance' => $clearance_data,
+                'indigency' => $indigency_data,
+                'rescert' => $rescert_data,
+            );
+        
+            return $requests_data;
+        }
+        // For Logs Processed
+        public function view_logs_processed_declined(){
+            $connection = $this->openConn();
+        
+            // tbl_brgyid
+            $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status='Declined'");
+            $stmt->execute();
+            $brgyid_data = $stmt->fetchAll();
+        
+            // tbl_bspermit
+            $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status='Declined'");
+            $stmt->execute();
+            $bspermit_data = $stmt->fetchAll();
+        
+            // tbl_clearance
+            $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE  form_status='Declined'");
+            $stmt->execute();
+            $clearance_data = $stmt->fetchAll();
+        
+            // tbl_indigency
+            $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status='Declined'");
+            $stmt->execute();
+            $indigency_data = $stmt->fetchAll();
+        
+            // tbl_rescert
+            $stmt = $connection->prepare("SELECT * FROM tbl_rescert  WHERE form_status='Declined'");
             $stmt->execute();
             $rescert_data = $stmt->fetchAll();
         

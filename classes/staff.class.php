@@ -56,6 +56,7 @@
             $fname = ucwords(strtolower($_POST['fname'])); // Convert to uppercase
             $mi = strtoupper(substr($_POST['mi'], 0, 1)) . '.'; // Get first letter in uppercase and add '.'
             $role = $_POST['role'];
+            $status = $_POST['status'];
     
             // Check if the email already exists
             if ($this->check_staff($email) > 0 ) {
@@ -82,11 +83,11 @@
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
     
             $connection = $this->openConn();
-            $stmt = $connection->prepare("INSERT INTO tbl_admin (`position`, `email`,`password`,`lname`,`fname`, `mi`,`role`) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->Execute([$position, $email, $password_hash, $lname, $fname, $mi,$role]);
+            $stmt = $connection->prepare("INSERT INTO tbl_admin (`position`, `email`,`password`,`lname`,`fname`, `mi`,`role`,`status`) VALUES (?, ?, ?, ?, ?, ?, ?,?)");
+            $stmt->Execute([$position, $email, $password_hash, $lname, $fname, $mi,$role, $status]);
             $message2 = "New Staff Added";
             echo "<script type='text/javascript'>alert('$message2');</script>";
-            header('refresh:1');
+            header('refresh:0');
         }
     }
 
@@ -168,6 +169,32 @@
             }
         }
 
+        public function update_staff_password() {
+            if (isset($_POST['update_staff_password'])) {
+                $id_admin = $_POST['id_admin'];
+                $new_password = $_POST['new_password']; // New password input
+                $confirm_password = $_POST['confirm_password']; // Confirm password input
+        
+                // Validate the new password and confirm password
+                if (!empty($new_password) && $new_password === $confirm_password) {
+                    // Hash the new password before storing it
+                    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+        
+                    // Update only the password column
+                    $connection = $this->openConn();
+                    $stmt = $connection->prepare("UPDATE tbl_admin SET password = ? WHERE id_admin = ?");
+                    $stmt->execute([$hashed_password, $id_admin]);
+        
+                    $message2 = "Admin Password Updated";
+                    echo "<script type='text/javascript'>alert('$message2');</script>";
+                    header('refresh:0');
+                } else {
+                    echo "<script type='text/javascript'>alert('New password and confirm password do not match.');</script>";
+                    return;
+                }
+            }
+        }
+
         public function delete_staff(){
 
             $id_user = $_POST['id_user'];
@@ -189,7 +216,7 @@
 
             public function get_single_staff($id_user){
 
-                $id_user = $_GET['id_user'];
+                $id_user = $_GET['id_admin'];
                 
                 $connection = $this->openConn();
                 // $stmt = $connection->prepare("SELECT * FROM tbl_user where id_user = ?");

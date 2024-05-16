@@ -72,7 +72,7 @@
             }
 
             .container{
-                margin-top: 10%;
+                margin-top: 5%;
             }
             .was-validated .form-control:valid, 
             .was-validated .form-control:invalid {
@@ -114,7 +114,7 @@
                     display: none;
                 }
                 .container{
-                    margin-top: 50%;
+                    margin-top: 30%;
                 }
                 .card{
                     width: 100%;
@@ -133,16 +133,20 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <h3 class="text-center">Email Checker</h3>
-                    <div class="card border-0 shadow p-3">
+                <div class="col-md-12">
+                    <h3 class="text-center">Resident Checker</h3>
+                    <div class="card border-0 shadow p-3 mt-3">
                         <form method="post">
-                            <label>Enter Email</label>
-                            <input class="form-control mt-3" placeholder="sample@gmail.com" name="email">
+                            <label>Enter First Name:</label>
+                            <input class="form-control mt-3" placeholder="" name="fname" required>
+                            <label class="mt-3">Enter Last Name:</label>
+                            <input class="form-control mt-3" placeholder="" name="lname" required>
+                            <label class="mt-3">Enter Email:</label>
+                            <input class="form-control mt-3" placeholder="sample@gmail.com" name="email" required>
 
                             <div class="d-flex justify-content-between">
                             <a href="login.php" class="btn btn-danger mt-3">Back to Login</a>
-                            <button type="submit" class="btn btn-success mt-3">Check Email</button>
+                            <button type="submit" class="btn btn-success mt-3 w-50">Check</button>
                         </form>
                         
                         </div>

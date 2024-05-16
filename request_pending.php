@@ -260,6 +260,7 @@ h4{
                             if($request['id_brgyid']) { ?>
                                 <h3 class="card-h1">Barangay ID</h3>
                                 <h5>Street: <?= $request['street'];?><?= $request['brgy'];?></h5>
+                                <h6>Urgent: <?= $request['is_urgent'];?></h6>
                                 <?php } elseif($request['id_bspermit']) { ?>
                                 <h3 class="card-h1">Business Recommendation</h3>
                                 <h5>Business Name: <?= $request['bsname'];?></h5>

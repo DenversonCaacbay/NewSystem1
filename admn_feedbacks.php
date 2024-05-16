@@ -29,18 +29,34 @@
 <div class="container-fluid page--container">
 
 <!-- Page Heading -->
+<div class="d-flex justify-content-between align-items-center">
     <h4 class="mt-3">Resident Feedbacks</h4>
-    <div class="row">
-        <?php if(is_array($view)) {?>
-            <?php foreach($view as $view) {?>
-                <div class="col-md-4 mt-3">
-                    <div class="card d-flex flex-column h-100 p-3" onclick="showModal('<?= $view['fname'];?> <?= $view['lname'];?>', '<?= $view['comment'];?>', <?= $view['rating'];?>)">
+    <div class="input-group mt-3" style="width: 30%">
+        <label class="input-group-text bg text-light" for="inputGroupSelect01">Filter by rating:</label>
+        <select id="starFilter" class="form-select" onchange="filterFeedbacks()" >
+            <option value="all">All</option>
+            <option value="5">5 stars</option>
+            <option value="4">4 stars</option>
+            <option value="3">3 stars</option>
+            <option value="2">2 stars</option>
+            <option value="1">1 star</option>
+        </select>
+    </div>
+
+    </div>
+
+
+    <div class="row" id="feedbackContainer">
+        <?php if (is_array($view)) { ?>
+            <?php foreach ($view as $feedback) { ?>
+                <div class="col-md-4 mt-3 feedback-card" data-rating="<?= $feedback['rating']; ?>">
+                    <div class="card d-flex flex-column h-100 p-3" onclick="showModal('<?= $feedback['fname']; ?> <?= $feedback['lname']; ?>', '<?= $feedback['comment']; ?>', <?= $feedback['rating']; ?>)">
                         <h4 class="card-title text-primary fw-bold">Unknown Resident</h4>
-                        <h6 class="card-desc"><b>Comment:</b> <br><?= strlen($view['comment']) > 30 ? substr($view['comment'], 0, 30) . '...' : $view['comment'];?></h6>
+                        <h6 class="card-desc"><b>Comment:</b> <br><?= strlen($feedback['comment']) > 30 ? substr($feedback['comment'], 0, 30) . '...' : $feedback['comment']; ?></h6>
                         <div class="mt-auto">
-                            <h5><b>Rate:</b> 
+                            <h5><b>Rate:</b>
                                 <?php
-                                $rating = $view['rating'];
+                                $rating = $feedback['rating'];
                                 for ($i = 1; $i <= 5; $i++) {
                                     if ($i <= $rating) {
                                         echo '<i class="fas fa-star text-primary"></i>';
@@ -53,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-            <?php }?>
+            <?php } ?>
         <?php } ?>
     </div>
 </div>
@@ -89,7 +105,7 @@
         $('#exampleModal').modal('show'); // Assuming you have a modal with id "exampleModal"
         
         // Set modal content
-        document.getElementById('modalName').innerText = name;
+        document.getElementById('modalName').innerText = 'Unknown Resident';
         document.getElementById('modalComment').innerText = comment;
         document.getElementById('modalRating').innerHTML = '';
         for (let i = 1; i <= 5; i++) {
@@ -101,6 +117,24 @@
         }
     }
 </script>
+
+<script>
+function filterFeedbacks() {
+    var selectedRating = document.getElementById('starFilter').value;
+    var feedbackCards = document.querySelectorAll('.feedback-card');
+
+    feedbackCards.forEach(function(card) {
+        var cardRating = card.getAttribute('data-rating');
+
+        if (selectedRating === 'all' || cardRating === selectedRating) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>
+
 
 <!-- charts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

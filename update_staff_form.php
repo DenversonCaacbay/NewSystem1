@@ -9,8 +9,10 @@
     $upstaff = $staffbmis->update_staff();
     $staffbmis->delete_staff();
     $staffcount = $staffbmis->count_staff();
-    $id_user = $_GET['id_user'];
+    $id_user = $_GET['id_admin'];
     $staff = $staffbmis->get_single_staff($id_user);
+
+    $staffbmis->update_staff_password();
 ?>
 
 <?php 
@@ -28,8 +30,7 @@
     </div>
 
     <div class="row mt-5">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card"> 
                 <div class="card-header bg text-white">Barangay Staff Data </div>
                 <div class="card-body text-center"> 
@@ -70,11 +71,69 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"> </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header bg text-light">Change Password</div>
+                <div class="card-body">
+                    <form method="post">
+                        <input type="hidden" name="id_admin" value="<?= $staff['id_admin']; ?>"/>
+                        <label>New Password</label>
+                        <input type="password" name="new_password" id="password-field" class="form-control"/>
+                        <label class="mt-3">Confirm New Password</label>
+                        <input type="password" name="confirm_password" id="confirm-password-field" class="form-control"/>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="" id="show-password-checkbox">
+                            <label class="form-check-label" for="show-password-checkbox">
+                                Show Password
+                            </label>
+                        </div>
+                        <button class="btn btn-primary w-100 p-2 mt-3" type="submit" name="update_staff_password">Update Password</button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
     </div>
     
     <br>
 </div>
+
+<script>
+    window.onload = function() {
+        document.getElementById("email").value = "";
+        document.getElementById("password-field").value = "";
+        // Repeat for other form fields if needed
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const passwordField = document.getElementById("password-field");
+        const confirmPasswordField = document.getElementById("confirm-password-field");
+        const showPasswordCheckbox = document.getElementById("show-password-checkbox");
+        const submitButton = document.getElementById("submit-button");
+
+        function togglePasswordVisibility() {
+            const type = showPasswordCheckbox.checked ? 'text' : 'password';
+            passwordField.type = type;
+            confirmPasswordField.type = type;
+        }
+
+        showPasswordCheckbox.addEventListener('change', togglePasswordVisibility);
+
+        function checkPasswords() {
+            if (passwordField.value === confirmPasswordField.value) {
+                confirmPasswordField.setCustomValidity('');
+                submitButton.disabled = false;
+            } else {
+                confirmPasswordField.setCustomValidity('Passwords do not match.');
+                submitButton.disabled = true;
+            }
+        }
+
+        passwordField.addEventListener("keyup", checkPasswords);
+        confirmPasswordField.addEventListener("keyup", checkPasswords);
+    });
+</script>
 <!-- /.container-fluid -->
 
 <!-- End of Main Content -->

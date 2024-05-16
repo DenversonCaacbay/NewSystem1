@@ -134,7 +134,7 @@
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-between">
                     <h3 class="text-center">Registration Form</h3>
-                    <button class="btn btn-primary"  onclick="downloadPDF()">Purok and Street List <i class="fas fa-download ms-1"></i></button>
+                    <!-- <button class="btn btn-primary"  onclick="downloadPDF()">Purok and Street List <i class="fas fa-download ms-1"></i></button> -->
                 </div>
             </div>
 
@@ -150,7 +150,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="mtop">Last Name: </label>
-                                            <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" value="<?php echo isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : ''; ?>" required>
+                                            <input type="text" class="form-control"  id="lname" name="lname" placeholder="Enter Last Name" value="<?php echo isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : ''; ?>" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -159,7 +159,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="mtop">First Name: </label>
-                                            <input type="text" class="form-control" name="fname" placeholder="Enter First Name" value="<?php echo isset($_POST['fname']) ? htmlspecialchars($_POST['fname']) : ''; ?>" required>
+                                            <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter First Name" value="<?php echo isset($_POST['fname']) ? htmlspecialchars($_POST['fname']) : ''; ?>" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -252,7 +252,38 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label> Purok: </label>
-                                            <select id="purokDropdown" class="form-select" onchange="showStreets(this.value)" name="purok" aria-label="Default select example" required>
+                                            <!-- <select id="purokDropdown" class="form-select" onchange="showStreets(this.value)" name="purok" aria-label="Default select example" required>
+                                                <option value="" selected>Select Purok</option>
+                                                <option value="1A">1A</option>
+                                                <option value="1B">1B</option>
+                                                <option value="2">2</option>
+                                                <option value="3A">3A</option>
+                                                <option value="3B">3B</option>
+                                                <option value="3C">3C</option>
+                                                <option value="3E">3E</option>
+                                                <option value="3F">3F</option>
+                                                <option value="4A">4A</option>
+                                                <option value="4B">4B</option>
+                                                <option value="4C">4C</option>
+                                                <option value="4D">4D</option>
+                                                <option value="5A">5A</option>
+                                                <option value="5A-1">5A-1</option>
+                                                <option value="5B">5B</option>
+                                                <option value="5C">5C</option>
+                                                <option value="5D">5D</option>
+                                                <option value="5E">5E</option>
+                                                <option value="5F">5F</option>
+                                                <option value="6A">6A</option>
+                                                <option value="6AEXT">6AEXT</option>
+                                                <option value="6B1">6B1</option>
+                                                <option value="6B2">6B2</option>
+                                                <option value="6C1">6C1</option>
+                                                <option value="6C2">6C2</option>
+                                                <option value="6D">6D</option>
+                                                <option value="6E">6E</option>
+                                                <option value="7">7</option>
+                                            </select> -->
+                                            <select id="purok" class="form-select"  name="purok" onchange="updateStreet()" required>
                                                 <option value="" selected>Select Purok</option>
                                                 <option value="1A">1A</option>
                                                 <option value="1B">1B</option>
@@ -291,8 +322,176 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label> Street: </label>
-                                            <select id="streetsDropdown" class="form-select" name="street" disabled required style="text-transform: none !important;">
+                                            <!-- <select id="streetsDropdown" class="form-select" name="street" disabled required style="text-transform: none !important;">
                                                 <option value="" disabled selected>Select Street</option>
+                                            </select> -->
+                                            <select id="street" class="form-select" name="street" onchange="updatePurok()">
+                                                <option value=""></option>
+                                                <optgroup label="1A">
+                                                    <option>Santolan Street</option>
+                                                    <option>Santolan Extension</option>
+                                                    <option>Chico Street</option>
+                                                    <option>Mabolo Street</option>
+                                                    <option>Ariola Bridge</option>
+                                                    <option>Filtration Road (Left Side from Sta. Rita Bridge to Alfa Mart)</option>
+                                                </optgroup>
+                                                <optgroup label="1B">
+                                                    <option>Avocado Street</option>
+                                                    <option>Avocado Extension</option>
+                                                    <option>Manggahan Street</option>
+                                                    <option>Manggahan Extension</option>
+                                                    <option>Filtration Road (Left Side after Alfa Mart to Corner of Manggahan Street)</option>
+                                                </optgroup>
+                                                <optgroup label="2">
+                                                    <option>Cabling Street</option>
+                                                    <option>Rosa Gonzales Street</option>
+                                                    <option>Interior</option>
+                                                    <option>Corpus Compound</option>
+                                                    <option>Cabling Compound</option>
+                                                    <option>Filtration Road (Right Side from Sta. Rita Bridge to Winnies Bake Shop Sampaguita Road)</option>
+                                                    <option>Sta. Rita Road (One Way)</option>
+                                                </optgroup>
+                                                <optgroup label="3A">
+                                                    <option>Begonia Street (Right Side from Dizon Junk Shop to Baptist Church)</option>
+                                                    <option>Camia Street (Right Side from Rodriguez Ice Plant to Delrosario Compound)</option>
+                                                    <option>Camia Street (Left Side from Baustista Compound to Gatchalian Store)</option>
+                                                </optgroup>
+                                                <optgroup label="3B">
+                                                    <option>Filtration Road (Left Side going to Mabayuan)</option>
+                                                    <option>Amapola Street</option>
+                                                    <option>Camia Street</option>
+                                                    <option>Rosal Street</option>
+                                                    <option>Begonia Street</option>
+                                                </optgroup>
+                                                <optgroup label="3C">
+                                                    <option>Horseshoe Drive</option>
+                                                    <option>Marikit Street</option>
+                                                    <option>Roselane</option>
+                                                    <option>Marilag Street</option>
+                                                    <option>Marilag Extension</option>
+                                                    <option>Adelfa 1</option>
+                                                    <option>Adelfa 2</option>
+                                                    <option>Filtration Road (Right Side from Corner of Horseshoe Drive to Corner of Mayumi)</option>
+                                                </optgroup>
+                                                <optgroup label="3E">
+                                                    <option>Sampaguita Road (Left Side from Back of Sta Rita Parish to Corner of Azucena Street)</option>
+                                                    <option>Mahinhin Street</option>
+                                                    <option>Maganda Street</option>
+                                                    <option>Jasmin Street</option>
+                                                    <option>Azucena Street</option>
+                                                </optgroup>
+                                                <optgroup label="3F">
+                                                    <option>Aries Street</option>
+                                                    <option>Jasmin Street</option>
+                                                    <option>Leo Street</option>
+                                                    <option>Leo Extension</option>
+                                                    <option>Libra Street</option>
+                                                    <option>Pisces Street</option>
+                                                    <option>Taurus Street</option>
+                                                    <option>Gemini Street</option>
+                                                    <option>Virgo Street</option>
+                                                    <option>Capricorn Street</option>
+                                                    <option>Aquarius Street</option>
+                                                    <option>Saguitarius Street</option>
+                                                </optgroup>
+                                                <optgroup label="4A">
+                                                    <option>Whole of Sampaloc Compound</option>
+                                                    <option>Sta. Rita Road (Fronting Sampaguita Compound)</option>
+                                                </optgroup>
+                                                <optgroup label="4B">
+                                                    <option>Sta. Rita Road (Right Side from 1087-1111)</option>
+                                                    <option>Clark Street</option>
+                                                    <option>Aglipay Church</option>
+                                                </optgroup>
+                                                <optgroup label="4C">
+                                                    <option>Mercury Lane</option>
+                                                    <option>Mercury A & B Extension</option>
+                                                    <option>Mars Lane</option>
+                                                    <option>Venus Lane</option>
+                                                    <option>Sta. Rita Road (Left Side)</option>
+                                                    <option>Sampaguita Extension</option>
+                                                    <option>Alejo Street</option>
+                                                </optgroup>
+                                                <optgroup label="4D">
+                                                    <option>Baltazar Street</option>
+                                                    <option>Soriano Street</option>
+                                                    <option>Cayabyab Street</option>
+                                                    <option>Back of Iglesia Ni Cristo</option>
+                                                    <option>Sta. Rita Road (Right Side from 1113-1158)</option>
+                                                </optgroup>
+                                                <optgroup label="5A">
+                                                    <option>Balic-Balic Road (Right Side from Corner Tabacuhan to Corner Laban Street)</option>
+                                                    <option>Lunduyan Street</option>
+                                                    <option>Payapa Street</option>
+                                                </optgroup>
+                                                <optgroup label="5A-1">
+                                                    <option>Whole of Sta. Rita Village (Block 1- Block 9)</option>
+                                                </optgroup>
+                                                <optgroup label="5B">
+                                                    <option>Laban Street</option>
+                                                    <option>Dominguez Street (From 1683 to 1687)</option>
+                                                    <option>Waterdam Road (1672) Balic-Balic Road (From Corner Laban Street to Corner Dominguez Street)</option>
+                                                </optgroup>
+                                                <optgroup label="5C">
+                                                    <option>Block 4</option>
+                                                    <option>Half of Dominguez Street</option>
+                                                    <option>Block 8 (Slaughter House)</option>
+                                                    <option>Block 12</option>
+                                                    <option>Block 13</option>
+                                                </optgroup>
+                                                <optgroup label="5D">
+                                                    <option>From Block 14 to Block 23</option>
+                                                </optgroup>
+                                                <optgroup label="5E">
+                                                    <option>From Block 24-Block 27</option>
+                                                </optgroup>
+                                                <optgroup label="5F">
+                                                    <option>Block 27 Extension</option>
+                                                </optgroup>
+                                                <optgroup label="6A">
+                                                    <option>Cristobal Street</option>
+                                                    <option>Trance Street</option>
+                                                    <option>Balimpuyo</option>
+                                                    <option>Part of Tabacuhan Road</option>
+                                                </optgroup>
+                                                <optgroup label="6AEXT">
+                                                    <option>Tulio Street</option>
+                                                    <option>Delrosario Street</option>
+                                                    <option>Part of Tabacuhan Road</option>
+                                                </optgroup>
+                                                <optgroup label="6B1">
+                                                    <option>Part of Tabacuhan Road</option>
+                                                    <option>Millionare Street</option>
+                                                    <option>Bigtime Street</option>
+                                                    <option>Calapati Compound (Beside Tabacuhan Elementary School)</option>
+                                                </optgroup>
+                                                <optgroup label="6B2">
+                                                    <option>Part of Tabacuhan Road</option>
+                                                    <option>Tabacuhan Elementary School</option>
+                                                    <option>Magiting Street</option>
+                                                    <option>Del Rosario Street (Left Side)</option>
+                                                </optgroup>
+                                                <optgroup label="6C1">
+                                                    <option>From 1466 Julo Tabacuhan to 1480 Julo Tabacuhan</option>
+                                                </optgroup>
+                                                <optgroup label="6C2">
+                                                    <option>From 1482 Upper Julo to 1483 Upper Julo</option>
+                                                </optgroup>
+                                                <optgroup label="6D">
+                                                    <option>Tabacuhan Extension</option>
+                                                    <option>Quiet Place</option>
+                                                    <option>Tinapahan Extension</option>
+                                                </optgroup>
+                                                <optgroup label="6E">
+                                                    <option>Whole of Holy Spirit</option>
+                                                    <option>San Isidro Street</option>
+                                                    <option>San Pedro Street</option>
+                                                    <option>San Roque Street</option>
+                                                    <option>Holy Spirit Drive</option>
+                                                </optgroup>
+                                                <optgroup label="7">
+                                                    <option>Upper Julo Tabacuhan</option>
+                                                </optgroup>
                                             </select>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
@@ -371,7 +570,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Email: </label>
-                                            <input type="email" class="form-control" name="email" placeholder="Enter Email" id="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
+                                            <input type="email" class="form-control" name="email" placeholder="Enter Email" id="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" readonly>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
@@ -420,13 +619,19 @@
 
         <!-- Footer -->
         <script>
-    // Retrieve the values from the query parameters
-        var params = new URLSearchParams(window.location.search);
-        var email = params.get('email');
+            // Retrieve the values from the query parameters
+            var params = new URLSearchParams(window.location.search);
+            var fname = params.get('fname');
+            var lname = params.get('lname');
+            var email = params.get('email');
 
-        // Set the values in the input fields
-        document.getElementById('email').value = email;
-    </script>
+            // Set the values in the input fields
+            document.getElementById('fname').value = fname;
+
+            document.getElementById('lname').value = lname;
+
+            document.getElementById('email').value = email;
+        </script>
 
         <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -475,7 +680,60 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
  -->
-        <script src="js/purok-street.js"></script>
+ <script>
+        function updateStreet() {
+            const purokDropdown = document.getElementById('purok');
+            const streetDropdown = document.getElementById('street');
+            const selectedPurok = purokDropdown.value;
+
+            // Show all optgroups if the default option is selected
+            if (selectedPurok === "") {
+                const optgroups = streetDropdown.querySelectorAll('optgroup');
+                optgroups.forEach(optgroup => {
+                    optgroup.style.display = 'block';
+                });
+                return; // Exit the function early
+            }
+
+            // Hide all optgroups
+            const optgroups = streetDropdown.querySelectorAll('optgroup');
+            optgroups.forEach(optgroup => {
+                optgroup.style.display = 'none';
+            });
+
+            // Show optgroup corresponding to selected purok
+            const selectedOptgroup = streetDropdown.querySelector(`optgroup[label="${selectedPurok}"]`);
+            if (selectedOptgroup) {
+                selectedOptgroup.style.display = 'block';
+            }
+        }
+
+        function updatePurok() {
+            const purokDropdown = document.getElementById('purok');
+            const streetDropdown = document.getElementById('street');
+            const selectedStreet = streetDropdown.value;
+
+            // Find optgroup containing the selected street
+            const optgroups = streetDropdown.querySelectorAll('optgroup');
+            let selectedPurok = '';
+            optgroups.forEach(optgroup => {
+                const options = optgroup.querySelectorAll('option');
+                options.forEach(option => {
+                    if (option.textContent === selectedStreet) {
+                        selectedPurok = optgroup.label;
+                    }
+                });
+            });
+
+            // Update selected purok in the purok dropdown
+            purokDropdown.value = selectedPurok;
+
+            // Update streets based on selected purok
+            updateStreet();
+        }
+
+    </script>
+        <!-- <script src="js/purok-street.js"></script> -->
         
         <script>
             $(".toggle-password").click(function() {

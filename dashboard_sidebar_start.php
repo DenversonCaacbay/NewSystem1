@@ -83,7 +83,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            <?php if($userdetails['position'] == 'Administrator' || $userdetails['position'] == 'Kagawad'): ?>
+            <?php if($userdetails['position'] == 'Administrator' || $userdetails['position'] == 'Super Administrator'): ?>
             <li class="nav-item">
                 <a class="nav-link" href="admn_feedbacks.php">
                     <i class="fas fa-fw fa-comment"></i>
