@@ -111,7 +111,7 @@
 
                 // Sort all requests by date in descending order
                 usort($all_requests, function($a, $b) {
-                    return strtotime($b['date']) - strtotime($a['date']);
+                    return strtotime($b['created_at']) - strtotime($a['created_at']);
                 });
 
                 // Iterate over sorted requests and display them in a table

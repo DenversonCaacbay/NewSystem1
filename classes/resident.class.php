@@ -1596,27 +1596,27 @@ use PHPMailer\PHPMailer\Exception;
             $connection = $this->openConn();
         
             // tbl_brgyid
-            $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status='Approved'");
+            $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status='Approved' ORDER BY created_at DESC");
             $stmt->execute();
             $brgyid_data = $stmt->fetchAll();
         
             // tbl_bspermit
-            $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status='Approved'");
+            $stmt = $connection->prepare("SELECT * FROM tbl_bspermit WHERE form_status='Approved' ORDER BY created_at DESC");
             $stmt->execute();
             $bspermit_data = $stmt->fetchAll();
         
             // tbl_clearance
-            $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE  form_status='Approved'");
+            $stmt = $connection->prepare("SELECT * FROM tbl_clearance WHERE  form_status='Approved' ORDER BY created_at DESC");
             $stmt->execute();
             $clearance_data = $stmt->fetchAll();
         
             // tbl_indigency
-            $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status='Approved'");
+            $stmt = $connection->prepare("SELECT * FROM tbl_indigency WHERE form_status='Approved' ORDER BY created_at DESC");
             $stmt->execute();
             $indigency_data = $stmt->fetchAll();
         
             // tbl_rescert
-            $stmt = $connection->prepare("SELECT * FROM tbl_rescert  WHERE form_status='Approved'");
+            $stmt = $connection->prepare("SELECT * FROM tbl_rescert  WHERE form_status='Approved' ORDER BY created_at DESC");
             $stmt->execute();
             $rescert_data = $stmt->fetchAll();
         
