@@ -4,6 +4,7 @@
     $userdetails = $bmis->get_userdata();
 
     $residentbmis->create_feedback($userdetails['id_resident']);
+    $has_brgyid = $residentbmis->has_brgyid($userdetails['id_resident']);
 
     $dt = new DateTime("now", new DateTimeZone('Asia/Manila'));
     $tm = new DateTime("now", new DateTimeZone('Asia/Manila'));
@@ -380,12 +381,20 @@
                         </a>
                     </div>
                     <div class="col-md-4 mt-3"> 
-                        <a href="services_brgyid.php" onclick="checkUserData(event)">
+                    <a href="<?php echo $has_brgyid ? '#' : 'services_brgyid.php'; ?>" onclick="checkUserData(event)">
                             <div class="zoom1">
-                                <div class="card services--card"> 
+                                <div class="card services--card" 
+                                    onclick="<?php echo ($has_brgyid && $has_brgyid['form_status'] == 'Pending') ? 'alert(\'You already have requested this ID\'); event.stopPropagation();' : (($has_brgyid && $has_brgyid['form_status'] == 'Approved') ? 'alert(\'You already have this ID\'); event.stopPropagation();' : 'window.location.href=\'services_brgyid.php\';'); ?>"> 
                                     <div class="card-body text-center"> 
                                         <img src="icons/ResidentHomepage/brgyid.png">
                                         <h4> Barangay ID </h4>
+                                        <?php 
+                                            if ($has_brgyid && $has_brgyid['form_status'] == "Pending") {
+                                                echo "<span class='text-danger'>You already have requested this ID</span>";
+                                            } else if ($has_brgyid && $has_brgyid['form_status'] == "Approved") {
+                                                echo "<span class='text-danger'>You already have this ID</span>";
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                             </div>

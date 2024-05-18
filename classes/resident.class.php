@@ -1888,6 +1888,15 @@ use PHPMailer\PHPMailer\Exception;
         }
     }
 
+    public function has_brgyid($id){
+        $connection = $this->openConn();
+        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = ?");
+        $stmt->execute([$id]);
+        $view = $stmt->fetch();
+    
+        return $view;
+    }
+
 
 
     }
