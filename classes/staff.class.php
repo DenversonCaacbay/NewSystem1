@@ -126,13 +126,13 @@
 
         public function update_staff() {
             if (isset($_POST['update_staff'])) {
-                $id_user = $_GET['id_user'];
+                $id_user = $_GET['id_admin'];
                 $password = ($_POST['password']);
                 $lname = ucfirst(strtolower($_POST['lname'])); // Convert to uppercase
                 $fname = ucfirst(strtolower($_POST['fname'])); // Convert to uppercase
                 $mi = strtoupper(substr($_POST['mi'], 0, 1)) . '.'; // Get first letter in uppercase and add '.'
                 $role = $_POST['role'];
-                $email = $_POST['email'];
+                $email = str_replace(' ', '', $_POST['email']);
                 
                     $connection = $this->openConn();
 
@@ -144,8 +144,8 @@
                     // checks if user changes email
                     if ($email !== $currentUserEmail) {
                         // Provided email is different, check for its existence
-                        $stmtEmailExist = $connection->prepare("SELECT COUNT(*) FROM tbl_admin WHERE email = ?");
-                        $stmtEmailExist->execute([$_POST['email']]);
+                        $stmtEmailExist = $connection->prepare("SELECT COUNT(*) FROM tbl_admin WHERE email = ? AND id_admin != ?");
+                        $stmtEmailExist->execute([$_POST['email'], $id_user]);
                         $emailExists = $stmtEmailExist->fetchColumn();
             
                         if ($emailExists > 0) {
