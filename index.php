@@ -381,25 +381,48 @@
                         </a>
                     </div>
                     <div class="col-md-4 mt-3"> 
-                    <a href="<?php echo $has_brgyid ? '#' : 'services_brgyid.php'; ?>" onclick="checkUserData(event)">
+                        <a href="<?php echo $has_brgyid ? '#' : 'services_brgyid.php'; ?>" onclick="checkUserData(event)">
                             <div class="zoom1">
                                 <div class="card services--card" 
-                                    onclick="<?php echo ($has_brgyid && $has_brgyid['form_status'] == 'Pending') ? 'alert(\'You already have requested this ID\'); event.stopPropagation();' : (($has_brgyid && $has_brgyid['form_status'] == 'Approved') ? 'alert(\'You already have this ID\'); event.stopPropagation();' : 'window.location.href=\'services_brgyid.php\';'); ?>"> 
+                                    onclick="<?php 
+                                        if ($has_brgyid) {
+                                            if ($has_brgyid['form_status'] == 'Pending') {
+                                                echo 'showModal(\'You already have requested this ID\'); event.stopPropagation();';
+                                            } else if ($has_brgyid['form_status'] == 'Approved') {
+                                                echo 'showModal(\'You already have this ID\'); event.stopPropagation();';
+                                            } else {
+                                                echo 'window.location.href=\'services_brgyid.php\';';
+                                            }
+                                        } else {
+                                            echo 'window.location.href=\'services_brgyid.php\';';
+                                        }
+                                    ?>"> 
                                     <div class="card-body text-center"> 
                                         <img src="icons/ResidentHomepage/brgyid.png">
-                                        <h4> Barangay ID </h4>
+                                        <!--<h4> Barangay ID </h4>-->
                                         <?php 
                                             if ($has_brgyid && $has_brgyid['form_status'] == "Pending") {
-                                                echo "<span class='text-danger'>You already have requested this ID</span>";
+                                                echo "<h4 class='text-danger'>Barangay ID</h4>";
                                             } else if ($has_brgyid && $has_brgyid['form_status'] == "Approved") {
-                                                echo "<span class='text-danger'>You already have this ID</span>";
+                                                echo "<h4 class='text-danger'>Barangay ID</h4>";
+                                            }
+                                            else if ($has_brgyid && $has_brgyid['form_status'] == "Declined") {
+                                                echo "<h4 class='text-dark'>Barangay ID</h4>";
                                             }
                                         ?>
                                     </div>
                                 </div>
                             </div>
                         </a>
-                    </div>
+
+                        <script>
+                            function showModal(message) {
+                                document.querySelector('#statusModal .modal-body').textContent = message;
+                                $('#statusModal').modal('show');
+                            }
+                        </script>
+
+                                            </div>
                     <div class="col-md-4 mt-3"> 
                         <a href="services_certofindigency.php" onclick="checkUserData(event)">
                             <div class="zoom1">
@@ -499,26 +522,43 @@
                 </div>
             </form>
         </div>
-<!-- Modal for Banned Account -->
-<div class="modal fade" id="bannedModal" tabindex="-1" role="dialog" aria-labelledby="bannedModalLabel" aria-hidden="true">
+        <!-- Modal for Banned Account -->
+        <div class="modal fade" id="bannedModal" tabindex="-1" role="dialog" aria-labelledby="bannedModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="bannedModalLabel">Account Banned</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Your account has been banned. Please check your email for more information.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="bannedModalLabel">Account Banned</h5>
+                <h5 class="modal-title" id="statusModalLabel">Barangay ID Status</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Your account has been banned. Please check your email for more information.</p>
+                <!-- Modal message goes here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
-
 <!-- Modal -->
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

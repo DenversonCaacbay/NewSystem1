@@ -226,7 +226,6 @@ h4{
     <div class="tabs--div d-flex justify-content-between">
         <a href="request_pending.php" class="btn request--btn active">PENDING</a>
         <a href="request_approved.php" class="btn request--btn">APPROVED</a>
-        <!-- <a href="request_done.php" class="btn request--btn">DONE</a>a -->
         <a href="request_declined.php" class="btn request--btn">DECLINED</a>
     </div>
     
@@ -252,7 +251,15 @@ h4{
                     <div class="card mt-3 mb-3">
                         <div class="card-header bg-primary text-light d-flex justify-content-between">
                             Date Requested: <?= ucfirst(date("F d, Y", strtotime($request['date']))); ?>
-                            <button class="btn btn-danger" name="cancel_request" onclick="return confirm('Are you sure you want to cancel the request?')"><i class="fas fa-trash text-white"></i></button>
+
+                            <?php 
+                            // Display common request fields
+                            if($request['id_brgyid']) { ?>
+                                
+                            <?php }else{ ?>
+                                <button class="btn btn-danger" name="cancel_request" onclick="return confirm('Are you sure you want to cancel the request?')"><i class="fas fa-trash text-white"></i></button>
+                            <?php } ?>
+                           
                         </div>
                         <div class="card-body">
                             <?php 
