@@ -169,7 +169,7 @@
                             </div>
                         <?php endif; ?>
                     </td>
-                    <td> <?= $view['is_urgent'] ?: "No" ;?> </td>
+                    <td> <?= $view['is_urgent'] ? : "No" ;?> </td>
                     <td width="20%">    
                         <form action="" method="post">
                             <!-- <a class="btn btn-success" target="blank" style="width: 90px; font-size: 17px; border-radius:30px; margin-bottom: 2px;" href="rescert_form.php?id_resident=<?= $view['id_resident'];?>">Generate</a>  -->

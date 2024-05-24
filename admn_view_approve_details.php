@@ -7,6 +7,8 @@
    $bmis->validate_admin();
    $view = $residentbmis->view_single_resident();
    $residentbmis->decline_resident_banned();
+
+   $residentbmis->update_resident_password();
 ?>
 
 <?php 
@@ -121,13 +123,47 @@
             </div>
 	    </div>
         <div class="d-flex justify-content-end mt-3">
-            <!-- <button class="btn btn-danger me-3" type="submit" name="decline_resident" onclick="return confirm('Are you sure you want to decline this data?')"> Decline Account </button> -->
+            <button class="btn btn-primary me-3"  data-bs-toggle="modal" data-bs-target="#changeModal" type="submit" name="vhange_resident"> Change Password </button>
             <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#declineModal"> Ban This Resident </button>
         </div>
         </div>
             
 <!-- Modal for Registering Residents -->
     </div>
+
+<!--Change Password Modal -->
+<div class="modal fade" id="changeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">Reason to Decline</h1> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" method="post">
+      <div class="modal-body">
+       <label class="mt-3">New Password</label>
+       <input type="password" class="form-control"  id="password-field" name="new_password" required/>
+
+       <label class="mt-3">Confirm New Password</label>
+       <input type="password" class="form-control"  id="confirm-password-field" name="confirm_password" required/>
+       <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="" id="show-password-checkbox">
+            <label class="form-check-label" for="show-password-checkbox">
+                Show Password
+            </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+            <!-- <a href="update_resident_form.php?id_resident=<?= $view['id_resident'];?>" class="btn btn-success">  Update </a> -->
+            <input type="hidden" name="id_resident" value="<?= $view['id_resident'];?>">
+            <input type="hidden" name="email" value="<?= $view['email'];?>">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" name="update_resident_password">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <!--Banned Modal -->
 <div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -157,7 +193,35 @@
     <!-- /.container-fluid -->
 
 <!-- End of Main Content -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const passwordField = document.getElementById("password-field");
+        const confirmPasswordField = document.getElementById("confirm-password-field");
+        const showPasswordCheckbox = document.getElementById("show-password-checkbox");
+        const submitButton = document.getElementById("submit-button");
 
+        function togglePasswordVisibility() {
+            const type = showPasswordCheckbox.checked ? 'text' : 'password';
+            passwordField.type = type;
+            confirmPasswordField.type = type;
+        }
+
+        showPasswordCheckbox.addEventListener('change', togglePasswordVisibility);
+
+        function checkPasswords() {
+            if (passwordField.value === confirmPasswordField.value) {
+                confirmPasswordField.setCustomValidity('');
+                submitButton.disabled = false;
+            } else {
+                confirmPasswordField.setCustomValidity('Passwords do not match.');
+                submitButton.disabled = true;
+            }
+        }
+
+        passwordField.addEventListener("keyup", checkPasswords);
+        confirmPasswordField.addEventListener("keyup", checkPasswords);
+    });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous"></script>
 <!-- responsive tags for screen compatibility -->

@@ -195,6 +195,8 @@
             }
         }
 
+        
+
         public function delete_staff(){
 
             $id_user = $_POST['id_user'];

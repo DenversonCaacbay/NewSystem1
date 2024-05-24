@@ -1548,7 +1548,62 @@ use PHPMailer\PHPMailer\Exception;
     
     //     return $view;
     // }
-
+    public function update_resident_password() {
+        if (isset($_POST['update_resident_password'])) {
+            $id_resident = $_POST['id_resident'];
+            $new_password = $_POST['new_password']; // New password input
+            $confirm_password = $_POST['confirm_password']; // Confirm password input
+    
+            // Validate the new password and confirm password
+            if (!empty($new_password) && $new_password === $confirm_password) {
+                // Hash the new password before storing it
+                $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+    
+                // Update only the password column
+                $connection = $this->openConn();
+                $stmt = $connection->prepare("UPDATE tbl_resident SET password = ? WHERE id_resident = ?");
+                $stmt->execute([$hashed_password, $id_resident]);
+    
+                // Fetch resident's email
+                $stmt = $connection->prepare("SELECT email FROM tbl_resident WHERE id_resident = ?");
+                $stmt->execute([$id_resident]);
+                $email = $stmt->fetchColumn();
+    
+                if (!empty($email)) {
+                    try {
+                        $mail = new PHPMailer(true);
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP server
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'olongapobarangaysantarita@gmail.com'; // Change this to your SMTP username
+                        $mail->Password = 'bakb fdvi qrim htgj'; // Change this to your SMTP password
+                        $mail->SMTPSecure = 'tls'; // Change this to 'ssl' if required
+                        $mail->Port = 587; // Change this to the appropriate port
+    
+                        $mail->setFrom('olongapobarangaysantarita@gmail.com', 'Barangay Sta. Rita'); // Change this to your email and name
+                        $mail->addAddress($email);
+    
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Password Update Notification';
+                        $mail->Body    = 'Your password has been successfully updated.<br>If you did not request this change, please contact us immediately.';
+    
+                        $mail->send();
+                        
+                        // Alert using JavaScript
+                        echo "<script>alert('Password updated and notification email sent.'); window.location.href = 'admn_brgyid.php';</script>";
+                    } catch (Exception $e) {
+                        echo "Mailer Error: {$mail->ErrorInfo}";
+                    }
+                } else {
+                    echo "<script type='text/javascript'>alert('Password updated, but email notification failed: Resident email not found.');</script>";
+                }
+            } else {
+                echo "<script type='text/javascript'>alert('New password and confirm password do not match.');</script>";
+                return;
+            }
+        }
+    }
+    
 
      // For Logs In-Process / Pending Requests
      public function view_logs_in_process(){

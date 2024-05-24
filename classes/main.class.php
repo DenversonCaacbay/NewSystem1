@@ -18,6 +18,7 @@ class BMISClass {
     protected $pass = "";
     protected $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
     protected $con;
+    
 
 
     public function show_404()
@@ -1337,20 +1338,40 @@ class BMISClass {
     // }
 
     // New with Pagination
+    // public function view_certofres($limit = 5, $offset = 0) {
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status = 'Pending' ORDER BY date ASC LIMIT :limit OFFSET :offset");
+    //     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    //     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    
+    //     // Fetch one extra record beyond the limit to check if there are more records
+    //     $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $moreRecords = $stmt->rowCount() > 0;
+    
+    //     return [$view, $moreRecords];
+    // }
     public function view_certofres($limit = 5, $offset = 0) {
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * FROM tbl_rescert WHERE form_status = 'Pending' ORDER BY date ASC LIMIT :limit OFFSET :offset");
+        $stmt = $connection->prepare("
+            SELECT * FROM tbl_rescert 
+            WHERE form_status = 'Pending' 
+            ORDER BY is_urgent IS NULL, is_urgent DESC, date ASC 
+            LIMIT :limit OFFSET :offset
+        ");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-    
+        
         // Fetch one extra record beyond the limit to check if there are more records
         $stmt->fetch(PDO::FETCH_ASSOC);
         $moreRecords = $stmt->rowCount() > 0;
-    
+        
         return [$view, $moreRecords];
     }
+    
     // public function view_certofres($limit = 5, $offset = 0) {
     //     $connection = $this->openConn();
     //     $stmt = $connection->prepare("
@@ -1740,21 +1761,42 @@ class BMISClass {
     //     return $view;
     // }
 
-    public function view_certofindigency($limit = 5, $offset = 0){
+    // public function view_certofindigency($limit = 5, $offset = 0){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("
+    //     SELECT * FROM tbl_indigency WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
+    //     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    //     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    
+    //     // Fetch one extra record beyond the limit to check if there are more records
+    //     $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $moreRecords = $stmt->rowCount() > 0;
+    
+    //     return [$view, $moreRecords];
+    // }
+
+    public function view_certofindigency($limit = 5, $offset = 0) {
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-        SELECT * FROM tbl_indigency WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
+            SELECT * FROM tbl_indigency 
+            WHERE form_status = 'Pending' 
+            ORDER BY is_urgent IS NULL, is_urgent DESC, date ASC 
+            LIMIT :limit OFFSET :offset
+        ");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-    
+        
         // Fetch one extra record beyond the limit to check if there are more records
         $stmt->fetch(PDO::FETCH_ASSOC);
         $moreRecords = $stmt->rowCount() > 0;
-    
+        
         return [$view, $moreRecords];
     }
+    
 
     public function view_certofindigency_done_all(){
         $connection = $this->openConn();
@@ -2181,21 +2223,41 @@ class BMISClass {
     //     $view = $stmt->fetchAll();
     //     return $view;
     // }
+    // public function view_clearance($limit = 5, $offset = 0){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("
+    //     SELECT * FROM tbl_clearance WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
+    //     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    //     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    
+    //     // Fetch one extra record beyond the limit to check if there are more records
+    //     $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $moreRecords = $stmt->rowCount() > 0;
+    
+    //     return [$view, $moreRecords];
+    // }
     public function view_clearance($limit = 5, $offset = 0){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-        SELECT * FROM tbl_clearance WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
+            SELECT * FROM tbl_clearance 
+            WHERE form_status = 'Pending' 
+            ORDER BY is_urgent IS NULL, is_urgent DESC, date ASC 
+            LIMIT :limit OFFSET :offset
+        ");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-    
+        
         // Fetch one extra record beyond the limit to check if there are more records
         $stmt->fetch(PDO::FETCH_ASSOC);
         $moreRecords = $stmt->rowCount() > 0;
-    
+        
         return [$view, $moreRecords];
     }
+    
 
     public function view_clearance_done_all(){
         $connection = $this->openConn();
@@ -2649,21 +2711,41 @@ class BMISClass {
     //     $view = $stmt->fetchAll();
     //     return $view;
     // }
+    // public function view_bspermit($limit = 5, $offset = 0){
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("
+    //     SELECT * FROM tbl_bspermit WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
+    //     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    //     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    
+    //     // Fetch one extra record beyond the limit to check if there are more records
+    //     $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $moreRecords = $stmt->rowCount() > 0;
+    
+    //     return [$view, $moreRecords];
+    // }
     public function view_bspermit($limit = 5, $offset = 0){
         $connection = $this->openConn();
         $stmt = $connection->prepare("
-        SELECT * FROM tbl_bspermit WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
+            SELECT * FROM tbl_bspermit 
+            WHERE form_status = 'Pending' 
+            ORDER BY is_urgent IS NULL, is_urgent DESC, date ASC 
+            LIMIT :limit OFFSET :offset
+        ");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-    
+        
         // Fetch one extra record beyond the limit to check if there are more records
         $stmt->fetch(PDO::FETCH_ASSOC);
         $moreRecords = $stmt->rowCount() > 0;
     
         return [$view, $moreRecords];
     }
+    
 
     
 
@@ -3104,20 +3186,40 @@ class BMISClass {
     //     return [$view, $moreRecords];
     // }
 
+    // public function view_brgyid($limit = 5, $offset = 0) {
+    //     $connection = $this->openConn();
+    //     $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status = 'Pending' ORDER BY date ASC LIMIT :limit OFFSET :offset");
+    //     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    //     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $view = $stmt->fetchAll();
+    
+    //     // Fetch one extra record beyond the limit to check if there are more records
+    //     $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $moreRecords = $stmt->rowCount() > 0;
+    
+    //     return [$view, $moreRecords];
+    // }
     public function view_brgyid($limit = 5, $offset = 0) {
         $connection = $this->openConn();
-        $stmt = $connection->prepare("SELECT * FROM tbl_brgyid WHERE form_status = 'Pending' ORDER BY date DESC LIMIT :limit OFFSET :offset");
+        $stmt = $connection->prepare("
+            SELECT * FROM tbl_brgyid 
+            WHERE form_status = 'Pending' 
+            ORDER BY is_urgent IS NULL, is_urgent DESC, date ASC 
+            LIMIT :limit OFFSET :offset
+        ");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $view = $stmt->fetchAll();
-    
+        
         // Fetch one extra record beyond the limit to check if there are more records
         $stmt->fetch(PDO::FETCH_ASSOC);
         $moreRecords = $stmt->rowCount() > 0;
-    
+        
         return [$view, $moreRecords];
     }
+    
     
     
 
