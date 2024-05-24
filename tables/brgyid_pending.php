@@ -109,6 +109,7 @@
         <tr>
             <th hidden> Resident ID </th>
             <th class="text-light"> Date Requested </th>
+            <th class="text-light"> Date Created </th>
             <th class="text-light"> Track ID </th>
             <th class="text-light"> Full Name </th>
             <th hidden class="bg text-light"> Address </th>
@@ -127,6 +128,7 @@
             <tr>
                 <td hidden> <?= $viewItem['id_resident'];?> </td> 
                 <td > <?= $viewItem['date'] ? date("F d, Y", strtotime($viewItem['date'])) : "Walk in"; ?></td>
+                <td > <?= $viewItem['created_at'] ? date("F d, Y - h:i:s A", strtotime($viewItem['created_at'])) : "Walk in"; ?></td>
                 <td> <?= $viewItem['track_id'];?> </td> 
                 <td> <?= $viewItem['lname'];?>, <?= $viewItem['fname'];?> <?= $viewItem['mi'];?> </td>
                 <td hidden> <?= $viewItem['houseno'];?>, <?= $viewItem['street'];?>, <?= $viewItem['brgy'];?>, <?= $viewItem['municipal'];?></td>

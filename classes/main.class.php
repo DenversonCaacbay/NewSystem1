@@ -1173,7 +1173,7 @@ class BMISClass {
         if(isset($_POST['create_certofres'])) {
             $id_resident = $_POST['id_resident'] ?: NULL;
             $purpose = $_POST['purpose'];
-            $is_urgent = $_POST['is_urgent'];
+            $is_urgent = $_POST['is_urgent'] ?: NULL;
     
             // Check if the resident has a pending request with the same purpose
             $connection = $this->openConn();
@@ -1266,7 +1266,7 @@ class BMISClass {
             $municipal = $_POST['municipal'];
             $date = $_POST['date'];
             $date_live = $_POST['date_live'];
-            $is_urgent = $_POST['is_urgent'];
+            $is_urgent = $_POST['is_urgent'] ?: NULL;
             $track_id = uniqid();
             
             // purpose checker
@@ -1357,7 +1357,7 @@ class BMISClass {
         $stmt = $connection->prepare("
             SELECT * FROM tbl_rescert 
             WHERE form_status = 'Pending' 
-            ORDER BY is_urgent IS NULL, is_urgent DESC, date ASC 
+            ORDER BY is_urgent IS NOT NULL DESC, created_at ASC
             LIMIT :limit OFFSET :offset
         ");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -1583,7 +1583,7 @@ class BMISClass {
         if(isset($_POST['create_certofindigency'])) {
             $id_resident = $_POST['id_resident'];
             $purpose = $_POST['purpose'];
-            $is_urgent = $_POST['is_urgent'];
+            $is_urgent = $_POST['is_urgent'] ?: NULL;
             
             // Check if the resident has a pending request with the same purpose
             $connection = $this->openConn();
@@ -1681,7 +1681,7 @@ class BMISClass {
             $brgy = $_POST['brgy'];
             $municipal = $_POST['municipal'];
             $track_id = uniqid();
-            $is_urgent = $_POST['is_urgent'];
+            $is_urgent = $_POST['is_urgent'] ?: NULL;
 
 
             // purpose checker
@@ -1783,7 +1783,7 @@ class BMISClass {
         $stmt = $connection->prepare("
             SELECT * FROM tbl_indigency 
             WHERE form_status = 'Pending' 
-            ORDER BY is_urgent IS NULL, is_urgent DESC, date ASC 
+            ORDER BY is_urgent IS NOT NULL DESC, created_at ASC
             LIMIT :limit OFFSET :offset
         ");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -2058,7 +2058,7 @@ class BMISClass {
             else{
                 $purpose = $_POST['purpose'];
             }
-            $is_urgent = $_POST['is_urgent'];
+            $is_urgent = $_POST['is_urgent'] ?: NULL;
             
             $houseno = $_POST['houseno'];
             $street = $_POST['street'];
@@ -2124,7 +2124,7 @@ class BMISClass {
             $bdate = $_POST['bdate'];
             $pickup_date = $_POST['date'] ?: date("Y-m-d");
             $track_id = uniqid();
-            $is_urgent = $_POST['is_urgent'];
+            $is_urgent = $_POST['is_urgent'] ?: NULL;
             
             // purpose checker
             if($_POST['purpose'] == "Other"){
@@ -2245,7 +2245,7 @@ class BMISClass {
         $stmt = $connection->prepare("
             SELECT * FROM tbl_clearance 
             WHERE form_status = 'Pending' 
-            ORDER BY is_urgent IS NULL, is_urgent DESC, date ASC 
+            ORDER BY is_urgent IS NOT NULL DESC, created_at ASC
             LIMIT :limit OFFSET :offset
         ");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -2553,7 +2553,7 @@ class BMISClass {
             $aoe = $_POST['aoe'];
             $pickup_date = $_POST['date'] ?: date("Y-m-d");
             $track_id = uniqid();
-            $is_urgent = $_POST['is_urgent'];
+            $is_urgent = $_POST['is_urgent'] ?: NULL;
             // Check if a file was uploaded
             if(isset($_FILES['bspermit_photo'])) {
                 $uploaded_file = $_FILES['bspermit_photo'];
@@ -2617,7 +2617,7 @@ class BMISClass {
             $aoe = $_POST['aoe'];
             $pickup_date = $_POST['date'] ?: date("Y-m-d");
             $track_id = uniqid();
-            $is_urgent = $_POST['is_urgent'];
+            $is_urgent = $_POST['is_urgent'] ?: NULL;
 
             // Check if a file was uploaded
             if(isset($_FILES['bspermit_photo'])) {
@@ -2733,7 +2733,7 @@ class BMISClass {
         $stmt = $connection->prepare("
             SELECT * FROM tbl_bspermit 
             WHERE form_status = 'Pending' 
-            ORDER BY is_urgent IS NULL, is_urgent DESC, date ASC 
+            ORDER BY is_urgent IS NOT NULL DESC, created_at ASC
             LIMIT :limit OFFSET :offset
         ");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -3013,7 +3013,7 @@ class BMISClass {
     public function create_brgyid() {
         if(isset($_POST['create_brgyid'])) {
             $id_resident = $_POST['id_resident'] ?: NULL;
-            $is_urgent = $_POST['is_urgent'];
+            $is_urgent = $_POST['is_urgent'] ?: NULL;;
             // Check if the resident has a pending request
             $connection = $this->openConn();
             $stmt_check = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = ? AND form_status = 'Pending'");
@@ -3095,7 +3095,7 @@ class BMISClass {
             // $civil_status = $_POST['civil_status']);
             $bplace = ucfirst(strtolower($_POST['bplace']));
             $bdate = $_POST['bdate'];
-            $is_urgent = $_POST['is_urgent'];
+            $is_urgent = $_POST['is_urgent'] ?: NULL;
             $pickup_date = $_POST['date'] ?: date("Y-m-d");
             $track_id = uniqid();
             
@@ -3207,7 +3207,7 @@ class BMISClass {
         $stmt = $connection->prepare("
             SELECT * FROM tbl_brgyid 
             WHERE form_status = 'Pending' 
-            ORDER BY is_urgent IS NULL, is_urgent DESC, date ASC 
+            ORDER BY is_urgent IS NOT NULL DESC, created_at ASC
             LIMIT :limit OFFSET :offset
         ");
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);

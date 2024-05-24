@@ -107,6 +107,7 @@
     <thead class="alert-info sticky-top">
         <tr>
             <th class="bg text-light"> Date Requested </th>
+            <th class="bg text-light"> Date Created </th>
             <th class="bg text-light"> Tracking ID </th>
             <th class="bg text-light"> Full Name </th>
             <th class="bg text-light"> Address </th>
@@ -123,6 +124,7 @@
             <?php foreach($view as $view) {?>
                 <tr>
                     <td> <?= date("F d, Y", strtotime($view['date'])); ?></td>
+                    <td> <?= date("F d, Y - h:i:s A", strtotime($view['created_at'])); ?></td>
                     <td> <?= $view['track_id'];?> </td> 
                     <td> <?= $view['lname'];?>, <?= $view['fname'];?> <?= $view['mi'];?></td>
                     <td> <?= $view['houseno'];?>, <?= $view['street'];?>, <?= $view['brgy'];?>, <?= $view['municipal'];?> </td>
