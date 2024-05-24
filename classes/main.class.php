@@ -18,7 +18,6 @@ class BMISClass {
     protected $pass = "";
     protected $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
     protected $con;
-    
 
 
     public function show_404()
@@ -2737,7 +2736,7 @@ class BMISClass {
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
-        $view = $stmt->fetchAll();
+                $view = $stmt->fetchAll();
         
         // Fetch one extra record beyond the limit to check if there are more records
         $stmt->fetch(PDO::FETCH_ASSOC);

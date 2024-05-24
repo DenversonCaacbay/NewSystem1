@@ -824,7 +824,8 @@ use PHPMailer\PHPMailer\Exception;
         $id_resident = $_GET['id_resident'];
         $age = $_POST['age'];
         $status = $_POST['status'];
-        $address = isset($_POST['address']) ? $_POST['address'] : NULL;
+        $houseno = $_POST['houseno'];
+        // $address = isset($_POST['address']) ? $_POST['address'] : NULL;
         $purok = $_POST['purok'];
         $street = $_POST['street'];
         $contact = $_POST['contact'];
@@ -833,9 +834,9 @@ use PHPMailer\PHPMailer\Exception;
            
             $connection = $this->openConn();
             $stmt = $connection->prepare("UPDATE tbl_resident SET  `age` = ?,  `status` = ?, 
-            `address` = ?,  `purok` = ?, `street` = ?,`contact` = ? 
+            `houseno` = ?,  `purok` = ?, `street` = ?,`contact` = ? 
             WHERE id_resident = ?");
-            $stmt->execute([ $age, $status, $address, $purok, $street,
+            $stmt->execute([ $age, $status, $houseno, $purok, $street,
             $contact, $id_resident]);
                
             $message2 = "Resident Profile Updated";

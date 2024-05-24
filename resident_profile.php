@@ -1,6 +1,7 @@
 <?php 
     error_reporting(E_ALL ^ E_WARNING);
     require('classes/resident.class.php');
+    require 'classes/conn.php';
     ini_set('display_errors',0);
     $userdetails = $residentbmis->get_userdata();
     $id_resident = $_GET['id_resident'];
@@ -179,14 +180,13 @@ margin-left: .1%;
 
         <br>
 
-        <div class="container"> 
-            <div class="card">  
-                    <div class="card-header bg-primary text-white" style="font-size:20px"> Personal Information </div>
+        <div class="container-fluid"> 
+            <div class="row">
+                <div class="col-md-6">
+                <h4>Profile Information</h4>
+                <div class="card">  
                 <div class="card-body"> 
                     <form method="post">
-
-                        
-
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -207,7 +207,6 @@ margin-left: .1%;
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -228,7 +227,6 @@ margin-left: .1%;
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -243,13 +241,10 @@ margin-left: .1%;
                                 </div>
                             </div>
                         </div>
-
                         <h6 class="mt-3">
                             Update Information
                         </h6>
-
                         <hr class="w-100">
-
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -270,7 +265,6 @@ margin-left: .1%;
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -278,8 +272,6 @@ margin-left: .1%;
                                     <input class="form-control" type="text" name="houseno" value="<?= $resident['houseno'];?>">
                                 </div>
                             </div>
-                            
-                            
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Purok:</label>
@@ -319,16 +311,16 @@ margin-left: .1%;
                                 </div>
                             </div>
                                     
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label> Street: </label>
-                                            <select id="streetsDropdown" class="form-control" name="street" required>
-                                                <option value="<?= $resident['street'];?>""><?= $resident['street'];?></option>
-                                            </select>
-                                            <div class="valid-feedback">Valid.</div>
-                                            <div class="invalid-feedback">Please fill out this field.</div>
-                                        </div>
-                                    </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label> Street: </label>
+                                    <select id="streetsDropdown" class="form-control" name="street" required>
+                                        <option value="<?= $resident['street'];?>""><?= $resident['street'];?></option>
+                                    </select>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                            </div>
                             
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -337,38 +329,80 @@ margin-left: .1%;
                                 </div>
                             </div>
                         </div>
-                        
-                        <!--<div class="row">-->
-                        <!--    <div class="col">-->
-                        <!--        <div class="form-group">-->
-                        <!--            <label>Address:</label>-->
-                        <!--            <input class="form-control" type="text" name="address" value="<?= $resident['address'];?>">-->
-                        <!--        </div>-->
-                        <!--    </div>-->
-                        <!--</div>-->
-
-
                         <div class="row" style="margin-bottom: 5px;"> 
                             <div>
                                 <div class="form-inline">
                                     <input class="form-control" name="lname" type="hidden" value="<?= $resident['lname'];?>"/>
                                     <input class="form-control" name="mi" type="hidden" value="<?= $resident['mi'];?>" />
                                     
-                                        <div class="col-md-6"><button type="submit" class="btn btn-info w-100 mt-2" name="search_household">View Household</button></div>
-                                        <div class="col-md-6"> <button class="btn btn-primary btn-info w-100 mt-2" type="submit" name="profile_update"> Update </button></div>
+                                        <!-- <div class="col-md-6"><button type="submit" class="btn btn-info w-100 mt-2" name="search_household">View Household</button></div> -->
+                                         <button class="btn btn-primary btn-info w-100 mt-2" type="submit" name="profile_update"> Update </button>
                                    
                                     <a href="resident_profile.php?id_resident=<?= $userdetails['id_resident'];?>"></a>   
-                                    <div>
+                                    <!-- <div>
                                         <br><br>
                                         <?php include'testingsearch.php'?>  
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>                               
             </div>
+                </div>
+                <div class="col-md-6">
+                    <h4>HouseHold</h4>
+                    <div class="card border-0 shadow p-3">
+                        <table class="table table-responsive">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Age</th>
+                                    <th>Contact</th>
+                                    <th>Status</th>
+                                    <th>Account Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                $query = $conn->prepare("SELECT * FROM `tbl_resident` WHERE `lname` LIKE :surname AND `houseno` LIKE :houseno");
+                                $query->bindParam(':surname', $userdetails['surname'], PDO::PARAM_STR);
+                                $query->bindParam(':houseno', $userdetails['houseno'], PDO::PARAM_STR);
+                                $query->execute();
+
+                                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                                    // Determine the display value for the verified field
+                                    if ($row['verified'] == 'Yes') {
+                                        $verifiedStatus = 'Active';
+                                    } elseif ($row['verified'] == 'No') {
+                                        $verifiedStatus = 'Declined';
+                                    } elseif ($row['verified'] == 'Banned') {
+                                        $verifiedStatus = 'Banned';
+                                    } else {
+                                        $verifiedStatus = htmlspecialchars($row['verified']);
+                                    }
+                                ?>
+                                    <tr class="text-center">
+                                        <td><?php echo htmlspecialchars($row['lname'])?>, <?php echo htmlspecialchars($row['fname'])?></td>
+                                        <td><?php echo htmlspecialchars($row['age'])?></td>
+                                        <td><?php echo htmlspecialchars($row['status'])?></td>
+                                        <td><?php echo htmlspecialchars($row['contact'])?></td>
+                                        <td><?php echo $verifiedStatus; ?></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
         </div>
+            <div class="col-md-6">
+               
+            </div>
 
         <!-- Footer -->
 
