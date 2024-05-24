@@ -1173,6 +1173,7 @@ class BMISClass {
         if(isset($_POST['create_certofres'])) {
             $id_resident = $_POST['id_resident'] ?: NULL;
             $purpose = $_POST['purpose'];
+            $is_urgent = $_POST['is_urgent'];
     
             // Check if the resident has a pending request with the same purpose
             $connection = $this->openConn();
@@ -1238,10 +1239,10 @@ class BMISClass {
     
             // Insert data into the database, including the $target_file value
             $stmt = $connection->prepare("INSERT INTO tbl_rescert (`id_resident`, `lname`, `fname`, `mi`,
-             `age`,`nationality`, `houseno`, `street`,`brgy`, `municipal`, `date`,`date_live`,`purpose`, `certofres_photo`, `track_id`)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+             `age`,`nationality`, `houseno`, `street`,`brgy`, `municipal`, `date`,`date_live`,`purpose`, `certofres_photo`, `track_id`, `is_urgent`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
-            $stmt->execute([$id_resident, $lname, $fname, $mi,  $age, $nationality, $houseno,  $street, $brgy, $municipal, $date,$date_live, $purpose, $target_file, $track_id]);
+            $stmt->execute([$id_resident, $lname, $fname, $mi,  $age, $nationality, $houseno,  $street, $brgy, $municipal, $date,$date_live, $purpose, $target_file, $track_id, $is_urgent]);
     
             // Display success message
             $message2 = "Application Applied, you will receive an email for further details, Thank you";
@@ -1582,6 +1583,7 @@ class BMISClass {
         if(isset($_POST['create_certofindigency'])) {
             $id_resident = $_POST['id_resident'];
             $purpose = $_POST['purpose'];
+            $is_urgent = $_POST['is_urgent'];
             
             // Check if the resident has a pending request with the same purpose
             $connection = $this->openConn();
@@ -1653,10 +1655,10 @@ class BMISClass {
     
             // Insert data into the database, including the $target_file value
             $stmt = $connection->prepare("INSERT INTO tbl_indigency (`id_resident`, `lname`, `fname`, `mi`,
-             `nationality`, `houseno`, `street`,`brgy`, `municipal`, `purpose`, `date`, `certofindigency_photo`, `track_id`)
+             `nationality`, `houseno`, `street`,`brgy`, `municipal`, `purpose`, `date`, `certofindigency_photo`, `track_id`, `is_urgent`)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
-            $stmt->execute([$id_resident, $lname, $fname, $mi, $nationality, $houseno, $street, $brgy, $municipal, $purpose, $date, $target_file, $track_id]);
+            $stmt->execute([$id_resident, $lname, $fname, $mi, $nationality, $houseno, $street, $brgy, $municipal, $purpose, $date, $target_file, $track_id, $is_urgent]);
     
             // Display success message
             $message2 = "Application Applied, you will receive our text message for further details";
@@ -2038,7 +2040,7 @@ class BMISClass {
 
 
      //------------------------------------------ BRGY CLEARANCE CRUD -----------------------------------------------
-
+ 
      public function create_brgyclearance() {
         if(isset($_POST['create_brgyclearance'])) {
             $id_resident = $_POST['id_resident'];
@@ -2056,6 +2058,7 @@ class BMISClass {
             else{
                 $purpose = $_POST['purpose'];
             }
+            $is_urgent = $_POST['is_urgent'];
             
             $houseno = $_POST['houseno'];
             $street = $_POST['street'];
@@ -2101,10 +2104,10 @@ class BMISClass {
             // Insert data into the database, including the $target_file value
             $connection = $this->openConn();
             $stmt = $connection->prepare("INSERT INTO tbl_clearance (`id_resident`, `lname`, `fname`, `mi`,
-            `purpose`, `houseno`, `street`,`brgy`, `municipal`, `status`, `brgyclearance_photo`, `track_id`, `date`, `bdate`)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            `purpose`, `houseno`, `street`,`brgy`, `municipal`, `status`, `brgyclearance_photo`, `track_id`, `date`, `bdate`, `is_urgent`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
-            $stmt->execute([$id_resident, $lname, $fname, $mi, $purpose, $houseno, $street, $brgy, $municipal, $status, $target_file, $track_id, $pickup_date, $bdate]);
+            $stmt->execute([$id_resident, $lname, $fname, $mi, $purpose, $houseno, $street, $brgy, $municipal, $status, $target_file, $track_id, $pickup_date, $bdate, $is_urgent]);
     
             $message2 = "Application Applied, you will receive our email for further details";
             echo "<script type='text/javascript'>alert('$message2');</script>";
@@ -2550,7 +2553,7 @@ class BMISClass {
             $aoe = $_POST['aoe'];
             $pickup_date = $_POST['date'] ?: date("Y-m-d");
             $track_id = uniqid();
-        
+            $is_urgent = $_POST['is_urgent'];
             // Check if a file was uploaded
             if(isset($_FILES['bspermit_photo'])) {
                 $uploaded_file = $_FILES['bspermit_photo'];
@@ -2588,10 +2591,10 @@ class BMISClass {
         
             // Insert data into the database, including the $target_file value
             $stmt = $connection->prepare("INSERT INTO tbl_bspermit (`id_resident`, `lname`, `fname`, `mi`,
-             `bsname`, `houseno`, `street`,`brgy`, `municipal`, `bsindustry`, `aoe`, `bspermit_photo`, `track_id`, `date`)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+             `bsname`, `houseno`, `street`,`brgy`, `municipal`, `bsindustry`, `aoe`, `bspermit_photo`, `track_id`, `date`, `is_urgent`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
-            $stmt->execute([$id_resident, $lname, $fname, $mi, $bsname, $houseno, $street, $brgy, $municipal, $bsindustry, $aoe, $target_file, $track_id, $pickup_date]);
+            $stmt->execute([$id_resident, $lname, $fname, $mi, $bsname, $houseno, $street, $brgy, $municipal, $bsindustry, $aoe, $target_file, $track_id, $pickup_date, $is_urgent]);
         
             $message2 = "Application Applied, you will receive an email for further details, Thank you";
             echo "<script type='text/javascript'>alert('$message2');</script>";
@@ -3010,7 +3013,7 @@ class BMISClass {
     public function create_brgyid() {
         if(isset($_POST['create_brgyid'])) {
             $id_resident = $_POST['id_resident'] ?: NULL;
-    
+            $is_urgent = $_POST['is_urgent'];
             // Check if the resident has a pending request
             $connection = $this->openConn();
             $stmt_check = $connection->prepare("SELECT * FROM tbl_brgyid WHERE id_resident = ? AND form_status = 'Pending'");
@@ -3063,12 +3066,12 @@ class BMISClass {
             // Insert data into the database
             $stmt = $connection->prepare("INSERT INTO tbl_brgyid (`id_resident`, `lname`, `fname`, `mi`,
                 `houseno`, `street`, `brgy`, `municipal`, `bplace`, `bdate`, `res_photo`, `inc_lname`,
-                `inc_fname`, `inc_mi`, `inc_contact`, `inc_houseno`, `inc_street`, `inc_brgy`, `track_id`, `date`,`inc_municipal`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                `inc_fname`, `inc_mi`, `inc_contact`, `inc_houseno`, `inc_street`, `inc_brgy`, `track_id`, `date`,`inc_municipal`, `is_urgent`)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
             $stmt->execute([$id_resident, $lname, $fname, $mi, $houseno, $street, $brgy, $municipal,
                 $bplace, $bdate, $target_file_res, $inc_lname, $inc_fname, $inc_mi, $inc_contact,
-                $inc_houseno, $inc_street, $inc_brgy, $track_id, $pickup_date, $inc_municipal]);
+                $inc_houseno, $inc_street, $inc_brgy, $track_id, $pickup_date, $inc_municipal, $is_urgent]);
     
             // Display success message
             $message2 = "Application Applied, you will receive an email for further details";

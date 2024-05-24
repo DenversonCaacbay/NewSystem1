@@ -252,37 +252,6 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label> Purok: </label>
-                                            <!-- <select id="purokDropdown" class="form-select" onchange="showStreets(this.value)" name="purok" aria-label="Default select example" required>
-                                                <option value="" selected>Select Purok</option>
-                                                <option value="1A">1A</option>
-                                                <option value="1B">1B</option>
-                                                <option value="2">2</option>
-                                                <option value="3A">3A</option>
-                                                <option value="3B">3B</option>
-                                                <option value="3C">3C</option>
-                                                <option value="3E">3E</option>
-                                                <option value="3F">3F</option>
-                                                <option value="4A">4A</option>
-                                                <option value="4B">4B</option>
-                                                <option value="4C">4C</option>
-                                                <option value="4D">4D</option>
-                                                <option value="5A">5A</option>
-                                                <option value="5A-1">5A-1</option>
-                                                <option value="5B">5B</option>
-                                                <option value="5C">5C</option>
-                                                <option value="5D">5D</option>
-                                                <option value="5E">5E</option>
-                                                <option value="5F">5F</option>
-                                                <option value="6A">6A</option>
-                                                <option value="6AEXT">6AEXT</option>
-                                                <option value="6B1">6B1</option>
-                                                <option value="6B2">6B2</option>
-                                                <option value="6C1">6C1</option>
-                                                <option value="6C2">6C2</option>
-                                                <option value="6D">6D</option>
-                                                <option value="6E">6E</option>
-                                                <option value="7">7</option>
-                                            </select> -->
                                             <select id="purok" class="form-select"  name="purok" onchange="updateStreet()" required>
                                                 <option value="" selected>Select Purok</option>
                                                 <option value="1A">1A</option>
@@ -322,9 +291,6 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label> Street: </label>
-                                            <!-- <select id="streetsDropdown" class="form-select" name="street" disabled required style="text-transform: none !important;">
-                                                <option value="" disabled selected>Select Street</option>
-                                            </select> -->
                                             <select id="street" class="form-select" name="street" onchange="updatePurok()">
                                                 <option value=""></option>
                                                 <optgroup label="1A">
